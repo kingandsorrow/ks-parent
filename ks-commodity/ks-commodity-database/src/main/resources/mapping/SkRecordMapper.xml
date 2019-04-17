@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="top.ks.commodity.database.mapper.SkRecordMapper">
+    <resultMap id="BaseResultMap" type="top.ks.commodity.database.model.SkRecord">
+        <id column="sk_id" property="skId" jdbcType="VARCHAR"/>
+        <result column="commodity_id" property="commodityId" jdbcType="VARCHAR"/>
+        <result column="sk_order_id" property="skOrderId" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    sk_id, commodity_id, sk_order_id
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from ks_sk_record
+        where sk_id = #{skId,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from ks_sk_record
+    where sk_id = #{skId,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="top.ks.commodity.database.model.SkRecord">
+    insert into ks_sk_record (sk_id,commodity_id,sk_order_id) values (#{skId},#{commodityId},#{skOrderId})
+  </insert>
+    <insert id="insertSelective" parameterType="top.ks.commodity.database.model.SkRecord">
+        insert into ks_sk_record
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="skId != null">
+                sk_id,
+            </if>
+            <if test="commodityId != null">
+                commodity_id,
+            </if>
+            <if test="skOrderId != null">
+                sk_order_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="skId != null">
+                #{skId,jdbcType=VARCHAR},
+            </if>
+            <if test="commodityId != null">
+                #{commodityId,jdbcType=VARCHAR},
+            </if>
+            <if test="skOrderId != null">
+                #{skOrderId,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="top.ks.commodity.database.model.SkRecord">
+        update ks_sk_record
+        <set>
+            <if test="commodityId != null">
+                commodity_id = #{commodityId,jdbcType=VARCHAR},
+            </if>
+            <if test="skOrderId != null">
+                sk_order_id = #{skOrderId,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where sk_id = #{skId,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="top.ks.commodity.database.model.SkRecord">
+    update ks_sk_record
+    set commodity_id = #{commodityId,jdbcType=VARCHAR},
+      sk_order_id = #{skOrderId,jdbcType=VARCHAR}
+    where sk_id = #{skId,jdbcType=VARCHAR}
+  </update>
+    <!--查询记录-->
+    <select id="selectByOrderId" parameterType="String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from ks_sk_record
+        where sk_order_id = #{skOrderId}
+    </select>
+</mapper>

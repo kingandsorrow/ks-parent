@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="top.ks.oss.provider.database.mapper.KsRoleMapper">
+    <resultMap id="BaseResultMap" type="top.ks.oss.provider.database.model.KsRole">
+        <id column="role_id" property="roleId" jdbcType="VARCHAR"/>
+        <result column="role_name" property="roleName" jdbcType="VARCHAR"/>
+        <result column="project_id" property="projectId" jdbcType="VARCHAR"/>
+        <result column="description" property="description" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    role_id, role_name, project_id, description, create_time, update_time
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from ks_role
+        where role_id = #{roleId,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from ks_role
+    where role_id = #{roleId,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="top.ks.oss.provider.database.model.KsRole">
+    insert into ks_role (role_id, role_name, project_id, 
+      description, create_time, update_time
+      )
+    values (#{roleId,jdbcType=VARCHAR}, #{roleName,jdbcType=VARCHAR}, #{projectId,jdbcType=VARCHAR}, 
+      #{description,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="top.ks.oss.provider.database.model.KsRole">
+        insert into ks_role
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="roleId != null">
+                role_id,
+            </if>
+            <if test="roleName != null">
+                role_name,
+            </if>
+            <if test="projectId != null">
+                project_id,
+            </if>
+            <if test="description != null">
+                description,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="roleId != null">
+                #{roleId,jdbcType=VARCHAR},
+            </if>
+            <if test="roleName != null">
+                #{roleName,jdbcType=VARCHAR},
+            </if>
+            <if test="projectId != null">
+                #{projectId,jdbcType=VARCHAR},
+            </if>
+            <if test="description != null">
+                #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="top.ks.oss.provider.database.model.KsRole">
+        update ks_role
+        <set>
+            <if test="roleName != null">
+                role_name = #{roleName,jdbcType=VARCHAR},
+            </if>
+            <if test="projectId != null">
+                project_id = #{projectId,jdbcType=VARCHAR},
+            </if>
+            <if test="description != null">
+                description = #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where role_id = #{roleId,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="top.ks.oss.provider.database.model.KsRole">
+    update ks_role
+    set role_name = #{roleName,jdbcType=VARCHAR},
+      project_id = #{projectId,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where role_id = #{roleId,jdbcType=VARCHAR}
+  </update>
+    <!--根据操作员查询角色列表-->
+    <select id="selectByOperatorId" parameterType="map" resultMap="BaseResultMap">
+    select a.role_id, a.role_name from ks_role a left join ks_operator_role b on a.role_id = b.role_id
+    where b.operator_id = #{operatorId} and  b.project_id = #{projectId} and a.project_id = #{projectId}
+  </select>
+    <!--分页查询角色列表-->
+    <select id="roleList" parameterType="map" resultMap="BaseResultMap">
+        select role_id, role_name, project_id, description, create_time, update_time from ks_role
+        <where>
+            <if test="roleName!=null and roleName!=''">
+                role_name like CONCAT(CONCAT('%', #{roleName}), '%')
+            </if>
+        </where>
+        order by create_time desc
+        <if test="pageSize!=0">
+            limit #{pageFrom},#{pageSize}
+        </if>
+    </select>
+    <!--分页查询角色列表-->
+    <select id="selectCount" parameterType="map" resultType="int">
+        select count(1) from ks_role
+        <where>
+            <if test="roleName!=null and roleName!=''">
+                role_name like CONCAT(CONCAT('%', #{roleName}), '%')
+            </if>
+        </where>
+    </select>
+</mapper>

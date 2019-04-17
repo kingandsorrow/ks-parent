@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="top.ks.oss.provider.database.mapper.KsRoleFunctionMapper">
+    <resultMap id="BaseResultMap" type="top.ks.oss.provider.database.model.KsRoleFunction">
+        <id column="role_function_id" property="roleFunctionId" jdbcType="VARCHAR"/>
+        <result column="role_id" property="roleId" jdbcType="VARCHAR"/>
+        <result column="function_id" property="functionId" jdbcType="VARCHAR"/>
+        <result column="project_id" property="projectId" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    role_function_id, role_id, function_id, project_id
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from ks_role_function
+        where role_function_id = #{roleFunctionId,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from ks_role_function
+    where role_function_id = #{roleFunctionId,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="top.ks.oss.provider.database.model.KsRoleFunction">
+    insert into ks_role_function (role_function_id, role_id, function_id, 
+      project_id)
+    values (#{roleFunctionId,jdbcType=VARCHAR}, #{roleId,jdbcType=VARCHAR}, #{functionId,jdbcType=VARCHAR}, 
+      #{projectId,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="top.ks.oss.provider.database.model.KsRoleFunction">
+        insert into ks_role_function
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="roleFunctionId != null">
+                role_function_id,
+            </if>
+            <if test="roleId != null">
+                role_id,
+            </if>
+            <if test="functionId != null">
+                function_id,
+            </if>
+            <if test="projectId != null">
+                project_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="roleFunctionId != null">
+                #{roleFunctionId,jdbcType=VARCHAR},
+            </if>
+            <if test="roleId != null">
+                #{roleId,jdbcType=VARCHAR},
+            </if>
+            <if test="functionId != null">
+                #{functionId,jdbcType=VARCHAR},
+            </if>
+            <if test="projectId != null">
+                #{projectId,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="top.ks.oss.provider.database.model.KsRoleFunction">
+        update ks_role_function
+        <set>
+            <if test="roleId != null">
+                role_id = #{roleId,jdbcType=VARCHAR},
+            </if>
+            <if test="functionId != null">
+                function_id = #{functionId,jdbcType=VARCHAR},
+            </if>
+            <if test="projectId != null">
+                project_id = #{projectId,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where role_function_id = #{roleFunctionId,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="top.ks.oss.provider.database.model.KsRoleFunction">
+    update ks_role_function
+    set role_id = #{roleId,jdbcType=VARCHAR},
+      function_id = #{functionId,jdbcType=VARCHAR},
+      project_id = #{projectId,jdbcType=VARCHAR}
+    where role_function_id = #{roleFunctionId,jdbcType=VARCHAR}
+  </update>
+    <!--批量增加-->
+    <insert id="insertksRoleFunctions" parameterType="List">
+        insert into ks_role_function (role_function_id, role_id, function_id, project_id) values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.roleFunctionId}, #{item.roleId}, #{item.functionId},#{item.projectId})
+        </foreach>
+    </insert>
+</mapper>

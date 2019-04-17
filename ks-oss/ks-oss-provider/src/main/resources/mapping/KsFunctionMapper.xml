@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.ks.oss.provider.database.mapper.KsFunctionMapper">
+    <resultMap id="BaseResultMap" type="top.ks.oss.provider.database.model.KsFunction">
+        <id column="function_id" jdbcType="VARCHAR" property="functionId"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="description" jdbcType="VARCHAR" property="description"/>
+        <result column="url" jdbcType="VARCHAR" property="url"/>
+        <result column="authorize" jdbcType="VARCHAR" property="authorize"/>
+        <result column="parent_id" jdbcType="VARCHAR" property="parentId"/>
+        <result column="order_num" jdbcType="TINYINT" property="orderNum"/>
+        <result column="icon" jdbcType="VARCHAR" property="icon"/>
+        <result column="type" jdbcType="INTEGER" property="type"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="project_id" jdbcType="VARCHAR" property="projectId"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    function_id, title, description, url, authorize, parent_id, order_num, icon, type, 
+    remark, project_id, create_time, update_time
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from ks_function
+        where function_id = #{functionId,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from ks_function
+    where function_id = #{functionId,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="top.ks.oss.provider.database.model.KsFunction">
+    insert into ks_function (function_id, title, description, 
+      url, authorize, parent_id, 
+      order_num, icon, type, 
+      remark, project_id, create_time, 
+      update_time)
+    values (#{functionId,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+      #{url,jdbcType=VARCHAR}, #{authorize,jdbcType=VARCHAR}, #{parentId,jdbcType=VARCHAR}, 
+      #{orderNum,jdbcType=TINYINT}, #{icon,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, 
+      #{remark,jdbcType=VARCHAR}, #{projectId,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+    <insert id="insertSelective" parameterType="top.ks.oss.provider.database.model.KsFunction">
+        insert into ks_function
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="functionId != null">
+                function_id,
+            </if>
+            <if test="title != null">
+                title,
+            </if>
+            <if test="description != null">
+                description,
+            </if>
+            <if test="url != null">
+                url,
+            </if>
+            <if test="authorize != null">
+                authorize,
+            </if>
+            <if test="parentId != null">
+                parent_id,
+            </if>
+            <if test="orderNum != null">
+                order_num,
+            </if>
+            <if test="icon != null">
+                icon,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="projectId != null">
+                project_id,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="functionId != null">
+                #{functionId,jdbcType=VARCHAR},
+            </if>
+            <if test="title != null">
+                #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="description != null">
+                #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="url != null">
+                #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="authorize != null">
+                #{authorize,jdbcType=VARCHAR},
+            </if>
+            <if test="parentId != null">
+                #{parentId,jdbcType=VARCHAR},
+            </if>
+            <if test="orderNum != null">
+                #{orderNum,jdbcType=TINYINT},
+            </if>
+            <if test="icon != null">
+                #{icon,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=INTEGER},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="projectId != null">
+                #{projectId,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="top.ks.oss.provider.database.model.KsFunction">
+        update ks_function
+        <set>
+            <if test="title != null">
+                title = #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="description != null">
+                description = #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="url != null">
+                url = #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="authorize != null">
+                authorize = #{authorize,jdbcType=VARCHAR},
+            </if>
+            <if test="parentId != null">
+                parent_id = #{parentId,jdbcType=VARCHAR},
+            </if>
+            <if test="orderNum != null">
+                order_num = #{orderNum,jdbcType=TINYINT},
+            </if>
+            <if test="icon != null">
+                icon = #{icon,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                type = #{type,jdbcType=INTEGER},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="projectId != null">
+                project_id = #{projectId,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where function_id = #{functionId,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="top.ks.oss.provider.database.model.KsFunction">
+    update ks_function
+    set title = #{title,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      authorize = #{authorize,jdbcType=VARCHAR},
+      parent_id = #{parentId,jdbcType=VARCHAR},
+      order_num = #{orderNum,jdbcType=TINYINT},
+      icon = #{icon,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      project_id = #{projectId,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where function_id = #{functionId,jdbcType=VARCHAR}
+  </update>
+    <!--根据角色ids查询权限-->
+    <select id="selectFunctionsByRoles" parameterType="map" resultMap="BaseResultMap">
+        select a.function_id, a.title, a.url, a.authorize, a.parent_id, a.icon, a.type
+        from ks_function a left join ks_role_function b on a.function_id = b.function_id
+        where b.role_id in
+        <foreach collection="list" item="role" index="index"
+                 open="(" close=")" separator=",">
+            #{role.roleId}
+        </foreach>
+        and a.project_id = #{projectId} and b.project_id = #{projectId}
+    </select>
+
+    <select id="selectAllList" parameterType="String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from ks_function
+        where project_id = #{projectId,jdbcType=VARCHAR}
+    </select>
+    <!--查询不包含菜单的列表-->
+    <select id="noButtonMenu" parameterType="String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from ks_function
+        where project_id = #{projectId,jdbcType=VARCHAR} and type in (0,1)
+    </select>
+</mapper>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="top.ks.oss.provider.database.mapper.KsOperatorRoleMapper" >
+  <resultMap id="BaseResultMap" type="top.ks.oss.provider.database.model.KsOperatorRole" >
+    <id column="operator_role_id" property="operatorRoleId" jdbcType="VARCHAR" />
+    <result column="operator_id" property="operatorId" jdbcType="VARCHAR" />
+    <result column="role_id" property="roleId" jdbcType="VARCHAR" />
+    <result column="project_id" property="projectId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    operator_role_id, operator_id, role_id, project_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from ks_operator_role
+    where operator_role_id = #{operatorRoleId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from ks_operator_role
+    where operator_role_id = #{operatorRoleId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="top.ks.oss.provider.database.model.KsOperatorRole" >
+    insert into ks_operator_role (operator_role_id, operator_id, role_id, 
+      project_id)
+    values (#{operatorRoleId,jdbcType=VARCHAR}, #{operatorId,jdbcType=VARCHAR}, #{roleId,jdbcType=VARCHAR}, 
+      #{projectId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="top.ks.oss.provider.database.model.KsOperatorRole" >
+    insert into ks_operator_role
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="operatorRoleId != null" >
+        operator_role_id,
+      </if>
+      <if test="operatorId != null" >
+        operator_id,
+      </if>
+      <if test="roleId != null" >
+        role_id,
+      </if>
+      <if test="projectId != null" >
+        project_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="operatorRoleId != null" >
+        #{operatorRoleId,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorId != null" >
+        #{operatorId,jdbcType=VARCHAR},
+      </if>
+      <if test="roleId != null" >
+        #{roleId,jdbcType=VARCHAR},
+      </if>
+      <if test="projectId != null" >
+        #{projectId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="top.ks.oss.provider.database.model.KsOperatorRole" >
+    update ks_operator_role
+    <set >
+      <if test="operatorId != null" >
+        operator_id = #{operatorId,jdbcType=VARCHAR},
+      </if>
+      <if test="roleId != null" >
+        role_id = #{roleId,jdbcType=VARCHAR},
+      </if>
+      <if test="projectId != null" >
+        project_id = #{projectId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where operator_role_id = #{operatorRoleId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="top.ks.oss.provider.database.model.KsOperatorRole" >
+    update ks_operator_role
+    set operator_id = #{operatorId,jdbcType=VARCHAR},
+      role_id = #{roleId,jdbcType=VARCHAR},
+      project_id = #{projectId,jdbcType=VARCHAR}
+    where operator_role_id = #{operatorRoleId,jdbcType=VARCHAR}
+  </update>
+</mapper>

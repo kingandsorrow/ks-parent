@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="top.ks.cy.web.database.mapper.UserAwardMapper">
+    <resultMap id="BaseResultMap" type="top.ks.cy.web.database.model.UserAward">
+        <id column="user_id" property="userId" jdbcType="VARCHAR"/>
+        <result column="phone_num" property="phoneNum" jdbcType="VARCHAR"/>
+        <result column="qq_num" property="qqNum" jdbcType="VARCHAR"/>
+        <result column="grade" property="grade" jdbcType="VARCHAR"/>
+        <result column="send_time" property="sendTime" jdbcType="VARCHAR"/>
+        <result column="get_time" property="getTime" jdbcType="TIMESTAMP"/>
+        <result column="status" property="status" jdbcType="TINYINT"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    user_id, phone_num, qq_num, grade, send_time, get_time, status, create_time
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from sky_user_award
+        where user_id = #{userId,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from sky_user_award
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="top.ks.cy.web.database.model.UserAward">
+    insert into sky_user_award (user_id, phone_num, qq_num, 
+      grade, send_time, get_time, 
+      status, create_time)
+    values (#{userId,jdbcType=VARCHAR}, #{phoneNum,jdbcType=VARCHAR}, #{qqNum,jdbcType=VARCHAR}, 
+      #{grade,jdbcType=VARCHAR}, #{sendTime,jdbcType=VARCHAR}, #{getTime,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+    <insert id="insertSelective" parameterType="top.ks.cy.web.database.model.UserAward">
+        insert into sky_user_award
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="phoneNum != null">
+                phone_num,
+            </if>
+            <if test="qqNum != null">
+                qq_num,
+            </if>
+            <if test="grade != null">
+                grade,
+            </if>
+            <if test="sendTime != null">
+                send_time,
+            </if>
+            <if test="getTime != null">
+                get_time,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="phoneNum != null">
+                #{phoneNum,jdbcType=VARCHAR},
+            </if>
+            <if test="qqNum != null">
+                #{qqNum,jdbcType=VARCHAR},
+            </if>
+            <if test="grade != null">
+                #{grade,jdbcType=VARCHAR},
+            </if>
+            <if test="sendTime != null">
+                #{sendTime,jdbcType=VARCHAR},
+            </if>
+            <if test="getTime != null">
+                #{getTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=TINYINT},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="top.ks.cy.web.database.model.UserAward">
+        update sky_user_award
+        <set>
+            <if test="phoneNum != null">
+                phone_num = #{phoneNum,jdbcType=VARCHAR},
+            </if>
+            <if test="qqNum != null">
+                qq_num = #{qqNum,jdbcType=VARCHAR},
+            </if>
+            <if test="grade != null">
+                grade = #{grade,jdbcType=VARCHAR},
+            </if>
+            <if test="sendTime != null">
+                send_time = #{sendTime,jdbcType=VARCHAR},
+            </if>
+            <if test="getTime != null">
+                get_time = #{getTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=TINYINT},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where user_id = #{userId,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="top.ks.cy.web.database.model.UserAward">
+    update sky_user_award
+    set phone_num = #{phoneNum,jdbcType=VARCHAR},
+      qq_num = #{qqNum,jdbcType=VARCHAR},
+      grade = #{grade,jdbcType=VARCHAR},
+      send_time = #{sendTime,jdbcType=VARCHAR},
+      get_time = #{getTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </update>
+    <!--查询列表根据时间-->
+    <select id="selectListByTime" parameterType="map" resultMap="BaseResultMap">
+        select
+        user_id, phone_num, qq_num, grade, send_time
+        from sky_user_award
+        <where>
+            <if test="startTime!=null and startTime !=''">
+                 create_time &gt;= #{startTime}
+            </if>
+            <if test="endTime!=null and endTime !=''">
+                and create_time &lt;= #{endTime}
+            </if>
+        </where>
+    </select>
+</mapper>
