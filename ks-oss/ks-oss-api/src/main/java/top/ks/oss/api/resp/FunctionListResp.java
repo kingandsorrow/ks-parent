@@ -1,6 +1,6 @@
 package top.ks.oss.api.resp;
 
-import top.ks.framework.base.entity.ResponseEntity;
+import top.ks.common.util.ResponseEntity;
 import top.ks.oss.api.bean.KsFunctionBean;
 
 import java.util.List;

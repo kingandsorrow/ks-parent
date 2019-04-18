@@ -1,6 +1,7 @@
 package top.ks.sso.api.resp;
 
-import top.ks.framework.base.entity.ResponseEntity;
+import top.ks.common.enums.ResultStatus;
+import top.ks.common.util.ResponseEntity;
 
 /**
  * <b>类名称:</b>LoginOutResp$<br/>
@@ -25,5 +26,9 @@ public class LoginOutResp extends ResponseEntity {
 
     public LoginOutResp(String errCode, String errMsg) {
         super(errCode, errMsg);
+    }
+
+    public LoginOutResp(ResultStatus resultStatus) {
+        super(resultStatus);
     }
 }

@@ -23,10 +23,10 @@ import top.ks.commodity.database.model.SkCommodity;
 import top.ks.commodity.database.model.SkRecord;
 import top.ks.commodity.database.service.SkCommodityService;
 import top.ks.common.redis.CommodityKey;
-import top.ks.common.util.JedisUtil;
-import top.ks.framework.base.entity.ResponseEntity;
-import top.ks.framework.util.LogFormat;
-import top.ks.framework.util.ToolUtil;
+import top.ks.common.redis.RedisService;
+import top.ks.common.util.LogFormat;
+import top.ks.common.util.ResponseEntity;
+import top.ks.common.util.ToolUtil;
 
 import javax.annotation.Resource;
 
@@ -64,7 +64,8 @@ public class SkCommodityServiceProxy implements SkCommodityServiceI {
     private SkCommodityService commodityService;
     @Resource
     private SkRecordMapper skRecordMapper;
-
+    @Resource
+    private RedisService redisService;
 
     private AtomicInteger checkTimes = new AtomicInteger();
 
@@ -74,7 +75,7 @@ public class SkCommodityServiceProxy implements SkCommodityServiceI {
     public SkCommodityDetailResp skCommodityDetail(SkCommodityDetailReq skCommodityDetailReq) {
         try {
             SkCommodityDetailResp resp = new SkCommodityDetailResp(SUCCESS.getCode(), SUCCESS.getMessage());
-            SkCommodityDetail skCommodityDetail = (SkCommodityDetail) JedisUtil.getObjectVal(CommodityKey.commodityDetail, skCommodityDetailReq.getCommodityId());
+            SkCommodityDetail skCommodityDetail = redisService.get(CommodityKey.commodityDetail, skCommodityDetailReq.getCommodityId(), SkCommodityDetail.class);
             if (skCommodityDetail != null) {
                 log.info(LogFormat.formatMsg("SkCommodityServiceProxy.skCommodityDetail", "", ""));
                 resp.setSkCommodityDetail(skCommodityDetail);
@@ -86,7 +87,7 @@ public class SkCommodityServiceProxy implements SkCommodityServiceI {
                 return new SkCommodityDetailResp(MIAOSHA_NOT_EXIST.getCode(), MIAOSHA_NOT_EXIST.getMessage());
             }
             SkCommodityDetail skDetail = convertDetail(skCommodity);
-            JedisUtil.setObjectVal(CommodityKey.commodityDetail, skDetail.getCommodityId(), skCommodity);
+            redisService.set(CommodityKey.commodityDetail, skDetail.getCommodityId(), skCommodity);
             resp.setSkCommodityDetail(skDetail);
             return resp;
         } catch (Exception e) {

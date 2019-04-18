@@ -2,7 +2,6 @@ package top.ks.common.distributedlock;
 
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
-import top.ks.framework.util.Strings;
 
 /**
  * <b>类名称:</b>Service$<br/>
@@ -40,7 +39,7 @@ public class Service {
     public void seckill() {
         // 返回锁的value值，供释放锁时候进行判断
         String identifier = lock.lockWithTimeout("resource", 5000, 1000,Thread.currentThread().getName());
-        if(Strings.isEmpty(identifier)){
+        if(identifier==null ||"".equals(identifier)){
             System.out.println(Thread.currentThread().getName() + "没有获得锁");
             return;
         }

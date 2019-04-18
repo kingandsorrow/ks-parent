@@ -12,9 +12,5 @@
     <artifactId>ks-oss-api</artifactId>
 
     <dependencies>
-        <dependency>
-            <groupId>top.ks</groupId>
-            <artifactId>framework-base</artifactId>
-        </dependency>
     </dependencies>
 </project>

@@ -11,10 +11,6 @@
 
     <artifactId>ks-order-api</artifactId>
     <dependencies>
-        <dependency>
-            <groupId>top.ks</groupId>
-            <artifactId>framework-base</artifactId>
-        </dependency>
     </dependencies>
 
 

@@ -1,6 +1,6 @@
 package top.ks.sso.api.resp;
 
-import top.ks.framework.base.entity.ResponseEntity;
+import top.ks.common.util.ResponseEntity;
 import top.ks.sso.api.bean.KsUserBean;
 
 /**

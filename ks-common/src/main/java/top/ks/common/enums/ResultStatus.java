@@ -21,6 +21,7 @@ public enum ResultStatus {
     FILE_NOT_EXIST("10002", "文件不存在"),
     FILE_NOT_DOWNLOAD("10003", "文件没有下载"),
     SYSTEM_BUSY("10004", "系统繁忙"),
+    DATA_NOT_EXSIT("10005", "系统繁忙"),
 
 
     /**

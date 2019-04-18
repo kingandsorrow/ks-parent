@@ -1,7 +1,7 @@
 package top.ks.sso.api.resp;
 
 import top.ks.common.user.SsoUser;
-import top.ks.framework.base.entity.ResponseEntity;
+import top.ks.common.util.ResponseEntity;
 
 /**
  * <b>类名称:</b>SsoUserResp$<br/>

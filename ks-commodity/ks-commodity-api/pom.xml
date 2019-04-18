@@ -13,7 +13,7 @@
     <dependencies>
         <dependency>
             <groupId>top.ks</groupId>
-            <artifactId>framework-base</artifactId>
+            <artifactId>ks-common</artifactId>
         </dependency>
     </dependencies>
 

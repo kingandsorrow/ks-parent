@@ -1,7 +1,7 @@
 package top.ks.commodity.api.resp;
 
 import top.ks.commodity.api.bean.KsRecordBean;
-import top.ks.framework.base.entity.ResponseEntity;
+import top.ks.common.util.ResponseEntity;
 
 /**
  * <b>类名称:</b>CommodityRecordResp$<br/>

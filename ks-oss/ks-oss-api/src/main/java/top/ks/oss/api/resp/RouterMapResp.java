@@ -1,6 +1,6 @@
 package top.ks.oss.api.resp;
 
-import top.ks.framework.base.entity.ResponseEntity;
+import top.ks.common.util.ResponseEntity;
 
 /**
  * <b>类名称:</b>RouterMapResp$<br/>

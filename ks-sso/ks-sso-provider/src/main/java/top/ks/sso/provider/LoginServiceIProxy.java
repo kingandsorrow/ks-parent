@@ -4,12 +4,13 @@ import com.alibaba.dubbo.config.annotation.Service;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Component;
-import top.ks.common.constant.StatusCodeConst;
-import top.ks.common.store.SsoLoginStore;
+import top.ks.common.enums.ResultStatus;
+import top.ks.common.redis.RedisService;
+import top.ks.common.redis.SsoKey;
 import top.ks.common.user.SsoUser;
-import top.ks.framework.util.LogFormat;
-import top.ks.framework.util.StatusCodeManager;
-import top.ks.framework.util.Strings;
+import top.ks.common.util.LogFormat;
+import top.ks.common.util.ResponseEntity;
+import top.ks.common.util.Strings;
 import top.ks.sso.api.LoginServiceI;
 import top.ks.sso.api.req.LoginOutReq;
 import top.ks.sso.api.req.LoginReq;
@@ -21,6 +22,9 @@ import top.ks.sso.provider.factory.LoginFactory;
 import top.ks.sso.provider.factory.LoginHandler;
 
 import javax.annotation.Resource;
+
+import static top.ks.common.enums.ResultStatus.*;
+
 
 /**
  * <b>类名称:</b>LoginServiceIProxy$<br/>
@@ -46,7 +50,8 @@ public class LoginServiceIProxy implements LoginServiceI {
     private static final Log log = LogFactory.getLog(LoginServiceIProxy.class);
     @Resource
     private LoginFactory loginFactory;
-
+    @Resource
+    private RedisService redisService;
 
     /**
      * @param :
@@ -60,12 +65,12 @@ public class LoginServiceIProxy implements LoginServiceI {
     public LoginResp doLogin(LoginReq loginReq) {
         if (Strings.isEmpty(loginReq.getLoginWay())) {
             log.info(LogFormat.formatMsg("LoginServiceIProxy.login", "login way is null.." + loginReq.toJsonStr(), ""));
-            return new LoginResp(StatusCodeConst.PARAMS_NULL);
+            return new LoginResp(SUCCESS);
         }
         LoginHandler loginHandler = loginFactory.getLoginHandler(loginReq.getLoginWay());
         if (loginHandler == null) {
             log.info(LogFormat.formatMsg("LoginServiceIProxy.doLogin", "get LoginHandler is null..", ""));
-            return new LoginResp(StatusCodeConst.SYSTEM_ERROR);
+            return new LoginResp();
         }
         LoginResp loginResp = loginHandler.loginMethod(loginReq);
         return loginResp;
@@ -75,31 +80,31 @@ public class LoginServiceIProxy implements LoginServiceI {
     public SsoUserResp getUserByToken(SsoUserReq ssoUserReq) {
         if (Strings.isEmpty(ssoUserReq.getToken())) {
             log.info(LogFormat.formatMsg("LoginServiceIProxy.getUserByToken", "token is empty.." + ssoUserReq.toJsonStr(), ""));
-            return new SsoUserResp(StatusCodeConst.PARAMS_NULL);
+            return new SsoUserResp(PARAM_ERROR);
         }
-        SsoUser ssoUser = SsoLoginStore.get(ssoUserReq.getToken());
+        SsoUser ssoUser = redisService.get(SsoKey.ssoUserToken, ssoUserReq.getToken(), SsoUser.class);
         if (ssoUser != null) {
             if ((System.currentTimeMillis() - ssoUser.getExpireFreshTime()) > ssoUser.getExpireMinite() / 2) {
                 ssoUser.setExpireFreshTime(System.currentTimeMillis());
-                SsoLoginStore.put(ssoUserReq.getToken(), ssoUser);
+                redisService.set(SsoKey.ssoUserToken, ssoUserReq.getToken(), ssoUser);
             }
-            SsoUserResp ssoUserResp = new SsoUserResp(StatusCodeConst.SUCCESS);
+            SsoUserResp ssoUserResp = new SsoUserResp(SUCCESS);
             ssoUserResp.setSsoUser(ssoUser);
             return ssoUserResp;
         }
-        return new SsoUserResp(StatusCodeConst.DATA_NOT_EXSIT);
+        return new SsoUserResp(DATA_NOT_EXSIT);
     }
 
     @Override
     public LoginOutResp loginOut(LoginOutReq loginOutReq) {
         try {
-            LoginOutResp loginOutResp = new LoginOutResp(StatusCodeConst.SUCCESS);
-            SsoLoginStore.remove(loginOutReq.getToken());
+            LoginOutResp loginOutResp = new LoginOutResp(SUCCESS);
+            redisService.del(loginOutReq.getToken());
             return loginOutResp;
         } catch (Exception e) {
             log.error("system exception:", e);
             log.info(LogFormat.formatMsg("LoginServiceIProxy.loginOut", "system error::" + e.getMessage(), ""));
-            return new LoginOutResp(StatusCodeConst.SYSTEM_ERROR);
+            return new LoginOutResp(SYSTEM_ERROR);
         }
 
     }

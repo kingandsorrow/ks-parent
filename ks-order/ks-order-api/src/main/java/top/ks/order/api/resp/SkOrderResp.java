@@ -1,6 +1,6 @@
 package top.ks.order.api.resp;
 
-import top.ks.framework.base.entity.ResponseEntity;
+import top.ks.common.util.ResponseEntity;
 
 /**
  * <b>类名称:</b>SkOrderResp$<br/>

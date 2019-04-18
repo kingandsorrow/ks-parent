@@ -14,10 +14,6 @@
     <dependencies>
         <dependency>
             <groupId>top.ks</groupId>
-            <artifactId>framework-base</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>top.ks</groupId>
             <artifactId>ks-common</artifactId>
         </dependency>
     </dependencies>

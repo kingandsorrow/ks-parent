@@ -4,7 +4,6 @@ import cn.hutool.core.collection.CollectionUtil;
 import com.alibaba.fastjson.JSON;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import top.ks.framework.util.LogFormat;
 
 import java.util.ArrayList;
 import java.util.Arrays;

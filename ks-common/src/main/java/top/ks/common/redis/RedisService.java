@@ -1,6 +1,5 @@
 package top.ks.common.redis;
 
-import com.alibaba.fastjson.JSON;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +8,8 @@ import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.ScanParams;
 import redis.clients.jedis.ScanResult;
-import top.ks.framework.util.LogFormat;
+import top.ks.common.util.LogFormat;
+import com.alibaba.fastjson.JSON;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -317,7 +317,7 @@ public class RedisService {
      * @param :
      * @return :
      * @Method :
-     * @Description :执行lua脚本
+     * @Description :初始化redis 分布式限流lua脚本
      * @author : brj
      * @CreateDate : 2019/4/8 15:05
      */

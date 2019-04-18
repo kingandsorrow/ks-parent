@@ -1,6 +1,6 @@
 package top.ks.sso.core.resp;
 
-import top.ks.framework.base.entity.ResponseEntity;
+import top.ks.common.util.ResponseEntity;
 
 /**
  * <b>类名称:</b>SsoResp$<br/>

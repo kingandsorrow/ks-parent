@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 import top.ks.common.basic.StatusCodeConst;
-import top.ks.framework.base.entity.ResponseEntity;
+import top.ks.common.util.ResponseEntity;
 import top.ks.framework.util.LogFormat;
 import top.ks.framework.util.Strings;
 import top.ks.oss.api.OperatorServiceI;

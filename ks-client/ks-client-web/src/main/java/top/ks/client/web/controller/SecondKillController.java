@@ -16,7 +16,7 @@ import top.ks.common.redis.CommodityKey;
 import top.ks.common.redis.CommonKey;
 import top.ks.common.redis.RedisService;
 import top.ks.common.util.JedisUtil;
-import top.ks.framework.base.entity.ResponseEntity;
+import top.ks.common.util.ResponseEntity;
 import top.ks.framework.util.LogFormat;
 import top.ks.framework.util.Strings;
 import top.ks.order.api.SecondKillServiceI;

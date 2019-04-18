@@ -45,28 +45,20 @@
         <javax.servlet-api.version>3.1.0</javax.servlet-api.version>
         <curator-recipes.version>4.0.1</curator-recipes.version>
         <jedis.version>2.9.1</jedis.version>
+        <cglib.version>3.2.4</cglib.version>
+        <fastjson.version>1.2.38</fastjson.version>
     </properties>
     <dependencyManagement>
         <dependencies>
             <dependency>
                 <groupId>top.ks</groupId>
-                <artifactId>framework-cache-redis</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>top.ks</groupId>
-                <artifactId>framework-util</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>top.ks</groupId>
-                <artifactId>framework-base</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>top.ks</groupId>
                 <artifactId>ks-consumer</artifactId>
                 <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cglib</groupId>
+                <artifactId>cglib</artifactId>
+                <version>${cglib.version}</version>
             </dependency>
             <dependency>
                 <groupId>top.ks</groupId>
@@ -265,6 +257,11 @@
                 <version>${project.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
     <build>

@@ -1,6 +1,6 @@
 package top.ks.client.web.helper.vo;
 
-import top.ks.framework.base.entity.ResponseEntity;
+import top.ks.common.util.ResponseEntity;
 
 /**
  * <b>类名称:</b>SkResponseEntity$<br/>

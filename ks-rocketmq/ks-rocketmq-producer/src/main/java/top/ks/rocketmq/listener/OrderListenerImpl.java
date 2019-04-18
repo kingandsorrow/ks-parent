@@ -13,7 +13,7 @@ import top.ks.commodity.api.SkCommodityServiceI;
 import top.ks.commodity.api.bean.CommodityBean;
 import top.ks.commodity.api.req.DeducteCommodityReq;
 import top.ks.commodity.api.resp.CommodityRecordResp;
-import top.ks.framework.base.entity.ResponseEntity;
+import top.ks.common.util.ResponseEntity;
 
 import javax.annotation.Resource;
 import java.io.UnsupportedEncodingException;

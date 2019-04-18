@@ -1,7 +1,8 @@
 package top.ks.sso.api.resp;
 
+import top.ks.common.enums.ResultStatus;
 import top.ks.common.user.SsoUser;
-import top.ks.framework.base.entity.ResponseEntity;
+import top.ks.common.util.ResponseEntity;
 
 /**
  * <b>类名称:</b>SsoUserResp$<br/>
@@ -36,5 +37,9 @@ public class SsoUserResp extends ResponseEntity {
 
     public void setSsoUser(SsoUser ssoUser) {
         this.ssoUser = ssoUser;
+    }
+
+    public SsoUserResp(ResultStatus resultStatus) {
+        super(resultStatus);
     }
 }

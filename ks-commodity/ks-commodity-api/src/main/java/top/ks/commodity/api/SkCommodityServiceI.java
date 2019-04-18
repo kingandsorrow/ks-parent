@@ -7,7 +7,7 @@ import top.ks.commodity.api.req.SkCommodityDetailReq;
 import top.ks.commodity.api.resp.CommodityRecordResp;
 import top.ks.commodity.api.resp.DeducteCommodityResp;
 import top.ks.commodity.api.resp.SkCommodityDetailResp;
-import top.ks.framework.base.entity.ResponseEntity;
+import top.ks.common.util.ResponseEntity;
 
 /**
  * <b>类名称:</b>SkCommodityServiceI$<br/>

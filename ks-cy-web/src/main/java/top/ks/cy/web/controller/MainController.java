@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import top.ks.common.basic.StatusCodeConst;
 import top.ks.cy.web.database.mapper.UserJoinMapper;
 import top.ks.cy.web.database.model.UserJoin;
-import top.ks.framework.base.entity.ResponseEntity;
+import top.ks.common.util.ResponseEntity;
 import top.ks.framework.util.LogFormat;
 import top.ks.framework.util.SequenceHelper;
 import top.ks.framework.util.Strings;

@@ -10,7 +10,7 @@ import top.ks.common.conf.Conf;
 import top.ks.common.constant.Const;
 import top.ks.common.constant.StatusCodeConst;
 import top.ks.common.user.SsoUser;
-import top.ks.framework.base.entity.ResponseEntity;
+import top.ks.common.util.ResponseEntity;
 import top.ks.framework.util.LogFormat;
 import top.ks.framework.util.Strings;
 import top.ks.sso.api.LoginServiceI;

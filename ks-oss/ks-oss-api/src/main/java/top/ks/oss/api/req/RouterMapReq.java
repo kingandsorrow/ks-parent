@@ -1,6 +1,6 @@
 package top.ks.oss.api.req;
 
-import top.ks.framework.base.entity.RequestEntity;
+import top.ks.common.util.RequestEntity;
 
 /**
  * <b>类名称:</b>RouterMapReq$<br/>

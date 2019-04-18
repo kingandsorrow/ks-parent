@@ -13,8 +13,6 @@ import top.ks.common.constant.ErrorCode;
 import top.ks.common.constant.StatusCodeConst;
 import top.ks.common.store.SsoLoginStore;
 import top.ks.common.user.SsoUser;
-import top.ks.framework.util.LogFormat;
-import top.ks.framework.util.Strings;
 import top.ks.sso.provider.database.mapper.KsUserAuthsMapper;
 import top.ks.sso.provider.database.model.KsUser;
 import top.ks.sso.provider.database.model.KsUserAuths;

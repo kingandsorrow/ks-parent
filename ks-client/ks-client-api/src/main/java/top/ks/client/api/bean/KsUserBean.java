@@ -1,6 +1,6 @@
 package top.ks.sso.api.bean;
 
-import top.ks.framework.base.entity.BaseEntity;
+import top.ks.common.util.BaseEntity;
 
 import java.util.Date;
 
