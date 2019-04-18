@@ -17,6 +17,7 @@
         <module>ks-order</module>
         <module>ks-commodity</module>
         <module>ks-rocketmq</module>
+        <module>ks-redis</module>
     </modules>
     <properties>
         <!--90repo   releases-->
@@ -261,6 +262,11 @@
                 <groupId>com.alibaba</groupId>
                 <artifactId>fastjson</artifactId>
                 <version>${fastjson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>top.ks</groupId>
+                <artifactId>ks-redis</artifactId>
+                <version>${project.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

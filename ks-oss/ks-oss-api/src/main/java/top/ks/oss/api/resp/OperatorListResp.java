@@ -1,5 +1,6 @@
 package top.ks.oss.api.resp;
 
+import top.ks.common.enums.ResultStatus;
 import top.ks.common.util.ResponseEntity;
 import top.ks.oss.api.bean.OperatorDeatilBean;
 import top.ks.oss.api.bean.OperatorDeatilBean;
@@ -22,6 +23,7 @@ public class OperatorListResp extends ResponseEntity {
 
     private List<OperatorDeatilBean> operatorDeatilBeanList;
     private int count;
+
     public OperatorListResp() {
     }
 
@@ -39,6 +41,10 @@ public class OperatorListResp extends ResponseEntity {
 
     public void setOperatorDeatilBeanList(List<OperatorDeatilBean> operatorDeatilBeanList) {
         this.operatorDeatilBeanList = operatorDeatilBeanList;
+    }
+
+    public OperatorListResp(ResultStatus resultStatus) {
+        super(resultStatus);
     }
 
     public int getCount() {

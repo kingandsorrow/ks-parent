@@ -9,9 +9,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Component;
 import top.ks.common.constant.Const;
-import top.ks.common.constant.ErrorCode;
-import top.ks.common.constant.StatusCodeConst;
-import top.ks.common.store.SsoLoginStore;
 import top.ks.common.user.SsoUser;
 import top.ks.sso.provider.database.mapper.KsUserAuthsMapper;
 import top.ks.sso.provider.database.model.KsUser;
@@ -43,7 +40,6 @@ public class PhoneLoginHandler extends LoginHandler {
     private KsUserAuthsMapper ksUserAuthsMapper;
     @Resource
     private KsUserService ksUserService;
-
 
 
 }

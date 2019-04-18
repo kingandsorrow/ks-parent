@@ -12,8 +12,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-import top.ks.common.conf.Conf;
-import top.ks.common.util.JedisUtil;
+import top.ks.common.constant.Const;
 import top.ks.sso.core.filter.SsoWebFilter;
 import top.ks.sso.web.interceptor.LoginInterceptor;
 
@@ -107,7 +106,6 @@ public class CommonConfig implements DisposableBean {
     @Bean
     public FilterRegistrationBean ssoFilterRegistration() {
         // xxl-sso, redis init
-        JedisUtil.init(ssoRedisAddress, ssoRedisPassword);
 
         // xxl-sso, filter init
         FilterRegistrationBean registration = new FilterRegistrationBean();
@@ -115,15 +113,14 @@ public class CommonConfig implements DisposableBean {
         registration.setOrder(1);
         registration.addUrlPatterns("/*");
         registration.setFilter(ssoWebFilter);
-        registration.addInitParameter(Conf.SSO_SERVER, ssoServer);
-        registration.addInitParameter(Conf.SSO_LOGOUT_PATH, ssoLogoutPath);
-        registration.addInitParameter(Conf.SSO_EXCLUDED_PATHS, ssoExcludedPaths);
+        registration.addInitParameter(Const.SSO_SERVER, ssoServer);
+        registration.addInitParameter(Const.SSO_LOGOUT_PATH, ssoLogoutPath);
+        registration.addInitParameter(Const.SSO_EXCLUDED_PATHS, ssoExcludedPaths);
         return registration;
     }
 
     @Override
     public void destroy() throws Exception {
-        JedisUtil.close();
     }
 }
 

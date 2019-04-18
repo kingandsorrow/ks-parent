@@ -11,8 +11,7 @@ import org.apache.rocketmq.common.message.Message;
 import org.apache.rocketmq.remoting.common.RemotingHelper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import top.ks.common.middleware.TransactionListenerImpl;
-import top.ks.framework.util.LogFormat;
+import top.ks.common.util.LogFormat;
 import top.ks.rocketmq.listener.OrderListenerImpl;
 
 import javax.annotation.PostConstruct;
@@ -53,7 +52,6 @@ public class TransactionProducer {
     @PostConstruct
     public void init() throws Exception {
         log.info(LogFormat.formatMsg("DefaultProducer.init", "DefaultProducer start...", ""));
-        TransactionListener transactionListener = new TransactionListenerImpl();
         producer = new TransactionMQProducer();
         producer.setProducerGroup(producerGroupName);
         //指定 NameServer 地址

@@ -1,5 +1,6 @@
 package top.ks.oss.api.resp;
 
+import top.ks.common.enums.ResultStatus;
 import top.ks.common.util.ResponseEntity;
 import top.ks.oss.api.bean.OperatorDeatilBean;
 import top.ks.oss.api.bean.OperatorDeatilBean;
@@ -12,8 +13,7 @@ import top.ks.oss.api.bean.OperatorDeatilBean;
  * <b>修改人:</b>brj<br/>
  * <b>修改时间:</b>2018/9/29<br/>
  * <b>修改备注:</b><br/>
- *
- * @version 1.0.0<br                               />
+ * <p>
  * Copyright 西安创意 2018/9/29
  */
 public class LoginResp extends ResponseEntity {
@@ -37,6 +37,10 @@ public class LoginResp extends ResponseEntity {
 
     public void setOperatorDeatilBean(OperatorDeatilBean operatorDeatilBean) {
         this.operatorDeatilBean = operatorDeatilBean;
+    }
+
+    public LoginResp(ResultStatus resultStatus) {
+        super(resultStatus);
     }
 
     public String getToken() {

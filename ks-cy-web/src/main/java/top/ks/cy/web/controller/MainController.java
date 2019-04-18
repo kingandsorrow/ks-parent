@@ -6,13 +6,12 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import top.ks.common.basic.StatusCodeConst;
+import top.ks.common.util.LogFormat;
+import top.ks.common.util.SequenceHelper;
+import top.ks.common.util.Strings;
 import top.ks.cy.web.database.mapper.UserJoinMapper;
 import top.ks.cy.web.database.model.UserJoin;
 import top.ks.common.util.ResponseEntity;
-import top.ks.framework.util.LogFormat;
-import top.ks.framework.util.SequenceHelper;
-import top.ks.framework.util.Strings;
 
 import javax.annotation.Resource;
 import java.util.Arrays;
@@ -44,11 +43,11 @@ public class MainController {
     public ResponseEntity doSubmit(@RequestParam("phoneNum") String phoneNum, @RequestParam("iptvNum") String iptvNum, @RequestParam("qqNum") String qqNum) {
         if (Strings.hasEmptyStr(phoneNum, iptvNum, qqNum)) {
             log.info(LogFormat.formatMsg("MainController.doSubmit", "params has null.." + phoneNum + "--" + iptvNum + "--" + qqNum, ""));
-            return new ResponseEntity(StatusCodeConst.PARAMS_NULL, "请完善信息");
+            return new ResponseEntity("1", "请完善信息");
         }
         if (!isBJLTPhone(phoneNum)) {
             log.info(LogFormat.formatMsg("MainController.doSubmit", "this phoneNum is not bjlt ::" + phoneNum, ""));
-            return new ResponseEntity(StatusCodeConst.PHONE_ERROR, "请输入北京联通手机号");
+            return new ResponseEntity("1", "请输入北京联通手机号");
         }
         UserJoin userJoin = new UserJoin();
         userJoin.setPhoneNum(phoneNum);
@@ -60,11 +59,11 @@ public class MainController {
         userJoin.setQqNum(qqNum);
         ResponseEntity entity = new ResponseEntity();
         if (joinMapper.insertSelective(userJoin) < 1) {
-            entity.setErrCode(StatusCodeConst.SYSTEM_ERROR);
+            entity.setErrCode("1");
             entity.setErrMsg("提交失败");
             return entity;
         }
-        entity.setErrCode(StatusCodeConst.SUCCESS);
+        entity.setErrCode("0000");
         entity.setErrMsg("提交成功");
         return entity;
     }

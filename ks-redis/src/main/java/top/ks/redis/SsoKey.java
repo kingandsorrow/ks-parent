@@ -1,4 +1,4 @@
-package top.ks.common.redis;
+package top.ks.redis;
 
 /**
  * <b>类名称:</b>SsoKey$<br/>

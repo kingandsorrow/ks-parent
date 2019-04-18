@@ -6,13 +6,11 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.util.AntPathMatcher;
-import top.ks.common.conf.Conf;
 import top.ks.common.constant.Const;
-import top.ks.common.constant.StatusCodeConst;
 import top.ks.common.user.SsoUser;
 import top.ks.common.util.ResponseEntity;
-import top.ks.framework.util.LogFormat;
-import top.ks.framework.util.Strings;
+import top.ks.common.util.LogFormat;
+import top.ks.common.util.Strings;
 import top.ks.sso.api.LoginServiceI;
 import top.ks.sso.api.req.SsoUserReq;
 import top.ks.sso.api.resp.SsoUserResp;
@@ -56,9 +54,9 @@ public class SsoWebFilter extends HttpServlet implements Filter {
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-        ssoServer = filterConfig.getInitParameter(Conf.SSO_SERVER);
-        logoutPath = filterConfig.getInitParameter(Conf.SSO_LOGOUT_PATH);
-        excludedPaths = filterConfig.getInitParameter(Conf.SSO_EXCLUDED_PATHS);
+        ssoServer = filterConfig.getInitParameter(Const.SSO_SERVER);
+        logoutPath = filterConfig.getInitParameter(Const.SSO_LOGOUT_PATH);
+        excludedPaths = filterConfig.getInitParameter(Const.SSO_EXCLUDED_PATHS);
     }
 
     @Override
@@ -89,16 +87,16 @@ public class SsoWebFilter extends HttpServlet implements Filter {
             // remove cookie
             SsoWebLoginHelper.removeSessionIdByCookie(req, res);
             // redirect logout
-            String logoutPageUrl = ssoServer.concat(Conf.SSO_LOGOUT);
+            String logoutPageUrl = ssoServer.concat(Const.SSO_LOGOUT);
             res.sendRedirect(logoutPageUrl);
             return;
         }
         // valid login user, cookie + redirect
         SsoUserReq ssoUserReq = new SsoUserReq();
-        //String cookieToken = CookieUtil.getValue(req, Conf.SSO_TOKEN);
+        //String cookieToken = CookieUtil.getValue(req, Const.SSO_TOKEN);
         String cookieToken = getCookieToken(req);
-        String sessionToken = (String) req.getSession().getAttribute(Conf.SSO_TOKEN);
-        SsoUser ssoUser = (SsoUser) req.getSession().getAttribute(Conf.SSO_USER);
+        String sessionToken = (String) req.getSession().getAttribute(Const.SSO_TOKEN);
+        SsoUser ssoUser = (SsoUser) req.getSession().getAttribute(Const.SSO_USER);
         if (Strings.isNotEmpty(cookieToken) && cookieToken.equals(sessionToken) && ssoUser != null) {
             log.info(LogFormat.formatMsg("SsoWebFilter.doFilter", "cookieToken check success..", ""));
             filterChain.doFilter(servletRequest, servletResponse);
@@ -121,14 +119,14 @@ public class SsoWebFilter extends HttpServlet implements Filter {
                 // total link
                 String link = req.getRequestURL().toString();
                 // redirect logout
-                String loginPageUrl = ssoServer.concat(Conf.SSO_LOGIN)
-                        + "?" + Conf.REDIRECT_URL + "=" + link;
+                String loginPageUrl = ssoServer.concat(Const.SSO_LOGIN)
+                        + "?" + Const.REDIRECT_URL + "=" + link;
                 res.sendRedirect(loginPageUrl);
                 return;
             }*/
         }
         // ser sso user
-        servletRequest.setAttribute(Conf.SSO_USER, ssoUserResp.getSsoUser());
+        servletRequest.setAttribute(Const.SSO_USER, ssoUserResp.getSsoUser());
         // already login, allow
         filterChain.doFilter(servletRequest, servletResponse);
         return;

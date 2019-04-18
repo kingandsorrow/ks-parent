@@ -6,7 +6,6 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
-import top.ks.common.basic.StatusCodeConst;
 import top.ks.common.util.ResponseEntity;
 
 import javax.servlet.http.HttpServletRequest;

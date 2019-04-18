@@ -9,12 +9,12 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Component;
 import top.ks.common.constant.Const;
-import top.ks.common.constant.ErrorCode;
-import top.ks.common.constant.StatusCodeConst;
-import top.ks.common.store.SsoLoginStore;
 import top.ks.common.user.SsoUser;
-import top.ks.framework.util.LogFormat;
-import top.ks.framework.util.Strings;
+import top.ks.common.util.ErrorCode;
+import top.ks.common.util.LogFormat;
+import top.ks.common.util.Strings;
+import top.ks.redis.RedisService;
+import top.ks.redis.SsoKey;
 import top.ks.sso.api.bean.KsUserBean;
 import top.ks.sso.api.req.LoginReq;
 import top.ks.sso.api.resp.LoginResp;
@@ -27,6 +27,8 @@ import top.ks.sso.provider.factory.LoginHandler;
 
 import javax.annotation.Resource;
 import java.util.Date;
+
+import static top.ks.common.enums.ResultStatus.*;
 
 /**
  * <b>类名称:</b>PhoneLoginHandler$<br/>
@@ -51,6 +53,8 @@ public class PhoneLoginHandler extends LoginHandler {
     private KsUserService ksUserService;
     @Resource
     private KsUserMapper ksUserMapper;
+    @Resource
+    private RedisService redisService;
 
     @Override
     public LoginResp loginMethod(LoginReq loginReq) {
@@ -74,7 +78,7 @@ public class PhoneLoginHandler extends LoginHandler {
         } catch (Exception e) {
             e.printStackTrace();
             log.info(LogFormat.formatMsg("PhoneLoginHandler.loginMethod", "catch system error is::" + e.getMessage(), ""));
-            return new LoginResp(StatusCodeConst.SYSTEM_ERROR);
+            return new LoginResp(SYSTEM_ERROR);
         }
     }
 
@@ -90,12 +94,12 @@ public class PhoneLoginHandler extends LoginHandler {
         SsoUser ssoUser = new SsoUser();
         ssoUser.setUserId(ksUser.getUserId());
         ssoUser.setUserName(ksUser.getNickName());
-        ssoUser.setExpireMinite(SsoLoginStore.getRedisExpireMinite());
+        ssoUser.setExpireMinite(SsoKey.ssoUserToken.expireSeconds());
         ssoUser.setExpireFreshTime(System.currentTimeMillis());
         String token = IdUtil.simpleUUID();
-        SsoLoginStore.put(token, ssoUser);
+        redisService.set(SsoKey.ssoUserToken, token, ssoUser);
         KsUserBean ksUserBean = initKsUserBean(ksUser);
-        LoginResp loginResp = new LoginResp(StatusCodeConst.SUCCESS);
+        LoginResp loginResp = new LoginResp(SUCCESS);
         loginResp.setKsUserBean(ksUserBean);
         loginResp.setToken(token);
         return loginResp;
@@ -151,15 +155,15 @@ public class PhoneLoginHandler extends LoginHandler {
 
         String code = userLoginReq.getCode();
         if (Strings.isEmpty(phone)) {
-            return new ErrorCode(StatusCodeConst.PHONE_IS_WRONG);
+            return new ErrorCode(PHONE_IS_WRONG);
         }
         if (Strings.isEmpty(code)) {
-            return new ErrorCode(StatusCodeConst.CODE_IS_WRONG);
+            return new ErrorCode(CODE_IS_WRONG);
         }
         //boolean codeFlag = redisHelper.checkSmsCode(phone, code);
         boolean codeFlag = Const.CODE_DEFAULT.equals(userLoginReq.getCode());
         if (!codeFlag) {
-            return new ErrorCode(StatusCodeConst.CODE_IS_WRONG);
+            return new ErrorCode(CODE_IS_WRONG);
         }
         return null;
     }

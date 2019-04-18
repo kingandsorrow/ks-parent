@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import top.ks.common.basic.StatusCodeConst;
 import top.ks.oss.api.OperatorServiceI;
 import top.ks.oss.api.req.*;
 import top.ks.oss.api.resp.*;
@@ -25,6 +24,8 @@ import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.Map;
 import java.util.Properties;
+
+import static top.ks.common.enums.ResultStatus.SUCCESS;
 
 //import com.google.code.kaptcha.Producer;
 
@@ -79,7 +80,7 @@ public class MainController {
 
     @RequestMapping("loginOut")
     public LoginOutResp loginOut(LoginOutReq req) {
-        return new LoginOutResp(StatusCodeConst.SUCCESS);
+        return new LoginOutResp(SUCCESS);
     }
 
     @RequestMapping("routerMap")

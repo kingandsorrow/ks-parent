@@ -1,5 +1,6 @@
 package top.ks.oss.api.resp;
 
+import top.ks.common.enums.ResultStatus;
 import top.ks.common.util.ResponseEntity;
 
 /**
@@ -31,5 +32,9 @@ public class RouterMapResp extends ResponseEntity {
 
     public RouterMapResp(String errCode) {
         super(errCode);
+    }
+
+    public RouterMapResp(ResultStatus resultStatus) {
+        super(resultStatus);
     }
 }

@@ -7,10 +7,9 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
-import top.ks.common.basic.StatusCodeConst;
 import top.ks.common.util.ResponseEntity;
-import top.ks.framework.util.LogFormat;
-import top.ks.framework.util.Strings;
+import top.ks.common.util.LogFormat;
+import top.ks.common.util.Strings;
 import top.ks.oss.api.OperatorServiceI;
 import top.ks.oss.api.resp.CheckTokenResp;
 import top.ks.oss.web.util.HttpUtil;
@@ -20,6 +19,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Map;
+
+import static top.ks.common.enums.ResultStatus.LOGIN_EXPIRE;
 
 /**
  * <b>类名称:</b>LoginInterceptor$<br/>
@@ -57,7 +58,7 @@ public class LoginInterceptor implements HandlerInterceptor {
     }
 
     private void setInvalidResp(HttpServletResponse response) throws IOException {
-        ResponseEntity responseEntity = new ResponseEntity(StatusCodeConst.LOGIN_EXPIRE);
+        ResponseEntity responseEntity = new ResponseEntity(LOGIN_EXPIRE);
         response.setContentType("application/json;charset=utf-8");//指定返回的格式为JSON格式
         response.setCharacterEncoding("UTF-8");//setContentType与setCharacterEncoding的顺序不能调换，否则还是无法解决中文乱码的问题
         PrintWriter out = null;

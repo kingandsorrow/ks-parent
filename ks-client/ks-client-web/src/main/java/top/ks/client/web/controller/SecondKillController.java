@@ -12,17 +12,16 @@ import org.springframework.web.bind.annotation.RestController;
 import top.ks.client.web.helper.vo.SkResponseEntity;
 import top.ks.commodity.api.req.DeducteCommodityReq;
 import top.ks.common.constant.Const;
-import top.ks.common.redis.CommodityKey;
-import top.ks.common.redis.CommonKey;
-import top.ks.common.redis.RedisService;
-import top.ks.common.util.JedisUtil;
 import top.ks.common.util.ResponseEntity;
-import top.ks.framework.util.LogFormat;
-import top.ks.framework.util.Strings;
+import top.ks.common.util.LogFormat;
+import top.ks.common.util.Strings;
 import top.ks.order.api.SecondKillServiceI;
 import top.ks.order.api.req.SecondKillReq;
 import top.ks.order.api.req.SkOrderReq;
 import top.ks.order.api.resp.SkOrderResp;
+import top.ks.redis.CommodityKey;
+import top.ks.redis.CommonKey;
+import top.ks.redis.RedisService;
 import top.ks.rocketmq.producer.TransactionProducer;
 
 import javax.annotation.Resource;
@@ -30,7 +29,6 @@ import javax.annotation.Resource;
 import java.io.UnsupportedEncodingException;
 
 import static top.ks.common.enums.ResultStatus.*;
-import static top.ks.common.redis.CommodityKey.commodityStock;
 
 /**
  * <b>类名称:</b>SecondKillController$<br/>

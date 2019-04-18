@@ -1,5 +1,6 @@
 package top.ks.oss.api.resp;
 
+import top.ks.common.enums.ResultStatus;
 import top.ks.common.util.ResponseEntity;
 import top.ks.oss.api.bean.KsFunctionBean;
 
@@ -34,6 +35,10 @@ public class MenuListResp extends ResponseEntity {
 
     public MenuListResp(String errCode) {
         super(errCode);
+    }
+
+    public MenuListResp(ResultStatus resultStatus) {
+        super(resultStatus);
     }
 
     public MenuListResp(String errCode, String errMsg) {

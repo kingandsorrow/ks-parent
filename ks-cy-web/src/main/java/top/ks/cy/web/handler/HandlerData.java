@@ -13,6 +13,8 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+import top.ks.common.util.LogFormat;
+import top.ks.common.util.Strings;
 import top.ks.cy.web.database.mapper.UserAwardMapper;
 import top.ks.cy.web.database.mapper.UserJoinMapper;
 import top.ks.cy.web.database.mapper.UserNotWonMapper;
@@ -21,8 +23,6 @@ import top.ks.cy.web.database.model.UserJoin;
 import top.ks.cy.web.database.model.UserNotWon;
 import top.ks.cy.web.database.service.UserAwardService;
 import top.ks.cy.web.util.Const;
-import top.ks.framework.util.LogFormat;
-import top.ks.framework.util.Strings;
 
 import javax.annotation.Resource;
 import java.io.File;

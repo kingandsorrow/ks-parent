@@ -1,5 +1,6 @@
 package top.ks.oss.api.resp;
 
+import top.ks.common.enums.ResultStatus;
 import top.ks.common.util.ResponseEntity;
 
 /**
@@ -24,5 +25,9 @@ public class RoleAddResp extends ResponseEntity {
 
     public RoleAddResp(String errCode, String errMsg) {
         super(errCode, errMsg);
+    }
+
+    public RoleAddResp(ResultStatus paramError) {
+        super(paramError);
     }
 }

@@ -1,5 +1,6 @@
 package top.ks.oss.api.resp;
 
+import top.ks.common.enums.ResultStatus;
 import top.ks.common.util.ResponseEntity;
 
 /**
@@ -31,6 +32,10 @@ public class MenuAddResp extends ResponseEntity {
 
     public MenuAddResp(String errCode) {
         super(errCode);
+    }
+
+    public MenuAddResp(ResultStatus resultStatus) {
+        super(resultStatus);
     }
 
     public MenuAddResp(String errCode, String errMsg) {

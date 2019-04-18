@@ -31,7 +31,11 @@ public enum ResultStatus {
     RESIGETER_FAIL("200001", "注册失败!"),
     CODE_FAIL("200002", "验证码不一致!"),
     RESIGETER_NICKNAMEEXIST("200003", "用户名已经存在!"),
-    LOGIN_FIAL("200004", "登录失败!"),
+    LOGIN_FAIL("200004", "登录失败!"),
+    PHONE_IS_WRONG("200005", "手机号错误"),
+    CODE_IS_WRONG("200006", "验证码错误"),
+    TOKEN_EXPIRE("200007", "token过期"),
+    LOGIN_EXPIRE("200008", "登录过期"),
 
 
     /**

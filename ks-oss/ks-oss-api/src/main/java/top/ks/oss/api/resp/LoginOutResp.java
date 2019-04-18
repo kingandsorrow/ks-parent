@@ -1,5 +1,6 @@
 package top.ks.oss.api.resp;
 
+import top.ks.common.enums.ResultStatus;
 import top.ks.common.util.ResponseEntity;
 
 /**
@@ -25,5 +26,9 @@ public class LoginOutResp extends ResponseEntity {
 
     public LoginOutResp(String errCode, String errMsg) {
         super(errCode, errMsg);
+    }
+
+    public LoginOutResp(ResultStatus resultStatus) {
+        super(resultStatus);
     }
 }

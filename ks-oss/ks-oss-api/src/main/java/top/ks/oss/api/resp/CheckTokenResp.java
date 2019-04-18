@@ -1,5 +1,6 @@
 package top.ks.oss.api.resp;
 
+import top.ks.common.enums.ResultStatus;
 import top.ks.common.util.ResponseEntity;
 import top.ks.oss.api.bean.OperatorDeatilBean;
 import top.ks.oss.api.bean.OperatorDeatilBean;
@@ -29,6 +30,10 @@ public class CheckTokenResp extends ResponseEntity {
 
     public CheckTokenResp(String errCode) {
         super(errCode);
+    }
+
+    public CheckTokenResp(ResultStatus resultStatus) {
+        super(resultStatus);
     }
 
     public CheckTokenResp(String errCode, String errMsg) {

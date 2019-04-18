@@ -5,7 +5,7 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.rocketmq.client.producer.DefaultMQProducer;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import top.ks.framework.util.LogFormat;
+import top.ks.common.util.LogFormat;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;

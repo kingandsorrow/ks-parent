@@ -1,7 +1,7 @@
 package top.ks.sso.core.util;
 
 
-import top.ks.common.conf.Conf;
+import top.ks.common.constant.Const;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,7 +20,7 @@ public class SsoWebLoginHelper {
      * @param response
      */
     public static void removeSessionIdByCookie(HttpServletRequest request, HttpServletResponse response) {
-        CookieUtil.remove(request, response, Conf.SSO_TOKEN);
+        CookieUtil.remove(request, response, Const.SSO_TOKEN);
     }
 
     /**
@@ -30,7 +30,7 @@ public class SsoWebLoginHelper {
      * @return
      */
     public static String getSessionIdByCookie(HttpServletRequest request) {
-        String cookieSessionId = CookieUtil.getValue(request, Conf.SSO_TOKEN);
+        String cookieSessionId = CookieUtil.getValue(request, Const.SSO_TOKEN);
         return cookieSessionId;
     }
 

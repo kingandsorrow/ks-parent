@@ -1,7 +1,7 @@
 package top.ks.sso.core.util;
 
 import top.ks.common.constant.Const;
-import top.ks.framework.util.Strings;
+import top.ks.common.util.Strings;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;

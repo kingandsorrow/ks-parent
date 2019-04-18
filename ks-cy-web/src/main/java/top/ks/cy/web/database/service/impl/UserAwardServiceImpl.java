@@ -4,12 +4,12 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import top.ks.common.util.LogFormat;
 import top.ks.cy.web.database.mapper.UserAwardMapper;
 import top.ks.cy.web.database.mapper.UserNotWonMapper;
 import top.ks.cy.web.database.model.UserAward;
 import top.ks.cy.web.database.model.UserNotWon;
 import top.ks.cy.web.database.service.UserAwardService;
-import top.ks.framework.util.LogFormat;
 
 import javax.annotation.Resource;
 

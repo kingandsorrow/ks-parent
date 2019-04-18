@@ -44,7 +44,11 @@
             <groupId>top.ks</groupId>
             <artifactId>ks-common</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>top.ks</groupId>
+            <artifactId>ks-redis</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>

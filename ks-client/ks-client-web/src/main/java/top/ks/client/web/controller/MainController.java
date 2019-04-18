@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import top.ks.commodity.api.bean.CommodityBean;
 import top.ks.common.util.ResponseEntity;
-import top.ks.framework.util.ToolUtil;
+import top.ks.common.util.ToolUtil;
 import top.ks.rocketmq.producer.TransactionProducer;
 
 import javax.annotation.Resource;

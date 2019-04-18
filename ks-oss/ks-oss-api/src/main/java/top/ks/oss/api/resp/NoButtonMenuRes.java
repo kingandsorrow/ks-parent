@@ -1,5 +1,6 @@
 package top.ks.oss.api.resp;
 
+import top.ks.common.enums.ResultStatus;
 import top.ks.common.util.ResponseEntity;
 import top.ks.oss.api.bean.KsFunctionBean;
 
@@ -26,6 +27,10 @@ public class NoButtonMenuRes extends ResponseEntity {
 
     public NoButtonMenuRes(String errCode) {
         super(errCode);
+    }
+
+    public NoButtonMenuRes(ResultStatus resultStatus) {
+        super(resultStatus);
     }
 
     public NoButtonMenuRes(String errCode, String errMsg) {

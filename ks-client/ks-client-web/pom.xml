@@ -62,6 +62,15 @@
             <groupId>top.ks</groupId>
             <artifactId>ks-order-api</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.apache.rocketmq</groupId>
+            <artifactId>rocketmq-client</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>top.ks</groupId>
+            <artifactId>ks-redis</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>

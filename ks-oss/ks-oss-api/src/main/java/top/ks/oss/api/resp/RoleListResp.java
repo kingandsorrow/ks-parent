@@ -1,5 +1,6 @@
 package top.ks.oss.api.resp;
 
+import top.ks.common.enums.ResultStatus;
 import top.ks.common.util.ResponseEntity;
 import top.ks.oss.api.bean.KsRoleBean;
 
@@ -45,6 +46,10 @@ public class RoleListResp extends ResponseEntity {
 
     public RoleListResp(String errCode) {
         super(errCode);
+    }
+
+    public RoleListResp(ResultStatus resultStatus) {
+        super(resultStatus);
     }
 
     public RoleListResp(String errCode, String errMsg) {

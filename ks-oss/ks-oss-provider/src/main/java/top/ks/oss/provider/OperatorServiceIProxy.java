@@ -11,10 +11,9 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import top.ks.common.basic.StatusCodeConst;
-import top.ks.framework.util.LogFormat;
-import top.ks.framework.util.Strings;
-import top.ks.framework.util.ToolUtil;
+import top.ks.common.util.LogFormat;
+import top.ks.common.util.Strings;
+import top.ks.common.util.ToolUtil;
 import top.ks.oss.api.OperatorServiceI;
 import top.ks.oss.api.bean.KsFunctionBean;
 import top.ks.oss.api.bean.KsRoleBean;
@@ -33,6 +32,8 @@ import javax.crypto.spec.SecretKeySpec;
 import javax.xml.bind.DatatypeConverter;
 import java.security.Key;
 import java.util.*;
+
+import static top.ks.common.enums.ResultStatus.*;
 
 /**
  * <b>类名称:</b>OperatorServiceIProxy$<br/>
@@ -73,19 +74,19 @@ public class OperatorServiceIProxy implements OperatorServiceI {
         try {
             if (Strings.hasEmptyStr(loginReq.getLoginName(), loginReq.getPassword())) {
                 log.info(LogFormat.formatMsg("OperatorServiceIProxy.login", "params has null ::" + loginReq.toJsonStr(), ""));
-                return new LoginResp(StatusCodeConst.PARAMS_NULL);
+                return new LoginResp(PARAM_ERROR);
             }
             KsOperator ksOperator = ksOperatorMapper.selectByNameAndPassword(loginReq.getLoginName(), loginReq.getPassword(), loginReq.getProjectId());
             if (ksOperator == null) {
                 log.info(LogFormat.formatMsg("OperatorServiceIProxy.login", "query operator is null::" + loginReq.toJsonStr(), ""));
-                return new LoginResp(StatusCodeConst.LOGIN_FAIL);
+                return new LoginResp(LOGIN_FAIL);
             }
             //查询该用户的权限
             OperatorDeatil operatorDeatil = ksRoleService.selectOperatorDetail(ksOperator);
             // 生成token
             long expireTime = Long.parseLong(this.getExpireTime());
             String jwt = createJWT(ToolUtil.getStringID(), ksOperator.getOperatorId(), JSON.toJSONString(operatorDeatil), expireTime);
-            LoginResp loginResp = new LoginResp(StatusCodeConst.SUCCESS);
+            LoginResp loginResp = new LoginResp(SUCCESS);
             OperatorDeatilBean operatorDeatilBean = new OperatorDeatilBean();
             BeanUtil.copyProperties(operatorDeatil, operatorDeatilBean);
             loginResp.setOperatorDeatilBean(operatorDeatilBean);
@@ -94,7 +95,7 @@ public class OperatorServiceIProxy implements OperatorServiceI {
         } catch (Exception e) {
             log.error("system exception:", e);
             log.info(LogFormat.formatMsg("OperatorServiceIProxy.login", "system error::" + e.getMessage(), ""));
-            return new LoginResp(StatusCodeConst.SYSTEM_ERROR);
+            return new LoginResp(SYSTEM_ERROR);
         }
     }
 
@@ -176,7 +177,7 @@ public class OperatorServiceIProxy implements OperatorServiceI {
                     .parseClaimsJws(token).getBody();
             String subject = claims.getSubject();
             OperatorDeatil operatorDeatil = JSON.parseObject(subject, OperatorDeatil.class);
-            CheckTokenResp checkTokenResp = new CheckTokenResp(StatusCodeConst.SUCCESS);
+            CheckTokenResp checkTokenResp = new CheckTokenResp(SUCCESS);
             OperatorDeatilBean operatorDeatilBean = new OperatorDeatilBean();
             BeanUtil.copyProperties(operatorDeatil, operatorDeatilBean);
             checkTokenResp.setOperatorDeatilBean(operatorDeatilBean);
@@ -187,11 +188,11 @@ public class OperatorServiceIProxy implements OperatorServiceI {
             return checkTokenResp;
         } catch (ExpiredJwtException ex) {
             log.info(LogFormat.formatMsg("OperatorServiceIProxy.checkToken", "token is expire::" + token, ""));
-            return new CheckTokenResp(StatusCodeConst.TOKEN_EXPIRE);
+            return new CheckTokenResp(TOKEN_EXPIRE);
         } catch (Exception e) {
             log.error("system exception:", e);
             log.info(LogFormat.formatMsg("OperatorServiceIProxy.checkToken", "system error::" + e.getMessage(), ""));
-            return new CheckTokenResp(StatusCodeConst.SYSTEM_ERROR);
+            return new CheckTokenResp(SYSTEM_ERROR);
         }
     }
 
@@ -227,17 +228,17 @@ public class OperatorServiceIProxy implements OperatorServiceI {
                 BeanUtil.copyProperties(ksOperator, operatorDeatilBean);
                 operatorDeatilBeans.add(operatorDeatilBean);
             }
-            OperatorListResp operatorListResp = new OperatorListResp(StatusCodeConst.SUCCESS);
+            OperatorListResp operatorListResp = new OperatorListResp(SUCCESS);
             operatorListResp.setOperatorDeatilBeanList(operatorDeatilBeans);
             operatorListResp.setCount(count);
             return operatorListResp;
         }
-        return new OperatorListResp(StatusCodeConst.SUCCESS, "成功");
+        return new OperatorListResp(SUCCESS);
     }
 
     @Override
     public RouterMapResp routerMap(RouterMapReq req) {
-        RouterMapResp routerMapResp = new RouterMapResp(StatusCodeConst.SUCCESS);
+        RouterMapResp routerMapResp = new RouterMapResp(SUCCESS);
         return routerMapResp;
     }
 
@@ -254,10 +255,10 @@ public class OperatorServiceIProxy implements OperatorServiceI {
         List<KsRole> ksRoles = ksRoleMapper.roleList(req.getRoleName(), req.getPageIndex() == 0 ? 0 : (req.getPageIndex() - 1) * req.getPageSize(), req.getPageSize());
         if (CollUtil.isEmpty(ksRoles)) {
             log.info(LogFormat.formatMsg("OperatorServiceIProxy.roleList", "ksRoles is empty..", ""));
-            return new RoleListResp(StatusCodeConst.SUCCESS);
+            return new RoleListResp(SUCCESS);
         }
         int totalCount = ksRoleMapper.selectCount(req.getRoleName());
-        RoleListResp roleListResp = new RoleListResp(StatusCodeConst.SUCCESS);
+        RoleListResp roleListResp = new RoleListResp(SUCCESS);
         roleListResp.setRoleList(converRoleList(ksRoles));
         roleListResp.setTotalCount(totalCount);
         return roleListResp;
@@ -268,10 +269,10 @@ public class OperatorServiceIProxy implements OperatorServiceI {
         List<KsFunction> ksFunctionList = ksFunctionMapper.selectAllList(menuListReq.getProjectId());
         if (CollUtil.isEmpty(ksFunctionList)) {
             log.info(LogFormat.formatMsg("OperatorServiceIProxy.menuList", "ksFunctionList is empty..", ""));
-            return new MenuListResp(StatusCodeConst.SUCCESS);
+            return new MenuListResp(SUCCESS);
         }
         List<KsFunctionBean> ksFunctionBeans = convertMenuList(ksFunctionList);
-        MenuListResp menuListResp = new MenuListResp(StatusCodeConst.SUCCESS);
+        MenuListResp menuListResp = new MenuListResp(SUCCESS);
         menuListResp.setKsFunctionBeans(ksFunctionBeans);
         return menuListResp;
     }
@@ -280,7 +281,7 @@ public class OperatorServiceIProxy implements OperatorServiceI {
     public RoleAddResp roleAdd(RoleAddReq roleAddReq) {
         if (Strings.hasEmptyStr(roleAddReq.getProjectId(), roleAddReq.getRoleName())) {
             log.info(LogFormat.formatMsg("OperatorServiceIProxy.roleAdd", "roleAddReq is.." + JSON.toJSONString(roleAddReq), ""));
-            return new RoleAddResp(StatusCodeConst.PARAMS_NULL);
+            return new RoleAddResp(PARAM_ERROR);
         }
         KsRole ksRole = new KsRole();
         ksRole.setCreateTime(new Date());
@@ -290,7 +291,7 @@ public class OperatorServiceIProxy implements OperatorServiceI {
         ksRole.setRoleId(IdUtil.simpleUUID());
         List<KsRoleFunction> ksRoleFunctions = initKsRoles(ksRole, roleAddReq.getMenuIdList());
         int row = ksRoleService.roleAdd(ksRole, ksRoleFunctions);
-        RoleAddResp roleAddResp = new RoleAddResp(StatusCodeConst.SUCCESS);
+        RoleAddResp roleAddResp = new RoleAddResp(SUCCESS);
         return roleAddResp;
     }
 
@@ -307,7 +308,7 @@ public class OperatorServiceIProxy implements OperatorServiceI {
         List<KsFunction> ksFunctionList = ksFunctionMapper.noButtonMenu(noButtonMenuReq.getProjectId());
         if (CollUtil.isEmpty(ksFunctionList)) {
             log.info(LogFormat.formatMsg("OperatorServiceIProxy.menuList", "ksFunctionList is empty..", ""));
-            return new NoButtonMenuRes(StatusCodeConst.SUCCESS);
+            return new NoButtonMenuRes(SUCCESS);
         }
         List<KsFunctionBean> ksFunctionBeans = convertMenuList(ksFunctionList);
         //添加顶级菜单
@@ -317,14 +318,14 @@ public class OperatorServiceIProxy implements OperatorServiceI {
         root.setParentId(-1L);
         root.setOpen(true);
         ksFunctionBeans.add(root);
-        NoButtonMenuRes noButtonMenuRes = new NoButtonMenuRes(StatusCodeConst.SUCCESS);
+        NoButtonMenuRes noButtonMenuRes = new NoButtonMenuRes(SUCCESS);
         noButtonMenuRes.setKsFunctionBeans(ksFunctionBeans);
         return noButtonMenuRes;
     }
 
     @Override
     public MenuAddResp menuAdd(MenuAddReq menuAddReq) {
-        MenuAddResp menuAddResp = new MenuAddResp(StatusCodeConst.SUCCESS);
+        MenuAddResp menuAddResp = new MenuAddResp(SUCCESS);
         KsFunction ksFunction = new KsFunction();
         ksFunction.setAuthorize(menuAddReq.getPerms());
         ksFunction.setCreateTime(new Date());
