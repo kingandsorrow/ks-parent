@@ -64,7 +64,7 @@ public class PhoneLoginHandler extends LoginHandler {
             ErrorCode errorCode = checkPhoneCode(loginReq);
             if (errorCode != null) {
                 log.info(LogFormat.formatMsg("PhoneLoginHandler.login", "check phone code is wrong..", ""));
-                return new LoginResp(errorCode.getCode());
+                return new LoginResp(errorCode.getCode(), errorCode.getMsg());
             }
             // 2.判断用户是否存在
             KsUser ksUser = ksUserMapper.selectByPhoneWay(loginReq.getLoginName());

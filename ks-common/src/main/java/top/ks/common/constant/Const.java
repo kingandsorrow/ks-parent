@@ -16,7 +16,7 @@ import java.io.Serializable;
  */
 public class Const implements Serializable {
 
-    public final static String CODE_DEFAULT = "1234";
+    public final static String CODE_DEFAULT = "123456";
     //0 微信 1手机号 2创意登录
     public final static Byte IDENTITY_TYPE_ZERO = 0;
 
@@ -43,7 +43,6 @@ public class Const implements Serializable {
      * sso sessionid, between browser and sso-server (web + token client)
      */
     public static final String SSO_TOKEN = "sso_token";
-
 
 
     /**
@@ -81,8 +80,8 @@ public class Const implements Serializable {
 
     public final static String SSO_CHECK_LOGIN_FAIL_MSG = "用户未登陆";
 
-    public final static String ROCKETMQ_NAME_ADDRESS  = "192.168.1.23:9876";
+    public final static String ROCKETMQ_NAME_ADDRESS = "192.168.1.23:9876";
 
 
-    public final static String ROCKET_MQ_TOPIC_KS  = "ks_core_topic";
+    public final static String ROCKET_MQ_TOPIC_KS = "ks_core_topic";
 }

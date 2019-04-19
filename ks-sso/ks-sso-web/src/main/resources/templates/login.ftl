@@ -8,8 +8,8 @@
     <#import "common/common.macro.ftl" as netCommon>
     <@netCommon.commonStyle />
     <#--<link rel="stylesheet" href="${request.contextPath}/static/adminlte/plugins/iCheck/square/blue.css">-->
-    <link rel="stylesheet" href="${request.contextPath}/static/css/common.css?201904151718">
-    <link rel="stylesheet" type="text/css" href="${request.contextPath}/static/css/login.css?201904151717"/>
+    <link rel="stylesheet" href="${request.contextPath}/static/css/common.css?201904151719">
+    <link rel="stylesheet" type="text/css" href="${request.contextPath}/static/css/login.css?201914151719"/>
 
 </head>
 <body class="hold-transition login-page">
@@ -17,7 +17,7 @@
     <div class="wrap">
 
     </div>
-    <form action="${request.contextPath}/doLogin">
+    <form id="form" name="form" action="${request.contextPath}/doLogin" method="post">
         <input type="hidden" name="loginWay" value="0"/>
         <input type="hidden" name="redirect_url" value="${redirect_url!''}"/>
         <div class="content">
@@ -26,23 +26,26 @@
             </div>
             <ul class="ul">
                 <li class="li">
-                    <input placeholder="点此输入手机号" maxlength="11" class="inphone" type="tel" name="" id="inputPhone"
-                           value=""
-                           v-model="req.phone"/>
+                    <input placeholder="点此输入手机号" maxlength="11" class="inphone" type="tel" name="loginName"
+                           id="inputPhone"
+                           value="17663748077"/>
                 </li>
                 <li class="li">
-                    <input placeholder="请输入验证码" class="incode" type="tel" name="" id="valideCode" value=""
-                           v-model="req.code"/>
-                    <div class="getCode" @click="getCode">
+                    <input placeholder="请输入验证码" class="incode" type="tel" name="code" id="valideCode" value="123456"/>
+                    <div class="getCode">
                         获取验证码
                     </div>
                 </li>
             </ul>
-            <div class="tishi">
-                登录即同意<span @click="userRule">《用户服务条款》</span>
+            <div class=" tishi">
+                登录即同意<span class=userRule">《用户服务条款》</span>
             </div>
-            <div class="login" @click="goLogin">
-                登录
+
+            <div class="goLogin">
+                <#if errorMsg?exists>
+                    <p style="color: red;text-align: center; margin-top: 1rem;font-size: 1.3rem;">${errorMsg}</p>
+                </#if>
+                <input class="login" type="submit" value="登录">
             </div>
         </div>
     </form>
@@ -90,5 +93,5 @@
 </body>
 <@netCommon.commonScript />
 <script src="${request.contextPath}/static/adminlte/plugins/iCheck/icheck.min.js"></script>
-<script src="${request.contextPath}/static/js/login.1.js"></script>
+<script src="${request.contextPath}/static/js/login.1.js?d=7"></script>
 </html>
