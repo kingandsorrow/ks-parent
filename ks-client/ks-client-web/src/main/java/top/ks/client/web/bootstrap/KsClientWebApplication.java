@@ -13,7 +13,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * <b>修改时间:</b>2018/8/1<br/>
  * <b>修改备注:</b><br/>
  *
- * @version 1.0.0<br   />
  * <p>
  * Copyright 西安创意 2018/8/1
  */
@@ -24,6 +23,5 @@ public class KsClientWebApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(KsClientWebApplication.class, args);
-
     }
 }

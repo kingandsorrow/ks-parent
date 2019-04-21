@@ -8,12 +8,17 @@ import org.springframework.web.bind.annotation.RestController;
 import top.ks.commodity.api.bean.CommodityBean;
 import top.ks.common.util.ResponseEntity;
 import top.ks.common.util.ToolUtil;
+import top.ks.order.api.bean.OrderBean;
+import top.ks.order.api.req.OrderListReq;
+import top.ks.order.api.resp.OrderListResp;
 import top.ks.rocketmq.producer.TransactionProducer;
 
 import javax.annotation.Resource;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
+
+import static top.ks.common.enums.ResultStatus.*;
 
 /**
  * <b>类名称:</b>MainController$<br/>
@@ -38,9 +43,27 @@ public class MainController {
     }
 
     @RequestMapping("orderList")
-    public List<String> orderList() {
-        List<String> list = new ArrayList<String>();
-        return list;
+    public OrderListResp orderList(OrderListReq orderListReq) {
+        OrderListResp orderListResp = new OrderListResp(SUCCESS);
+        if (orderListReq.getCurNavIndex() == 0) {
+            List<OrderBean> orderBeans = new ArrayList<>();
+            for (int i = 1; i < 34; i++) {
+                OrderBean orderBean = new OrderBean();
+                orderBean.setShopName("未支付订单" + i);
+                orderBeans.add(orderBean);
+            }
+            orderListResp.setOrderBeanList(orderBeans);
+        }
+        if (orderListReq.getCurNavIndex() == 0) {
+            List<OrderBean> orderBeans = new ArrayList<>();
+            for (int i = 1; i < 28; i++) {
+                OrderBean orderBean = new OrderBean();
+                orderBean.setShopName("已支付订单" + i);
+                orderBeans.add(orderBean);
+            }
+            orderListResp.setOrderBeanList(orderBeans);
+        }
+        return orderListResp;
     }
 
     @RequestMapping("addOrder")
