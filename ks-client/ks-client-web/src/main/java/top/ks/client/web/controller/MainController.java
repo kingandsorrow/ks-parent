@@ -47,16 +47,16 @@ public class MainController {
         OrderListResp orderListResp = new OrderListResp(SUCCESS);
         if (orderListReq.getCurNavIndex() == 0) {
             List<OrderBean> orderBeans = new ArrayList<>();
-            for (int i = 1; i < 34; i++) {
+            for (int i = orderListReq.getPageNum(); i < orderListReq.getPageSize(); i++) {
                 OrderBean orderBean = new OrderBean();
                 orderBean.setShopName("未支付订单" + i);
                 orderBeans.add(orderBean);
             }
             orderListResp.setOrderBeanList(orderBeans);
         }
-        if (orderListReq.getCurNavIndex() == 0) {
+        if (orderListReq.getCurNavIndex() == 1) {
             List<OrderBean> orderBeans = new ArrayList<>();
-            for (int i = 1; i < 28; i++) {
+            for (int i = orderListReq.getPageNum(); i < orderListReq.getPageSize(); i++) {
                 OrderBean orderBean = new OrderBean();
                 orderBean.setShopName("已支付订单" + i);
                 orderBeans.add(orderBean);

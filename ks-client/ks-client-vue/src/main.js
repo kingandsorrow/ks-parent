@@ -6,6 +6,7 @@ import {routerMode} from './config/env'
 import './config/rem'
 import FastClick from 'fastclick'
 import httpRequest from './utils/httpRequest'
+import './utils/rem'
 // 挂载全局
 Vue.prototype.$http = httpRequest // ajax请求方法
 if ('addEventListener' in document) {
