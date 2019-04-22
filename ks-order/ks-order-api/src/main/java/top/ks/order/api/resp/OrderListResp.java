@@ -22,7 +22,7 @@ public class OrderListResp extends ResponseEntity {
 
     private List<OrderBean> orderBeanList;
 
-    private int count;
+    private int total;
 
     public List<OrderBean> getOrderBeanList() {
         return orderBeanList;
@@ -36,11 +36,11 @@ public class OrderListResp extends ResponseEntity {
         super(resultStatus);
     }
 
-    public int getCount() {
-        return count;
+    public int getTotal() {
+        return total;
     }
 
-    public void setCount(int count) {
-        this.count = count;
+    public void setTotal(int total) {
+        this.total = total;
     }
 }
