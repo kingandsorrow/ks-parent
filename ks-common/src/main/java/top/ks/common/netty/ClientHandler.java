@@ -27,7 +27,6 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {
     private ChannelHandlerContext ctx;
 
 
-
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         //super.channelActive(ctx);
@@ -36,9 +35,9 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-       // super.channelRead(ctx, msg);
+        // super.channelRead(ctx, msg);
         ByteBuf buf = (ByteBuf) msg;
-        System.out.println("服务器端发来的消息："+buf.toString(CharsetUtil.UTF_8));
+        System.out.println("服务器端发来的消息：" + buf.toString(CharsetUtil.UTF_8));
     }
 
     public boolean sendMsg(String msg) {

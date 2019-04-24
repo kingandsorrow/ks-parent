@@ -18,9 +18,9 @@ public class ClientMain {
 
     public static void main(String[] args) {
         NettyClient nettyClient = new NettyClient();
-        Scanner scanner = new Scanner(System.in);
-        while(nettyClient.client.sendMsg(scanner.nextLine()));
         new Thread(nettyClient).start();
+        Scanner scanner = new Scanner(System.in);
+        while (nettyClient.client.sendMsg(scanner.nextLine())) ;
 
 
     }

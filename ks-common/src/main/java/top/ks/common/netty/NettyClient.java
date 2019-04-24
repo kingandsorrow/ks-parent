@@ -26,12 +26,12 @@ import java.util.Scanner;
 public class NettyClient implements Runnable {
 
     static ClientHandler client = new ClientHandler();
-    public static void main(String[] args) throws Exception {
+    /*public static void main(String[] args) throws Exception {
         new Thread(new NettyClient()).start();
         @SuppressWarnings("resource")
         Scanner scanner = new Scanner(System.in);
         while(client.sendMsg(scanner.nextLine()));
-    }
+    }*/
     @Override
     public void run() {
 
