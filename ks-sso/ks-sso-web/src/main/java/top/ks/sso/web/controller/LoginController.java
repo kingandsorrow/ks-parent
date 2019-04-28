@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import top.ks.common.constant.Const;
 import top.ks.common.user.SsoUser;
@@ -25,6 +26,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.util.ArrayList;
+import java.util.List;
+
+import static top.ks.common.enums.ResultStatus.SUCCESS;
 
 /**
  * <b>类名称:</b>LoginController$<br/>
@@ -38,7 +43,7 @@ import java.net.URLDecoder;
  * @version 1.0.0
  * Copyright 西安创意 2018/12/14
  */
-@Controller
+@RestController
 public class LoginController {
 
     @Reference(version = "${dubbo.service.version}")
@@ -124,5 +129,9 @@ public class LoginController {
         return "redirect:/toLogin";
     }
 
-
+    @RequestMapping("orderList")
+    public String orderList(String a) {
+        System.out.println("a:" + a);
+        return a;
+    }
 }
