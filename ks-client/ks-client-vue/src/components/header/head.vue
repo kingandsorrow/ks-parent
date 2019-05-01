@@ -1,8 +1,8 @@
 <template>
   <header id='head_top'>
-    <slot name='logo'></slot>
-    <slot name='search'></slot>
-    <section class="head_goback" v-if="goBack" @click="$router.go(-1)">
+    <!--<slot name='logo'></slot>
+    <slot name='search'></slot>-->
+    <!--<section class="head_goback" v-if="goBack" @click="$router.go(-1)">
       <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" version="1.1">
         <polyline points="12,18 4,9 12,0" style="fill:none;stroke:rgb(255,255,255);stroke-width:2"/>
       </svg>
@@ -15,11 +15,20 @@
     </router-link>
     <section class="title_head ellipsis" v-if="headTitle">
       <span class="title_text">{{headTitle}}</span>
-    </section>
-    <slot name="edit"></slot>
+    </section>-->
+    <!--375 44-->
+    <div class="header">
+      <div class="location">西安</div>
+      <div class="search bar5">
+        <input type="text" placeholder="请输入您要搜索的内容...">
+        <button type="submit"></button>
+      </div>
+      <div class="profile">KS</div>
+    </div>
+    <!--<slot name="edit"></slot>
     <slot name="msite-title"></slot>
     <slot name="changecity"></slot>
-    <slot name="changeLogin"></slot>
+    <slot name="changeLogin"></slot>-->
   </header>
 </template>
 
@@ -32,27 +41,28 @@
     },
     mounted() {
       //获取用户信息
-      this.getUserInfo();
+      /*this.getUserInfo();*/
 
     },
     props: ['signinUp', 'headTitle', 'goBack'],
     computed: {
-      ...mapState([
+      /*...mapState([
         'userInfo'
-      ]),
+      ]),*/
     },
     methods: {
-      ...mapActions([
+      /*...mapActions([
         'getUserInfo'
-      ]),
+      ]),*/
     },
 
   }
 
 </script>
 
-<style lang="scss" scoped>
-  @import '../../style/mixin';
+<style lang="css" scoped>
+
+  /*@import '../../style/mixin';
 
   #head_top {
     background-color: $blue;
@@ -96,5 +106,112 @@
       text-align: center;
       font-weight: bold;
     }
+  }*/
+  .header {
+    z-index: 9990;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 44px;
+    border-bottom: 1px solid #eee;
+    float: left;
+    /*background-image: url(../../../static/img/zhihu1.jpg);*/
+    /*background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: white;*/
+  }
+
+  .location {
+    width: 13%;
+    line-height: 44px;
+    float: left;
+    text-align: center;
+  }
+
+  .profile {
+    width: 13%;
+    line-height: 44px;
+    float: left;
+    text-align: center;
+  }
+
+  .search {
+    width: 73%;
+    line-height: 44px;
+    float: left;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    background: #494A5F;
+    font-weight: 500;
+    font-family: "Microsoft YaHei", "宋体", "Segoe UI", "Lucida Grande", Helvetica, Arial, sans-serif, FreeSans, Arimo;
+  }
+
+  #container {
+    width: 500px;
+    height: 820px;
+    margin: 0 auto;
+  }
+
+  /*div.search {padding: 30px 0;}*/
+  form {
+    position: relative;
+    width: 300px;
+    margin: 0 auto;
+  }
+
+  input, button {
+    border: none;
+    outline: none;
+  }
+
+  input {
+    width: 100%;
+    height: 33px;
+    padding-left: 13px;
+    padding-right: 46px;
+  }
+
+  button {
+    height: 33px;
+    width: 42px;
+    cursor: pointer;
+    position: absolute;
+  }
+
+  /*搜索框5*/
+  .bar5 {
+  }
+
+  .bar5 input, .bar5 button {
+    background: transparent;
+  }
+
+  .bar5 input {
+    border: 2px solid #F9F0DA;
+  }
+
+  .bar5 button {
+    top: 5px;
+    left: 280px;
+  }
+
+  .bar5 button:before {
+    content: "\f002";
+    font-family: FontAwesome;
+    font-size: 16px;
+    color: #F9F0DA;
+  }
+
+  .bar5 input:focus {
+    border-color: #311c24
   }
 </style>
