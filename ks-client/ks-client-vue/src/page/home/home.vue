@@ -16,16 +16,38 @@
         </router-link>
     </nav>-->
     <mescroll-vue ref="mescroll" :up="mescrollUp" @init="mescrollInit">
-      <!--模拟的内容-->
-      <img src="../../../static/img/zhihu2.jpg"/>
+      <!--第一部分 轮播图-->
+      <div class="first-content">
+        <div class="swiper-container">
+          <div class="swiper-wrapper">
+            <!--v-for="(foodItem, index) in foodTypes" :key="index"   v-for="foodItem in foodTypes" :key="foodItem.id"-->
+            <div class="swiper-slide">
+              <!--<router-link
+                :to="'/search/geohash'"
+                class="link_to_food">-->
+              <img src="https://yun.gs-troy.com/cy-index-h5/images/banner2.png?123">
+              <!--<figcaption>{{foodItem.title}}</figcaption>-->
+              <!--</router-link>-->
+            </div>
+            <!--v-for="foodItem in foodTypes" :key="foodItem.id"-->
+            <div class="swiper-slide">
+              <!--<router-link
+                :to="'/search/geohash'"
+                class="link_to_food">-->
+              <img src="https://yun.gs-troy.com/cy-index-h5/images/banner.png?123">
+              <!--<figcaption>{{foodItem.title}}</figcaption>-->
+              <!--</router-link>-->
+            </div>
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
+      </div>
+      <!--第二部分 分类-->
       <img src="../../../static/img/zhihu3.jpg"/>
+      <!--第三部分 热销产品-->
       <img src="../../../static/img/zhihu4.jpg"/>
-      <!--展示上拉加载的数据列表-->
+      <!--第四部分 产品列表-->
       <ul id="newsList" class="news-list">
-        <!--<li>
-                    <p>【话题1】标题标题标题标题</p>
-                    <p class="new-content">内容内容内容内容内容内容内容内容内容</p>
-                </li>-->
       </ul>
     </mescroll-vue>
     <div class="footer"></div>
@@ -36,12 +58,17 @@
   import headTop from '../../components/header/head'
   // import {cityGuess, hotcity, groupcity} from '../../service/getData'
   import MescrollVue from 'mescroll.js/mescroll.vue'
+  import Swiper from '../../plugins/swiper.min.js'
+
+  import {imgBaseUrl} from 'src/config/env'
 
   export default {
     name: 'mescrollComponent',
     components: {
-      headTop, MescrollVue
+      headTop, MescrollVue, Swiper
     },
+    //mounted->安装
+
     data() {
       return {
         mescroll: null, // mescroll实例对象
@@ -70,7 +97,9 @@
           }
         },
         dataList: [], // 列表数据
-        pdType: 0 // 菜单
+        pdType: 0, // 菜单
+        foodTypes: [],
+        imgBaseUrl
       }
     },
     beforeRouteEnter(to, from, next) { // 如果没有配置回到顶部按钮或isBounce,则beforeRouteEnter不用写
@@ -85,12 +114,31 @@
       next()
     },
     mounted() {
+      /*let obj1 = new Object();
+      obj1.imgUrl = "images/banner2.png?123";
+      let obj2 = new Object();
+      obj2.imgUrl = "images/banner.png?123";
+      let foodArr = [];
+      foodArr.push(obj1);
+      foodArr.push(obj2)
+      this.foodTypes = foodArr;*/
+
     },
-    computed: {},
     methods: {
       // mescroll组件初始化的回调,可获取到mescroll对象
       mescrollInit(mescroll) {
         this.mescroll = mescroll
+        var swiper = new Swiper('.swiper-container', {
+          loop: true,
+          pagination: '.swiper-pagination',
+          // 如果需要分页器
+          /*pagination: '.swiper-pagination',*/
+          // 如果需要前进后退按钮
+          /*nextButton: '.swiper-button-next',
+          prevButton: '.swiper-button-prev',
+          // 如果需要滚动条
+          scrollbar: '.swiper-scrollbar',*/
+        })
       },
       // 上拉回调 page = {num:1, size:10}; num:当前页 ,默认从1开始; size:每页数据条数,默认10
       upCallback(page, mescroll) {
@@ -115,9 +163,9 @@
          实际项目以您服务器接口返回的数据为准,无需本地处理分页.
          * */
       getListDataFromNet(pdType, pageNum, pageSize, successCallback, errorCallback) {
-        var listData = []
+        let listData = []
         // pdType 全部商品0; 奶粉1; 图书2;
-        /*this.$http({
+        this.$http({
           url: this.$http.adornUrl('/orderList'),
           method: 'get',
           params: this.$http.adornParams({
@@ -137,7 +185,7 @@
         }).catch((e) => {
           // 联网失败的回调,隐藏下拉刷新和上拉加载的状态;
           errorCallback && errorCallback()
-        })*/
+        })
       },
       //点击图标刷新页面
       reload() {
@@ -150,26 +198,31 @@
 </script>
 
 <style lang="css" scoped>
+  @import '../../style/swiper.min.css';
 
   * {
     margin: 0;
     padding: 0;
-    -webkit-touch-callout:none;
-    -webkit-user-select:none;
-    -webkit-tap-highlight-color:transparent;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
   }
-  body{
+
+  body {
     background-color: white
   }
-  ul{
+
+  ul {
     list-style-type: none
   }
-  img{
+
+  img {
     width: 100%;
     vertical-align: bottom;
   }
+
   /*模拟的标题,底部*/
-  .header{
+  .header {
     z-index: 9990;
     position: fixed;
     top: 0;
@@ -183,7 +236,8 @@
     background-repeat: no-repeat;
     background-color: white;
   }
-  .footer{
+
+  .footer {
     z-index: 9990;
     position: fixed;
     bottom: 0;
@@ -197,19 +251,22 @@
     background-repeat: no-repeat;
     background-color: white;
   }
+
   /*列表*/
-  .mescroll{
+  .mescroll {
     position: fixed;
     top: 3.6666666666666665rem;
     bottom: 4.25rem;
     height: auto;
   }
+
   /*回到顶部按钮*/
   .mescroll-totop {
     bottom: 5.833333333333333rem;
   }
+
   /*下拉刷新回调的提示*/
-  .download-tip{
+  .download-tip {
     z-index: 9900;
     position: fixed;
     top: 1.6666666666666667rem;
@@ -219,21 +276,27 @@
     line-height: 2rem;
     font-size: 1rem;
     text-align: center;
-    background-color: rgba(80,175,85,.7);
+    background-color: rgba(80, 175, 85, .7);
     color: white;
     -webkit-transition: top 300ms;
     transition: top 300ms;
   }
+
   /*展示上拉加载的数据列表*/
-  .news-list li{
+  .news-list li {
     padding: 1.3333333333333333rem;
     border-bottom: 0.08333333333333333rem solid #eee;
   }
-  .news-list .new-content{
+
+  .news-list .new-content {
     font-size: 1.1666666666666667rem;
     margin-top: 0.5rem;
     margin-left: 0.8333333333333334rem;
     color: #666;
+  }
+
+  .swiper-container {
+    width: 100%;
   }
 
 </style>

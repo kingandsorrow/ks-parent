@@ -9,11 +9,11 @@
 
 let baseUrl = 'localhost:8090';
 let routerMode = 'hash';
-let imgBaseUrl = '';
+let imgBaseUrl = 'https://yun.gs-troy.com/cy-index-h5/';
 
 
 if (process.env.NODE_ENV == 'development') {
-    imgBaseUrl = '/img/';
+    imgBaseUrl = 'https://yun.gs-troy.com/cy-index-h5/';
 
 }else if(process.env.NODE_ENV == 'production'){
 	baseUrl = '//elm.cangdu.org';

@@ -16,6 +16,7 @@ import top.ks.common.constant.Const;
 import top.ks.sso.core.filter.SsoWebFilter;
 import top.ks.sso.web.interceptor.LoginInterceptor;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 
 //import org.springframework.boot.autoconfigure.http.HttpMessageConverters;
@@ -77,7 +78,7 @@ public class CommonConfig implements DisposableBean {
         //3.返回新的CorsFilter.
         return new CorsFilter(configSource);
     }*/
-    @Bean
+    @PostConstruct
     public FilterRegistrationBean corsFilterRegistration() {
         //1.添加CORS配置信息
         CorsConfiguration config = new CorsConfiguration();

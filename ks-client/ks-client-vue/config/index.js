@@ -21,7 +21,7 @@ module.exports = {
         env: {
             NODE_ENV: '"development"'
         },
-        port: 8000,
+        port: 8050,
         assetsSubDirectory: 'static',
         assetsPublicPath: '/',
         context: [ //代理路径
@@ -37,8 +37,9 @@ module.exports = {
             '/eus',
             '/payapi',
             '/img',
+            '/home'
         ],
-        proxypath: 'http://cangdu.org:8001',
+        proxypath: 'http://www.ks.com:8000',
         // CSS Sourcemaps off by default because relative paths are "buggy"
         // with this option, according to the CSS-Loader README
         // (https://github.com/webpack/css-loader#sourcemaps)
