@@ -20,25 +20,35 @@
       <div class="first-content">
         <div class="swiper-container">
           <div class="swiper-wrapper">
-            <!--v-for="(foodItem, index) in foodTypes" :key="index"   v-for="foodItem in foodTypes" :key="foodItem.id"-->
-            <div class="swiper-slide">
-              <!--<router-link
+            <!--v-for="(foodItem, index) in foodTypes" :key="index"   -->
+            <div class="swiper-slide" v-for="foodItem in foodTypes" :key="foodItem.id">
+              <router-link
                 :to="'/search/geohash'"
-                class="link_to_food">-->
-              <img src="https://yun.gs-troy.com/cy-index-h5/images/banner2.png?123">
-              <!--<figcaption>{{foodItem.title}}</figcaption>-->
-              <!--</router-link>-->
+                class="link_to_food">
+                <img :src="imgBaseUrl+foodItem.imgUrl">
+                <!--<figcaption>{{foodItem.title}}</figcaption>-->
+              </router-link>
             </div>
-            <!--v-for="foodItem in foodTypes" :key="foodItem.id"-->
+          <!--<div class="swiper-wrapper">
+            &lt;!&ndash;v-for="(foodItem, index) in foodTypes" :key="index"   &ndash;&gt;
             <div class="swiper-slide">
-              <!--<router-link
+              <router-link
                 :to="'/search/geohash'"
-                class="link_to_food">-->
-              <img src="https://yun.gs-troy.com/cy-index-h5/images/banner.png?123">
-              <!--<figcaption>{{foodItem.title}}</figcaption>-->
-              <!--</router-link>-->
+                class="link_to_food">
+                <img src="https://yun.gs-troy.com/cy-index-h5/images/banner2.png?123">
+                &lt;!&ndash;<figcaption>{{foodItem.title}}</figcaption>&ndash;&gt;
+              </router-link>
             </div>
-          </div>
+            <div class="swiper-slide">
+              <router-link
+                :to="'/search/geohash'"
+                class="link_to_food">
+                <img src="https://yun.gs-troy.com/cy-index-h5/images/banner.png?123">
+                &lt;!&ndash;<figcaption>{{foodItem.title}}</figcaption>&ndash;&gt;
+              </router-link>
+            </div>
+            &lt;!&ndash;v-for="foodItem in foodTypes" :key="foodItem.id"&ndash;&gt;
+          </div>-->
           <div class="swiper-pagination"></div>
         </div>
       </div>
@@ -65,7 +75,7 @@
   export default {
     name: 'mescrollComponent',
     components: {
-      headTop, MescrollVue, Swiper
+      headTop, MescrollVue
     },
     //mounted->安装
 
@@ -114,31 +124,20 @@
       next()
     },
     mounted() {
-      /*let obj1 = new Object();
-      obj1.imgUrl = "images/banner2.png?123";
-      let obj2 = new Object();
-      obj2.imgUrl = "images/banner.png?123";
-      let foodArr = [];
-      foodArr.push(obj1);
-      foodArr.push(obj2)
-      this.foodTypes = foodArr;*/
-
     },
     methods: {
       // mescroll组件初始化的回调,可获取到mescroll对象
       mescrollInit(mescroll) {
+        let obj1 = new Object();
+        obj1.imgUrl = "images/banner2.png?123";
+        let obj2 = new Object();
+        obj2.imgUrl = "images/banner.png?123";
+        let foodArr = [];
+        foodArr.push(obj1);
+        foodArr.push(obj2)
+        this.foodTypes = foodArr;
         this.mescroll = mescroll
-        var swiper = new Swiper('.swiper-container', {
-          loop: true,
-          pagination: '.swiper-pagination',
-          // 如果需要分页器
-          /*pagination: '.swiper-pagination',*/
-          // 如果需要前进后退按钮
-          /*nextButton: '.swiper-button-next',
-          prevButton: '.swiper-button-prev',
-          // 如果需要滚动条
-          scrollbar: '.swiper-scrollbar',*/
-        })
+        setTimeout(this.swipperInit(), 50);
       },
       // 上拉回调 page = {num:1, size:10}; num:当前页 ,默认从1开始; size:每页数据条数,默认10
       upCallback(page, mescroll) {
@@ -190,6 +189,20 @@
       //点击图标刷新页面
       reload() {
         window.location.reload();
+      },
+      swipperInit() {
+        alert(1);
+        var swipper = new Swiper('.swiper-container', {
+          loop: true,
+          pagination: '.swiper-pagination',
+          // 如果需要分页器
+          /*pagination: '.swiper-pagination',*/
+          // 如果需要前进后退按钮
+          /*nextButton: '.swiper-button-next',
+          prevButton: '.swiper-button-prev',
+          // 如果需要滚动条
+          scrollbar: '.swiper-scrollbar',*/
+        })
       }
 
     }

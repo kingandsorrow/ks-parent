@@ -1,0 +1,17 @@
+/* 没有数据 */
+.noData{
+	clear: both;
+	width: 100%;
+	text-align: center;
+	padding-top: 4.444rem;
+	overflow: hidden;
+	background: #fff;
+}
+.noData img{width: 10.444rem;}
+.noData i{
+	display: block;
+	width: 100%;
+	font-size: 1.111rem;
+	color: #aaa;
+	margin-top: 2.6667rem;
+}

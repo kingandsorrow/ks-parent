@@ -1,0 +1,55 @@
+body{
+	background: rgb(255,255,255);
+}
+.content{
+	padding-left: 1.28rem;padding-right: 1.28rem;padding-bottom: 1.28rem;
+}
+.menu{
+	width: 100%;margin-top: 1.6rem;display: flex;justify-content: space-around;
+}
+.menu div{
+	font-family: PingFang-SC-Regular;font-size: 1.493rem;color: rgb(51,51,51);text-align: center;
+}
+.menu div div{
+	margin-top: 1.066rem;
+}
+.head_ll{
+	margin-top: 1.706rem;display: flex;justify-content: space-between;
+}
+.head_ll div:nth-of-type(1){
+	font-family: PingFang-SC-Medium;font-size: 1.92rem;color: rgb(51,51,51);
+}
+.head_ll div:nth-of-type(2){
+	font-family: PingFang-SC-Light;font-size: 1.493rem;color: #adadad;margin-top: 0.4rem;
+}
+.content_ll{
+	margin-top: 1.706rem;display: flex;justify-content: space-around;
+}
+.content_ll div img{
+	width: 8.906rem;height: 7.68rem;
+}
+.bg_gg{
+	margin-top: 1.706rem;margin-bottom: 1.706rem;
+}
+.bg_box {
+	margin-top: 2.133rem;
+	overflow: hidden;
+	padding-left: 0.853rem;
+	padding-right: 0.853rem;
+}
+
+.bg_shop {
+	width: 17.066rem;
+	height: 19.2rem;
+	margin-bottom: 1.28rem;
+	border-radius: 10px;
+	float: left;
+	text-align: center;
+}
+
+.bg_shop:nth-of-type(even) {
+	float: right;
+}
+.bg_shop img{
+	width: 17.066rem;height: 19.2rem;
+}

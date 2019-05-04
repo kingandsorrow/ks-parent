@@ -1,0 +1,65 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  /*background: #dadada;*/
+}
+
+#app {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+#wrapper {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+#scroller {
+  margin: 0;
+  padding: 0;
+}
+
+.jroll-infinite-tip {
+  height: 4.6933333333rem;
+  line-height: 4.6933333333rem;
+  text-align: center;
+  font-size: 1.6rem;
+  color: #808080;
+}
+
+.jroll-vue-infinite {
+  height: 100%;
+}
+
+.jroll-plugin-pulldown {
+  position: absolute;
+  top: -4.6933333333rem;
+  width: 100%;
+  height: 4.6933333333rem;
+  line-height: 4.6933333333rem;
+  font-size: 1.6rem;
+  text-align: center;
+  color: #808080;
+  border-bottom: 0.0533333333rem solid #e4e4e4;
+}
+
+.jroll-plugin-pulldown-icon {
+  display: inline-block;
+  width: 2.3466666667rem;
+  height: 2.3466666667rem;
+  position: absolute;
+  top: 1.1733333333rem;
+  left: 25%;
+}
+
+.jroll-plugin-pulldown-icon img {
+  width: 2.3466666667rem;
+  height: 2.3466666667rem;
+  display: block;
+}

@@ -1,0 +1,79 @@
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td{padding:0;margin:0;-webkit-tap-highlight-color:rgba(255,255,255,0)}
+section,article,aside,header,footer,nav,dialog,figure{display:block}
+ol,ul,li{list-style:none}
+h1,h2,h3,h4,h5,h6{font-weight:normal;}
+img{border:0;vertical-align:middle}
+input{vertical-align:middle}
+table{border-collapse:collapse;border-spacing:0}
+address,caption,cite,code,dfn,em,th,var,i{font-weight:normal;font-style:normal}
+input[type="radio"], input[type="checkbox"], input[type="submit"], input[type="rest"], input[type="button"], button, select {cursor:pointer}
+input[type="text"], input[type="number"], input[type="tel"], input[type="password"], input[type="submit"], input[type="rest"], input[type="button"], button, textarea {-webkit-border-radius:0;-webkit-appearance:none;-moz-appearance:none}
+html,body{color:#2b2a2a;font: 14px/1.5 "Microsoft YaHei",PingFang-SC-Regular,sans-serif;}
+a {color:#2b2a2a;text-decoration:none}a:visited{color:#2b2a2a;}
+a img {border:0}
+html,body{font:"Helvetica Neue", HelveticaNeue, "Helvetica-Neue", Helvetica, "BBAlpha Sans", sans-serif,"microsoft yahei";color:#242424;}
+.clearfix:after {display:block;clear:both;height:0;visibility:hidden;font-size:0;line-height:0;content:'';}
+.clearfix {zoom:1}
+input[type="text"], input[type="number"], input[type="tel"], input[type="password"],textarea{border:1px solid #CFCFCF;}
+.selbdbox{border: 1px solid #bebebe; position:relative; background-color:#fff;}
+.selbdbox:before{ content:'';display: inline-block;font-size: 0;width: 0; position:absolute;right:8px;top:13px;
+    border-width: 6px;border-style: solid dashed dashed dashed;border-color: #bebebe transparent transparent transparent;}
+.fl {float:left}
+.fr {float:right}
+.hide {display:none}
+.cf{*display:inline-block;*zoom:1}
+.cf:after{content:"";display:block;height:0;clear:both;visibility:hidden}
+.clear{clear: both;}
+
+* {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+html{font-size:2.667vw;}
+body{font-size: 1rem;}
+/* loading 数据渲染前的显示……*/
+.vue-loading-common{
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,1);
+    text-align: center;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 19891015;
+}
+.vue-loading-common img{
+    width: 9.66rem;
+    margin-top: 75%;
+}
+
+/*自动算宽*/
+.autoWidth{display: -webkit-flex;
+    -webkit-flex-flow: row wrap;
+    -webkit-align-items: stretch;
+    -webkit-justify-content:space-between;
+
+    /*IE10还不支持*/
+    display: -ms-flex;
+    -ms-flex-flow: row wrap;
+    -ms-align-items: stretch;
+    -ms-justify-content:space-between;
+
+    display: flex;
+    flex-flow: row wrap;
+    align-items: stretch;
+    justify-content:space-between;
+}
+.mask{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  background: rgba(0,0,0,0.7);
+  display: none;
+  z-index: 999;
+}

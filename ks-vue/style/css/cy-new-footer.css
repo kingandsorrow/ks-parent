@@ -1,0 +1,48 @@
+/* 底部 */
+.cyb-index-footer{
+	clear: both;
+	width: 100%;
+	height:5.23rem;
+	background:rgba(255,255,255,1);
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	z-index: 88;
+	overflow: hidden;
+	-webkit-box-shadow: 0rem 1.2rem 3rem 0rem rgba(140, 158, 177, .6);
+	box-shadow: 0rem 1.2rem 3rem 0rem rgba(140, 158, 177, .6);
+}
+.cyb-index-footer ul{
+	clear: both;
+	width: 100%;
+	overflow: hidden;
+	display: flex;
+	justify-content: space-around;
+}
+.cyb-index-footer ul li{
+	float: left;
+	width: 33.33%;
+	height: 5.23rem;
+	text-align: center;
+}
+.cyb-index-footer li span{
+	width:100%;
+	display: block;
+	overflow: hidden;
+}
+.cyb-index-footer li i{
+	display: block;
+	height:1.49rem;
+	font-size:1.07rem;
+	font-family:AppleSystemUIFont;
+	color:rgba(142,142,147,1);
+	line-height:1.49rem;
+}
+.cyb-index-footer li img{
+	width:5.12rem;
+	height:3.63rem;
+}
+.cyb-index-footer li .footer-active{
+	font-family:PingFangSC-Medium;
+	color:rgba(65,157,255,1);
+}
