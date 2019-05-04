@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="style/css/module/noData.css">
     <link rel="stylesheet" href="style/css/module/page.css">
     <link href="http://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style/css/ks-header.css">
+    <link rel="stylesheet" href="style/css/ks-footer.css">
     <link rel="stylesheet" href="style/css/mescroll.min.css">
     <link rel="stylesheet" href="style/css/mescroll-option.css">
     <link rel="stylesheet" href="style/css/swiper.min.css"/>
@@ -28,57 +30,38 @@
             display: none
         }
 
-        body {
-            background-color: white
-        }
-
-        ul {
-            list-style-type: none
-        }
-
         img {
             width: 100%;
             vertical-align: bottom;
         }
 
-        .footer {
-            z-index: 9990;
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 50px;
-            border-top: 1px solid #eee;
-            background-image: url(images/zhihu5.jpg);
-            background-size: contain;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-color: white;
-        }
 
         /*列表*/
         .mescroll {
             position: fixed;
-            top: 44px;
-            bottom: 51px;
+            top: 4.373333333333333rem;
+            bottom: 5.226666666666667rem;
             height: auto;
         }
 
         /*回到顶部按钮*/
         .mescroll-totop {
-            bottom: 70px;
+            bottom: 9.88888888888888rem;
+            width: 4.51111111111111rem;
+            height: 4.5111111111111rem;
+            right: 1.31111111111111rem;
         }
 
         /*下拉刷新回调的提示*/
         .download-tip {
             z-index: 9900;
             position: fixed;
-            top: 20px;
+            top: 1.0666666666666667rem;
             left: 0;
             width: 100%;
-            height: 24px;
-            line-height: 24px;
-            font-size: 12px;
+            height: 1.28rem;
+            line-height: 1.28rem;
+            font-size: 0.64rem;
             text-align: center;
             background-color: rgba(80, 175, 85, .7);
             color: white;
@@ -88,112 +71,16 @@
 
         /*展示上拉加载的数据列表*/
         .news-list li {
-            padding: 16px;
+            padding: 0.8533333333333334rem;
             border-bottom: 1px solid #eee;
         }
 
         .news-list .new-content {
-            font-size: 14px;
-            margin-top: 6px;
-            margin-left: 10px;
+            font-size: 0.7466666666666667rem;
+            margin-top: 0.32rem;
+            margin-left: 0.5333333333333333rem;
             color: #666;
         }
-
-        /*头部样式开始*/
-        .header-index {
-            z-index: 9990;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 44px;
-            border-bottom: 1px solid #eee;
-            float: left;
-            /*background-image: url(../../../static/img/zhihu1.jpg);*/
-            /*background-size: contain;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-color: white;*/
-        }
-
-        .header-index .location {
-            width: 13%;
-            line-height: 44px;
-            float: left;
-            text-align: center;
-        }
-
-        .header-index .profile {
-            width: 13%;
-            line-height: 44px;
-            float: left;
-            text-align: center;
-        }
-
-        .header-index .search {
-            width: 73%;
-            line-height: 44px;
-            float: left;
-        }
-
-        .header-index * {
-            box-sizing: border-box;
-        }
-
-        .header-index form {
-            position: relative;
-            width: 300px;
-            margin: 0 auto;
-        }
-
-        .header-index input, .header-index button {
-            border: none;
-            outline: none;
-        }
-
-        .header-index input {
-            width: 100%;
-            height: 33px;
-            padding-left: 13px;
-            padding-right: 46px;
-        }
-
-        .header-index button {
-            height: 33px;
-            width: 42px;
-            cursor: pointer;
-            position: absolute;
-        }
-
-        /*搜索框5*/
-        .header-index .bar5 {
-        }
-
-        .header-index .bar5 input, .header-index .bar5 button {
-            background: transparent;
-        }
-
-        .header-index .bar5 input {
-            border: 2px solid #F9F0DA;
-        }
-
-        .header-index .bar5 button {
-            top: 7px;
-            left: 280px;
-        }
-
-        .header-index .bar5 button:before {
-            content: "\f002";
-            font-family: FontAwesome;
-            font-size: 16px;
-            color: #F9F0DA;
-        }
-
-        .header-index .bar5 input:focus {
-            border-color: #311c24
-        }
-
-        /*头部样式结束*/
     </style>
 </head>
 
@@ -240,7 +127,17 @@
     </div>
 
     <!--底部-->
-    <div class="footer"></div>
+    <!--<div style="height: 5.3rem"></div>-->
+    <footer class="ks-footer">
+        <ul>
+            <li><span class="default">
+						<img src="images/footer/Overrides_Tab Bar_Icons_Active_1@2x.png"></span>
+                <i class="footer-i footer-active">首页</i></li>
+            <li><span class="default">
+						<img src="images/footer/Overrides_Tab Bar_Icons_Unselected_3@2x.png"></span>
+                <i class="footer-i">我的</i></li>
+        </ul>
+    </footer>
 </div>
 </body>
 

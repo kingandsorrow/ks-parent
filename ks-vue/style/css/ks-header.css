@@ -1,0 +1,95 @@
+/*头部样式开始*/
+.header-index {
+    z-index: 9990;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4.373333333333333rem;
+    line-height: 4.373333333333333rem;
+    border-bottom: 1px solid #eee;
+    float: left;
+    font-size: 1.3866666666666667rem;
+    border-bottom: 2px solid #f6f6f6;
+}
+
+.header-index .location {
+    width: 13%;
+    height: 4.373333333333333rem;
+    line-height: 4.373333333333333rem;
+    float: left;
+    text-align: center;
+}
+
+.header-index .profile {
+    width: 13%;
+    height: 4.373333333333333rem;
+    line-height: 4.373333333333333rem;
+    float: left;
+    text-align: center;
+}
+
+.header-index .search {
+    width: 73%;
+    height: 4.373333333333333rem;
+    line-height: 4.373333333333333rem;
+    float: left;
+}
+
+.header-index * {
+    box-sizing: border-box;
+}
+
+.header-index form {
+    position: relative;
+    width: 16rem;
+    margin: 0 auto;
+}
+
+.header-index input, .header-index button {
+    border: none;
+    outline: none;
+}
+
+.header-index input {
+    width: 100%;
+    height: 3.2rem;
+    padding-left: 1.4933333333333334rem;
+    padding-right: 4.213333333333333rem;
+}
+
+.header-index button {
+    height: 3.2rem;
+    width: 4.48rem;
+    cursor: pointer;
+    position: absolute;
+}
+
+/*搜索框5*/
+.header-index .bar5 {
+}
+
+.header-index .bar5 input, .header-index .bar5 button {
+    background: transparent;
+}
+
+.header-index .bar5 input {
+    border: 4px solid #F9F0DA;
+    font-size: 1.3866666666666667rem;
+}
+
+.header-index .bar5 button {
+    top: 0.7466666666666667rem;
+    left: 29.866666666666667rem;
+}
+
+.header-index .bar5 button:before {
+    content: "\f002";
+    font-family: FontAwesome;
+    font-size: 1.76rem;
+    color: #F9F0DA;
+}
+
+.header-index .bar5 input:focus {
+    border-color: #311c24
+;}
