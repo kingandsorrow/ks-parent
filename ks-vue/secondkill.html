@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>秒杀</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <script src="style/js/include.js"></script>
+    <link rel="stylesheet" href="style/css/module/index-common.css">
+    <link rel="stylesheet" href="style/css/module/noData.css">
+    <link rel="stylesheet" href="style/css/swiper.min.css"/>
+    <link rel="stylesheet" href="style/css/module/secondkill.css?d=2">
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -webkit-tap-highlight-color: transparent;
+            /*苹果设备滑动卡顿问题*/
+            -webkit-overflow-scrolling: touch
+        }
+
+        /*滑动取消*/
+        ::-webkit-scrollbar {
+            display: none
+        }
+
+        img {
+            border: 0;
+            vertical-align: middle;
+        }
+
+        .jishi {
+            width: 28rem;
+            height: 4rem;
+            text-align: center;
+            position: relative;
+            margin: auto;
+            background: rgba(255, 202, 110, 1);
+            border-radius: 4rem;
+        }
+
+        .timing {
+            position: absolute;
+            top: 0;
+            height: 4rem;
+            line-height: 4rem;
+            text-align: center;
+            font-size: 1.39rem;
+            font-family: PingFangSC-Medium;
+            color: rgba(197, 127, 79, 1);
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    <div class="bg_image">
+        <div class="swiper-container image">
+            <ul class="swiper-wrapper image">
+                <!--v-for="item in bean.galleryUrls"-->
+                <li class="swiper-slide image">
+                    <!--<img :src="item"/>-->
+                    <img src="https://ebp.gs-troy.com/img/190328/1903281440338169047.jpg">
+                </li>
+            </ul>
+            <div class="swiper-pagination"></div>
+        </div>
+    </div>
+    <div class="status">
+        <div class="status_notice">
+            进行中
+        </div>
+        <div class="status_time">
+            距离结束 <span id="status_time_end"></span>
+        </div>
+    </div>
+    <div class="bg_zuan">
+        <div class="bg_zuan_now">1000<span>钻</span><span class="bg_zuan_now_notice">当前价格</span></div>
+        <div class="bg_zuan_max">最高10000钻</div>
+    </div>
+
+    <div class="bg_notice">
+        <div style="float: left;max-width: 70%;">
+            <div class="bg_notice_name">【夏季冰袖】限时竞价</div>
+            <div class="bg_notice_notice">夏季冰袖超值兑，周日10:00开抢</div>
+        </div>
+        <div class="bg_notice_refresh" @click="refresh">
+            刷新价格
+        </div>
+    </div>
+    <template v-if="recordList.length > 0">
+        <div class="bg_gray"></div>
+
+        <div class="record_title">
+            竞价记录
+        </div>
+        <template v-for="(item,index) in recordList">
+            <template v-if="index == 0">
+                <div class="record_first">
+                    <div class="record_name" v-html="item.userName"></div>
+                    <div class="record_status">领先</div>
+                    <div class="record_price">{{item.price}}钻</div>
+                    <div class="record_time">{{item.createTime | formatDate}}</div>
+                </div>
+            </template>
+            <template v-else>
+                <div class="record_normal">
+                    <div class="record_name" v-html="item.userName"></div>
+                    <div class="record_status">出局</div>
+                    <div class="record_price">{{item.price}}钻</div>
+                    <div class="record_time">{{item.createTime | formatDate}}</div>
+                </div>
+            </template>
+            <div class="record_line"></div>
+        </template>
+    </template>
+    <div class="bg_gray"></div>
+
+    <div class="shopDetail_title">
+        商品图文详情
+    </div>
+    <div>
+        <img src="https://ebp.gs-troy.com/img/190328/1903281444355289049.jpg" style="width: 100%;">
+        <img src="https://ebp.gs-troy.com/img/190328/1903281446347429051.jpg" style="width: 100%;">
+        <img src="https://ebp.gs-troy.com/img/190328/1903281446438699032.jpg" style="width: 100%;">
+    </div>
+
+    <div class="bg_gray"></div>
+
+    <div class="bg_gray"></div>
+
+    <div style="height: 6rem;"></div>
+
+    <div class="bg_pay">
+        <div class="reduce" @click="reduce"></div>
+        <div class="pay_price">1000</div>
+        <div class="add" @click="add"></div>
+        <div class="btn_pay" @click="goPay">
+            出价
+        </div>
+        <div class="bg_sxf">
+            <img src="images/secondkill/icon_zuanshi.png"/>
+            10
+            <span>(手续费)</span>
+        </div>
+    </div>
+
+    <div class="goTop" id="back-to-top" style="display: none;">
+        <img src="images/secondkill/top.png"/>
+    </div>
+
+    <div class="mask"></div>
+    <div class="bg_tan">
+        <div class="tan_title">出价确认</div>
+        <div class="tan_notice">单次出价手续费100颗钻石，出价成功后不退</div>
+        <div class="noTiShi" @click="saveSign">
+            <div class="yuan"></div>
+            不再提醒
+        </div>
+        <div class="bg_tan_btn">
+            <div class="tan_btn_qx" @click="closeTan">取消</div>
+            <div class="tan_btn_qd" @click="biddPrice">确定</div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="style/js/swiper.min.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" src="style/js/countdown/countdown.js"></script>
+<script type="text/javascript" charset="utf-8">
+    var vm = new Vue({
+        el: ".box",
+        data: {
+            ticket: "",
+            userId: "",
+            userInfo: "",
+            loading: true,
+            isLogin: false,
+            req: {
+                userId: "",
+                shoppingId: "",
+                shopingPeriodId: ""
+            },
+            biddReq: {
+                userId: "",
+                shoppingId: "",
+                price: "",
+                proceduresPrice: "",
+                shopingPeriodId: "",//期次ID
+            },
+            bean: "",//商品详情
+            shopList: "",//推荐商品
+            recordList: "",//记录集合
+            price: "",//价格
+            ticketReq: {
+                ticket: ""
+            },
+        },
+        filters: {
+            formatDate(time) {
+                var date = new Date(time);
+                return tools.formatDateTime(date);
+            },
+            formatFlow(flowNum) {
+                return parseFloat(flowNum).toFixed(2);
+            }
+        },
+        created: function () {
+            var vm = this;
+        },
+        mounted: function () {
+            $(window).scroll(function () {
+                if ($(window).scrollTop() > 100) {
+                    $("#back-to-top").fadeIn(1500);
+                } else {
+                    $("#back-to-top").fadeOut(1500);
+                }
+            });
+            //当点击跳转链接后，回到页面顶部位置
+            $("#back-to-top").click(function () {
+                //$('body,html').animate({scrollTop:0},1000);
+                if ($('html').scrollTop()) {
+                    $('html').animate({scrollTop: 0}, 1000);
+                    return false;
+                }
+                $('body').animate({scrollTop: 0}, 1000);
+                return false;
+            });
+        },
+        methods: {
+            //判断商品状态
+            status: function (start, end, periodStatus) {
+                //1未开始2进行中3已结束
+                var now = new Date().getTime();
+                /*start = start.replace(/-/g, "/");
+                end = end.replace(/-/g, "/");*/
+                if (now < new Date(start).getTime()) {
+                    return 1;
+                } else if (now > new Date(start).getTime() && now < new Date(end).getTime() && periodStatus == '0') {
+                    return 3;
+                } else if (now > new Date(start).getTime() && now < new Date(end).getTime() && periodStatus == '1') {
+                    return 1;
+                } else if (now > new Date(start).getTime() && now < new Date(end).getTime() && periodStatus == '2') {
+                    return 2;
+                } else if (now > new Date(end).getTime()) {
+                    return 3;
+                }
+            },
+            add: function () {
+                if (vm.price == vm.bean.maxBiddPrice) {
+                    layerTool.msg("出价不能高于最高价");
+                    return false;
+                }
+                vm.price = parseInt(vm.price) + parseInt(vm.bean.spaceBiddPrice);
+                if (vm.price >= vm.bean.maxBiddPrice) {
+                    vm.price = vm.bean.maxBiddPrice
+                }
+            },
+            reduce: function () {
+                vm.price = parseInt(vm.price) - parseInt(vm.bean.spaceBiddPrice);
+                if (vm.price == "0") {
+                    vm.price = "0";
+                }
+            },
+            refresh: function () {
+                httpTool.postTranscode(CONSTANT.INTERFACE_URL, [
+                    "biddingPriceServiceI",
+                    "selectOneDetails",
+                    vm.req
+                ], function (data) {
+                    vm.bean = data.biddingPriceBean;
+                    var imgs = data.biddingPriceBean.galleryUrls.replace("[", "");
+                    imgs = imgs.replace("]", "");
+                    imgs = imgs.replace(/"([^"]*)"/g, "$1");
+                    vm.bean.galleryUrls = imgs.split(",");
+
+                    var images = data.biddingPriceBean.pictureUrl.replace("[", "");
+                    images = images.replace("]", "");
+                    images = images.replace(/"([^"]*)"/g, "$1");
+                    vm.bean.pictureUrl = images.split(",");
+                    vm.shopList = data.recommendList;
+                    vm.recordList = data.historyList;
+                    vm.price = vm.bean.nowMaxBiddPrice;
+                }, function (err) {
+                    layerTool.msg(err.errMsg);
+                });
+            },
+            //竞价
+            biddPrice: function () {
+                vm.biddReq.price = vm.price;
+                vm.biddReq.proceduresPrice = vm.bean.brokerage;
+                httpTool.postTranscode(CONSTANT.USER_NEED_LOGIN_URL, [
+                    "biddHistoryServiceI",
+                    "insertBiddingPrice",
+                    vm.biddReq
+                ], function (data) {
+
+                    httpTool.postTranscode(CONSTANT.INTERFACE_URL, [
+                        "h5UserServiceI",
+                        "getUserInfo",
+                        {userId: ""}
+                    ], function (data) {
+                        vm.userInfo = data.userBean;
+                        if (vm.userInfo.openId) {
+                            //查询是否关注
+                            httpTool.postTranscode(CONSTANT.USER_NEED_LOGIN_URL, [
+                                "weixinSubscribeServiceI",
+                                "selectSubscribeInfo",
+                                {openId: vm.userInfo.openId}
+                            ], function (data) {
+                                //已关注
+                                if (data.subscribeStatus == "1") {
+                                    window.location.href = BASE_URL + "static/mall/page/me/myCompete.html";
+                                } else {
+                                    $(".mask").css("display", "block");
+                                    $(".bg_tan_gzh").css("display", "block");
+                                }
+                            }, function (err) {
+                                $(".mask").css("display", "block");
+                                $(".bg_tan_gzh").css("display", "block");
+                            });
+                        } else {
+                            $(".mask").css("display", "block");
+                            $(".bg_tan_gzh").css("display", "block");
+                        }
+                    });
+                }, function (err) {
+                    layerTool.msg(err.errMsg);
+                });
+            },
+            goPay: function () {
+
+                var sign = localStorage.getItem("hasSign");
+                if (sign == "1") {
+                    vm.biddPrice();
+                } else {
+                    $(".mask").css("display", "block");
+                    $(".bg_tan").css("display", "block");
+                }
+                /*httpTool.postTranscode(CONSTANT.USER_NEED_LOGIN_URL, [
+                    "h5UserServiceI",
+                    "getUserInfo",
+                    {userId: ""}
+                ], function (data) {
+                    vm.loading = false;
+                    vm.isLogin = true;
+                    vm.userInfo = data.userBean;
+
+                    var sign = localStorage.getItem("hasSign");
+                    if(sign == "1"){
+                        vm.biddPrice();
+                    }else{
+                        $(".mask").css("display","block");
+                        $(".bg_tan").css("display","block");
+                    }
+                }, function (res) {
+                    vm.loading = false;
+                    if (res.errCode == "6016") {
+                        vm.isLogin = false;
+                         window.location.href = CONSTANT.USER_TO_LOGIN + "?returnUrl=" + window.location.href;
+                    } else {
+                        layerTool.msg(res.errMsg);
+                    }
+                });*/
+            },
+            closeTan: function () {
+                $(".mask").css("display", "none");
+                $(".bg_tan").css("display", "none");
+            },
+            saveSign: function () {
+                var sign = localStorage.getItem("hasSign");
+                if (sign == "1") {
+                    $(".yuan").css("background", "rgb(255,255,255)");
+                    localStorage.removeItem("hasSign");
+                } else {
+                    $(".yuan").css("background", "rgb(203,188,158)");
+                    localStorage.setItem("hasSign", "1");
+                }
+            },
+            //进入详情
+            goDetail: function (shoppingId, shopingPeriodId) {
+                window.location.href = "auctionDetail.html?shoppingId=" + shoppingId + "&shopingPeriodId=" + shopingPeriodId;
+            },
+            closeGZ: function () {
+                window.location.href = BASE_URL + "static/mall/page/me/myCompete.html";
+            }
+        },
+        destroyed: function () {
+            //清除倒计时
+            clearInterval(interval);
+        }
+    });
+
+</script>
+</html>

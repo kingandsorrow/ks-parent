@@ -1,0 +1,495 @@
+.title {
+    font-family: PingFang-SC-Regular;
+    font-size: 2.133rem;
+    color: rgb(51, 51, 51);
+    text-align: center;
+    font-weight: 400;
+}
+
+.bg_image {
+    height: 33.066rem;
+}
+
+.bg_image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.status {
+    background: url(../../../images/secondkill/bg_jingjia.png) no-repeat;
+    background-size: 100% 100%;
+    height: 5rem;
+}
+
+.status_before {
+    background: rgb(114, 139, 224);
+    height: 5rem;
+}
+
+.status_after {
+    background: rgb(114, 139, 224);
+    height: 5rem;
+    text-align: center;
+    font-family: PingFang-SC-Medium;
+    font-size: 1.706rem;
+    color: rgb(255, 255, 255);
+    line-height: 5rem;
+}
+
+.status_notice {
+    font-family: PingFang-SC-Medium;
+    font-size: 1.706rem;
+    color: rgb(255, 255, 255);
+    float: left;
+    line-height: 5rem;
+    margin-left: 2rem;
+}
+
+.status_time {
+    font-family: PingFang-SC-Regular;
+    font-size: 1.493rem;
+    color: rgb(255, 255, 255);
+    float: right;
+    line-height: 5rem;
+    margin-right: 2rem;
+}
+
+.bg_zuan {
+    margin-top: 2.133rem;
+    margin-left: 1.6rem;
+    height: 4rem;
+    line-height: 4rem;
+    position: relative;
+}
+
+.bg_zuan_now {
+    font-family: PingFang-SC-Medium;
+    font-size: 3.2rem;
+    color: rgb(236, 88, 88);
+    position: absolute;
+    left: 0;
+    bottom: 0;
+}
+
+.bg_zuan_now span:nth-of-type(1) {
+    font-size: 1.706rem;
+}
+
+.bg_zuan_now_notice {
+    font-family: PingFang-SC-Regular;
+    font-size: 1.493rem;
+    color: rgb(102, 102, 102);
+    margin-left: 1.067rem;
+}
+
+.bg_zuan_max {
+    font-family: PingFang-SC-Regular;
+    font-size: 1.6rem;
+    color: rgb(51, 51, 51);
+    position: absolute;
+    right: 1.6rem;
+    bottom: 0;
+}
+
+.bg_notice {
+    margin-top: 1.706rem;
+    margin-left: 1.6rem;
+    height: 6.6rem;
+    margin-bottom: 2.133rem;
+}
+
+.bg_notice_name {
+    font-family: PingFang-SC-Regular;
+    font-size: 2.133rem;
+    color: rgb(51, 51, 51);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.bg_notice_notice {
+    font-family: PingFang-SC-Regular;
+    font-size: 1.706rem;
+    color: rgb(102, 102, 102);
+    word-wrap: break-word;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+}
+
+.bg_notice_refresh {
+    background: url(../../../images/secondkill/bg_shuaxin.png) no-repeat;
+    background-size: 100% 100%;
+    width: 9rem;
+    height: 4rem;
+    font-family: PingFang-SC-Medium;
+    font-size: 1.493rem;
+    color: rgb(255, 255, 255);
+    line-height: 4rem;
+    text-align: center;
+    float: right;
+    margin-right: 1.6rem;
+    margin-top: 1rem;
+}
+
+.bg_gray {
+    background: rgb(240, 240, 245);
+    height: 1.067rem;
+}
+
+.record_title {
+    font-family: PingFang-SC-Medium;
+    font-size: 1.92rem;
+    color: rgb(51, 51, 51);
+    height: 5.866rem;
+    line-height: 5.866rem;
+    padding-left: 1.6rem;
+    border-bottom: 1px solid rgb(223, 223, 223);
+}
+
+.record_first {
+    font-family: PingFang-SC-Regular;
+    font-size: 1.386rem;
+    color: rgb(196, 175, 133);
+    height: 4.693rem;
+    line-height: 4.693rem;
+    margin-left: 1.6rem;
+}
+
+.record_name {
+    width: 9.706rem;
+    float: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.record_status {
+    width: 5.226rem;
+    float: left;
+}
+
+.record_price {
+    width: 7.466rem;
+    float: left;
+}
+
+.record_time {
+    font-size: 1.28rem;
+    float: left;
+}
+
+.record_line {
+    background: rgb(235, 235, 235);
+    height: 1px;
+    margin-left: 1.6rem;
+    margin-right: 1.6rem;
+}
+
+.record_normal {
+    font-family: PingFang-SC-Regular;
+    font-size: 1.386rem;
+    color: rgb(153, 153, 153);
+    height: 4.693rem;
+    line-height: 4.693rem;
+    margin-left: 1.6rem;
+}
+
+.shopDetail_title {
+    font-family: PingFang-SC-Medium;
+    font-size: 1.92rem;
+    color: rgb(51, 51, 51);
+    height: 5.866rem;
+    line-height: 5.866rem;
+    padding-left: 1.6rem;
+    border-bottom: 1px solid rgb(223, 223, 223);
+}
+
+.bg_pay {
+    width: 100%;
+    height: 5.866rem;
+    background: rgb(255, 255, 255);
+    position: fixed;
+    bottom: 0;
+}
+
+.reduce {
+    background: url(../../../images/secondkill/_@2x.png) no-repeat;
+    background-size: 100% 100%;
+    height: 3rem;
+    width: 3rem;
+    float: left;
+    margin-top: 1.4rem;
+    margin-left: 1.6rem;
+}
+
+.add {
+    background: url(../../../images/secondkill/add@2x.png) no-repeat;
+    background-size: 100% 100%;
+    height: 3rem;
+    width: 3rem;
+    float: left;
+    margin-top: 1.4rem;
+}
+
+.pay_price {
+    font-family: PingFang-SC-Regular;
+    font-size: 1.706rem;
+    color: rgb(153, 153, 153);
+    float: left;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    line-height: 5.866rem;
+    width: 4rem;
+}
+
+.btn_pay {
+    width: 13.866rem;
+    background: #728be0;
+    font-family: PingFang-SC-Medium;
+    font-size: 2.133rem;
+    color: rgb(255, 255, 255);
+    line-height: 5.866rem;
+    text-align: center;
+    float: right;
+}
+
+.bg_sxf {
+    font-family: PingFang-SC-Medium;
+    font-size: 1.92rem;
+    color: rgb(236, 88, 88);
+    float: right;
+    margin-right: 1.706rem;
+    line-height: 5.866rem;
+}
+
+.bg_sxf img {
+    margin-right: 0.2rem;
+}
+
+.bg_sxf span {
+    font-family: PingFang-SC-Light;
+    font-size: 1.067rem;
+    margin-left: 0.2rem;
+}
+
+.tuijian_title {
+    font-family: PingFang-SC-Medium;
+    font-size: 1.92rem;
+    color: rgb(51, 51, 51);
+    margin-top: 2.133rem;
+    text-align: center;
+}
+
+.tuijian_content {
+    margin-top: 2.133rem;
+    height: 25.333rem;
+    margin-bottom: 2.133rem;
+}
+
+.tuijian_content .content-lists {
+    width: 17.813rem;
+    height: 27.333rem;
+    margin-left: 1.28rem;
+    margin-right: 0.853rem;
+    margin-bottom: 1.6rem;
+    background: rgb(255, 255, 255);
+    box-shadow: 0 10px 10px rgba(51, 51, 51, 0.1), 10px 0 10px rgba(51, 51, 51, 0.1), 0 -10px 10px rgba(51, 51, 51, 0.1), -10px 0 10px rgba(51, 51, 51, 0.1);
+    border-radius: 10px;
+    float: left;
+}
+
+.tuijian_content .content-lists:nth-of-type(even) {
+    margin-left: 0.853rem;
+    margin-right: 1.28rem;
+    float: right;
+}
+
+.bg_img {
+    height: 16.213rem;
+    position: relative;
+}
+
+.bg_img img {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px 10px 0 0;
+    object-fit: contain;
+}
+
+.shop_name {
+    font-family: PingFang-SC-Regular;
+    font-size: 1.493rem;
+    color: rgb(51, 51, 51);
+    margin-top: 0.8rem;
+    margin-left: 1.067rem;
+}
+
+.shop_notice {
+    font-family: PingFang-SC-Regular;
+    font-size: 1.173rem;
+    color: rgb(51, 51, 51);
+    margin-top: 0.66rem;
+    margin-left: 1.067rem;
+    height: 3.8rem;
+    word-wrap: break-word;
+}
+
+.bg_price {
+    font-family: PingFang-SC-Regular;
+    font-size: 1.706rem;
+    color: rgb(236, 88, 88);
+    margin-top: 0.8rem;
+    margin-left: 1.067rem;
+}
+
+.bg_price img {
+    width: 1.6rem;
+    margin-right: 0.6rem;
+}
+
+.bg_price_time {
+    font-family: PingFang-SC-Regular;
+    font-size: 1.493rem;
+    color: rgb(187, 187, 187);
+    margin-left: 2rem;
+}
+
+.image {
+    width: 100%;
+    height: 100%;
+}
+
+.goTop {
+    position: fixed;
+    right: 2rem;
+    bottom: 10rem;
+}
+
+.mask {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background: rgba(0, 0, 0, .8);
+    display: none;
+    z-index: 999;
+}
+
+.bg_tan {
+    width: 34.026rem;
+    height: 23.733rem;
+    background: rgb(255, 255, 255);
+    border-radius: 15px;
+    display: none;
+    padding-top: 1.92rem;
+    padding-left: 1.28rem;
+    padding-right: 1.28rem;
+    position: fixed;
+    top: 20%;
+    z-index: 1000;
+    left: 8%;
+}
+
+.tan_title {
+    font-family: PingFang-SC-Medium;
+    font-size: 1.92rem;
+    color: rgb(51, 51, 51);
+    width: 100%;
+    text-align: center;
+}
+
+.tan_notice {
+    font-family: PingFang-SC-Regular;
+    font-size: 1.706rem;
+    color: rgb(51, 51, 51);
+    margin-top: 3.093rem;
+    text-align: center;
+}
+
+.noTiShi {
+    font-family: PingFang-SC-Regular;
+    font-size: 1.493rem;
+    color: rgb(203, 188, 158);
+    height: 2rem;
+    display: flex;
+    justify-content: center;
+}
+
+.yuan {
+    width: 1.5rem;
+    height: 1.5rem;
+    border: 2px solid rgb(203, 188, 158);
+    border-radius: 50%;
+    margin-right: 1.28rem;
+    margin-top: 0.5rem;
+}
+
+.bg_tan_btn {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.tan_btn_qx {
+    width: 12.16rem;
+    height: 4.266rem;
+    line-height: 4.266rem;
+    border-radius: 1.6rem;
+    border: 2px solid rgb(153, 172, 237);
+    font-family: PingFang-SC-Medium;
+    font-size: 1.92rem;
+    color: rgb(153, 172, 237);
+    text-align: center;
+    margin-right: 3.306rem;
+}
+
+.tan_btn_qd {
+    width: 12.16rem;
+    height: 4.266rem;
+    line-height: 4.266rem;
+    border-radius: 1.6rem;
+    background: rgb(153, 172, 237);
+    font-family: PingFang-SC-Medium;
+    font-size: 1.92rem;
+    color: rgb(255, 255, 255);
+    text-align: center;
+}
+
+.bg_tan_gzh {
+    width: 34.026rem;
+    height: 34.026rem;
+    background: rgb(255, 255, 255);
+    border-radius: 15px;
+    display: none;
+    padding-top: 1.92rem;
+    padding-left: 2.56rem;
+    padding-right: 2.56rem;
+    position: fixed;
+    top: 20%;
+    z-index: 1000;
+    left: 8%;
+}
+
+.bg_tan_ewm {
+    width: 100%;
+    text-align: center;
+    margin-top: 2.13rem;
+}
+
+.btn_tan_gzh {
+    width: 26.773rem;
+    height: 4.266rem;
+    line-height: 4.266rem;
+    background: rgb(153, 172, 237);
+    border-radius: 1.6rem;
+    font-family: PingFang-SC-Medium;
+    font-size: 1.92rem;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    margin-left: 4%;
+    margin-top: 2rem;
+}
