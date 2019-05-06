@@ -63,7 +63,7 @@ public class SsoWebFilter extends HttpServlet implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) servletRequest;
         HttpServletResponse res = (HttpServletResponse) servletResponse;
-        res.setHeader("Access-Control-Allow-Origin", "http://www.ks.com:8050");
+        res.setHeader("Access-Control-Allow-Origin", "http://localhost:63342");
         // 允许的访问方法
         res.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT, OPTIONS, DELETE, PATCH");
         // Access-Control-Max-Age 用于 CORS 相关配置的缓存

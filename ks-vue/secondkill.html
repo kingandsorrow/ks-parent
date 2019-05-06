@@ -166,6 +166,7 @@
 </body>
 <script src="style/js/swiper.min.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript" src="style/js/countdown/countdown.js"></script>
+
 <script type="text/javascript" charset="utf-8">
     var vm = new Vue({
         el: ".box",
@@ -208,6 +209,15 @@
             var vm = this;
         },
         mounted: function () {
+            //轮播图
+            var mySwiper = new Swiper('.swiper-container', {
+                autoplay: 10000,//可选选项，自动滑动
+                autoplayDisableOnInteraction: false,
+                loop: true,
+                pagination: '.swiper-pagination',
+                observer: true,
+                observeParents: true,
+            });
             $(window).scroll(function () {
                 if ($(window).scrollTop() > 100) {
                     $("#back-to-top").fadeIn(1500);
@@ -286,46 +296,13 @@
             },
             //竞价
             biddPrice: function () {
-                vm.biddReq.price = vm.price;
-                vm.biddReq.proceduresPrice = vm.bean.brokerage;
-                httpTool.postTranscode(CONSTANT.USER_NEED_LOGIN_URL, [
-                    "biddHistoryServiceI",
-                    "insertBiddingPrice",
-                    vm.biddReq
-                ], function (data) {
+                httpRequest.postTranscode("orderList", 'curNavIndex=1&pageNum=1&pageSize=10', function (data) {
+                    alert(data)
+                }, function (data) {
+                    alert(data)
+                })
 
-                    httpTool.postTranscode(CONSTANT.INTERFACE_URL, [
-                        "h5UserServiceI",
-                        "getUserInfo",
-                        {userId: ""}
-                    ], function (data) {
-                        vm.userInfo = data.userBean;
-                        if (vm.userInfo.openId) {
-                            //查询是否关注
-                            httpTool.postTranscode(CONSTANT.USER_NEED_LOGIN_URL, [
-                                "weixinSubscribeServiceI",
-                                "selectSubscribeInfo",
-                                {openId: vm.userInfo.openId}
-                            ], function (data) {
-                                //已关注
-                                if (data.subscribeStatus == "1") {
-                                    window.location.href = BASE_URL + "static/mall/page/me/myCompete.html";
-                                } else {
-                                    $(".mask").css("display", "block");
-                                    $(".bg_tan_gzh").css("display", "block");
-                                }
-                            }, function (err) {
-                                $(".mask").css("display", "block");
-                                $(".bg_tan_gzh").css("display", "block");
-                            });
-                        } else {
-                            $(".mask").css("display", "block");
-                            $(".bg_tan_gzh").css("display", "block");
-                        }
-                    });
-                }, function (err) {
-                    layerTool.msg(err.errMsg);
-                });
+
             },
             goPay: function () {
 

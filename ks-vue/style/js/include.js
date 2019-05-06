@@ -5,7 +5,7 @@
  * app设置
  * @type {{version: string, include: [*]}}
  */
-const APP_VERSION = "4.2.4";
+const APP_VERSION = "1.0.9";
 const pathName = window.location.pathname;
 const PORJECT_NAME = pathName.substring(0, pathName.substr(1).indexOf('/') + 1) + "/";
 var appSetting = {
@@ -23,13 +23,14 @@ var appSetting = {
         '<script src="https://pv.sohu.com/cityjson?ie=utf-8&qq-pf-to=pcqq.c2c"></script>',
         '<script src="style/js/constant.js?v=#version#"></script>',
         '<script src="style/js/jquery.min.js?v=#version#"></script>',
+        '<script src="style/js/axios.min.js?v=#version#"></script>',
         '<script src="style/js/layer_mobile/layer.js?v=#version#"></script>',
         '<script src="style/js/vue.min.js?v=#version#"></script>',
         '<script src="style/js/tools.js?v=#version#"></script>',
+        '<script src="style/js/httpRequest.js?v=#version#"></script>',
         '<script src="style/js/rem.js??v=#version#"></script>',
         '<script src="style/js/layer_mobile/layer.js?v=#version#" charset="utf-8"></script>',
         '<link rel="stylesheet" href="style/js/layer_mobile/layer.css?v=#version#" media="all">',
-        '<script src="style/js/tools.js?v=#version#"></script>',
         '<script src="style/js/weixinHide.js?v=#version#"></script>',
         '<script src="style/js/json2.js?v=#version#"></script>',
         '<script src="style/js/common.js?v=#version#"></script>',
