@@ -31,5 +31,4 @@
             <artifactId>ks-common</artifactId>
         </dependency>
     </dependencies>
-
 </project>

@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 import top.ks.commodity.api.SkCommodityServiceI;
 import top.ks.commodity.api.bean.CommodityBean;
 import top.ks.commodity.api.bean.SkCommodityDetail;
-import top.ks.commodity.api.req.CommodityRecordReq;
 import top.ks.commodity.api.req.DeducteCommodityReq;
 import top.ks.commodity.api.req.SkCommodityDetailReq;
 import top.ks.commodity.api.resp.CommodityRecordResp;

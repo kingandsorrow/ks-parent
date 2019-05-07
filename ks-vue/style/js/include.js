@@ -5,7 +5,7 @@
  * app设置
  * @type {{version: string, include: [*]}}
  */
-const APP_VERSION = "1.0.9";
+const APP_VERSION = "1.0.2";
 const pathName = window.location.pathname;
 const PORJECT_NAME = pathName.substring(0, pathName.substr(1).indexOf('/') + 1) + "/";
 var appSetting = {
@@ -19,7 +19,6 @@ var appSetting = {
         '<meta name="format-detection" content="telephone=no" />',
         '<meta http-equiv="cache-control" content="no-cache">',
         '<base href="./">',
-        //script
         '<script src="https://pv.sohu.com/cityjson?ie=utf-8&qq-pf-to=pcqq.c2c"></script>',
         '<script src="style/js/constant.js?v=#version#"></script>',
         '<script src="style/js/jquery.min.js?v=#version#"></script>',

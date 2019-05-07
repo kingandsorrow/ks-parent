@@ -17,7 +17,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @version 1.0.0
  * Copyright 西安创意 2019/3/20
  */
-@SpringBootApplication(scanBasePackages = "top.ks.commodity")
+@SpringBootApplication(scanBasePackages = "top.ks")
 @MapperScan("top.ks.commodity.database.mapper")
 @SpringBootConfiguration
 public class KsCommodityProvider {

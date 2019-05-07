@@ -1,4 +1,4 @@
-package top.ks.sso.web.bootstrap;
+package top.ks.client.web.bootstrap;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.SpringBootConfiguration;
