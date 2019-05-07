@@ -354,8 +354,9 @@ public class RedisService {
 
     public boolean accquireToken(KeyPrefix prefix, String key, Integer permits) {
         String realKey = prefix.getPrefix() + key;
+        Jedis jedis = null;
         try {
-            Jedis jedis = jedisPool.getResource();
+            jedis = jedisPool.getResource();
             List<String> args = new ArrayList<>();
             args.add(permits + "");
             args.add(new Date().getTime() + "");
@@ -366,9 +367,10 @@ public class RedisService {
                 return false;
             }
         } catch (Exception e) {
-            init(realKey);
             log.error("system exception:", e);
             log.info(LogFormat.formatMsg("RedisService.accquireToken", "system error::" + e.getMessage(), ""));
+        } finally {
+            returnToPool(jedis);
         }
         return false;
     }
