@@ -50,7 +50,7 @@ public class SecondKillServiceIProxy implements SecondKillServiceI {
             return new SecondKillResp(REPEATE_MIAOSHA.getCode(), REPEATE_MIAOSHA.getMessage());
         }
         SkOrder order = new SkOrder();
-        order.setOrderId(IdUtil.objectId());
+        order.setOrderId(IdUtil.createSnowflake(1, 1).nextId() + "");
         order.setUserId(secondKillReq.getUserId());
         order.setSkOrderId(secondKillReq.getSkOrderId());
         order.setCommodityId(secondKillReq.getCommodityId());

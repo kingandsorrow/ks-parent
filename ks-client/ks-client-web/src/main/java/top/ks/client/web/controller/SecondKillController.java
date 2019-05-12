@@ -89,7 +89,7 @@ public class SecondKillController {
             log.info(LogFormat.formatMsg("SecondKillController.secondKill", "", ""));
             return new SkResponseEntity(MIAO_SHA_OVER.getCode(), MIAO_SHA_OVER.getMessage());
         }
-        String orderId = IdUtil.createSnowflake(1, 1).nextId() + "";
+        String orderId = IdUtil.createSnowflake(5, 5).nextId() + "";
         deducteCommodityReq.setSkOrderId(orderId);
         //6.往消息队列放数据
         TransactionSendResult transactionSendResult = transactionProducer.sendTransMessage(Const.ROCKET_MQ_TOPIC_KS_SK, null, Const.ROCKET_KS_ORDER_KEY + orderId, JSON.toJSONString(deducteCommodityReq));
@@ -102,4 +102,5 @@ public class SecondKillController {
     public ResponseEntity testRedis() {
         return new ResponseEntity(SUCCESS.getCode(), SUCCESS.getMessage());
     }
+
 }

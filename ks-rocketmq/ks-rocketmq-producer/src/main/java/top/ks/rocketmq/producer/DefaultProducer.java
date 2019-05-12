@@ -2,6 +2,7 @@ package top.ks.rocketmq.producer;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.client.producer.DefaultMQProducer;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -32,8 +33,8 @@ public class DefaultProducer {
 
     private DefaultMQProducer producer;
 
-    @PostConstruct
-    public void init() throws Exception {
+
+    {
         log.info(LogFormat.formatMsg("DefaultProducer.init", "DefaultProducer start...", ""));
 
         //创建一个消息生产者，并设置一个消息生产者组
@@ -41,7 +42,11 @@ public class DefaultProducer {
         //指定 NameServer 地址
         producer.setNamesrvAddr(nameServerAddr);
         //初始化 SpringProducer，整个应用生命周期内只需要初始化一次
-        producer.start();
+        try {
+            producer.start();
+        } catch (MQClientException e) {
+            e.printStackTrace();
+        }
 
     }
 

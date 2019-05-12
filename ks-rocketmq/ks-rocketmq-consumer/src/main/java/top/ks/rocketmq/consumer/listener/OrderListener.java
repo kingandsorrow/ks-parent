@@ -44,6 +44,7 @@ public class OrderListener implements MessageListenerConcurrently {
 
     @Override
     public ConsumeConcurrentlyStatus consumeMessage(List<MessageExt> list, ConsumeConcurrentlyContext consumeConcurrentlyContext) {
+        log.info(LogFormat.formatMsg("OrderListener.consumeMessage", "message list is.." + list.size(), ""));
         if (list != null) {
             for (MessageExt ext : list) {
                 try {
@@ -62,7 +63,5 @@ public class OrderListener implements MessageListenerConcurrently {
             }
         }
         return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
-
-
     }
 }

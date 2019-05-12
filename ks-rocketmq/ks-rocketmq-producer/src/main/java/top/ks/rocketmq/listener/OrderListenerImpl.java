@@ -41,6 +41,7 @@ public class OrderListenerImpl implements TransactionListener {
         try {
             LocalTransactionState state = null;
             String body = new String(message.getBody(), RemotingHelper.DEFAULT_CHARSET);
+
             DeducteCommodityReq deducteCommodityReq = JSON.parseObject(body, DeducteCommodityReq.class);
             ResponseEntity responseEntity = commodityServiceI.deducteCommodity(deducteCommodityReq);
             if (!"0".equals(responseEntity.getErrCode())) {
@@ -50,6 +51,7 @@ public class OrderListenerImpl implements TransactionListener {
         } catch (Exception e) {
             e.printStackTrace();
             return LocalTransactionState.UNKNOW;
+
         }
     }
 

@@ -31,7 +31,7 @@ public interface SkCommodityServiceI {
     DeducteCommodityResp deducteCommodity(DeducteCommodityReq deducteCommodityReq);
 
     CommodityBean selectOne(String commodityId);
-
+    //查询是否已
     CommodityRecordResp selectCommodityRecord(DeducteCommodityReq deducteCommodityReq);
 
 
