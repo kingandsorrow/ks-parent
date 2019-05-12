@@ -42,7 +42,7 @@ public class SkCommodityServiceImpl implements SkCommodityService {
         }
         SkRecord skRecord = new SkRecord();
         skRecord.setCommodityId(commodityId);
-        skRecord.setSkId(IdUtil.createSnowflake(1, 1).nextId() + "");
+        skRecord.setSkId(IdUtil.createSnowflake(5, 5).nextId() + "");
         skRecord.setSkOrderId(skOrderId);
         int row2 = skRecordMapper.insert(skRecord);
         return row2;
