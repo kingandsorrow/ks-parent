@@ -84,6 +84,6 @@
         select
         <include refid="Base_Column_List"/>
         from ks_sk_order
-        where commodity_id = #{commodityId,jdbcType=VARCHAR} and user_id = #{userId}
+        where commodity_id = #{commodityId,jdbcType=VARCHAR} and user_id = #{userId} limit 1
     </select>
 </mapper>

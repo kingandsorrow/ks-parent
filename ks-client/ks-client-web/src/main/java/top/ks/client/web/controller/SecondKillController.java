@@ -65,7 +65,7 @@ public class SecondKillController {
         String repeatCheckKey = deducteCommodityReq.getUserId() + Const.REDIS_CONCAT_SIGN + deducteCommodityReq.getCommodityId();
         long commitTimes = redisService.repeatCheck(CommonKey.repeatCheck, repeatCheckKey);
         if (commitTimes > 1) {
-            log.info(LogFormat.formatMsg("SecondKillController.secondKill", "commit too many times..", ""));
+            log.info(LogFormat.formatMsg("SecondKillController.secondKill", "repeatCheckKey::" + repeatCheckKey + " commit too many times..", ""));
             return new SkResponseEntity(REQUEST_ILLEGAL.getCode(), REQUEST_ILLEGAL.getMessage());
         }
         //3.限流操作（分布式限流）
