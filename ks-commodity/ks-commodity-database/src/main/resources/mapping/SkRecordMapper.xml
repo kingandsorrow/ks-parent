@@ -70,6 +70,6 @@
         select
         <include refid="Base_Column_List"/>
         from ks_sk_record
-        where sk_order_id = #{skOrderId}
+        where sk_order_id = #{skOrderId} limit 1
     </select>
 </mapper>
