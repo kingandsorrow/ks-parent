@@ -3,6 +3,8 @@ package top.ks.rocketmq.listener;
 import cn.hutool.core.bean.BeanUtil;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.fastjson.JSON;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.rocketmq.client.producer.LocalTransactionState;
 import org.apache.rocketmq.client.producer.TransactionListener;
 import org.apache.rocketmq.common.message.Message;
@@ -13,7 +15,10 @@ import top.ks.commodity.api.SkCommodityServiceI;
 import top.ks.commodity.api.bean.CommodityBean;
 import top.ks.commodity.api.req.DeducteCommodityReq;
 import top.ks.commodity.api.resp.CommodityRecordResp;
+import top.ks.common.util.LogFormat;
 import top.ks.common.util.ResponseEntity;
+import top.ks.redis.CommodityKey;
+import top.ks.redis.RedisService;
 
 import javax.annotation.Resource;
 import java.io.UnsupportedEncodingException;
@@ -35,6 +40,9 @@ import java.math.BigDecimal;
 public class OrderListenerImpl implements TransactionListener {
     @Reference(version = "${dubbo.service.version}")
     private SkCommodityServiceI commodityServiceI;
+    private final static Log log = LogFactory.getLog(OrderListenerImpl.class);
+    @Resource
+    private RedisService redisService;
 
     @Override
     public LocalTransactionState executeLocalTransaction(Message message, Object o) {
@@ -45,6 +53,8 @@ public class OrderListenerImpl implements TransactionListener {
             DeducteCommodityReq deducteCommodityReq = JSON.parseObject(body, DeducteCommodityReq.class);
             ResponseEntity responseEntity = commodityServiceI.deducteCommodity(deducteCommodityReq);
             if (!"0".equals(responseEntity.getErrCode())) {
+                Long count = redisService.incr(CommodityKey.commodityStock, "" + deducteCommodityReq.getCommodityId());
+                log.info(LogFormat.formatMsg("OrderListenerImpl.executeLocalTransaction", "deducteCommodity fail... && count is.." + count, ""));
                 return LocalTransactionState.ROLLBACK_MESSAGE;
             }
             return LocalTransactionState.COMMIT_MESSAGE;

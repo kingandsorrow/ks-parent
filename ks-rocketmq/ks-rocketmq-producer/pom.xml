@@ -33,6 +33,10 @@
             <groupId>org.apache.rocketmq</groupId>
             <artifactId>rocketmq-client</artifactId>
         </dependency>
+        <dependency>
+            <groupId>top.ks</groupId>
+            <artifactId>ks-redis</artifactId>
+        </dependency>
 
     </dependencies>
 
