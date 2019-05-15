@@ -51,6 +51,7 @@ public class OrderListenerImpl implements TransactionListener {
             String body = new String(message.getBody(), RemotingHelper.DEFAULT_CHARSET);
 
             DeducteCommodityReq deducteCommodityReq = JSON.parseObject(body, DeducteCommodityReq.class);
+            log.info(LogFormat.formatMsg("OrderListenerImpl.executeLocalTransaction", "log id is.." + deducteCommodityReq.getSkOrderId(), ""));
             ResponseEntity responseEntity = commodityServiceI.deducteCommodity(deducteCommodityReq);
             if (!"0".equals(responseEntity.getErrCode())) {
                 Long count = redisService.incr(CommodityKey.commodityStock, "" + deducteCommodityReq.getCommodityId());

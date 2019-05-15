@@ -91,6 +91,7 @@ public class SecondKillController {
             return new SkResponseEntity(MIAO_SHA_OVER.getCode(), MIAO_SHA_OVER.getMessage());
         }
         String orderId = SequenceHelper.getNextSequence();
+        log.info(LogFormat.formatMsg("SecondKillController.secondKill", "get current thread id::" + Thread.currentThread().getId() + "--" + orderId, ""));
         deducteCommodityReq.setSkOrderId(orderId);
         //6.往消息队列放数据
         TransactionSendResult transactionSendResult = transactionProducer.sendTransMessage(Const.ROCKET_MQ_TOPIC_KS_SK, null, Const.ROCKET_KS_ORDER_KEY + orderId, JSON.toJSONString(deducteCommodityReq));
