@@ -50,7 +50,9 @@ import static top.ks.common.enums.ResultStatus.*;
         version = "${dubbo.application.version}",
         application = "${dubbo.application.id}",
         protocol = "${dubbo.protocol.id}",
-        registry = "${dubbo.registry.id}"
+        registry = "${dubbo.registry.id}",
+        retries = -1
+
 )
 @Component
 public class SkCommodityServiceProxy implements SkCommodityServiceI {
