@@ -109,17 +109,23 @@ public class SkCommodityServiceProxy implements SkCommodityServiceI {
     @Override
     public DeducteCommodityResp deducteCommodity(DeducteCommodityReq deducteCommodityReq) {
         log.info(LogFormat.formatMsg("SkCommodityServiceProxy.deducteCommodity", "deducteCommodityReq is.." + deducteCommodityReq.getSkOrderId(), ""));
-        SkCommodity skCommodity = skCommodityMapper.selectByCommodityId(deducteCommodityReq.getCommodityId());
-        if (skCommodity.getSkStockCount() <= 0) {
-            log.info(LogFormat.formatMsg("SkCommodityServiceProxy.deducteCommodity", "skCommodity stock is not enough.." + JSON.toJSONString(skCommodity), ""));
-            return new DeducteCommodityResp(MIAO_SHA_OVER.getCode(), MIAO_SHA_OVER.getMessage());
+        try {
+            SkCommodity skCommodity = skCommodityMapper.selectByCommodityId(deducteCommodityReq.getCommodityId());
+            if (skCommodity.getSkStockCount() <= 0) {
+                log.info(LogFormat.formatMsg("SkCommodityServiceProxy.deducteCommodity", "skCommodity stock is not enough.." + JSON.toJSONString(skCommodity), ""));
+                return new DeducteCommodityResp(MIAO_SHA_OVER.getCode(), MIAO_SHA_OVER.getMessage());
+            }
+            int row = commodityService.deducteCommodity(deducteCommodityReq.getUserId(), deducteCommodityReq.getCommodityId(), deducteCommodityReq.getSkOrderId());
+            if (row <= 0) {
+                log.info(LogFormat.formatMsg("SkCommodityServiceProxy.deducteCommodity", "skCommodity deducteCommodity fail.." + JSON.toJSONString(skCommodity), ""));
+                return new DeducteCommodityResp(MIAO_SHA_OVER.getCode(), MIAO_SHA_OVER.getMessage());
+            }
+            return new DeducteCommodityResp(SUCCESS.getCode(), SUCCESS.getMessage());
+        } catch (Exception e) {
+            e.printStackTrace();
+            log.error(LogFormat.formatMsg("SkCommodityServiceProxy.deducteCommodity", "e" + e.getMessage(), ""));
+            return new DeducteCommodityResp(SYSTEM_ERROR.getCode(), SYSTEM_ERROR.getMessage());
         }
-        int row = commodityService.deducteCommodity(deducteCommodityReq.getUserId(), deducteCommodityReq.getCommodityId(), deducteCommodityReq.getSkOrderId());
-        if (row <= 0) {
-            log.info(LogFormat.formatMsg("SkCommodityServiceProxy.deducteCommodity", "skCommodity deducteCommodity fail.." + JSON.toJSONString(skCommodity), ""));
-            return new DeducteCommodityResp(MIAO_SHA_OVER.getCode(), MIAO_SHA_OVER.getMessage());
-        }
-        return new DeducteCommodityResp(SUCCESS.getCode(), SUCCESS.getMessage());
     }
 
     /**
