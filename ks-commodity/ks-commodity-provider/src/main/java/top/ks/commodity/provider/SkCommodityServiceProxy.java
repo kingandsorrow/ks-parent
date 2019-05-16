@@ -108,6 +108,7 @@ public class SkCommodityServiceProxy implements SkCommodityServiceI {
 
     @Override
     public DeducteCommodityResp deducteCommodity(DeducteCommodityReq deducteCommodityReq) {
+        log.info(LogFormat.formatMsg("SkCommodityServiceProxy.deducteCommodity", "deducteCommodityReq is.." + deducteCommodityReq.getSkOrderId(), ""));
         SkCommodity skCommodity = skCommodityMapper.selectByCommodityId(deducteCommodityReq.getCommodityId());
         if (skCommodity.getSkStockCount() <= 0) {
             log.info(LogFormat.formatMsg("SkCommodityServiceProxy.deducteCommodity", "skCommodity stock is not enough.." + JSON.toJSONString(skCommodity), ""));

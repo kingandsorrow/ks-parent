@@ -38,7 +38,7 @@ import java.math.BigDecimal;
  */
 @Component
 public class OrderListenerImpl implements TransactionListener {
-    @Reference(version = "${dubbo.service.version}")
+    @Reference(version = "${dubbo.service.version}", retries = -1)
     private SkCommodityServiceI commodityServiceI;
     private final static Log log = LogFactory.getLog(OrderListenerImpl.class);
     @Resource
@@ -68,10 +68,12 @@ public class OrderListenerImpl implements TransactionListener {
 
     @Override
     public LocalTransactionState checkLocalTransaction(MessageExt messageExt) {
+
         DeducteCommodityReq deducteCommodityReq = null;
         try {
             String body = new String(messageExt.getBody(), RemotingHelper.DEFAULT_CHARSET);
             deducteCommodityReq = JSON.parseObject(body, DeducteCommodityReq.class);
+            log.info(LogFormat.formatMsg("OrderListenerImpl.checkLocalTransaction", "checkLocalTransaction is.." + deducteCommodityReq.getSkOrderId(), ""));
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
