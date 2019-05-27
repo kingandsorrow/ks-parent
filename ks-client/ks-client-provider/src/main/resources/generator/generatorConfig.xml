@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 <generatorConfiguration>
     <!-- 数据库驱动:选择你的本地硬盘上面的数据库驱动包-->
-    <classPathEntry location="D:\document\mysql-connector-java-5.1.39.jar"/>
+    <classPathEntry location="D:\data\mysql-connector-java-5.1.39.jar"/>
     <context id="DB2Tables" targetRuntime="MyBatis3">
         <commentGenerator>
             <property name="suppressDate" value="true"/>
@@ -13,14 +13,14 @@
         </commentGenerator>
         <!--数据库链接URL，用户名、密码 -->
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://47.98.135.245:3306/ks-sso" userId="root"
-                        password="Wh147258963">
+                        connectionURL="jdbc:mysql://192.168.1.2:3306/ks-core-data" userId="root"
+                        password="rootroot">
         </jdbcConnection>
         <javaTypeResolver>
             <property name="forceBigDecimals" value="false"/>
         </javaTypeResolver>
         <!-- 生成模型的包名和位置-->
-        <javaModelGenerator targetPackage="top.ks.sso.provider.database.model" targetProject="src/main/java">
+        <javaModelGenerator targetPackage="top.ks.client.provider.database.model" targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
@@ -29,19 +29,18 @@
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
         <!-- 生成DAO的包名和位置-->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="top.ks.sso.provider.database.mapper"
+        <javaClientGenerator type="XMLMAPPER" targetPackage="top.ks.client.provider.database.mapper"
                              targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
         <!-- 要生成的表 tableName是数据库中的表名或视图名 domainObjectName是实体类名-->
-        <!--<table tableName="ks_operator" domainObjectName="KsOperator" enableCountByExample="false"
+        <table tableName="ks_lol_hero" domainObjectName="LolHero" enableCountByExample="false"
                enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
-               selectByExampleQueryId="false"></table>-->
-        <table tableName="ks_user" domainObjectName="KsUser" enableCountByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+        <table tableName="ks_lol_hero_ability" domainObjectName="LolHeroAbility" enableCountByExample="false"
                enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
-               selectByExampleQueryId="false"></table>
-        <table tableName="ks_user_auths" domainObjectName="KsUserAuths" enableCountByExample="false"
-               enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
-               selectByExampleQueryId="false"></table>
+               selectByExampleQueryId="false">
+        </table>
     </context>
 </generatorConfiguration>

@@ -107,7 +107,7 @@
     <update id="deducteCommodity" parameterType="String">
     update ks_sk_commodity
     set sk_stock_count = sk_stock_count-1
-    where commodity_id = #{commodityId,jdbcType=VARCHAR} and sk_stock_count>0
+    where commodity_id = #{commodityId,jdbcType=VARCHAR}
   </update>
     <!--查询-->
     <select id="selectByCommodityId" parameterType="String" resultMap="BaseResultMap">

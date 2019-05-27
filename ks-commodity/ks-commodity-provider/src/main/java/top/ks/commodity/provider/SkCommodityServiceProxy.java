@@ -51,7 +51,8 @@ import static top.ks.common.enums.ResultStatus.*;
         application = "${dubbo.application.id}",
         protocol = "${dubbo.protocol.id}",
         registry = "${dubbo.registry.id}",
-        retries = -1
+        retries = -1,
+        timeout = 30000
 
 )
 @Component

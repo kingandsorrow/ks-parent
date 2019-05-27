@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="top.ks.client.provider.database.mapper.LolHeroAbilityMapper" >
+  <resultMap id="BaseResultMap" type="top.ks.client.provider.database.model.LolHeroAbility" >
+    <id column="ability_id" property="abilityId" jdbcType="VARCHAR" />
+    <result column="hero_id" property="heroId" jdbcType="VARCHAR" />
+    <result column="ability_name" property="abilityName" jdbcType="VARCHAR" />
+    <result column="ability_hot_key" property="abilityHotKey" jdbcType="VARCHAR" />
+    <result column="ability_img" property="abilityImg" jdbcType="VARCHAR" />
+    <result column="ability_desc" property="abilityDesc" jdbcType="VARCHAR" />
+    <result column="consume_type" property="consumeType" jdbcType="TINYINT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ability_id, hero_id, ability_name, ability_hot_key, ability_img, ability_desc, consume_type, 
+    create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from ks_lol_hero_ability
+    where ability_id = #{abilityId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from ks_lol_hero_ability
+    where ability_id = #{abilityId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="top.ks.client.provider.database.model.LolHeroAbility" >
+    insert into ks_lol_hero_ability (ability_id, hero_id, ability_name, 
+      ability_hot_key, ability_img, ability_desc, 
+      consume_type, create_time, update_time
+      )
+    values (#{abilityId,jdbcType=VARCHAR}, #{heroId,jdbcType=VARCHAR}, #{abilityName,jdbcType=VARCHAR}, 
+      #{abilityHotKey,jdbcType=VARCHAR}, #{abilityImg,jdbcType=VARCHAR}, #{abilityDesc,jdbcType=VARCHAR}, 
+      #{consumeType,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="top.ks.client.provider.database.model.LolHeroAbility" >
+    insert into ks_lol_hero_ability
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="abilityId != null" >
+        ability_id,
+      </if>
+      <if test="heroId != null" >
+        hero_id,
+      </if>
+      <if test="abilityName != null" >
+        ability_name,
+      </if>
+      <if test="abilityHotKey != null" >
+        ability_hot_key,
+      </if>
+      <if test="abilityImg != null" >
+        ability_img,
+      </if>
+      <if test="abilityDesc != null" >
+        ability_desc,
+      </if>
+      <if test="consumeType != null" >
+        consume_type,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="abilityId != null" >
+        #{abilityId,jdbcType=VARCHAR},
+      </if>
+      <if test="heroId != null" >
+        #{heroId,jdbcType=VARCHAR},
+      </if>
+      <if test="abilityName != null" >
+        #{abilityName,jdbcType=VARCHAR},
+      </if>
+      <if test="abilityHotKey != null" >
+        #{abilityHotKey,jdbcType=VARCHAR},
+      </if>
+      <if test="abilityImg != null" >
+        #{abilityImg,jdbcType=VARCHAR},
+      </if>
+      <if test="abilityDesc != null" >
+        #{abilityDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="consumeType != null" >
+        #{consumeType,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="top.ks.client.provider.database.model.LolHeroAbility" >
+    update ks_lol_hero_ability
+    <set >
+      <if test="heroId != null" >
+        hero_id = #{heroId,jdbcType=VARCHAR},
+      </if>
+      <if test="abilityName != null" >
+        ability_name = #{abilityName,jdbcType=VARCHAR},
+      </if>
+      <if test="abilityHotKey != null" >
+        ability_hot_key = #{abilityHotKey,jdbcType=VARCHAR},
+      </if>
+      <if test="abilityImg != null" >
+        ability_img = #{abilityImg,jdbcType=VARCHAR},
+      </if>
+      <if test="abilityDesc != null" >
+        ability_desc = #{abilityDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="consumeType != null" >
+        consume_type = #{consumeType,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ability_id = #{abilityId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="top.ks.client.provider.database.model.LolHeroAbility" >
+    update ks_lol_hero_ability
+    set hero_id = #{heroId,jdbcType=VARCHAR},
+      ability_name = #{abilityName,jdbcType=VARCHAR},
+      ability_hot_key = #{abilityHotKey,jdbcType=VARCHAR},
+      ability_img = #{abilityImg,jdbcType=VARCHAR},
+      ability_desc = #{abilityDesc,jdbcType=VARCHAR},
+      consume_type = #{consumeType,jdbcType=TINYINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where ability_id = #{abilityId,jdbcType=VARCHAR}
+  </update>
+</mapper>

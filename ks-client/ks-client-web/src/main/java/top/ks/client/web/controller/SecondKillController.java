@@ -85,11 +85,11 @@ public class SecondKillController {
             return new SkResponseEntity(REPEATE_MIAOSHA.getCode(), REPEATE_MIAOSHA.getMessage());
         }
         //5.减少缓存中商品的数量
-        Long stock = redisService.decr(CommodityKey.commodityStock, "" + deducteCommodityReq.getCommodityId());
+        /*Long stock = redisService.decr(CommodityKey.commodityStock, "" + deducteCommodityReq.getCommodityId());
         if (stock < 0) {
             log.info(LogFormat.formatMsg("SecondKillController.secondKill", "", ""));
             return new SkResponseEntity(MIAO_SHA_OVER.getCode(), MIAO_SHA_OVER.getMessage());
-        }
+        }*/
         String orderId = SequenceHelper.getNextSequence();
         log.info(LogFormat.formatMsg("SecondKillController.secondKill", "get current thread id::" + Thread.currentThread().getId() + "--" + orderId, ""));
         deducteCommodityReq.setSkOrderId(orderId);
