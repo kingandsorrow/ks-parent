@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 import top.ks.client.api.FileUploadServiceI;
 import top.ks.client.api.req.UploadImgReq;
 import top.ks.client.api.resp.FilepathRes;
+import top.ks.client.provider.FileUploadServiceIProxy;
 import top.ks.client.provider.database.mapper.LolHeroAbilityMapper;
 import top.ks.client.provider.database.mapper.LolHeroMapper;
 import top.ks.client.provider.database.model.LolHero;
@@ -49,20 +50,27 @@ public class LolDataHandler {
         log.info(LogFormat.formatMsg("LolDataHandler.handle", "current thread is.." + Thread.currentThread().getId() + " name is.." + Thread.currentThread().getName() + "current times .." + ToolUtil.getDateStr(new Date()), "11111111111111111111"));
         List<String> heroEnNames = getHeroEnNames();
         for (String heroEnName : heroEnNames) {
-            try {
-                LolHero lolHero = lolHeroMapper.selectByHeroEngName(heroEnName);
-                if (lolHero != null) {
-                    log.info(LogFormat.formatMsg("TestTreasureJob.processJob", "database hero is not null.." + heroEnName, ""));
-                    continue;
-                }
-                log.info(LogFormat.formatMsg("TestTreasureJob.processJob", "current handle hero eng name is.." + heroEnName, ""));
-                Map<String, Object> map = crawlData(heroEnName);
+            handleOneHero(heroEnName);
+        }
+    }
 
-                int row1 = lolHeroService.insertHero((LolHero) map.get("LolHero"), (List<LolHeroAbility>) map.get("lolHeroAbilities"));
-                log.info(LogFormat.formatMsg("TestTreasureJob.processJob", "row1::" + row1, ""));
-            } catch (Exception e) {
-                e.printStackTrace();
+    private void handleOneHero(String heroEnName) {
+        try {
+            LolHero lolHero = lolHeroMapper.selectByHeroEngName(heroEnName);
+            if (lolHero != null) {
+                log.info(LogFormat.formatMsg("TestTreasureJob.processJob", "database hero is not null.." + heroEnName, ""));
+                return;
             }
+            log.info(LogFormat.formatMsg("TestTreasureJob.processJob", "current handle hero eng name is.." + heroEnName, ""));
+            Map<String, Object> map = crawlData(heroEnName);
+
+            int row1 = lolHeroService.insertHero((LolHero) map.get("LolHero"), (List<LolHeroAbility>) map.get("lolHeroAbilities"));
+            if (row1 <= 0) {
+                log.info(LogFormat.formatMsg("LolDataHandler.handle", "handle heroEnName fail.." + heroEnName, ""));
+            }
+            log.info(LogFormat.formatMsg("TestTreasureJob.processJob", "row1::" + row1, ""));
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -273,5 +281,21 @@ public class LolDataHandler {
             heroAttribute += headline.text();
         }
         return heroAttribute;
+    }
+
+    public FileUploadServiceI getFileUploadServiceI() {
+        return fileUploadServiceI;
+    }
+
+    public void setFileUploadServiceI(FileUploadServiceI fileUploadServiceI) {
+        this.fileUploadServiceI = fileUploadServiceI;
+    }
+
+    public static void main(String[] args) throws Exception {
+        String url = "http://lol.duowan.com/" + "poppy" + "/";
+        Document doc = Jsoup.connect(url).get();
+        List<String> abilityImgs = getAbilityImgs(doc);
+        List<Map<String, Object>> abilityInfos = getAbilityInfos(doc);
+        System.out.println(abilityImgs.size() + "--" + abilityInfos.size());
     }
 }

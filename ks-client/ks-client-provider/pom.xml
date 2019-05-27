@@ -80,6 +80,11 @@
             <groupId>top.ks</groupId>
             <artifactId>ks-client-api</artifactId>
         </dependency>
+        <dependency>
+            <groupId>net.sourceforge.htmlunit</groupId>
+            <artifactId>htmlunit</artifactId>
+            <version>2.25</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
