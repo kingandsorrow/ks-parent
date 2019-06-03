@@ -36,7 +36,7 @@ public class CacheManager {
     }
 
     //自定义缓存失效时间
-    private void init(long cacheTimes) {
+    public void init(long cacheTimes) {
         this.cacheTimeout = cacheTimes;
         initClearTask();
     }
@@ -49,7 +49,7 @@ public class CacheManager {
     }
 
 
-    private static CacheManager getCacheManagerInstance() {
+    public static CacheManager getCacheManagerInstance() {
         return CacheManagerFactory.CACHE_MANAGER;
     }
 

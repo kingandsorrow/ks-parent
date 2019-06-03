@@ -2,15 +2,15 @@ package top.ks.common.cachemanager;
 
 public class UserEntity {
 
-    private int age;
+    private long age;
 
     private String name;
 
-    public int getAge() {
+    public long getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(long age) {
         this.age = age;
     }
 
