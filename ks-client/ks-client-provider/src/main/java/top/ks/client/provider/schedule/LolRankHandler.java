@@ -1,9 +1,17 @@
 package top.ks.client.provider.schedule;
 
+import cn.edu.hfut.dmic.contentextractor.ContentExtractor;
+import cn.edu.hfut.dmic.contentextractor.News;
+import cn.hutool.http.HttpConnection;
+import cn.hutool.http.HttpRequest;
+import cn.hutool.http.HttpUtil;
+import cn.hutool.http.Method;
 import com.alibaba.fastjson.JSON;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.NicelyResynchronizingAjaxController;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import org.apache.http.client.HttpClient;
 import org.apache.juli.logging.LogFactory;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
@@ -14,39 +22,28 @@ import org.junit.Assert;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class LolRankHandler {
 
     public static void main(String[] args) throws Exception {
-        String url = "https://www.famulei.com/data/ranking";
+        String url = "https://www.op.gg/ranking/ladder/";
         Document doc = Jsoup.connect(url).get();
-        /**HtmlUnit请求web页面*/
-        WebClient wc = new WebClient();
-        wc.getOptions().setJavaScriptEnabled(true); //启用JS解释器，默认为true
-        wc.getOptions().setCssEnabled(false); //禁用css支持
-        wc.getOptions().setThrowExceptionOnScriptError(false); //js运行错误时，是否抛出异常
-        wc.getOptions().setTimeout(10000); //设置连接超时时间 ，这里是10S。如果为0，则无限期等待
-        HtmlPage page = wc.getPage(url);
-        String pageXml = page.asXml(); //以xml的形式获取响应文本
-
-        /**jsoup解析文档*/
-        Element pv = doc.select("#feed_content span").get(1);
-        System.out.println(pv.text());
-        Assert.assertTrue(pv.text().contains("浏览"));
-
-        System.out.println("Thank God!");
+        getRankInfos(doc);
     }
 
     private static List<String> getRankInfos(Document doc) {
-        Elements elements = doc.select("table[class=sTable]");
+        Elements elements = doc.select("li[class=ranking-highest__item]");
         List<String> strs = new ArrayList<String>();
         for (Element element : elements) {
-            Elements eles = element.select("tr");
+            Elements eles = element.select("a[ranking-highest__name]");
             for (Element ele : eles) {
-                Elements es = ele.select("td[class=rank]");
-                strs.add(es.get(0).select("span").get(0).text());
+                /*Elements es = ele.select("td[class=rank]");
+                strs.add(es.get(0).select("span").get(0).text());*/
+                System.out.println(ele.text());
+                strs.add(ele.text());
             }
         }
         System.out.println(JSON.toJSONString(strs));
