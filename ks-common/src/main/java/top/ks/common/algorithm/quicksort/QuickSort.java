@@ -52,43 +52,10 @@ public class QuickSort {
         return i;
     }
 
-    //快速排序标准写法
-    public static void quickSortArr(int[] p, int L, int R) {
-        if (L >= R)
-            return;
-        int i = L;
-        int j = R;
-        int temp = p[L];
-        while (i < j) {
-            while (i < j && p[j] < temp) {
-                j--;
-            }
-            if (i < j) {
-                p[i] = p[j];
-                i++;
-            }
-            while (i < j && p[i] > temp) {
-                i++;
-            }
-            if (i < j) {
-                p[j] = p[i];
-                j--;
-            }
-        }
-        p[i] = temp;
-        //去掉以下两句注释，再将return注释掉，并且将返回值改为void，
-        //就是一个完整的快速排序
-        quickSortArr(p, L, i - 1);
-        quickSortArr(p, i + 1, R);
-    }
+    //快速排序
 
-    public static void main(String[] args) {
-        int[] arr = new int[]{12, 7, 3, 2, 9, 1, 10, 23, 28, 99, 33, 199, 65, 16, 36, 111, 17, 27, 83, 21, 5, 8, 9, 11, 19};
-       /* int[] arr1 = new int[]{3, 9, 7, 5, 10};
-        System.out.println(findKth(arr1, 0, arr1.length - 1, 3));
-*/
-        quickSortArr(arr, 0, arr.length - 1);
+    public static void quickSortArr(int[] arr, int L, int R) {
+        int m = arr[L];
 
-        System.out.println(JSON.toJSONString(arr));
     }
 }
