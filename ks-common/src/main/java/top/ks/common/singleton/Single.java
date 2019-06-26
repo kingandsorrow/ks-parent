@@ -20,7 +20,7 @@ public class Single {
 
     private static volatile Single single;
 
-
+    //双重校验锁
     private static Single getSingleBean() {
         if (single == null) {
             synchronized (Single.class) {

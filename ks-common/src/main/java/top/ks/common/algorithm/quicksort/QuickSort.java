@@ -54,8 +54,34 @@ public class QuickSort {
 
     //快速排序
 
-    public static void quickSortArr(int[] arr, int L, int R) {
-        int m = arr[L];
+    public static void quickSortArr(int[] arr, int low, int high) {
+        if (low >= high) {
+            return;
+        }
+        int mid = getMiddle(arr, low, high);
+        quickSortArr(arr, low, mid - 1);
+        quickSortArr(arr, mid + 1, high);
+    }
 
+    private static int getMiddle(int[] arr, int low, int high) {
+        int temp = arr[low];
+        while (low < high) {
+            while (low < high && arr[high] >= temp) {
+                high--;
+            }
+            arr[low] = arr[high];
+            while (low < high && arr[low] <= temp) {
+                low++;
+            }
+            arr[high] = arr[low];
+        }
+        arr[low] = temp;
+        return low;
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {3, 6, 2, 9, 10, 8, 7, 5, 1};
+        quickSortArr(arr, 0, arr.length - 1);
+        System.out.println(JSON.toJSON(arr));
     }
 }

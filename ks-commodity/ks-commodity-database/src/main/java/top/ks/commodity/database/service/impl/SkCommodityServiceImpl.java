@@ -8,10 +8,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import top.ks.commodity.database.mapper.SkCommodityMapper;
 import top.ks.commodity.database.mapper.SkRecordMapper;
+import top.ks.commodity.database.model.SkCommodity;
 import top.ks.commodity.database.model.SkRecord;
 import top.ks.commodity.database.service.SkCommodityService;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
+import java.util.Date;
 
 /**
  * <b>类名称:</b>SkCommodityServiceImpl$<br/>
@@ -34,6 +37,7 @@ public class SkCommodityServiceImpl implements SkCommodityService {
     private SkRecordMapper skRecordMapper;
     private static final Log log = LogFactory.getLog(SkCommodityServiceImpl.class);
 
+
     @Override
     public int deducteCommodity(String userId, String commodityId, String skOrderId) {
         int row1 = skCommodityMapper.deducteCommodity(commodityId);
@@ -47,4 +51,27 @@ public class SkCommodityServiceImpl implements SkCommodityService {
         int row2 = skRecordMapper.insert(skRecord);
         return row2;
     }
+
+    @Override
+    public int insertData() {
+        SkCommodity skCommodity = new SkCommodity();
+        skCommodity.setCommodityId(IdUtil.createSnowflake(5, 5).nextId());
+        skCommodity.setEndDate(new Date());
+        skCommodity.setSkId("123456");
+        skCommodity.setSkPrice(new BigDecimal("123"));
+        skCommodity.setSkStockCount(10);
+        skCommodity.setStartDate(new Date());
+        int row1 = skCommodityMapper.insert(skCommodity);
+        SkRecord skRecord = new SkRecord();
+        skRecord.setCommodityId(skCommodity.getCommodityId() + "");
+        skRecord.setSkId(IdUtil.createSnowflake(5, 5).nextId() + "");
+        skRecord.setSkOrderId("456");
+        int row2 = skRecordMapper.insert(skRecord);
+        if (1 == 1) {
+            throw new RuntimeException();
+        }
+        return row2;
+    }
+
+
 }

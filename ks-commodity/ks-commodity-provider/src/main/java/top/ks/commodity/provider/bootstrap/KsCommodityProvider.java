@@ -4,6 +4,7 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 /**
  * <b>类名称:</b>KsCommodityProvider$<br/>
@@ -20,6 +21,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication(scanBasePackages = "top.ks")
 @MapperScan("top.ks.commodity.database.mapper")
 @SpringBootConfiguration
+@EnableAspectJAutoProxy
 public class KsCommodityProvider {
 
     public static void main(String[] args) {

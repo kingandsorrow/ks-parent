@@ -38,7 +38,7 @@ public class LolRankHandler {
         Elements elements = doc.select("li[class=ranking-highest__item]");
         List<String> strs = new ArrayList<String>();
         for (Element element : elements) {
-            Elements eles = element.select("a[ranking-highest__name]");
+            Elements eles = element.select("a[class=ranking-highest__name]");
             for (Element ele : eles) {
                 /*Elements es = ele.select("td[class=rank]");
                 strs.add(es.get(0).select("span").get(0).text());*/

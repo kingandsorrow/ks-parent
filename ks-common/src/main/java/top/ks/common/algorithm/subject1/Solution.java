@@ -30,6 +30,7 @@ public class Solution {
      */
 
     public static void main(String[] args) {
+        String str = "hello";
         int[] nums = {3, 5, 7, 6, 2, 3};
         int target = 10;
         System.out.println(Arrays.toString(getTwoSum(nums, target)));

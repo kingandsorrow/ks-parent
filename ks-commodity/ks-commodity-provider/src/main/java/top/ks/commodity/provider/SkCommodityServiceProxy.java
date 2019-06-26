@@ -159,6 +159,18 @@ public class SkCommodityServiceProxy implements SkCommodityServiceI {
         return new CommodityRecordResp(SUCCESS.getCode(), SUCCESS.getMessage());
     }
 
+    @Override
+    public ResponseEntity reduce(DeducteCommodityReq deducteCommodityReq) {
+        //1
+        return null;
+    }
+
+    @Override
+    public ResponseEntity testAop() {
+        int row = commodityService.insertData();
+        return null;
+    }
+
     private SkCommodityDetail convertDetail(SkCommodity skCommodity) {
         SkCommodityDetail skCommodityDetail = new SkCommodityDetail();
         BeanUtil.copyProperties(skCommodity, skCommodityDetail);

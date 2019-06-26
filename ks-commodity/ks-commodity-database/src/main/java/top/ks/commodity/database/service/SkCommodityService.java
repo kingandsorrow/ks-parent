@@ -14,4 +14,7 @@ package top.ks.commodity.database.service;
  */
 public interface SkCommodityService {
     int deducteCommodity(String userId, String commodityId, String skOrderId);
+
+
+    int insertData();
 }

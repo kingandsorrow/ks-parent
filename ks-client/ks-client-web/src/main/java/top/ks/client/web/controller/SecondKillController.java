@@ -11,6 +11,7 @@ import org.apache.rocketmq.client.producer.TransactionSendResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import top.ks.client.web.helper.vo.SkResponseEntity;
+import top.ks.commodity.api.SkCommodityServiceI;
 import top.ks.commodity.api.req.DeducteCommodityReq;
 import top.ks.common.constant.Const;
 import top.ks.common.util.*;
@@ -52,6 +53,8 @@ public class SecondKillController {
     private RedisService redisService;
     @Reference(version = "${dubbo.service.version}")
     private SecondKillServiceI secondKillServiceI;
+    @Reference(version = "${dubbo.service.version}")
+    private SkCommodityServiceI commodityServiceI;
     @Resource
     private TransactionProducer transactionProducer;
 
@@ -105,6 +108,10 @@ public class SecondKillController {
         return new ResponseEntity(SUCCESS.getCode(), SUCCESS.getMessage());
     }
 
+    @RequestMapping("testAop")
+    public ResponseEntity testAop() {
+        return commodityServiceI.testAop();
+    }
 
     public static void main(String[] args) {
         ExecutorService executorService = Executors.newCachedThreadPool();
