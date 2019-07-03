@@ -62,14 +62,12 @@ public class SkCommodityServiceImpl implements SkCommodityService {
         skCommodity.setSkStockCount(10);
         skCommodity.setStartDate(new Date());
         int row1 = skCommodityMapper.insert(skCommodity);
+        SkCommodity commodity = skCommodityMapper.selectByPrimaryKey("123456");
         SkRecord skRecord = new SkRecord();
         skRecord.setCommodityId(skCommodity.getCommodityId() + "");
         skRecord.setSkId(IdUtil.createSnowflake(5, 5).nextId() + "");
         skRecord.setSkOrderId("456");
         int row2 = skRecordMapper.insert(skRecord);
-        if (1 == 1) {
-            throw new RuntimeException();
-        }
         return row2;
     }
 

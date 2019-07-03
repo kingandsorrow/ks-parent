@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="top.ks.commodity.database.mapper.SkTempMapper">
+    <resultMap id="BaseResultMap" type="top.ks.commodity.database.model.SkTemp">
+        <id column="temp_id" property="tempId" jdbcType="VARCHAR"/>
+        <result column="temp_name" property="tempName" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    temp_id, temp_name
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from ks_sk_temp
+        where temp_id = #{tempId,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from ks_sk_temp
+    where temp_id = #{tempId,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="top.ks.commodity.database.model.SkTemp">
+    insert into ks_sk_temp (temp_id, temp_name)
+    values (#{tempId,jdbcType=VARCHAR}, #{tempName,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="top.ks.commodity.database.model.SkTemp">
+        insert into ks_sk_temp
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="tempId != null">
+                temp_id,
+            </if>
+            <if test="tempName != null">
+                temp_name,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="tempId != null">
+                #{tempId,jdbcType=VARCHAR},
+            </if>
+            <if test="tempName != null">
+                #{tempName,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="top.ks.commodity.database.model.SkTemp">
+        update ks_sk_temp
+        <set>
+            <if test="tempName != null">
+                temp_name = #{tempName,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where temp_id = #{tempId,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="top.ks.commodity.database.model.SkTemp">
+    update ks_sk_temp
+    set temp_name = #{tempName,jdbcType=VARCHAR}
+    where temp_id = #{tempId,jdbcType=VARCHAR}
+  </update>
+</mapper>

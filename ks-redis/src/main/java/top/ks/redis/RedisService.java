@@ -399,4 +399,45 @@ public class RedisService {
             returnToPool(jedis);
         }
     }
+
+    public String setNxAndExpire(KeyPrefix keyPrefix, String key, String value, Long lockExpireTimeOut) {
+        Jedis jedis = null;
+        try {
+            jedis = jedisPool.getResource();
+            String realKey = keyPrefix.getPrefix() + key;
+            String result = jedis.set(realKey, value, "NX", "EX", lockExpireTimeOut);
+            return result;
+        } catch (Exception e) {
+            log.error("system exception:", e);
+            log.info(LogFormat.formatMsg("RedisService.setNxAndExpire", "system error::" + e.getMessage(), ""));
+            return null;
+        } finally {
+            returnToPool(jedis);
+        }
+
+    }
+
+    /**
+     * @param :
+     * @return :
+     * @Method :
+     * @Description :执行redis lua表达式
+     * @author : brj
+     * @CreateDate : 2019-06-28 10:01
+     */
+    public Object evalScript(KeyPrefix keyPrefix, String key, List<String> args, String unlockScript) {
+        String realKey = keyPrefix.getPrefix() + key;
+        Jedis jedis = null;
+        try {
+            jedis = jedisPool.getResource();
+            Object obj = (Long) jedis.eval(unlockScript, Collections.singletonList(realKey), args);
+            return obj;
+        } catch (Exception e) {
+            log.error("system exception:", e);
+            log.info(LogFormat.formatMsg("RedisService.evalScript", "system error::" + e.getMessage(), ""));
+            return null;
+        } finally {
+            returnToPool(jedis);
+        }
+    }
 }
