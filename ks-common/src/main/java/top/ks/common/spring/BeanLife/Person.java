@@ -13,7 +13,7 @@ import org.springframework.beans.factory.*;
  * <b>修改备注:</b><br/>
  *
  * @version 1.0.0
- * Copyright 西安创意 2019/3/25
+ * Copyright KS 2019/3/25
  */
 public class Person implements BeanFactoryAware, BeanNameAware, InitializingBean, DisposableBean {
 

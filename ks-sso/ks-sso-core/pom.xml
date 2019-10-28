@@ -18,7 +18,7 @@
         </dependency>
         <dependency>
             <groupId>top.ks</groupId>
-            <artifactId>ks-sso-api</artifactId>
+            <artifactId>ks-sso-consumer</artifactId>
         </dependency>
         <dependency>
             <groupId>com.alibaba.boot</groupId>

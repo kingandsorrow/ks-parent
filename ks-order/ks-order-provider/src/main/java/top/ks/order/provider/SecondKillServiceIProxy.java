@@ -28,7 +28,7 @@ import static top.ks.common.enums.ResultStatus.*;
  * <b>修改备注:</b><br/>
  *
  * @version 1.0.0
- * Copyright 西安创意 2019/2/28
+ * Copyright KS 2019/2/28
  */
 @Service(
         version = "${dubbo.application.version}",

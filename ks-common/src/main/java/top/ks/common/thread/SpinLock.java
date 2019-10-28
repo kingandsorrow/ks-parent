@@ -12,10 +12,11 @@ import java.util.concurrent.atomic.AtomicReference;
  * <b>修改备注:</b><br/>
  *
  * @version 1.0.0
- * Copyright 西安创意 2019/3/18
+ * Copyright KS 2019/3/18
  */
 public class SpinLock {
     private AtomicReference<Thread> cas = new AtomicReference<Thread>();
+
     public void lock() {
         Thread current = Thread.currentThread();
         // 利用CAS
@@ -23,6 +24,7 @@ public class SpinLock {
             // DO nothing
         }
     }
+
     public void unlock() {
         Thread current = Thread.currentThread();
         cas.compareAndSet(current, null);

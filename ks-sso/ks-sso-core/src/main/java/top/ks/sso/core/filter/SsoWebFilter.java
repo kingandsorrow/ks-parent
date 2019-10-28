@@ -8,14 +8,12 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.AntPathMatcher;
 import top.ks.common.constant.Const;
 import top.ks.common.user.SsoUser;
-import top.ks.common.util.ResponseEntity;
 import top.ks.common.util.LogFormat;
 import top.ks.common.util.Strings;
-import top.ks.sso.api.LoginServiceI;
-import top.ks.sso.api.req.SsoUserReq;
-import top.ks.sso.api.resp.SsoUserResp;
+import top.ks.sso.consumer.LoginServiceI;
+import top.ks.sso.consumer.req.SsoUserReq;
+import top.ks.sso.consumer.resp.SsoUserResp;
 import top.ks.sso.core.resp.SsoResp;
-import top.ks.sso.core.util.CookieUtil;
 import top.ks.sso.core.util.HttpUtil;
 import top.ks.sso.core.util.SsoWebLoginHelper;
 
@@ -38,7 +36,7 @@ import static top.ks.common.enums.ResultStatus.USER_NOT_LOGIN;
  * <b>修改备注:</b><br/>
  *
  * @version 1.0.0
- * Copyright 西安创意 2019/1/20
+ * Copyright KS 2019/1/20
  */
 @Component
 public class SsoWebFilter extends HttpServlet implements Filter {

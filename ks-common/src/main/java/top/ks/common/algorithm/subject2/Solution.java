@@ -9,7 +9,7 @@ package top.ks.common.algorithm.subject2;
  * <b>修改时间:</b>2018/9/3<br/>
  * <b>修改备注:</b><br/>
  * <p>
- * Copyright 西安创意 2018/9/3
+ * Copyright KS 2018/9/3
  */
 public class Solution {
 

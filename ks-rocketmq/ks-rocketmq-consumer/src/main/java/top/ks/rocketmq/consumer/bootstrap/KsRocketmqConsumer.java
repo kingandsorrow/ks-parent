@@ -15,7 +15,7 @@ import org.springframework.context.annotation.ImportResource;
  * <b>修改备注:</b><br/>
  *
  * @version 1.0.0
- * Copyright 西安创意 2019/4/2
+ * Copyright KS 2019/4/2
  */
 @SpringBootApplication(scanBasePackages = "top.ks")
 public class KsRocketmqConsumer {

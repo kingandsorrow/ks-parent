@@ -1,6 +1,12 @@
 package top.ks.oss.provider;
 
-import top.ks.oss.api.PermissionServiceI;
+
+import org.springframework.stereotype.Component;
+import top.ks.common.enums.ResultStatus;
+import top.ks.common.util.ResponseEntity;
+import top.ks.oss.consumer.PermissionServiceI;
+import top.ks.oss.consumer.req.LoginReq;
+import top.ks.oss.consumer.resp.LoginResp;
 
 /**
  * <b>类名称:</b>PermissionServiceIProxy$<br/>
@@ -12,10 +18,15 @@ import top.ks.oss.api.PermissionServiceI;
  * <b>修改备注:</b><br/>
  *
  * @version 1.0.0
- * Copyright 西安创意 2018/12/2
+ * Copyright KS 2018/12/2
  */
+@Component
 public class PermissionServiceIProxy implements PermissionServiceI {
 
-
-
+    public LoginResp test(LoginReq loginReq) {
+        System.out.println("test success..");
+        LoginResp loginResp = new LoginResp(ResultStatus.SUCCESS);
+        loginResp.setToken("token");
+        return loginResp;
+    }
 }

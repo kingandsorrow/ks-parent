@@ -1,6 +1,5 @@
 package top.ks.oss.web.interceptor;
 
-import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.fastjson.JSON;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -8,17 +7,11 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 import top.ks.common.util.ResponseEntity;
-import top.ks.common.util.LogFormat;
-import top.ks.common.util.Strings;
-import top.ks.oss.api.OperatorServiceI;
-import top.ks.oss.api.resp.CheckTokenResp;
-import top.ks.oss.web.util.HttpUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Map;
 
 import static top.ks.common.enums.ResultStatus.LOGIN_EXPIRE;
 
@@ -31,17 +24,17 @@ import static top.ks.common.enums.ResultStatus.LOGIN_EXPIRE;
  * <b>修改时间:</b>2018/10/6<br/>
  * <b>修改备注:</b><br/>
  * <p>
- * Copyright 西安创意 2018/10/6
+ * Copyright KS 2018/10/6
  */
 @Component
 public class LoginInterceptor implements HandlerInterceptor {
     private static final Log log = LogFactory.getLog(LoginInterceptor.class);
-    @Reference(version = "${demo.service.version}", url = "dubbo://localhost:9093")
-    private OperatorServiceI operatorServiceI;
+    /*@Reference(version = "${demo.service.version}", url = "dubbo://localhost:9093")
+    private OperatorServiceI operatorServiceI;*/
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        Map<String, String> headersMap = HttpUtil.getHeadersInfo(request);
+        /*Map<String, String> headersMap = HttpUtil.getHeadersInfo(request);
         String token = headersMap.get("token");
         if (Strings.isEmpty(token)) {
             log.info(LogFormat.formatMsg("LoginInterceptor.preHandle", "not get token by Authorization", ""));
@@ -53,7 +46,7 @@ public class LoginInterceptor implements HandlerInterceptor {
             log.info(LogFormat.formatMsg("LoginInterceptor.preHandle", "checkTokenResp is::" + JSON.toJSONString(checkTokenResp), ""));
             setInvalidResp(response);
             return false;
-        }
+        }*/
         return true;
     }
 

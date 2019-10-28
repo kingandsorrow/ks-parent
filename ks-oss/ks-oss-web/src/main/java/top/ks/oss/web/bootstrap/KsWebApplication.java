@@ -3,6 +3,7 @@ package top.ks.oss.web.bootstrap;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ImportResource;
 
 /**
  * <b>类名称:</b>KsWebApplication$<br/>
@@ -13,13 +14,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * <b>修改时间:</b>2018/8/1<br/>
  * <b>修改备注:</b><br/>
  *
- * @version 1.0.0<br/>
+ * @version 1.0.0<br />
  * <p>
- * Copyright 西安创意 2018/8/1
+ * Copyright KS 2018/8/1
  */
 @SpringBootApplication(scanBasePackages = "top.ks")
 @SpringBootConfiguration
-//@ImportResource("classpath*:spring/*.xml")
+@ImportResource("classpath*:spring/*.xml")
 public class KsWebApplication {
 
     public static void main(String[] args) {

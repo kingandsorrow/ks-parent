@@ -13,7 +13,7 @@ import top.ks.cy.web.database.model.UserNotWon;
  * <b>修改备注:</b><br/>
  *
  * @version 1.0.0
- * Copyright 西安创意 2018/11/15
+ * Copyright KS 2018/11/15
  */
 public interface UserAwardService {
     int handleAward(UserAward userAward, UserNotWon userNotWon);

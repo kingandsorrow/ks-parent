@@ -1,31 +1,6 @@
 package top.ks.oss.web.controller;
 
-import com.alibaba.dubbo.config.annotation.Reference;
-import com.google.code.kaptcha.impl.DefaultKaptcha;
-import com.google.code.kaptcha.util.Config;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.apache.tomcat.util.http.fileupload.IOUtils;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import top.ks.oss.api.OperatorServiceI;
-import top.ks.oss.api.req.*;
-import top.ks.oss.api.resp.*;
-import top.ks.oss.web.util.HttpUtil;
-
-import javax.imageio.ImageIO;
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.lang.reflect.Method;
-import java.util.Map;
-import java.util.Properties;
-
-import static top.ks.common.enums.ResultStatus.SUCCESS;
 
 //import com.google.code.kaptcha.Producer;
 
@@ -39,12 +14,12 @@ import static top.ks.common.enums.ResultStatus.SUCCESS;
  * <b>修改备注:</b><br/>
  *
  * <p>
- * Copyright 西安创意 2018/8/1
+ * Copyright KS 2018/8/1
  */
 @RestController
 public class MainController {
-    private static final Log log = LogFactory.getLog(MainController.class);
-    @Reference(version = "${demo.service.version}", url = "dubbo://localhost:9093")
+    /*private static final Log log = LogFactory.getLog(MainController.class);
+    @Reference(version = "${dubbo.service.version}", url = "dubbo://localhost:9093")
     OperatorServiceI operatorServiceI;
     @Value("${project.id}")
     private String projectId;
@@ -136,13 +111,15 @@ public class MainController {
     }
 
 
+    */
+
     /**
      * 获取method
      *
-     * @param cls
-     * @param methodName
+     * @param
+     * @param
      * @return
-     */
+     *//*
     private Method getMethod(Class cls, String methodName) {
         Method[] methods = cls.getMethods();
         for (Method method : methods) {
@@ -158,27 +135,25 @@ public class MainController {
         response.setContentType("text/html");
         response.setCharacterEncoding("utf-8");
         try {
-            /*if (des) {
+            *//*if (des) {
                 json = DesUtil.encrypt(json);
-            }*/
+            }*//*
             response.getWriter().print(json);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-
+    }*/
     public static void main(String[] args) {
         System.out.println("osskeyosskeyosskeyosskeyosskeyosskeyosskeyosskeyosskeyosskeyosskeyosskeyosskey".length());
     }
 
-    public String getProjectId() {
+    /*public String getProjectId() {
         return projectId;
     }
 
     public void setProjectId(String projectId) {
         this.projectId = projectId;
-    }
+    }*/
 }

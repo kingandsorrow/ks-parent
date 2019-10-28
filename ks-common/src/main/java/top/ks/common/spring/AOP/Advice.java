@@ -13,7 +13,8 @@ import java.lang.reflect.InvocationHandler;
  * <b>修改备注:</b><br/>
  *
  * @version 1.0.0
- * Copyright 西安创意 2019/3/14
+ * Copyright KS 2019/3/14
  */
 public interface Advice extends InvocationHandler {
+    int a = 10;
 }

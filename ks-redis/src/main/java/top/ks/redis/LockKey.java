@@ -10,7 +10,7 @@ package top.ks.redis;
  * <b>修改备注:</b><br/>
  *
  * @version 1.0.0
- * Copyright 西安创意 2019/4/7
+ * Copyright KS 2019/4/7
  */
 public class LockKey extends BasePrefix {
     public LockKey(int expireSeconds, String prefix) {

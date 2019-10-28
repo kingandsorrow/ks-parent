@@ -13,7 +13,7 @@ import top.ks.order.api.resp.ShopDetailResp;
  * <b>修改备注:</b><br/>
  *
  * @version 1.0.0
- * Copyright 西安创意 2019/3/3
+ * Copyright KS 2019/3/3
  */
 public interface ShoppingServiceI {
 

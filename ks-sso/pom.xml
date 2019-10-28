@@ -12,7 +12,7 @@
     <artifactId>ks-sso</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>ks-sso-api</module>
+        <module>ks-sso-consumer</module>
         <module>ks-sso-provider</module>
         <module>ks-sso-web</module>
         <module>ks-sso-core</module>

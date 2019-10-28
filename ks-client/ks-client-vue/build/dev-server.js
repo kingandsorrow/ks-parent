@@ -50,7 +50,7 @@ if (context.length) {
 }
 
 // handle fallback for HTML5 history API
-server.use(require('connect-history-api-fallback')())
+server.use(require('connect-history-consumer-fallback')())
 
 // serve webpack bundle output
 server.use(devMiddleware)

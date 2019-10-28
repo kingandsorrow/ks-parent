@@ -14,7 +14,7 @@ import java.util.Map;
  * <b>修改时间:</b>2018/10/6<br/>
  * <b>修改备注:</b><br/>
  * <p>
- * Copyright 西安创意 2018/10/6
+ * Copyright KS 2018/10/6
  */
 public class HttpUtil {
 

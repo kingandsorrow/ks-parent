@@ -14,7 +14,7 @@ import top.ks.common.algorithm.subject2.ListNode;
  * <b>修改备注:</b><br/>
  *
  * @version 1.0.0
- * Copyright 西安创意 2019/4/15
+ * Copyright KS 2019/4/15
  */
 public class Solution {
     public static ListNode swapPairs(ListNode head) {

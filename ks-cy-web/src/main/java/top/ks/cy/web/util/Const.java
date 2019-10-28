@@ -10,7 +10,7 @@ package top.ks.cy.web.util;
  * <b>修改备注:</b><br/>
  *
  * @version 1.0.0
- * Copyright 西安创意 2018/11/15
+ * Copyright KS 2018/11/15
  */
 public class Const {
 

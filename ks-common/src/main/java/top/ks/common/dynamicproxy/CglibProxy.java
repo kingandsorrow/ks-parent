@@ -19,7 +19,7 @@ import java.lang.reflect.Method;
  *
  * @version 1.0.0<br />
  * <p>
- * Copyright 西安创意 2019-06-23
+ * Copyright KS 2019-06-23
  */
 public class CglibProxy {
 

@@ -24,7 +24,7 @@ import javax.annotation.Resource;
  * <b>修改备注:</b><br/>
  *
  * @version 1.0.0
- * Copyright 西安创意 2019/4/2
+ * Copyright KS 2019/4/2
  */
 @Component
 public class DefaultConsumer {

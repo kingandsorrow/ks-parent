@@ -1,7 +1,7 @@
 package top.ks.sso.provider.factory;
 
-import top.ks.sso.api.req.LoginReq;
-import top.ks.sso.api.resp.LoginResp;
+import top.ks.sso.consumer.req.LoginReq;
+import top.ks.sso.consumer.resp.LoginResp;
 
 /**
  * <b>类名称:</b>LoginHandler$<br/>
@@ -12,9 +12,9 @@ import top.ks.sso.api.resp.LoginResp;
  * <b>修改时间:</b>2018/6/20<br/>
  * <b>修改备注:</b><br/>
  *
- * @version 1.0.0<br/>
+ * @version 1.0.0<br />
  * <p>
- * Copyright 西安创意 2018/6/20
+ * Copyright KS 2018/6/20
  */
 public abstract class LoginHandler {
 

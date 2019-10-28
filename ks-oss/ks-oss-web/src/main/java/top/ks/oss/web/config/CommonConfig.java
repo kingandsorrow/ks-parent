@@ -24,7 +24,7 @@ import top.ks.oss.web.interceptor.LoginInterceptor;
  * <b>修改备注:</b><br/>
  *
  * @version 1.0.0
- * Copyright 西安创意 2018/10/6
+ * Copyright KS 2018/10/6
  */
 
 @Configuration
@@ -34,7 +34,7 @@ public class CommonConfig extends WebMvcConfigurerAdapter {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(loginInterceptor).addPathPatterns("/*").excludePathPatterns("/login", "/checkToken", "/loginOut", "/captcha.jpg", "/error");
+        registry.addInterceptor(loginInterceptor).addPathPatterns("/*").excludePathPatterns("/login", "/checkToken", "/loginOut", "/captcha.jpg", "/error", "/listDetail","/listDetail1");
         super.addInterceptors(registry);
     }
 

@@ -8,6 +8,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.reflect.Method;
 import java.math.BigDecimal;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -37,6 +38,8 @@ public class ToolUtil {
     private static final String SHORTURL_STR = "abcdefghijklmnopqrstuvwxyz1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     private static final String NUMBERS = "0123456789";
     private static Log logger = LogFactory.getLog(ToolUtil.class);
+
+    private static List<Class> baseClassList = new ArrayList<>(Arrays.asList(Integer.class, int.class, String.class, Byte.class, byte.class, Short.class, short.class, float.class, Float.class, double.class, Double.class, char.class, Character.class, boolean.class, Boolean.class, String.class));
 
     // 转换为酒吧时间，头一天12点到今天12点
     public static Date convertBarDay(Date date) {
@@ -93,7 +96,7 @@ public class ToolUtil {
     /**
      * 获取星期几 周一即为1
      *
-     * @param date
+     * @param nowDate
      * @return
      */
 
@@ -148,7 +151,7 @@ public class ToolUtil {
     }
 
     /**
-     * @param week
+     * @param weekId
      * @return
      */
     public static final String getWeekStr(int weekId) {
@@ -1393,5 +1396,52 @@ public class ToolUtil {
         }
 
         return host;
+    }
+
+    /**
+     * @param :
+     * @return :
+     * @Method :
+     * @Description :判断一个类是否是基础类型，并且是他的封装类
+     * @author : birjc
+     * @CreateDate : 2019-10-23 09:23
+     */
+    public static boolean isWrapClass(Class clz) {
+        try {
+            return ((Class) clz.getField("TYPE").get(null)).isPrimitive();
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    /**
+     * @param :
+     * @return :
+     * @Method :
+     * @Description :获取某一个类的方法
+     * @author : birjc
+     * @CreateDate : 2019-10-22 21:19
+     */
+    public static Method getMethod(Class cls, String methodName) {
+        Method[] methods = cls.getMethods();
+        List<Method> methodList = new ArrayList<Method>(Arrays.asList(methods));
+        return methodList.stream().filter(method -> {
+            return method.getName().equalsIgnoreCase(methodName);
+        }).findAny().orElse(null);
+    }
+
+    /**
+     * @param :
+     * @return :
+     * @Method :
+     * @Description :判断是否是基本类型及其封装类型，并且是String类型,获取类型
+     * @author : birjc
+     * @CreateDate : 2019-10-23 21:44
+     */
+    public static Class getPrimitive(Class param) {
+        Class paramClass = baseClassList.stream().filter(clz -> {
+            return clz.equals(param);
+        }).findAny().orElse(null);
+        return paramClass;
     }
 }

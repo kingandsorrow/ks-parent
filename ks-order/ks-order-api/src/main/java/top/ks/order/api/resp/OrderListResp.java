@@ -16,7 +16,7 @@ import java.util.List;
  * <b>修改备注:</b><br/>
  *
  * @version 1.0.0
- * Copyright 西安创意 2019/4/20
+ * Copyright KS 2019/4/20
  */
 public class OrderListResp extends ResponseEntity {
 

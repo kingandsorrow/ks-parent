@@ -23,7 +23,7 @@ import static cn.hutool.core.io.IoUtil.close;
  * <b>修改备注:</b><br/>
  *
  * @version 1.0.0
- * Copyright 西安创意 2019/3/11
+ * Copyright KS 2019/3/11
  */
 public class NIOTest {
 

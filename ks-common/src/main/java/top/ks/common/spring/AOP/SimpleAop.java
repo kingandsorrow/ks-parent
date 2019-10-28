@@ -12,7 +12,7 @@ import java.lang.reflect.Proxy;
  * <b>修改备注:</b><br/>
  *
  * @version 1.0.0
- * Copyright 西安创意 2019/3/14
+ * Copyright KS 2019/3/14
  */
 public class SimpleAop {
     public static Object getProxy(Object bean, Advice advice) {

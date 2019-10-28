@@ -11,7 +11,7 @@ package top.ks.common.algorithm.subject2;
  *
  * @version 1.0.0<br               />
  * <p>
- * Copyright 西安创意 2018/9/3
+ * Copyright KS 2018/9/3
  */
 public class ListNode {
     int val;

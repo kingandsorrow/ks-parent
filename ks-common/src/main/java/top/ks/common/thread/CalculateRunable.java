@@ -21,7 +21,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * <b>修改备注:</b><br/>
  *
  * @version 1.0.0
- * Copyright 西安创意 2019/3/18
+ * Copyright KS 2019/3/18
  */
 public class CalculateRunable implements Runnable {
     private static final Log log = LogFactory.getLog(CalculateRunable.class);

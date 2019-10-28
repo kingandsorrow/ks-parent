@@ -39,7 +39,7 @@
         </dependency>
         <dependency>
             <groupId>top.ks</groupId>
-            <artifactId>ks-oss-api</artifactId>
+            <artifactId>ks-oss-consumer</artifactId>
         </dependency>
         <dependency>
             <groupId>com.github.axet</groupId>

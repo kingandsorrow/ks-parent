@@ -39,6 +39,7 @@ public class ResponseEntity extends BaseEntity {
 
     /**
      * 返回对象是否是处理成功对象
+     *
      * @return
      */
     public boolean respSuc() {

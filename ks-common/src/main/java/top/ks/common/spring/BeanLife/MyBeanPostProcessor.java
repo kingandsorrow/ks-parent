@@ -13,7 +13,7 @@ import org.springframework.beans.factory.config.BeanPostProcessor;
  * <b>修改备注:</b><br/>
  *
  * @version 1.0.0
- * Copyright 西安创意 2019/3/26
+ * Copyright KS 2019/3/26
  */
 public class MyBeanPostProcessor implements BeanPostProcessor {
     //BeanPostProcessor接口包括2个方法postProcessAfterInitialization和postProcessBeforeInitialization，

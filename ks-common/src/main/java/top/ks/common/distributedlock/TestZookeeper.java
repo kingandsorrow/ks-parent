@@ -16,7 +16,7 @@ import org.apache.curator.retry.ExponentialBackoffRetry;
  * <b>修改备注:</b><br/>
  *
  * @version 1.0.0
- * Copyright 西安创意 2019/3/23
+ * Copyright KS 2019/3/23
  */
 public class TestZookeeper {
 

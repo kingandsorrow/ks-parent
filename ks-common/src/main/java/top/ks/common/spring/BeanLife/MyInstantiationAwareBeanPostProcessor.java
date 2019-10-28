@@ -17,7 +17,7 @@ import java.lang.reflect.Constructor;
  * <b>修改备注:</b><br/>
  *
  * @version 1.0.0
- * Copyright 西安创意 2019/3/26
+ * Copyright KS 2019/3/26
  */
 public class MyInstantiationAwareBeanPostProcessor extends InstantiationAwareBeanPostProcessorAdapter {
 

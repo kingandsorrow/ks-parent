@@ -10,7 +10,7 @@ package top.ks.common.singleton;
  * <b>修改备注:</b><br/>
  *
  * @version 1.0.0
- * Copyright 西安创意 2019/3/29
+ * Copyright KS 2019/3/29
  */
 public class Single {
 
@@ -21,6 +21,8 @@ public class Single {
     private static volatile Single single;
 
     //双重校验锁
+    //第一层校验是为了减少同步
+    //第二层校验是为了防止重复创建对象
     private static Single getSingleBean() {
         if (single == null) {
             synchronized (Single.class) {

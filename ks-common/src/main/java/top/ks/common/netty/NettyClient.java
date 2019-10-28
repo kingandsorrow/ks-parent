@@ -21,7 +21,7 @@ import java.util.Scanner;
  * <b>修改备注:</b><br/>
  *
  * @version 1.0.0
- * Copyright 西安创意 2019/4/16
+ * Copyright KS 2019/4/16
  */
 public class NettyClient implements Runnable {
 

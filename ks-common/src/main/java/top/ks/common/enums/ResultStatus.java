@@ -10,7 +10,7 @@ package top.ks.common.enums;
  * <b>修改备注:</b><br/>
  *
  * @version 1.0.0
- * Copyright 西安创意 2019/2/13
+ * Copyright KS 2019/2/13
  */
 public enum ResultStatus {
     SUCCESS("0", "成功"),

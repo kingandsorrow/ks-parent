@@ -17,7 +17,7 @@ import java.util.List;
  * <b>修改备注:</b><br/>
  *
  * @version 1.0.0<br               />
- * Copyright 西安创意 2018/10/4
+ * Copyright KS 2018/10/4
  */
 public interface KsRoleService {
     OperatorDeatil selectOperatorDetail(KsOperator ksOperator);

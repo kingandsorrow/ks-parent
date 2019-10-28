@@ -1,23 +1,22 @@
 package top.ks.sso.provider;
 
-import com.alibaba.dubbo.config.annotation.Service;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Component;
-import top.ks.common.enums.ResultStatus;
 import top.ks.common.user.SsoUser;
 import top.ks.common.util.LogFormat;
-import top.ks.common.util.ResponseEntity;
 import top.ks.common.util.Strings;
 import top.ks.redis.RedisService;
 import top.ks.redis.SsoKey;
-import top.ks.sso.api.LoginServiceI;
-import top.ks.sso.api.req.LoginOutReq;
-import top.ks.sso.api.req.LoginReq;
-import top.ks.sso.api.req.SsoUserReq;
-import top.ks.sso.api.resp.LoginOutResp;
-import top.ks.sso.api.resp.LoginResp;
-import top.ks.sso.api.resp.SsoUserResp;
+import top.ks.sso.consumer.LoginServiceI;
+import top.ks.sso.consumer.req.LoginOutReq;
+import top.ks.sso.consumer.req.LoginReq;
+import top.ks.sso.consumer.req.RegisterReq;
+import top.ks.sso.consumer.req.SsoUserReq;
+import top.ks.sso.consumer.resp.LoginOutResp;
+import top.ks.sso.consumer.resp.LoginResp;
+import top.ks.sso.consumer.resp.RegisterResp;
+import top.ks.sso.consumer.resp.SsoUserResp;
 import top.ks.sso.provider.factory.LoginFactory;
 import top.ks.sso.provider.factory.LoginHandler;
 
@@ -36,14 +35,8 @@ import static top.ks.common.enums.ResultStatus.*;
  * <b>修改备注:</b><br/>
  *
  * @version 1.0.0
- * Copyright 西安创意 2018/12/12
+ * Copyright KS 2018/12/12
  */
-@Service(
-        version = "${dubbo.application.version}",
-        application = "${dubbo.application.id}",
-        protocol = "${dubbo.protocol.id}",
-        registry = "${dubbo.registry.id}"
-)
 @Component
 public class LoginServiceIProxy implements LoginServiceI {
 
@@ -93,6 +86,19 @@ public class LoginServiceIProxy implements LoginServiceI {
             return ssoUserResp;
         }
         return new SsoUserResp(DATA_NOT_EXSIT);
+    }
+
+    /**
+     * @param :
+     * @return :
+     * @Method :
+     * @Description :统一注册接口
+     * @author : birjc
+     * @CreateDate : 2019-09-17 22:26
+     */
+    @Override
+    public RegisterResp register(RegisterReq registerReq) {
+        return null;
     }
 
     @Override

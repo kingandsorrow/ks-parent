@@ -12,7 +12,7 @@ import java.util.Map;
  * <b>修改备注:</b><br/>
  *
  * <p>
- * Copyright 西安创意 2018/6/20
+ * Copyright KS 2018/6/20
  */
 
 public class LoginFactory {

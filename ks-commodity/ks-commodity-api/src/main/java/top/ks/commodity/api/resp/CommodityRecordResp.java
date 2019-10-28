@@ -13,7 +13,7 @@ import top.ks.common.util.ResponseEntity;
  * <b>修改备注:</b><br/>
  *
  * @version 1.0.0
- * Copyright 西安创意 2019/4/9
+ * Copyright KS 2019/4/9
  */
 public class CommodityRecordResp extends ResponseEntity {
 

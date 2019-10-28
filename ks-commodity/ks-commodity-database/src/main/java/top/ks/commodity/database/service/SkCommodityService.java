@@ -10,7 +10,7 @@ package top.ks.commodity.database.service;
  * <b>修改备注:</b><br/>
  *
  * @version 1.0.0
- * Copyright 西安创意 2019/4/9
+ * Copyright KS 2019/4/9
  */
 public interface SkCommodityService {
     int deducteCommodity(String userId, String commodityId, String skOrderId);

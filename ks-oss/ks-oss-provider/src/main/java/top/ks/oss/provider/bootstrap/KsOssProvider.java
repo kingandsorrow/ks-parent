@@ -1,8 +1,10 @@
 package top.ks.oss.provider.bootstrap;
 
 import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.context.annotation.ImportResource;
 
 /*import org.springframework.boot.WebApplicationType;*/
 
@@ -16,14 +18,15 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
  * <b>修改备注:</b><br/>
  *
  * @version 1.0.0
- * Copyright 西安创意 2018/9/29
+ * Copyright KS 2018/9/29
  */
 @SpringBootApplication(scanBasePackages = "top.ks")
 @MapperScan("top.ks.oss.provider.database.mapper")
+@ImportResource(locations = {"classpath*:spring/*.xml"})
 public class KsOssProvider {
     public static void main(String[] args) {
         new SpringApplicationBuilder(KsOssProvider.class)
-                .web(false)
+                .web(WebApplicationType.NONE)
                 .run(args);
     }
 }

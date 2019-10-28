@@ -12,7 +12,7 @@
     <artifactId>ks-oss</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>ks-oss-api</module>
+        <module>ks-oss-consumer</module>
         <module>ks-oss-provider</module>
         <module>ks-oss-web</module>
     </modules>

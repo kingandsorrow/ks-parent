@@ -15,7 +15,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  *
  * @version 1.0.0<br/>
  * <p>
- * Copyright 西安创意 2018/8/1
+ * Copyright KS 2018/8/1
  */
 @SpringBootApplication(scanBasePackages = "top.ks")
 @SpringBootConfiguration

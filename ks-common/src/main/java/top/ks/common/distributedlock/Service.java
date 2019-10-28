@@ -13,7 +13,7 @@ import redis.clients.jedis.JedisPoolConfig;
  * <b>修改备注:</b><br/>
  *
  * @version 1.0.0
- * Copyright 西安创意 2018/12/9
+ * Copyright KS 2018/12/9
  */
 public class Service {
 

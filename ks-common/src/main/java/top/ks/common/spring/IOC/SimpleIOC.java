@@ -23,7 +23,7 @@ import java.util.Map;
  * <b>修改备注:</b><br/>
  *
  * @version 1.0.0
- * Copyright 西安创意 2019/3/12
+ * Copyright KS 2019/3/12
  */
 public class SimpleIOC {
 

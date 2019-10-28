@@ -12,7 +12,7 @@ import top.ks.common.util.BaseEntity;
  * <b>修改备注:</b><br/>
  *
  * @version 1.0.0
- * Copyright 西安创意 2019/3/3
+ * Copyright KS 2019/3/3
  */
 public class ShopDetailBean extends BaseEntity {
 }

@@ -1,10 +1,7 @@
 package top.ks.sso.provider.factory.impl;
 
-import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.date.DateUtil;
-import cn.hutool.core.lang.Snowflake;
 import cn.hutool.core.util.IdUtil;
-import com.alibaba.fastjson.JSON;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Component;
@@ -15,13 +12,12 @@ import top.ks.common.util.LogFormat;
 import top.ks.common.util.Strings;
 import top.ks.redis.RedisService;
 import top.ks.redis.SsoKey;
-import top.ks.sso.api.bean.KsUserBean;
-import top.ks.sso.api.req.LoginReq;
-import top.ks.sso.api.resp.LoginResp;
+import top.ks.sso.consumer.bean.KsUserBean;
+import top.ks.sso.consumer.req.LoginReq;
+import top.ks.sso.consumer.resp.LoginResp;
 import top.ks.sso.provider.database.mapper.KsUserAuthsMapper;
 import top.ks.sso.provider.database.mapper.KsUserMapper;
 import top.ks.sso.provider.database.model.KsUser;
-import top.ks.sso.provider.database.model.KsUserAuths;
 import top.ks.sso.provider.database.service.KsUserService;
 import top.ks.sso.provider.factory.LoginHandler;
 
@@ -40,7 +36,7 @@ import static top.ks.common.enums.ResultStatus.*;
  * <b>修改备注:</b><br/>
  *
  * <p>
- * Copyright 西安创意 2018/6/20
+ * Copyright KS 2018/6/20
  */
 @Component
 public class PhoneLoginHandler extends LoginHandler {

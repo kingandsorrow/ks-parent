@@ -12,7 +12,7 @@ import java.io.Serializable;
  * <b>修改备注:</b><br/>
  *
  * @version 1.0.0
- * Copyright 西安创意 2018/12/16
+ * Copyright KS 2018/12/16
  */
 public class SsoUser implements Serializable {
     private static final long serialVersionUID = 33L;

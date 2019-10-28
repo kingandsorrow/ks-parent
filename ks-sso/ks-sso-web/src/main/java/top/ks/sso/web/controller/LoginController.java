@@ -1,35 +1,28 @@
 package top.ks.sso.web.controller;
 
-import com.alibaba.dubbo.config.annotation.Reference;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import top.ks.common.constant.Const;
-import top.ks.common.user.SsoUser;
 import top.ks.common.util.LogFormat;
 import top.ks.common.util.Strings;
-import top.ks.sso.api.LoginServiceI;
-import top.ks.sso.api.req.LoginOutReq;
-import top.ks.sso.api.req.LoginReq;
-import top.ks.sso.api.req.SsoUserReq;
-import top.ks.sso.api.resp.LoginOutResp;
-import top.ks.sso.api.resp.LoginResp;
-import top.ks.sso.api.resp.SsoUserResp;
+import top.ks.sso.consumer.LoginServiceI;
+import top.ks.sso.consumer.req.LoginOutReq;
+import top.ks.sso.consumer.req.LoginReq;
+import top.ks.sso.consumer.req.SsoUserReq;
+import top.ks.sso.consumer.resp.LoginOutResp;
+import top.ks.sso.consumer.resp.LoginResp;
+import top.ks.sso.consumer.resp.SsoUserResp;
 import top.ks.sso.core.util.CookieUtil;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
-import java.util.ArrayList;
-import java.util.List;
-
-import static top.ks.common.enums.ResultStatus.SUCCESS;
 
 /**
  * <b>类名称:</b>LoginController$<br/>
@@ -41,12 +34,11 @@ import static top.ks.common.enums.ResultStatus.SUCCESS;
  * <b>修改备注:</b><br/>
  *
  * @version 1.0.0
- * Copyright 西安创意 2018/12/14
+ * Copyright KS 2018/12/14
  */
 @RestController
 public class LoginController {
-
-    @Reference(version = "${dubbo.service.version}")
+    @Resource
     private LoginServiceI loginServiceI;
 
     private static final Log log = LogFactory.getLog(LoginController.class);

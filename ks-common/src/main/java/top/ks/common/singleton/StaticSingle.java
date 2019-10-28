@@ -10,7 +10,7 @@ package top.ks.common.singleton;
  * <b>修改备注:</b><br/>
  *
  * @version 1.0.0
- * Copyright 西安创意 2019/3/29
+ * Copyright KS 2019/3/29
  */
 public class StaticSingle {
 
@@ -22,6 +22,11 @@ public class StaticSingle {
     private static class SingleHolder {
         // 创建单例对象
         private static StaticSingle staticSingle = new StaticSingle();
+    }
+
+    public String sayHello() {
+        System.out.println("您好..");
+        return "您好";
     }
 
 

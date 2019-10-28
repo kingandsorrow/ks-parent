@@ -4,7 +4,6 @@ import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.lang.Snowflake;
 import cn.hutool.core.util.IdUtil;
-import com.alibaba.dubbo.config.annotation.Service;
 import com.alibaba.fastjson.JSON;
 import io.jsonwebtoken.*;
 import org.apache.commons.logging.Log;
@@ -14,12 +13,12 @@ import org.springframework.stereotype.Component;
 import top.ks.common.util.LogFormat;
 import top.ks.common.util.Strings;
 import top.ks.common.util.ToolUtil;
-import top.ks.oss.api.OperatorServiceI;
-import top.ks.oss.api.bean.KsFunctionBean;
-import top.ks.oss.api.bean.KsRoleBean;
-import top.ks.oss.api.bean.OperatorDeatilBean;
-import top.ks.oss.api.req.*;
-import top.ks.oss.api.resp.*;
+import top.ks.oss.consumer.OperatorServiceI;
+import top.ks.oss.consumer.bean.KsFunctionBean;
+import top.ks.oss.consumer.bean.KsRoleBean;
+import top.ks.oss.consumer.bean.OperatorDeatilBean;
+import top.ks.oss.consumer.req.*;
+import top.ks.oss.consumer.resp.*;
 import top.ks.oss.provider.database.mapper.KsFunctionMapper;
 import top.ks.oss.provider.database.mapper.KsOperatorMapper;
 import top.ks.oss.provider.database.mapper.KsRoleMapper;
@@ -44,14 +43,8 @@ import static top.ks.common.enums.ResultStatus.*;
  * <b>修改时间:</b>2018/9/29<br/>
  * <b>修改备注:</b><br/>
  * <p>
- * Copyright 西安创意 2018/9/29
+ * Copyright KS 2018/9/29
  */
-@Service(
-        version = "${dubbo.application.version}",
-        application = "${dubbo.application.id}",
-        protocol = "${dubbo.protocol.id}",
-        registry = "${dubbo.registry.id}"
-)
 @Component
 public class OperatorServiceIProxy implements OperatorServiceI {
 

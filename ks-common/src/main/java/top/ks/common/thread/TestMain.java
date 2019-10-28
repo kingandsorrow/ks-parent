@@ -21,7 +21,7 @@ import java.util.concurrent.Executors;
  * <b>修改备注:</b><br/>
  *
  * @version 1.0.0
- * Copyright 西安创意 2019/3/15
+ * Copyright KS 2019/3/15
  */
 public class TestMain {
     //有30个数 每个数都要乘以3； 分4个线程来计算

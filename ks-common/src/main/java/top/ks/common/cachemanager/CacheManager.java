@@ -1,5 +1,9 @@
 package top.ks.common.cachemanager;
 
+
+import com.alibaba.fastjson.JSON;
+
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -14,7 +18,7 @@ public class CacheManager {
     //是否开启清除失效缓存
     private volatile Boolean clearExpireCacheEnable = true;
 
-    //缓存失效时间
+    //缓存失效时间(12小时)
     private long cacheTimeout = 12 * 60 * 60 * 1000L;
 
     //缓存使用记录
@@ -241,11 +245,20 @@ public class CacheManager {
 
 
     public static void main(String[] args) throws Exception {
-        CacheManager cacheManager = CacheManager.getCacheManagerInstance();
-        cacheManager.init(0);
+//        CacheManager cacheManager = CacheManager.getCacheManagerInstance();
+//        cacheManager.init(0);
+//
+//        for (int i = 0; i < 200; i++) {
+//            cacheManager.put(i + "", i);
+//        }
+        LinkedList<String> linkedList = new LinkedList<String>();
+        linkedList.add(0, "aa");
+        linkedList.add(0, "bb");
+        linkedList.add(0, "cc");
+        System.out.println(linkedList.get(2));
 
-        for (int i = 0; i < 200; i++) {
-            cacheManager.put(i + "", i);
-        }
+        System.out.println(JSON.toJSON(linkedList));
+
+        Map map = new HashMap();
     }
 }

@@ -13,7 +13,7 @@ import top.ks.common.util.RequestEntity;
  * <b>修改备注:</b><br/>
  *
  * @version 1.0.0
- * Copyright 西安创意 2019/4/8
+ * Copyright KS 2019/4/8
  */
 public class SkOrderReq extends RequestEntity {
 

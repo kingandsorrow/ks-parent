@@ -20,7 +20,7 @@ import top.ks.cy.web.interceptor.LoginInterceptor;
  * <b>修改备注:</b><br/>
  *
  * @version 1.0.0
- * Copyright 西安创意 2018/10/6
+ * Copyright KS 2018/10/6
  */
 @Configuration
 public class CommonConfig extends WebMvcConfigurerAdapter {

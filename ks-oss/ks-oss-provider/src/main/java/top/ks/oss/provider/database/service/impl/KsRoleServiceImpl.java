@@ -21,7 +21,7 @@ import java.util.List;
  * <b>修改时间:</b>2018/10/4<br/>
  * <b>修改备注:</b><br/>
  * <p>
- * Copyright 西安创意 2018/10/4
+ * Copyright KS 2018/10/4
  */
 @Service
 public class KsRoleServiceImpl implements KsRoleService {

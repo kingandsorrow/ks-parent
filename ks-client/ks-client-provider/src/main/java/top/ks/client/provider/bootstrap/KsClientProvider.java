@@ -16,7 +16,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  * <b>修改备注:</b><br/>
  *
  * @version 1.0.0
- * Copyright 西安创意 2018/12/12
+ * Copyright KS 2018/12/12
  */
 @SpringBootApplication(scanBasePackages = "top.ks")
 @MapperScan("top.ks.client.provider.database.mapper")
