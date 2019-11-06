@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.TimeZone;
 
 public class Dates {
 	public static DateHelper from(Date date) {
@@ -208,7 +209,12 @@ public class Dates {
 
 		String formatStr = "yyyy-MM-dd HH:mm:ss";
 
-		System.out.println(Dates.now().beginOf('M').asString(formatStr));
-		System.out.println(Dates.now().endOf('M').asString(formatStr));
+//		System.out.println(Dates.now().beginOf('M').asString(formatStr));
+//		System.out.println(Dates.now().endOf('M').asString(formatStr));
+		TimeZone zone0 = TimeZone.getTimeZone("");
+		TimeZone zone1 = TimeZone.getDefault();
+
+		System.out.println(zone0.useDaylightTime());
+		System.out.println(zone1.useDaylightTime());
 	}
 }

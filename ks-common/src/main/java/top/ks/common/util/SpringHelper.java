@@ -1,4 +1,4 @@
-package top.ks.oss.web.util;
+package top.ks.common.util;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

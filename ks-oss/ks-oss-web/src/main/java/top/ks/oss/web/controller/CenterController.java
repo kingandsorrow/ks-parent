@@ -12,7 +12,6 @@ import top.ks.oss.web.basic.BasicController;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 
 /**
  * <b>类名称:</b>CenterController<br/>

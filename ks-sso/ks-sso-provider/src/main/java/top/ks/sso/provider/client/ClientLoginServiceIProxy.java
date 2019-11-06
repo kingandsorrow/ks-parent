@@ -1,4 +1,4 @@
-package top.ks.sso.provider;
+package top.ks.sso.provider.client;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -38,9 +38,9 @@ import static top.ks.common.enums.ResultStatus.*;
  * Copyright KS 2018/12/12
  */
 @Component
-public class LoginServiceIProxy implements LoginServiceI {
+public class ClientLoginServiceIProxy implements LoginServiceI {
 
-    private static final Log log = LogFactory.getLog(LoginServiceIProxy.class);
+    private static final Log log = LogFactory.getLog(ClientLoginServiceIProxy.class);
     @Resource
     private LoginFactory loginFactory;
     @Resource
@@ -56,17 +56,7 @@ public class LoginServiceIProxy implements LoginServiceI {
      */
     @Override
     public LoginResp doLogin(LoginReq loginReq) {
-        if (Strings.isEmpty(loginReq.getLoginWay())) {
-            log.info(LogFormat.formatMsg("LoginServiceIProxy.login", "login way is null.." + loginReq.toJsonStr(), ""));
-            return new LoginResp(SUCCESS);
-        }
-        LoginHandler loginHandler = loginFactory.getLoginHandler(loginReq.getLoginWay());
-        if (loginHandler == null) {
-            log.info(LogFormat.formatMsg("LoginServiceIProxy.doLogin", "get LoginHandler is null..", ""));
-            return new LoginResp();
-        }
-        LoginResp loginResp = loginHandler.loginMethod(loginReq);
-        return loginResp;
+        return null;
     }
 
     @Override

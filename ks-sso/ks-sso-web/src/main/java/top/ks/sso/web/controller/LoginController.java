@@ -16,7 +16,9 @@ import top.ks.sso.consumer.req.SsoUserReq;
 import top.ks.sso.consumer.resp.LoginOutResp;
 import top.ks.sso.consumer.resp.LoginResp;
 import top.ks.sso.consumer.resp.SsoUserResp;
+import top.ks.sso.core.help.LoginFactory;
 import top.ks.sso.core.util.CookieUtil;
+import top.ks.sso.core.util.LoginUtil;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -38,60 +40,79 @@ import java.net.URLDecoder;
  */
 @RestController
 public class LoginController {
-    @Resource
-    private LoginServiceI loginServiceI;
+    @Resource(name = "ossLoginServiceI")
+    private LoginServiceI ossLoginServiceI;
 
+    @Resource(name = "clientLoginServiceI")
+    private LoginServiceI clientLoginServiceI;
     private static final Log log = LogFactory.getLog(LoginController.class);
 
     @RequestMapping("toLogin")
     public String toLogin(HttpServletRequest request, HttpServletResponse response, Model model) throws UnsupportedEncodingException {
-        // login check
+        //1.获取token并且设置返回地址到session中
         String token = CookieUtil.getValue(request, Const.TOKEN) == null ? request.getParameter(Const.TOKEN) : CookieUtil.getValue(request, Const.TOKEN);
         String redirectUrl = request.getParameter(Const.REDIRECT_URL);
         if (Strings.isNotEmpty(redirectUrl)) {
             redirectUrl = URLDecoder.decode(request.getParameter(Const.REDIRECT_URL), "UTF-8");
             request.getSession().setAttribute(Const.SESSION_REDIRECT_URL, redirectUrl);
         }
-        if (Strings.isNotEmpty(token)) {
-            SsoUserReq ssoUserReq = new SsoUserReq();
-            ssoUserReq.setToken(token);
-            SsoUserResp ssoUserResp = loginServiceI.getUserByToken(ssoUserReq);
-            if (ssoUserResp.respSuc()) {
-                // success redirect
-                if (Strings.isNotEmpty(redirectUrl)) {
-                    String redirectUrlFinal = redirectUrl + "?" + Const.TOKEN + "=" + token;
-                    return "redirect:" + redirectUrlFinal;
-                } else {
-                    return "redirect:/";
-                }
+        //2.如果token为空则直接跳到登录页
+        if (Strings.isEmpty(token)) {
+            CookieUtil.remove(request, response, Const.TOKEN);
+            model.addAttribute("errorMsg", request.getParameter("errorMsg"));
+            model.addAttribute(Const.REDIRECT_URL, request.getParameter(Const.REDIRECT_URL));
+            return "login";
+        }
+        //3.获取登录来源，并且查询是否是登录状态
+        int loginFrom = request.getParameter(LoginFactory.LOGIN_FROM_PAR) == null ? LoginUtil.LOGIN_FROM_ZERO : Integer.parseInt((String) request.getParameter(LoginFactory.LOGIN_FROM_PAR));
+        LoginServiceI loginServiceI = LoginFactory.getLoginServiceI(loginFrom);
+        SsoUserReq ssoUserReq = new SsoUserReq();
+        ssoUserReq.setToken(token);
+        SsoUserResp ssoUserResp = loginServiceI.getUserByToken(ssoUserReq);
+        if (ssoUserResp.respSuc()) {
+            if (Strings.isNotEmpty(redirectUrl)) {
+                String redirectUrlFinal = redirectUrl + "?" + Const.TOKEN + "=" + token;
+                return "redirect:" + redirectUrlFinal;
             }
         }
-        CookieUtil.remove(request, response, Const.TOKEN);
-        model.addAttribute("errorMsg", request.getParameter("errorMsg"));
-        model.addAttribute(Const.REDIRECT_URL, request.getParameter(Const.REDIRECT_URL));
-        return "login";
+        return "redirect:/";
     }
 
     @RequestMapping("/doLogin")
     public String dologin(LoginReq loginReq, Model model, HttpServletRequest request, HttpServletResponse response, RedirectAttributes redirectAttributes) {
-        //1.调接口做登录
-        LoginResp loginResp = loginServiceI.doLogin(loginReq);
-        if (!loginResp.respSuc()) {
-            redirectAttributes.addAttribute("errorMsg", loginResp.getErrMsg());
-            redirectAttributes.addAttribute(Const.REDIRECT_URL, request.getParameter(Const.REDIRECT_URL));
-            return "redirect:/toLogin";
+        try {
+            //1.判断是否登录来源（oss,client）
+            int loginFrom = loginReq.getLoginFrom();
+            //2. 查询登录方式
+            LoginServiceI loginServiceI = LoginFactory.getLoginServiceI(loginFrom);
+            if (loginServiceI == null) {
+                redirectAttributes.addAttribute("errorMsg", "获取登录方式失败");
+                redirectAttributes.addAttribute(Const.REDIRECT_URL, request.getParameter(Const.REDIRECT_URL));
+                return "redirect:/toLogin";
+            }
+            //3.调用登录接口
+            LoginResp loginResp = loginServiceI.doLogin(loginReq);
+            if (!loginResp.respSuc()) {
+                redirectAttributes.addAttribute("errorMsg", loginResp.getErrMsg());
+                redirectAttributes.addAttribute(Const.REDIRECT_URL, request.getParameter(Const.REDIRECT_URL));
+                return "redirect:/toLogin";
+            }
+            //4.往cookie 存token
+            String token = loginResp.getToken();
+            CookieUtil.set(response, Const.TOKEN, token, false);
+            //5、登录成功，跳转回跳地址
+            String redirectUrl = (String) request.getSession().getAttribute(Const.SESSION_REDIRECT_URL);
+            if (Strings.isNotEmpty(redirectUrl)) {
+                String redirectUrlFinal = redirectUrl + "?" + Const.TOKEN + "=" + loginResp.getToken();
+                return "redirect:" + redirectUrlFinal;
+            } else {
+                return "redirect:/";
+            }
+        } catch (Exception e) {
+            log.error("system exception:", e);
+            log.info(LogFormat.formatMsg("LoginController.dologin", "system error::" + e.getMessage(), ""));
         }
-        //2.往cookie 存token
-        String token = loginResp.getToken();
-        CookieUtil.set(response, Const.TOKEN, token, false);
-        //3、登录成功，跳转回跳地址
-        String redirectUrl = (String) request.getSession().getAttribute(Const.SESSION_REDIRECT_URL);
-        if (Strings.isNotEmpty(redirectUrl)) {
-            String redirectUrlFinal = redirectUrl + "?" + Const.TOKEN + "=" + loginResp.getToken();
-            return "redirect:" + redirectUrlFinal;
-        } else {
-            return "redirect:/";
-        }
+        return null;
     }
 
     @RequestMapping("/loginOut")
@@ -119,11 +140,5 @@ public class LoginController {
             request.getSession().setAttribute(Const.SESSION_REDIRECT_URL, redirectUrl);
         }
         return "redirect:/toLogin";
-    }
-
-    @RequestMapping("orderList")
-    public String orderList(String a) {
-        System.out.println("a:" + a);
-        return a;
     }
 }

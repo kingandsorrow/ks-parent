@@ -22,8 +22,8 @@ import top.ks.sso.consumer.resp.SsoUserResp;
  * Copyright KS 2018/12/12
  */
 public interface LoginServiceI {
-
-    LoginResp doLogin(LoginReq loginReq);
+    //登录统一接口
+    LoginResp doLogin(LoginReq loginReq) throws Exception;
 
     SsoUserResp getUserByToken(SsoUserReq ssoUserReq);
 
