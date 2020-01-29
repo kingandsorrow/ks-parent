@@ -20,7 +20,7 @@ import org.springframework.context.annotation.ImportResource;
  */
 @SpringBootApplication(scanBasePackages = "top.ks")
 @MapperScan("top.ks.sso.provider.database.mapper")
-@ImportResource(locations = {"classpath:spring/*.xml"})
+@ImportResource(locations = {"classpath*:spring/*.xml"})
 public class KsSsoProvider {
     public static void main(String[] args) {
         new SpringApplicationBuilder(KsSsoProvider.class)

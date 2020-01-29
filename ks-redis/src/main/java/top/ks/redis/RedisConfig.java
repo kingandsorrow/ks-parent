@@ -13,6 +13,7 @@ public class RedisConfig {
     private int poolMaxTotal;
     private int poolMaxIdle;
     private int poolMaxWait;//秒
+    private int database;
 
     public String getHost() {
         return host;
@@ -68,5 +69,13 @@ public class RedisConfig {
 
     public void setPoolMaxWait(int poolMaxWait) {
         this.poolMaxWait = poolMaxWait;
+    }
+
+    public int getDatabase() {
+        return database;
+    }
+
+    public void setDatabase(int database) {
+        this.database = database;
     }
 }

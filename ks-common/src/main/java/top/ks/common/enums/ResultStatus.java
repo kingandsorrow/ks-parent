@@ -36,6 +36,7 @@ public enum ResultStatus {
     CODE_IS_WRONG("200006", "验证码错误"),
     TOKEN_EXPIRE("200007", "token过期"),
     LOGIN_EXPIRE("200008", "登录过期"),
+    LOGIN_WAY_ERROR("200009", "登录方式错误"),
 
 
     /**
@@ -53,6 +54,7 @@ public enum ResultStatus {
     USER_NOT_EXIST("30011", "用户不存在！"),
     USER_NOT_LOGIN("30012", "用户未登陆"),
     JOIN_USER_TOO_MUCH("30013", "当前参与人数过多,稍后再试"),
+    LOGINSERVICE_NOT_FOUND("30014", "当前参与人数过多,稍后再试"),
 
 
     /**

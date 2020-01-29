@@ -1,14 +1,16 @@
 package top.ks.common.design.chainmodel;
+
 /**
  * <b>类名称:</b>Client<br/>
- * <b>类注释:</b>zeren<br/>
+ * <b>类注释:</b>责任链模式<br/>
  * <b>类描述:</b><br/>
  * <b>创建人:</b>birjc<br/>
  * <b>修改人:</b>birjc<br/>
  * <b>修改时间:</b><br/>
  * <b>修改备注:</b><br/>
- * @version 1.0.0<br/>
  *
+ * @version 1.0.0<br />
+ * <p>
  * Copyright KS 2019-08-10
  */
 public class Client {

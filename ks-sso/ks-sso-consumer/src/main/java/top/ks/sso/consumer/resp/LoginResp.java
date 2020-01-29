@@ -3,7 +3,7 @@ package top.ks.sso.consumer.resp;
 
 import top.ks.common.enums.ResultStatus;
 import top.ks.common.util.ResponseEntity;
-import top.ks.sso.consumer.bean.KsUserBean;
+import top.ks.sso.consumer.bean.KsOssUserBean;
 
 /**
  * <b>类名称:</b>LoginResp$<br/>
@@ -19,7 +19,7 @@ import top.ks.sso.consumer.bean.KsUserBean;
  */
 public class LoginResp extends ResponseEntity {
 
-    private KsUserBean ksUserBean;
+    private KsOssUserBean ksUserBean;
 
     private String token;
 
@@ -46,11 +46,11 @@ public class LoginResp extends ResponseEntity {
         this.token = token;
     }
 
-    public KsUserBean getKsUserBean() {
+    public KsOssUserBean getKsUserBean() {
         return ksUserBean;
     }
 
-    public void setKsUserBean(KsUserBean ksUserBean) {
+    public void setKsUserBean(KsOssUserBean ksUserBean) {
         this.ksUserBean = ksUserBean;
     }
 }

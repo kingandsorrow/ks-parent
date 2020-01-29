@@ -73,21 +73,24 @@ router.beforeEach((to, from, next) => {
     next()
   } else {
     let token = Vue.cookie.get('token')
-    console.log("get cookie token is..",token)
+    console.log("get cookie token is..", token)
     http({
-      url: http.adornUrl('/checkToken'),
+      url: http.adornUrl('/oss/checkToken'),
       method: 'get',
       params: http.adornParams(),
       data: {"token": token}
     }).then(({data}) => {
-      if (data && data.errCode === '0000') {
-        fnAddDynamicMenuRoutes(data.operatorDeatilBean.menuList)
+      debugger;
+      if (data && data.errCode === '0') {
+        //fnAddDynamicMenuRoutes(data.operatorDeatilBean.menuList)
         router.options.isAddDynamicMenuRoutes = true
+/*
         sessionStorage.setItem('operatorDeatilBean', JSON.stringify(data.operatorDeatilBean));
         sessionStorage.setItem('menuList', JSON.stringify(data.operatorDeatilBean.menuList || '[]'))
         sessionStorage.setItem('permissions', JSON.stringify(data.permissions || '[]'))
+*/
         next({...to, replace: true})
-      } else if (data && data.errCode === "0401") { // 401, token失效
+      } else if (data && data.errCode === "200008") { // 401, token失效
         clearLoginInfo()
         router.push({name: 'login'})
       } else {

@@ -2,6 +2,8 @@
 package top.ks.oss.web.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.cors.CorsConfiguration;
@@ -9,7 +11,11 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import top.ks.common.constant.Const;
 import top.ks.oss.web.interceptor.LoginInterceptor;
+import top.ks.sso.core.filter.SsoWebFilter;
+
+import javax.annotation.Resource;
 
 //import org.springframework.boot.autoconfigure.http.HttpMessageConverters;
 
@@ -31,6 +37,22 @@ import top.ks.oss.web.interceptor.LoginInterceptor;
 public class CommonConfig extends WebMvcConfigurerAdapter {
     @Autowired
     private LoginInterceptor loginInterceptor;
+
+    @Value("${sso.redis.address}")
+    private String ssoRedisAddress;
+    @Value("${sso.redis.password}")
+    private String ssoRedisPassword;
+
+    @Value("${sso.server}")
+    private String ssoServer;
+
+    @Value("${sso.logout.path}")
+    private String ssoLogoutPath;
+
+    @Value("${sso.excluded.paths}")
+    private String ssoExcludedPaths;
+    @Resource
+    private SsoWebFilter ssoWebFilter;
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
@@ -59,6 +81,21 @@ public class CommonConfig extends WebMvcConfigurerAdapter {
 
         //3.返回新的CorsFilter.
         return new CorsFilter(configSource);
+    }
+    @Bean
+    public FilterRegistrationBean ssoFilterRegistration() {
+        // xxl-sso, redis init
+
+        // xxl-sso, filter init
+        FilterRegistrationBean registration = new FilterRegistrationBean();
+        registration.setName("SsoWebFilter");
+        registration.setOrder(1);
+        registration.addUrlPatterns("/*");
+        registration.setFilter(ssoWebFilter);
+        registration.addInitParameter(Const.SSO_SERVER, ssoServer);
+        registration.addInitParameter(Const.SSO_LOGOUT_PATH, ssoLogoutPath);
+        registration.addInitParameter(Const.SSO_EXCLUDED_PATHS, ssoExcludedPaths);
+        return registration;
     }
 }
 

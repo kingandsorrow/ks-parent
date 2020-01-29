@@ -71,7 +71,7 @@
         this.$refs['dataForm'].validate((valid) => {
           if (valid) {
             this.$http({
-              url: this.$http.adornUrl('/login'),
+              url: this.$http.adornUrl('/oss/encrypt/handle'),
               method: 'post',
               data: this.$http.adornData({
                 'loginName': this.dataForm.userName,

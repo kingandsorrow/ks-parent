@@ -10,7 +10,7 @@ import redis.clients.jedis.JedisPoolConfig;
 public class RedisPoolFactory {
 
     @Autowired
-    RedisConfig redisConfig;
+    private RedisConfig redisConfig;
 
     @Bean
     public JedisPool JedisPoolFactory() {
@@ -19,7 +19,7 @@ public class RedisPoolFactory {
         poolConfig.setMaxTotal(redisConfig.getPoolMaxTotal());
         poolConfig.setMaxWaitMillis(redisConfig.getPoolMaxWait() * 1000);
         JedisPool jp = new JedisPool(poolConfig, redisConfig.getHost(), redisConfig.getPort(),
-                redisConfig.getTimeout() * 1000, redisConfig.getPassword(), 0);
+                redisConfig.getTimeout() * 1000, redisConfig.getPassword(), redisConfig.getDatabase());
         return jp;
     }
 

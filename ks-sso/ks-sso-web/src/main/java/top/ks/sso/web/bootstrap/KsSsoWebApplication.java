@@ -3,6 +3,7 @@ package top.ks.sso.web.bootstrap;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ImportResource;
 
 /**
  * <b>类名称:</b>KsWebApplication$<br/>
@@ -19,7 +20,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 @SpringBootApplication(scanBasePackages = "top.ks")
 @SpringBootConfiguration
-//@ImportResource("classpath*:spring/*.xml")
+@ImportResource("classpath*:spring/*.xml")
 public class KsSsoWebApplication {
 
     public static void main(String[] args) {

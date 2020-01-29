@@ -1,5 +1,6 @@
 package top.ks.sso.core.resp;
 
+import top.ks.common.enums.ResultStatus;
 import top.ks.common.util.ResponseEntity;
 
 /**
@@ -18,7 +19,7 @@ public class SsoResp extends ResponseEntity {
 
     private String loginUrl;
 
-    public SsoResp() {
+    public SsoResp(ResultStatus userNotLogin) {
     }
 
     public SsoResp(String errCode) {

@@ -54,6 +54,7 @@ public class CenterController extends BasicController {
         resultString(responseEntity.toJsonStr(), response, true);
     }
 
+
     /**
      * @param :
      * @return :
@@ -77,5 +78,19 @@ public class CenterController extends BasicController {
         }
     }
 
+
+    /**
+     * @param :
+     * @return :
+     * @Method :
+     * @Description :统一调用dubbo入口（需要加密）
+     * @author : birjc
+     * @CreateDate : 2019-10-22 19:53
+     */
+    @RequestMapping("checkToken")
+    public void checkToken(String serviceIName, String methodName, HttpServletRequest request, HttpServletResponse response) {
+        ResponseEntity responseEntity = new ResponseEntity(ResultStatus.SUCCESS);
+        resultString(responseEntity.toJsonStr(), response, true);
+    }
 
 }

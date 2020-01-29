@@ -17,8 +17,8 @@ import top.ks.common.util.RequestEntity;
  */
 
 public class LoginReq extends RequestEntity {
-    // 登录方式
-    private String loginWay;
+    // 登录方式 0 账号密码登录
+    private Integer loginWay;
     // 登录账号
     private String loginName;
     // 登录密码
@@ -29,15 +29,8 @@ public class LoginReq extends RequestEntity {
     private String token;
     //登录来源
     private int loginFrom;
-
-
-    public String getLoginWay() {
-        return loginWay;
-    }
-
-    public void setLoginWay(String loginWay) {
-        this.loginWay = loginWay;
-    }
+    //工程id
+    private String projectId;
 
     public String getLoginName() {
         return loginName;
@@ -77,5 +70,21 @@ public class LoginReq extends RequestEntity {
 
     public void setLoginFrom(int loginFrom) {
         this.loginFrom = loginFrom;
+    }
+
+    public Integer getLoginWay() {
+        return loginWay;
+    }
+
+    public void setLoginWay(Integer loginWay) {
+        this.loginWay = loginWay;
+    }
+
+    public String getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(String projectId) {
+        this.projectId = projectId;
     }
 }

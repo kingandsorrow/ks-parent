@@ -20,7 +20,7 @@ import java.util.List;
 public class RedisService {
 
     @Autowired
-    JedisPool jedisPool;
+    private JedisPool jedisPool;
 
     private static final Log log = LogFactory.getLog(RedisService.class);
 

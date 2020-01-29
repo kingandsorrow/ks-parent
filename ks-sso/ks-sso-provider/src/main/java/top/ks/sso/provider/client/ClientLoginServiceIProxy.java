@@ -17,8 +17,6 @@ import top.ks.sso.consumer.resp.LoginOutResp;
 import top.ks.sso.consumer.resp.LoginResp;
 import top.ks.sso.consumer.resp.RegisterResp;
 import top.ks.sso.consumer.resp.SsoUserResp;
-import top.ks.sso.provider.factory.LoginFactory;
-import top.ks.sso.provider.factory.LoginHandler;
 
 import javax.annotation.Resource;
 
@@ -41,8 +39,6 @@ import static top.ks.common.enums.ResultStatus.*;
 public class ClientLoginServiceIProxy implements LoginServiceI {
 
     private static final Log log = LogFactory.getLog(ClientLoginServiceIProxy.class);
-    @Resource
-    private LoginFactory loginFactory;
     @Resource
     private RedisService redisService;
 

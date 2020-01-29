@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd"
+       default-lazy-init="true">
+
+    <description>RPC</description>
+
+    <bean id="chartTypeService" class="com.yonyou.cloud.middleware.rpc.RPCBeanFactory">
+        <constructor-arg value="orgcenter"/>
+        <constructor-arg value="c87e2267-1001-4c70-bb2a-ab41f3b81aa3"/>
+        <constructor-arg>
+            <list>
+                <value>com.yonyou.diwork.init.IBaseDocInitManager</value>
+            </list>
+        </constructor-arg>
+    </bean>
+
+    <bean id="u8cService" class="com.yonyou.cloud.middleware.rpc.RPCBeanFactory">
+        <constructor-arg value="u8c-config"/>
+        <constructor-arg value="c87e2267-1001-4c70-bb2a-ab41f3b81aa3"/>
+        <constructor-arg>
+            <list>
+                <value>com.yonyoucloud.uretail.option.pubItf.IOptionManagerService</value>
+            </list>
+        </constructor-arg>
+    </bean>
+
+</beans>

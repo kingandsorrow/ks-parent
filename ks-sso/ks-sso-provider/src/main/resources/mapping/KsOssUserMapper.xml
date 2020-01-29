@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.ks.sso.provider.database.mapper.KsOssUserMapper">
+    <resultMap id="BaseResultMap" type="top.ks.sso.provider.database.model.KsOssUser">
+        <id column="oss_user_id" jdbcType="VARCHAR" property="ossUserId"/>
+        <result column="phone" jdbcType="VARCHAR" property="phone"/>
+        <result column="gender" jdbcType="BIT" property="gender"/>
+        <result column="login_no" jdbcType="VARCHAR" property="loginNo"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="login_password" jdbcType="VARCHAR" property="loginPassword"/>
+        <result column="salt" jdbcType="VARCHAR" property="salt"/>
+        <result column="head_img" jdbcType="VARCHAR" property="headImg"/>
+        <result column="province_id" jdbcType="VARCHAR" property="provinceId"/>
+        <result column="city_id" jdbcType="VARCHAR" property="cityId"/>
+        <result column="other_info" jdbcType="VARCHAR" property="otherInfo"/>
+        <result column="frezz_type" jdbcType="BIT" property="frezzType"/>
+        <result column="project_id" jdbcType="VARCHAR" property="projectId"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="nick_name" jdbcType="VARCHAR" property="nickName"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    oss_user_id, phone, gender, login_no, email, login_password, salt, head_img, province_id, 
+    city_id, other_info, frezz_type, project_id, create_time, update_time, nick_name
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from ks_oss_user
+        where oss_user_id = #{ossUserId,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from ks_oss_user
+    where oss_user_id = #{ossUserId,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="top.ks.sso.provider.database.model.KsOssUser">
+    insert into ks_oss_user (oss_user_id, phone, gender, 
+      login_no, email, login_password, 
+      salt, head_img, province_id, 
+      city_id, other_info, frezz_type, 
+      project_id, create_time, update_time, 
+      nick_name)
+    values (#{ossUserId,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{gender,jdbcType=BIT}, 
+      #{loginNo,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{loginPassword,jdbcType=VARCHAR}, 
+      #{salt,jdbcType=VARCHAR}, #{headImg,jdbcType=VARCHAR}, #{provinceId,jdbcType=VARCHAR}, 
+      #{cityId,jdbcType=VARCHAR}, #{otherInfo,jdbcType=VARCHAR}, #{frezzType,jdbcType=BIT}, 
+      #{projectId,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{nickName,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="top.ks.sso.provider.database.model.KsOssUser">
+        insert into ks_oss_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="ossUserId != null">
+                oss_user_id,
+            </if>
+            <if test="phone != null">
+                phone,
+            </if>
+            <if test="gender != null">
+                gender,
+            </if>
+            <if test="loginNo != null">
+                login_no,
+            </if>
+            <if test="email != null">
+                email,
+            </if>
+            <if test="loginPassword != null">
+                login_password,
+            </if>
+            <if test="salt != null">
+                salt,
+            </if>
+            <if test="headImg != null">
+                head_img,
+            </if>
+            <if test="provinceId != null">
+                province_id,
+            </if>
+            <if test="cityId != null">
+                city_id,
+            </if>
+            <if test="otherInfo != null">
+                other_info,
+            </if>
+            <if test="frezzType != null">
+                frezz_type,
+            </if>
+            <if test="projectId != null">
+                project_id,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="nickName != null">
+                nick_name,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="ossUserId != null">
+                #{ossUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null">
+                #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="gender != null">
+                #{gender,jdbcType=BIT},
+            </if>
+            <if test="loginNo != null">
+                #{loginNo,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null">
+                #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="loginPassword != null">
+                #{loginPassword,jdbcType=VARCHAR},
+            </if>
+            <if test="salt != null">
+                #{salt,jdbcType=VARCHAR},
+            </if>
+            <if test="headImg != null">
+                #{headImg,jdbcType=VARCHAR},
+            </if>
+            <if test="provinceId != null">
+                #{provinceId,jdbcType=VARCHAR},
+            </if>
+            <if test="cityId != null">
+                #{cityId,jdbcType=VARCHAR},
+            </if>
+            <if test="otherInfo != null">
+                #{otherInfo,jdbcType=VARCHAR},
+            </if>
+            <if test="frezzType != null">
+                #{frezzType,jdbcType=BIT},
+            </if>
+            <if test="projectId != null">
+                #{projectId,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="nickName != null">
+                #{nickName,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="top.ks.sso.provider.database.model.KsOssUser">
+        update ks_oss_user
+        <set>
+            <if test="phone != null">
+                phone = #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="gender != null">
+                gender = #{gender,jdbcType=BIT},
+            </if>
+            <if test="loginNo != null">
+                login_no = #{loginNo,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null">
+                email = #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="loginPassword != null">
+                login_password = #{loginPassword,jdbcType=VARCHAR},
+            </if>
+            <if test="salt != null">
+                salt = #{salt,jdbcType=VARCHAR},
+            </if>
+            <if test="headImg != null">
+                head_img = #{headImg,jdbcType=VARCHAR},
+            </if>
+            <if test="provinceId != null">
+                province_id = #{provinceId,jdbcType=VARCHAR},
+            </if>
+            <if test="cityId != null">
+                city_id = #{cityId,jdbcType=VARCHAR},
+            </if>
+            <if test="otherInfo != null">
+                other_info = #{otherInfo,jdbcType=VARCHAR},
+            </if>
+            <if test="frezzType != null">
+                frezz_type = #{frezzType,jdbcType=BIT},
+            </if>
+            <if test="projectId != null">
+                project_id = #{projectId,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="nickName != null">
+                nick_name = #{nickName,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where oss_user_id = #{ossUserId,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="top.ks.sso.provider.database.model.KsOssUser">
+    update ks_oss_user
+    set phone = #{phone,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=BIT},
+      login_no = #{loginNo,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      login_password = #{loginPassword,jdbcType=VARCHAR},
+      salt = #{salt,jdbcType=VARCHAR},
+      head_img = #{headImg,jdbcType=VARCHAR},
+      province_id = #{provinceId,jdbcType=VARCHAR},
+      city_id = #{cityId,jdbcType=VARCHAR},
+      other_info = #{otherInfo,jdbcType=VARCHAR},
+      frezz_type = #{frezzType,jdbcType=BIT},
+      project_id = #{projectId,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      nick_name = #{nickName,jdbcType=VARCHAR}
+    where oss_user_id = #{ossUserId,jdbcType=VARCHAR}
+  </update>
+
+    <!--根据登录方式查询-->
+    <select id="selectByLogin" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from ks_oss_user
+        <where>
+            <if test="loginNo!=null and loginNo!=''">
+                login_no = #{loginNo,jdbcType=VARCHAR}
+            </if>
+            <if test="loginPassword!=null and loginPassword!=''">
+                and login_password = #{loginPassword,jdbcType=VARCHAR}
+            </if>
+            <if test="email!=null and email!=''">
+                and email = #{email,jdbcType=VARCHAR}
+            </if>
+            <if test="projectId!=null and projectId!=''">
+                and project_id = #{projectId,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+</mapper>

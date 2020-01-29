@@ -17,8 +17,8 @@ import top.ks.sso.consumer.resp.LoginOutResp;
 import top.ks.sso.consumer.resp.LoginResp;
 import top.ks.sso.consumer.resp.RegisterResp;
 import top.ks.sso.consumer.resp.SsoUserResp;
-import top.ks.sso.provider.factory.LoginFactory;
-import top.ks.sso.provider.factory.LoginHandler;
+import top.ks.sso.provider.database.service.LoginService;
+import top.ks.sso.provider.factory.LoginWayFactory;
 
 import javax.annotation.Resource;
 
@@ -42,8 +42,6 @@ public class OssLoginServiceIProxy implements LoginServiceI {
 
     private static final Log log = LogFactory.getLog(OssLoginServiceIProxy.class);
     @Resource
-    private LoginFactory loginFactory;
-    @Resource
     private RedisService redisService;
 
     /**
@@ -56,16 +54,16 @@ public class OssLoginServiceIProxy implements LoginServiceI {
      */
     @Override
     public LoginResp doLogin(LoginReq loginReq) throws Exception {
-        if (Strings.isEmpty(loginReq.getLoginWay())) {
+        if (loginReq.getLoginWay() == null) {
             log.info(LogFormat.formatMsg("LoginServiceIProxy.login", "login way is null.." + loginReq.toJsonStr(), ""));
-            return new LoginResp(SUCCESS);
+            return new LoginResp(LOGIN_WAY_ERROR);
         }
-        LoginHandler loginHandler = loginFactory.getLoginHandler(loginReq.getLoginWay());
-        if (loginHandler == null) {
+        LoginService loginService = LoginWayFactory.getLoginService(loginReq.getLoginWay());
+        if (loginService == null) {
             log.info(LogFormat.formatMsg("LoginServiceIProxy.doLogin", "get LoginHandler is null..", ""));
             return new LoginResp();
         }
-        LoginResp loginResp = loginHandler.loginMethod(loginReq);
+        LoginResp loginResp = loginService.doLogin(loginReq);
         return loginResp;
     }
 

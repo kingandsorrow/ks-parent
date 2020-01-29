@@ -16,11 +16,10 @@ import top.ks.sso.consumer.req.SsoUserReq;
 import top.ks.sso.consumer.resp.LoginOutResp;
 import top.ks.sso.consumer.resp.LoginResp;
 import top.ks.sso.consumer.resp.SsoUserResp;
+import top.ks.sso.consumer.util.LoginUtil;
 import top.ks.sso.core.help.LoginFactory;
 import top.ks.sso.core.util.CookieUtil;
-import top.ks.sso.core.util.LoginUtil;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
@@ -40,11 +39,8 @@ import java.net.URLDecoder;
  */
 @RestController
 public class LoginController {
-    @Resource(name = "ossLoginServiceI")
-    private LoginServiceI ossLoginServiceI;
 
-    @Resource(name = "clientLoginServiceI")
-    private LoginServiceI clientLoginServiceI;
+
     private static final Log log = LogFactory.getLog(LoginController.class);
 
     @RequestMapping("toLogin")
@@ -54,7 +50,6 @@ public class LoginController {
         String redirectUrl = request.getParameter(Const.REDIRECT_URL);
         if (Strings.isNotEmpty(redirectUrl)) {
             redirectUrl = URLDecoder.decode(request.getParameter(Const.REDIRECT_URL), "UTF-8");
-            request.getSession().setAttribute(Const.SESSION_REDIRECT_URL, redirectUrl);
         }
         //2.如果token为空则直接跳到登录页
         if (Strings.isEmpty(token)) {
@@ -87,12 +82,14 @@ public class LoginController {
             LoginServiceI loginServiceI = LoginFactory.getLoginServiceI(loginFrom);
             if (loginServiceI == null) {
                 redirectAttributes.addAttribute("errorMsg", "获取登录方式失败");
+                redirectAttributes.addAttribute(LoginFactory.LOGIN_FROM_PAR, loginFrom);
                 redirectAttributes.addAttribute(Const.REDIRECT_URL, request.getParameter(Const.REDIRECT_URL));
                 return "redirect:/toLogin";
             }
             //3.调用登录接口
             LoginResp loginResp = loginServiceI.doLogin(loginReq);
             if (!loginResp.respSuc()) {
+                redirectAttributes.addAttribute(LoginFactory.LOGIN_FROM_PAR, loginFrom);
                 redirectAttributes.addAttribute("errorMsg", loginResp.getErrMsg());
                 redirectAttributes.addAttribute(Const.REDIRECT_URL, request.getParameter(Const.REDIRECT_URL));
                 return "redirect:/toLogin";
@@ -117,7 +114,16 @@ public class LoginController {
 
     @RequestMapping("/loginOut")
     public String loginOut(LoginReq loginReq, Model model, HttpServletRequest request, HttpServletResponse response, RedirectAttributes redirectAttributes) throws UnsupportedEncodingException {
-        //1.从cookie获取token,调用dubbo接口从redis清除用户数据
+        //1.获取登录方式
+        int loginFrom = loginReq.getLoginFrom();
+        //2. 查询登录方式
+        LoginServiceI loginServiceI = LoginFactory.getLoginServiceI(loginFrom);
+        if (loginServiceI == null) {
+            redirectAttributes.addAttribute("errorMsg", "注销失败");
+            redirectAttributes.addAttribute(Const.REDIRECT_URL, request.getParameter(Const.REDIRECT_URL));
+            return "";
+        }
+        //3.从cookie获取token,调用dubbo接口从redis清除用户数据
         String token = CookieUtil.getValue(request, Const.TOKEN);
         if (Strings.isEmpty(token)) {
             log.info(LogFormat.formatMsg("LoginController.loginOut", "token is empty and redirect login..", ""));

@@ -1,17 +1,25 @@
 package top.ks.oss.web.interceptor;
 
+import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.fastjson.JSON;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
+import top.ks.common.util.LogFormat;
 import top.ks.common.util.ResponseEntity;
+import top.ks.common.util.Strings;
+import top.ks.oss.web.util.HttpUtil;
+import top.ks.sso.consumer.LoginServiceI;
+import top.ks.sso.consumer.req.SsoUserReq;
+import top.ks.sso.consumer.resp.SsoUserResp;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Map;
 
 import static top.ks.common.enums.ResultStatus.LOGIN_EXPIRE;
 
@@ -29,8 +37,9 @@ import static top.ks.common.enums.ResultStatus.LOGIN_EXPIRE;
 @Component
 public class LoginInterceptor implements HandlerInterceptor {
     private static final Log log = LogFactory.getLog(LoginInterceptor.class);
-    /*@Reference(version = "${demo.service.version}", url = "dubbo://localhost:9093")
-    private OperatorServiceI operatorServiceI;*/
+    @Reference(version = "${dubbo.service.version}", group = "${dubbo.group}", interfaceName = "ossLoginServiceI")
+    private LoginServiceI loginServiceI;
+
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -41,9 +50,11 @@ public class LoginInterceptor implements HandlerInterceptor {
             setInvalidResp(response);
             return false;
         }
-        CheckTokenResp checkTokenResp = operatorServiceI.checkToken(token);
-        if (!checkTokenResp.respSuc()) {
-            log.info(LogFormat.formatMsg("LoginInterceptor.preHandle", "checkTokenResp is::" + JSON.toJSONString(checkTokenResp), ""));
+        SsoUserReq ssoUserReq = new SsoUserReq();
+        ssoUserReq.setToken(token);
+        SsoUserResp ssoUserResp = loginServiceI.getUserByToken(ssoUserReq);
+        if (!ssoUserResp.respSuc()) {
+            log.info(LogFormat.formatMsg("LoginInterceptor.preHandle", "checkTokenResp is::" + JSON.toJSONString(ssoUserResp), ""));
             setInvalidResp(response);
             return false;
         }*/

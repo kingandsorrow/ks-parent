@@ -2,7 +2,7 @@ package top.ks.sso.core.help;
 
 import top.ks.common.util.SpringHelper;
 import top.ks.sso.consumer.LoginServiceI;
-import top.ks.sso.core.util.LoginUtil;
+import top.ks.sso.consumer.util.LoginUtil;
 
 public class LoginFactory {
 
@@ -30,4 +30,5 @@ public class LoginFactory {
                 return SpringHelper.getBean(CLIENT_LOGIN_ID);
         }
     }
+
 }
