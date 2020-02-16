@@ -13,7 +13,7 @@ package top.ks.common.distributedlock;
  * Copyright KS 2018/12/9
  */
 public class ThreadA extends Thread {
-    private Service service;
+    /*private Service service;
 
     public ThreadA(Service service) {
         this.service = service;
@@ -22,7 +22,7 @@ public class ThreadA extends Thread {
     @Override
     public void run() {
         service.seckill();
-    }
+    }*/
 }
 
 

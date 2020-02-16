@@ -6,6 +6,7 @@ import org.apache.commons.logging.LogFactory;
 import top.ks.common.util.*;
 
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
@@ -75,5 +76,27 @@ public class BasicController {
         return object;
     }
 
+    /**
+     * @param :
+     * @return :
+     * @Method :
+     * @Description : 处理响应结果
+     * @author : birjc
+     * @CreateDate : 2019-10-28 20:25
+     */
+    public void resultString(String json, HttpServletResponse response, boolean des) {
+        response.setContentType("text/html");
+        response.setCharacterEncoding("utf-8");
+        try {
+            if (des) {
+                //TODO 处理响应结果加密的操作
+            }
+            response.getWriter().print(json);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 }

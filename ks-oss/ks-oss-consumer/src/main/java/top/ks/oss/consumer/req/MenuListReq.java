@@ -17,6 +17,7 @@ import top.ks.common.util.RequestEntity;
 public class MenuListReq extends RequestEntity {
 
     private String projectId;
+    private String token;
 
     public String getProjectId() {
         return projectId;
@@ -24,5 +25,13 @@ public class MenuListReq extends RequestEntity {
 
     public void setProjectId(String projectId) {
         this.projectId = projectId;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }

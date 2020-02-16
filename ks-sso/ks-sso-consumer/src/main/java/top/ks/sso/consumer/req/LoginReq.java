@@ -1,6 +1,7 @@
 package top.ks.sso.consumer.req;
 
 
+import org.springframework.beans.factory.annotation.Value;
 import top.ks.common.util.RequestEntity;
 
 /**
@@ -31,6 +32,12 @@ public class LoginReq extends RequestEntity {
     private int loginFrom;
     //工程id
     private String projectId;
+
+    private String ossAPiKey;
+
+    private String captcha;
+
+    private boolean redisCache;
 
     public String getLoginName() {
         return loginName;
@@ -86,5 +93,29 @@ public class LoginReq extends RequestEntity {
 
     public void setProjectId(String projectId) {
         this.projectId = projectId;
+    }
+
+    public String getOssAPiKey() {
+        return ossAPiKey;
+    }
+
+    public void setOssAPiKey(String ossAPiKey) {
+        this.ossAPiKey = ossAPiKey;
+    }
+
+    public String getCaptcha() {
+        return captcha;
+    }
+
+    public void setCaptcha(String captcha) {
+        this.captcha = captcha;
+    }
+
+    public boolean isRedisCache() {
+        return redisCache;
+    }
+
+    public void setRedisCache(boolean redisCache) {
+        this.redisCache = redisCache;
     }
 }

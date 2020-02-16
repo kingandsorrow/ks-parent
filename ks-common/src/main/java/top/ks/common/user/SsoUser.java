@@ -21,6 +21,8 @@ public class SsoUser implements Serializable {
 
     private String userName;
 
+    private String projectId;
+
     private String version;
 
     private int expireMinite;
@@ -65,5 +67,13 @@ public class SsoUser implements Serializable {
 
     public void setExpireFreshTime(long expireFreshTime) {
         this.expireFreshTime = expireFreshTime;
+    }
+
+    public String getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(String projectId) {
+        this.projectId = projectId;
     }
 }

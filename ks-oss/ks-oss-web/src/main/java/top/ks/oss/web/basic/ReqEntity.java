@@ -1,15 +1,16 @@
 package top.ks.oss.web.basic;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.Serializable;
 
 /**
  * Created by jason on 2016/12/27.
  */
-public class ReqEntity {
+public class ReqEntity implements Serializable {
     private String serviceIName;
     private String methodName;
     private String content;
-    private HttpServletRequest request;
+    private String t;
 
     public String getMethodName() {
         return methodName;
@@ -35,11 +36,11 @@ public class ReqEntity {
         this.serviceIName = serviceIName;
     }
 
-    public HttpServletRequest getRequest() {
-        return request;
+    public String getT() {
+        return t;
     }
 
-    public void setRequest(HttpServletRequest request) {
-        this.request = request;
+    public void setT(String t) {
+        this.t = t;
     }
 }

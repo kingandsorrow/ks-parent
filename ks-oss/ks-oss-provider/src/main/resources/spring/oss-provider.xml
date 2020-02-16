@@ -4,7 +4,9 @@
        xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
-    <dubbo:service interface="top.ks.oss.consumer.OperatorServiceI" ref="operatorServiceIProxy"/>
+    <dubbo:service interface="top.ks.oss.consumer.OperatorServiceI" ref="operatorServiceIProxy" timeout="3000" retries="0"/>
 
-    <dubbo:service interface="top.ks.oss.consumer.PermissionServiceI" ref="permissionServiceIProxy"/>
+    <dubbo:service interface="top.ks.oss.consumer.PermissionServiceI" ref="permissionServiceIProxy" timeout="3000" retries="0"/>
+
+    <dubbo:service interface="top.ks.oss.consumer.MenuServiceI" ref="menuServiceIProxy" timeout="3000" retries="0"/>
 </beans>

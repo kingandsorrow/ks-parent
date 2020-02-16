@@ -19,4 +19,6 @@ public interface UserJoinMapper {
     int updateByPrimaryKey(UserJoin record);
 
     List<UserJoin> selectListByTime(@Param("startTime") String startTime, @Param("endTime") String endTime);
+
+    String selectOneName(@Param("id")String id);
 }

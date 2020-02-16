@@ -1,7 +1,13 @@
 package top.ks.sso.provider.oss;
 
+import cn.hutool.core.bean.BeanUtil;
+import com.alibaba.fastjson.JSON;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.Jwts;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import top.ks.common.user.SsoUser;
 import top.ks.common.util.LogFormat;
@@ -21,6 +27,10 @@ import top.ks.sso.provider.database.service.LoginService;
 import top.ks.sso.provider.factory.LoginWayFactory;
 
 import javax.annotation.Resource;
+import javax.xml.bind.DatatypeConverter;
+
+import java.util.List;
+import java.util.Set;
 
 import static top.ks.common.enums.ResultStatus.*;
 
@@ -43,6 +53,10 @@ public class OssLoginServiceIProxy implements LoginServiceI {
     private static final Log log = LogFactory.getLog(OssLoginServiceIProxy.class);
     @Resource
     private RedisService redisService;
+    @Resource
+    private LoginWayFactory loginWayFactory;
+    @Value("${oss.api.key}")
+    private String ossAPiKey;
 
     /**
      * @param :
@@ -54,14 +68,15 @@ public class OssLoginServiceIProxy implements LoginServiceI {
      */
     @Override
     public LoginResp doLogin(LoginReq loginReq) throws Exception {
+        loginReq.setOssAPiKey(ossAPiKey);
         if (loginReq.getLoginWay() == null) {
             log.info(LogFormat.formatMsg("LoginServiceIProxy.login", "login way is null.." + loginReq.toJsonStr(), ""));
             return new LoginResp(LOGIN_WAY_ERROR);
         }
-        LoginService loginService = LoginWayFactory.getLoginService(loginReq.getLoginWay());
+        LoginService loginService = loginWayFactory.getLoginService(loginReq.getLoginWay());
         if (loginService == null) {
             log.info(LogFormat.formatMsg("LoginServiceIProxy.doLogin", "get LoginHandler is null..", ""));
-            return new LoginResp();
+            return new LoginResp(LOGIN_WAY_ERROR);
         }
         LoginResp loginResp = loginService.doLogin(loginReq);
         return loginResp;
@@ -69,21 +84,38 @@ public class OssLoginServiceIProxy implements LoginServiceI {
 
     @Override
     public SsoUserResp getUserByToken(SsoUserReq ssoUserReq) {
-        if (Strings.isEmpty(ssoUserReq.getToken())) {
+        String token = ssoUserReq.getToken();
+        if (Strings.isEmpty(token)) {
             log.info(LogFormat.formatMsg("LoginServiceIProxy.getUserByToken", "token is empty.." + ssoUserReq.toJsonStr(), ""));
             return new SsoUserResp(PARAM_ERROR);
         }
-        SsoUser ssoUser = redisService.get(SsoKey.ssoUserToken, ssoUserReq.getToken(), SsoUser.class);
-        if (ssoUser != null) {
-            if ((System.currentTimeMillis() - ssoUser.getExpireFreshTime()) > ssoUser.getExpireMinite() / 2) {
-                ssoUser.setExpireFreshTime(System.currentTimeMillis());
-                redisService.set(SsoKey.ssoUserToken, ssoUserReq.getToken(), ssoUser);
+        if (ssoUserReq.isRedisCache()) {
+            SsoUser ssoUser = redisService.get(SsoKey.ssoUserToken, ssoUserReq.getToken(), SsoUser.class);
+            if (ssoUser == null) {
+                return new SsoUserResp(LOGIN_EXPIRE);
             }
+        }
+        try {
+            long startTime = System.currentTimeMillis();
+            Claims claims = Jwts.parser()
+                    .setSigningKey(DatatypeConverter.parseBase64Binary(ossAPiKey))
+                    .parseClaimsJws(token).getBody();
+            String subject = claims.getSubject();
+            SsoUser ssoUser = JSON.parseObject(subject, SsoUser.class);
+            long endTime = System.currentTimeMillis();
+            log.info(String.format("birjc OssLoginServiceIProxy.getUserByToken:: %s, %s", "spend token time is.." + (endTime - startTime), ""));
             SsoUserResp ssoUserResp = new SsoUserResp(SUCCESS);
             ssoUserResp.setSsoUser(ssoUser);
             return ssoUserResp;
+        } catch (ExpiredJwtException ex) {
+            log.info(LogFormat.formatMsg("OperatorServiceIProxy.checkToken", "token is expire::" + token, ""));
+            return new SsoUserResp(TOKEN_EXPIRE);
+        } catch (Exception e) {
+            log.error("system exception:", e);
+            log.info(LogFormat.formatMsg("OperatorServiceIProxy.checkToken", "system error::" + e.getMessage(), ""));
+            return new SsoUserResp(SYSTEM_ERROR);
         }
-        return new SsoUserResp(DATA_NOT_EXSIT);
+
     }
 
     /**

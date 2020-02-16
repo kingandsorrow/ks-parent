@@ -2,9 +2,9 @@ package top.ks.sso.web.controller;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import top.ks.common.constant.Const;
 import top.ks.common.util.LogFormat;
@@ -37,30 +37,32 @@ import java.net.URLDecoder;
  * @version 1.0.0
  * Copyright KS 2018/12/14
  */
-@RestController
+@Controller
 public class LoginController {
 
 
     private static final Log log = LogFactory.getLog(LoginController.class);
 
     @RequestMapping("toLogin")
-    public String toLogin(HttpServletRequest request, HttpServletResponse response, Model model) throws UnsupportedEncodingException {
+    public String toLogin(HttpServletRequest request, HttpServletResponse response, Model model) throws UnsupportedEncodingException, ClassNotFoundException {
         //1.获取token并且设置返回地址到session中
         String token = CookieUtil.getValue(request, Const.TOKEN) == null ? request.getParameter(Const.TOKEN) : CookieUtil.getValue(request, Const.TOKEN);
         String redirectUrl = request.getParameter(Const.REDIRECT_URL);
+        String redirectStr = getRedirectStr(request);
         if (Strings.isNotEmpty(redirectUrl)) {
             redirectUrl = URLDecoder.decode(request.getParameter(Const.REDIRECT_URL), "UTF-8");
+            request.getSession().setAttribute(Const.SESSION_REDIRECT_URL, redirectUrl);
         }
         //2.如果token为空则直接跳到登录页
         if (Strings.isEmpty(token)) {
             CookieUtil.remove(request, response, Const.TOKEN);
             model.addAttribute("errorMsg", request.getParameter("errorMsg"));
             model.addAttribute(Const.REDIRECT_URL, request.getParameter(Const.REDIRECT_URL));
-            return "login";
+            return redirectStr;
         }
         //3.获取登录来源，并且查询是否是登录状态
         int loginFrom = request.getParameter(LoginFactory.LOGIN_FROM_PAR) == null ? LoginUtil.LOGIN_FROM_ZERO : Integer.parseInt((String) request.getParameter(LoginFactory.LOGIN_FROM_PAR));
-        LoginServiceI loginServiceI = LoginFactory.getLoginServiceI(loginFrom);
+        LoginServiceI loginServiceI = LoginFactory.getLoginServiceI(loginFrom + "");
         SsoUserReq ssoUserReq = new SsoUserReq();
         ssoUserReq.setToken(token);
         SsoUserResp ssoUserResp = loginServiceI.getUserByToken(ssoUserReq);
@@ -73,13 +75,27 @@ public class LoginController {
         return "redirect:/";
     }
 
+    /**
+     * @param :
+     * @return :
+     * @Method :
+     * @Description : 获取跳转地址，页面地址，是后端登录还是前端登录
+     * @author : birjc
+     * @CreateDate : 2020-01-30 11:40
+     */
+    private String getRedirectStr(HttpServletRequest request) {
+        String loginCode = request.getParameter("loginCode");
+        loginCode = loginCode == null ? "oss" : loginCode;
+        return loginCode + "Login";
+    }
+
     @RequestMapping("/doLogin")
     public String dologin(LoginReq loginReq, Model model, HttpServletRequest request, HttpServletResponse response, RedirectAttributes redirectAttributes) {
         try {
             //1.判断是否登录来源（oss,client）
             int loginFrom = loginReq.getLoginFrom();
             //2. 查询登录方式
-            LoginServiceI loginServiceI = LoginFactory.getLoginServiceI(loginFrom);
+            LoginServiceI loginServiceI = LoginFactory.getLoginServiceI(loginFrom + "");
             if (loginServiceI == null) {
                 redirectAttributes.addAttribute("errorMsg", "获取登录方式失败");
                 redirectAttributes.addAttribute(LoginFactory.LOGIN_FROM_PAR, loginFrom);
@@ -100,6 +116,7 @@ public class LoginController {
             //5、登录成功，跳转回跳地址
             String redirectUrl = (String) request.getSession().getAttribute(Const.SESSION_REDIRECT_URL);
             if (Strings.isNotEmpty(redirectUrl)) {
+
                 String redirectUrlFinal = redirectUrl + "?" + Const.TOKEN + "=" + loginResp.getToken();
                 return "redirect:" + redirectUrlFinal;
             } else {
@@ -108,16 +125,16 @@ public class LoginController {
         } catch (Exception e) {
             log.error("system exception:", e);
             log.info(LogFormat.formatMsg("LoginController.dologin", "system error::" + e.getMessage(), ""));
+            return "redirect:/toLogin";
         }
-        return null;
     }
 
     @RequestMapping("/loginOut")
-    public String loginOut(LoginReq loginReq, Model model, HttpServletRequest request, HttpServletResponse response, RedirectAttributes redirectAttributes) throws UnsupportedEncodingException {
+    public String loginOut(LoginReq loginReq, Model model, HttpServletRequest request, HttpServletResponse response, RedirectAttributes redirectAttributes) throws UnsupportedEncodingException, ClassNotFoundException {
         //1.获取登录方式
         int loginFrom = loginReq.getLoginFrom();
         //2. 查询登录方式
-        LoginServiceI loginServiceI = LoginFactory.getLoginServiceI(loginFrom);
+        LoginServiceI loginServiceI = LoginFactory.getLoginServiceI(loginFrom + "");
         if (loginServiceI == null) {
             redirectAttributes.addAttribute("errorMsg", "注销失败");
             redirectAttributes.addAttribute(Const.REDIRECT_URL, request.getParameter(Const.REDIRECT_URL));

@@ -19,8 +19,6 @@ public class SsoResp extends ResponseEntity {
 
     private String loginUrl;
 
-    public SsoResp(ResultStatus userNotLogin) {
-    }
 
     public SsoResp(String errCode) {
         super(errCode);
@@ -28,6 +26,10 @@ public class SsoResp extends ResponseEntity {
 
     public SsoResp(String errCode, String errMsg) {
         super(errCode, errMsg);
+    }
+
+    public SsoResp(ResultStatus resultStatus) {
+        super(resultStatus);
     }
 
     public String getLoginUrl() {

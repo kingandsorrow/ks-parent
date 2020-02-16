@@ -176,7 +176,6 @@ public class OperatorServiceIProxy implements OperatorServiceI {
             checkTokenResp.setOperatorDeatilBean(operatorDeatilBean);
             List<KsFunctionBean> menuList = initMenuList(operatorDeatil.getKsFunctionList());
             Set<String> permissions = initPermissions(operatorDeatil.getKsFunctionList());
-            operatorDeatilBean.setMenuList(menuList);
             checkTokenResp.setPermissions(permissions);
             return checkTokenResp;
         } catch (ExpiredJwtException ex) {
@@ -259,14 +258,14 @@ public class OperatorServiceIProxy implements OperatorServiceI {
 
     @Override
     public MenuListResp menuList(MenuListReq menuListReq) {
-        List<KsFunction> ksFunctionList = ksFunctionMapper.selectAllList(menuListReq.getProjectId());
+       /* List<KsFunction> ksFunctionList = ksFunctionMapper.selectAllList(menuListReq.getProjectId());
         if (CollUtil.isEmpty(ksFunctionList)) {
             log.info(LogFormat.formatMsg("OperatorServiceIProxy.menuList", "ksFunctionList is empty..", ""));
             return new MenuListResp(SUCCESS);
         }
-        List<KsFunctionBean> ksFunctionBeans = convertMenuList(ksFunctionList);
+        List<KsFunctionBean> ksFunctionBeans = convertMenuList(ksFunctionList);*/
         MenuListResp menuListResp = new MenuListResp(SUCCESS);
-        menuListResp.setKsFunctionBeans(ksFunctionBeans);
+        /*menuListResp.setKsFunctionBeans(ksFunctionBeans);*/
         return menuListResp;
     }
 
@@ -433,7 +432,7 @@ public class OperatorServiceIProxy implements OperatorServiceI {
                 .setIssuedAt(now)
                 .setSubject(subject)
                 .setIssuer(issuer)
-                .signWith(signatureAlgorithm, signingKey);
+                .signWith(signingKey, signatureAlgorithm);
 
 //if it has been specified, let's add the expiration
         if (ttlMillis >= 0) {

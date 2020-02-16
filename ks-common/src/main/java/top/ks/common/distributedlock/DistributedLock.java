@@ -1,9 +1,9 @@
 package top.ks.common.distributedlock;
 
-import redis.clients.jedis.Jedis;
+/*import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.Transaction;
-import redis.clients.jedis.exceptions.JedisException;
+import redis.clients.jedis.exceptions.JedisException;*/
 
 import java.util.List;
 import java.util.UUID;
@@ -22,21 +22,21 @@ import java.util.UUID;
  */
 public class DistributedLock {
 
-    private final JedisPool jedisPool;
+   /* private final JedisPool jedisPool;
 
     public DistributedLock(JedisPool jedisPool) {
         this.jedisPool = jedisPool;
     }
 
 
-    /**
+    *//**
      * 加锁
      *
      * @param lockName       锁的key
      * @param acquireTimeout 获取超时时间
      * @param timeout        锁的超时时间
      * @return 锁标识
-     */
+     *//*
     public String lockWithTimeout(String lockName, long acquireTimeout, long timeout, String threadName) {
         Jedis conn = null;
         String retIdentifier = null;
@@ -82,13 +82,13 @@ public class DistributedLock {
         return retIdentifier;
     }
 
-    /**
+    *//**
      * 释放锁
      *
      * @param lockName   锁的key
      * @param identifier 释放锁的标识
      * @return
-     */
+     *//*
     public boolean releaseLock(String lockName, String identifier) {
         Jedis conn = null;
         String lockKey = "lock:" + lockName;
@@ -119,6 +119,6 @@ public class DistributedLock {
             }
         }
         return retFlag;
-    }
+    }*/
 }
 

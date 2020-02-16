@@ -55,6 +55,8 @@
         <netty-all.version>4.1.20.Final</netty-all.version>
         <thumbnailator.version>0.4.8</thumbnailator.version>
         <junit.version>4.12</junit.version>
+        <lombok.version>1.16.18</lombok.version>
+        <joda-time.version>2.9.2</joda-time.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -331,6 +333,16 @@
                 <groupId>top.ks</groupId>
                 <artifactId>ks-oss-consumer</artifactId>
                 <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>joda-time</groupId>
+                <artifactId>joda-time</artifactId>
+                <version>${joda-time.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

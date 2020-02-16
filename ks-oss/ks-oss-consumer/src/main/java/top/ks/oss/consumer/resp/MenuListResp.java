@@ -3,6 +3,7 @@ package top.ks.oss.consumer.resp;
 import top.ks.common.enums.ResultStatus;
 import top.ks.common.util.ResponseEntity;
 import top.ks.oss.consumer.bean.KsFunctionBean;
+import top.ks.oss.consumer.bean.OperatorDeatilBean;
 
 import java.util.List;
 
@@ -20,15 +21,7 @@ import java.util.List;
  */
 public class MenuListResp extends ResponseEntity {
 
-    private List<KsFunctionBean> ksFunctionBeans;
-
-    public List<KsFunctionBean> getKsFunctionBeans() {
-        return ksFunctionBeans;
-    }
-
-    public void setKsFunctionBeans(List<KsFunctionBean> ksFunctionBeans) {
-        this.ksFunctionBeans = ksFunctionBeans;
-    }
+    private OperatorDeatilBean operatorDeatilBean;
 
     public MenuListResp() {
     }
@@ -43,5 +36,13 @@ public class MenuListResp extends ResponseEntity {
 
     public MenuListResp(String errCode, String errMsg) {
         super(errCode, errMsg);
+    }
+
+    public OperatorDeatilBean getOperatorDeatilBean() {
+        return operatorDeatilBean;
+    }
+
+    public void setOperatorDeatilBean(OperatorDeatilBean operatorDeatilBean) {
+        this.operatorDeatilBean = operatorDeatilBean;
     }
 }

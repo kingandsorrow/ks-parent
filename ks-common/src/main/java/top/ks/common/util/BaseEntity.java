@@ -32,9 +32,11 @@ import java.util.Map;
  * @version 1.0
  * @since 1.0
  */
-public abstract class BaseEntity implements Serializable,Cloneable {
+public abstract class BaseEntity implements Serializable, Cloneable {
 
     public static final long serialVersionUID = 8339499669797253682L;
+
+    protected String projectId;
 
     /**
      * toString方法，返回属性名称及值
@@ -46,27 +48,27 @@ public abstract class BaseEntity implements Serializable,Cloneable {
         final StringBuilder result = new StringBuilder(getClass().getSimpleName()).append("@").append(Integer.toHexString(hashCode())).append(":");
         try {
 
-        	 String fieldName;
-             Object resultObj;
+            String fieldName;
+            Object resultObj;
 
-        	PropertyDescriptor[] descriptors = ReflectUtils.getBeanProperties(this.getClass());
+            PropertyDescriptor[] descriptors = ReflectUtils.getBeanProperties(this.getClass());
 
-        	if(descriptors != null){
+            if (descriptors != null) {
 
-        		for (PropertyDescriptor propertyDescriptor : descriptors) {
+                for (PropertyDescriptor propertyDescriptor : descriptors) {
 
-        			fieldName = propertyDescriptor.getName();
-        			Method readMethod = propertyDescriptor.getReadMethod();
-        			if(readMethod == null){
-        				continue;
-        			}
+                    fieldName = propertyDescriptor.getName();
+                    Method readMethod = propertyDescriptor.getReadMethod();
+                    if (readMethod == null) {
+                        continue;
+                    }
 
                     resultObj = readMethod.invoke(this);
                     if (resultObj != null && !"".equals(resultObj)) {
                         result.append("[").append(fieldName).append("]").append(resultObj).append(" ");
                     }
-				}
-        	}
+                }
+            }
 
         } catch (InvocationTargetException e) {
             e.printStackTrace();
@@ -113,9 +115,7 @@ public abstract class BaseEntity implements Serializable,Cloneable {
     /**
      * 根据字段转换json串
      *
-     * @param paramNames
-     *         实体类字段名称
-     *
+     * @param paramNames 实体类字段名称
      * @return json串
      */
     public String toJsonStr(String... paramNames) {
@@ -136,5 +136,13 @@ public abstract class BaseEntity implements Serializable,Cloneable {
      */
     public String toJsonStr() {
         return JsonEntityTransform.toJsonString(this);
+    }
+
+    public String getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(String projectId) {
+        this.projectId = projectId;
     }
 }

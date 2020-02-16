@@ -1,5 +1,8 @@
 package top.ks.redis;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
 /**
  * <b>类名称:</b>SsoKey$<br/>
  * <b>类注释:</b><br/>
@@ -18,7 +21,7 @@ public class SsoKey extends BasePrefix {
         super(expireSeconds, prefix);
     }
 
-    public static SsoKey ssoUserToken = new SsoKey(60 * 60 * 24 * 14, "sut");
+    public static SsoKey ssoUserToken = new SsoKey(30 * 60, "sut");
     public static SsoKey commodityDetail = new SsoKey(60, "cd");
 
     public static SsoKey commodityStock = new SsoKey(0, "cs");

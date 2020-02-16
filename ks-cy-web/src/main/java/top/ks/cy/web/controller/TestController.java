@@ -6,15 +6,22 @@ import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
 import org.apache.curator.framework.recipes.locks.InterProcessMutex;
 import org.apache.curator.retry.ExponentialBackoffRetry;
+import org.apache.poi.ss.usermodel.CellType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import top.ks.cy.web.database.mapper.UserJoinMapper;
+import top.ks.cy.web.util.Excel2007Utils;
+import top.ks.cy.web.util.ExcelExportData;
+import top.ks.cy.web.util.ExcelField;
 
+import javax.annotation.Resource;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.net.URLEncoder;
-import java.util.Date;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
+
 
 @RestController
 public class TestController {
@@ -22,9 +29,13 @@ public class TestController {
 
     private AtomicInteger b = new AtomicInteger(0);
 
+    @Resource
+    private UserJoinMapper userJoinMapper;
+
+
     @RequestMapping(value = "/downloadFile")
     public String downloads(HttpServletResponse response) throws Exception {
-        String path = "/Users/birongjun/Downloads/";
+        String path = "D:\\backup\\";
         String fileName = "ks-cy-web-1.0.0-SNAPSHOT.jar";
         //1、设置response 响应头
         response.reset();
@@ -85,24 +96,81 @@ public class TestController {
 
     @RequestMapping(value = "/downExcelFile")
     public String downExcelFile(HttpServletResponse response) throws Exception {
-        String path = "/Users/birongjun/Downloads/";
-        String fileName = "1.xlsx";
-        String filePreName = "部門卡片模版導出";
-        String afterHostName = ".xlsx";
-//        String chromeName1 = URLEncoder.encode(filePreName, "UTF-8");
-//        String chromeName1 = new String(filePreName.getBytes("gbk"), "ISO8859-1");
-        String chromeName1 = new String(filePreName.getBytes("utf-8"), "iso8859-1");
-        ServletOutputStream outputStream = response.getOutputStream();
-        //1、设置response 响应头
-        response.reset();
-        response.setCharacterEncoding("UTF-8");
-        response.setContentType("application/msexcel;charset=utf-8");
-        response.setHeader("Content-Disposition",
-                "attachment;fileName=" + chromeName1 + afterHostName);
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        outputStream.write(byteArrayOutputStream.toByteArray());
-        outputStream.close();
+        ByteArrayOutputStream byteArrayOutputStream = null;
+        ServletOutputStream outputStream = null;
+        try {
+            String filePreName = userJoinMapper.selectOneName("1");
+            String chromeName1 = new String(filePreName.getBytes("gbk"), "ISO8859-1");
+            String afterHostName = "xlsx";
+            outputStream = response.getOutputStream();
+            //1、设置response 响应头
+            response.reset();
+            response.setCharacterEncoding("UTF-8");
+            response.setContentType("application/msexcel;charset=utf-8");
+            response.setHeader("Content-Disposition",
+                    "attachment;fileName=" + chromeName1 + afterHostName);
+            Excel2007Utils excel2007Utils = new Excel2007Utils();
+            ExcelExportData excelExportData = handelExportData(chromeName1);
+            byteArrayOutputStream = excel2007Utils.export2Stream(excelExportData);
+            outputStream.write(byteArrayOutputStream.toByteArray());
+            outputStream.flush();
+            outputStream.close();
+            return null;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (byteArrayOutputStream != null) {
+                byteArrayOutputStream.flush();
+            }
+            if (outputStream != null) {
+                outputStream.close();
+            }
+        }
         return null;
     }
 
+
+    private ExcelExportData handelExportData(String filePreName) {
+        ExcelExportData excelExportData = new ExcelExportData();
+        excelExportData.setFileName(filePreName);
+        List<String[]> list = new ArrayList<>();
+        String[] strs = {"部門編碼", "部門名稱(简体中文)", "部門名稱(English)", "部門名稱(繁體中文)", "所属上级", "部門性質", "負責人", "分管領導", "狀態"};
+        list.add(strs);
+        excelExportData.setColumnNames(list);
+        List<String[]> listField = new ArrayList<>();
+        String[] strFields = {"code", "name", "name2", "name3", "parent_name", "depttype_name", "principal_name", "branchleader_name", "enable"};
+        listField.add(strFields);
+        List<ExcelField[]> excelFields = new ArrayList<>();
+        ExcelField[] excelFieldsArr = new ExcelField[9];
+        excelFieldsArr[0] = handelOneExcelField("code", false, false, null, CellType.STRING, null);
+        excelFieldsArr[1] = handelOneExcelField("name", false, false, null, CellType.STRING, null);
+        excelFieldsArr[2] = handelOneExcelField("name2", false, false, null, CellType.STRING, null);
+        excelFieldsArr[3] = handelOneExcelField("name3", false, false, null, CellType.STRING, null);
+        excelFieldsArr[4] = handelOneExcelField("parent_name", false, false, null, CellType.STRING, "请输入上级编码");
+        excelFieldsArr[5] = handelOneExcelField("depttype_name", false, false, null, CellType.STRING, null);
+        excelFieldsArr[6] = handelOneExcelField("principal_name", false, false, null, CellType.STRING, null);
+        excelFieldsArr[7] = handelOneExcelField("branchleader_name", false, false, null, CellType.STRING, null);
+        excelFieldsArr[8] = handelOneExcelField("enable", false, false, null, CellType.STRING, null);
+        excelFields.add(excelFieldsArr);
+        excelExportData.setFields(excelFields);
+        excelExportData.setFieldNames(listField);
+        LinkedHashMap<String, List<Object>> dataMap = new LinkedHashMap<>();
+        dataMap.put("DeptOrgVO(部门)", null);
+        excelExportData.setDataMap(dataMap);
+        LinkedHashMap<String, List<Map<String, Object>>> linkedHashMap = new LinkedHashMap<>();
+        linkedHashMap.put("DeptOrgVO(部门)", null);
+        excelExportData.setHeadersMap(linkedHashMap);
+        return excelExportData;
+    }
+
+    private ExcelField handelOneExcelField(String code, boolean b, boolean b1, String o, CellType cellType, String o1) {
+        ExcelField excelField = new ExcelField();
+        excelField.setFieldName(code);
+        excelField.setIsEnum(b);
+        excelField.setIsNull(b1);
+        excelField.setEnumString(o);
+        excelField.setCellType(cellType);
+        excelField.setMappingName(o1);
+        return excelField;
+    }
 }

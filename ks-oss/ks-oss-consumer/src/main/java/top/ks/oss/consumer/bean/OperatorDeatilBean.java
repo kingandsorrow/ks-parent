@@ -45,7 +45,7 @@ public class OperatorDeatilBean extends BaseEntity {
 
     private List<KsRoleBean> ksRoleList;
 
-    private List<KsFunctionBean> menuList;
+    private List<KsFunctionBean> ksFunctionList;
 
     public String getOperatorId() {
         return operatorId;
@@ -159,11 +159,11 @@ public class OperatorDeatilBean extends BaseEntity {
         this.ksRoleList = ksRoleList;
     }
 
-    public List<KsFunctionBean> getMenuList() {
-        return menuList;
+    public List<KsFunctionBean> getKsFunctionList() {
+        return ksFunctionList;
     }
 
-    public void setMenuList(List<KsFunctionBean> menuList) {
-        this.menuList = menuList;
+    public void setKsFunctionList(List<KsFunctionBean> ksFunctionList) {
+        this.ksFunctionList = ksFunctionList;
     }
 }

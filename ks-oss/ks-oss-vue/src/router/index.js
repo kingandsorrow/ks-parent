@@ -9,6 +9,7 @@ import Router from 'vue-router'
 import http from '@/utils/httpRequest'
 import {isURL} from '@/utils/validate'
 import {clearLoginInfo} from '@/utils'
+import {UrlSearch} from '@/utils/searchUrl'
 
 Vue.use(Router)
 
@@ -49,6 +50,7 @@ const mainRoutes = {
     }
   ],
   beforeEnter(to, from, next) {
+    debugger;
     let token = Vue.cookie.get('token')
     if (!token || !/\S/.test(token)) {
       clearLoginInfo()
@@ -59,7 +61,7 @@ const mainRoutes = {
 }
 
 const router = new Router({
-  mode: 'hash',
+  mode: 'history',
   scrollBehavior: () => ({y: 0}),
   isAddDynamicMenuRoutes: false, // 是否已经添加动态(菜单)路由
   routes: globalRoutes.concat(mainRoutes)
@@ -73,24 +75,38 @@ router.beforeEach((to, from, next) => {
     next()
   } else {
     let token = Vue.cookie.get('token')
+    if (token == null || token == '') {
+      token = UrlSearch("token");
+      if (token != null && token != '') {
+        Vue.cookie.set('token', token)
+      }
+    }
     console.log("get cookie token is..", token)
+    let contentObj = {
+      token: token
+    }
+    let dataObj = {
+      serviceIName: "menuServiceI",
+      methodName: "menuList",
+      content: JSON.stringify(contentObj)
+    };
+    let dataStr = JSON.stringify(dataObj);
+    console.log("dataObj:", dataStr);
     http({
-      url: http.adornUrl('/oss/checkToken'),
-      method: 'get',
+      url: http.adornUrl('oss/encrypt/handle'),
+      method: 'post',
       params: http.adornParams(),
-      data: {"token": token}
+      data: dataObj
     }).then(({data}) => {
       debugger;
       if (data && data.errCode === '0') {
-        //fnAddDynamicMenuRoutes(data.operatorDeatilBean.menuList)
+        fnAddDynamicMenuRoutes(data.operatorDeatilBean.ksFunctionList)
         router.options.isAddDynamicMenuRoutes = true
-/*
         sessionStorage.setItem('operatorDeatilBean', JSON.stringify(data.operatorDeatilBean));
-        sessionStorage.setItem('menuList', JSON.stringify(data.operatorDeatilBean.menuList || '[]'))
-        sessionStorage.setItem('permissions', JSON.stringify(data.permissions || '[]'))
-*/
+        sessionStorage.setItem('menuList', JSON.stringify(data.operatorDeatilBean.ksFunctionList || '[]'));
+        sessionStorage.setItem('permissions', JSON.stringify(data.permissions || '[]'));
         next({...to, replace: true})
-      } else if (data && data.errCode === "200008") { // 401, token失效
+      } else if (data && data.errCode === "30012") { // 401, token失效
         clearLoginInfo()
         router.push({name: 'login'})
       } else {
@@ -99,6 +115,7 @@ router.beforeEach((to, from, next) => {
         next()
       }
     }).catch((e) => {
+      debugger
       console.log(`%c${e} 请求菜单列表和权限失败，跳转至登录页！！`, 'color:blue')
       router.push({name: 'login'})
     })

@@ -1,13 +1,18 @@
 package top.ks.oss.web.controller;
 
+import com.alibaba.fastjson.JSON;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import top.ks.common.enums.ResultStatus;
 import top.ks.common.util.LogFormat;
 import top.ks.common.util.ResponseEntity;
+import top.ks.oss.consumer.req.MenuListReq;
 import top.ks.oss.web.basic.BasicController;
+import top.ks.oss.web.basic.ReqEntity;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -41,11 +46,11 @@ public class CenterController extends BasicController {
      * @CreateDate : 2019-10-22 19:53
      */
     @RequestMapping("encrypt/handle")
-    public void handle(String serviceIName, String methodName, HttpServletRequest request, HttpServletResponse response) {
-        String methodParam = request.getParameter("content");
+    public void handle(@RequestBody ReqEntity reqEntity, HttpServletRequest request, HttpServletResponse response) {
+        String methodParam = reqEntity.getContent();
         ResponseEntity responseEntity = null;
         try {
-            responseEntity = invokeDubbo(serviceIName, methodName, methodParam, response, true);
+            responseEntity = invokeDubbo(reqEntity.getServiceIName(), reqEntity.getMethodName(), methodParam, response, true);
         } catch (Exception e) {
             log.error("system exception:", e);
             log.info(LogFormat.formatMsg("CenterController.handle", "system error::" + e.getMessage(), ""));
@@ -55,28 +60,7 @@ public class CenterController extends BasicController {
     }
 
 
-    /**
-     * @param :
-     * @return :
-     * @Method :
-     * @Description : 处理响应结果
-     * @author : birjc
-     * @CreateDate : 2019-10-28 20:25
-     */
-    public void resultString(String json, HttpServletResponse response, boolean des) {
-        response.setContentType("text/html");
-        response.setCharacterEncoding("utf-8");
-        try {
-            if (des) {
-                //TODO 处理响应结果加密的操作
-            }
-            response.getWriter().print(json);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+
 
 
     /**
@@ -93,4 +77,13 @@ public class CenterController extends BasicController {
         resultString(responseEntity.toJsonStr(), response, true);
     }
 
+
+    public static void main(String[] args) {
+        MenuListReq menuListReq = new MenuListReq();
+        menuListReq.setToken("aaaa");
+        System.out.println(JSON.toJSONString(menuListReq));
+        String param = "{\"token\":\"aaaa\"}";
+        MenuListReq req = JSON.parseObject(param, MenuListReq.class);
+        System.out.println(req.toJsonStr());
+    }
 }

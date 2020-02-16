@@ -18,11 +18,21 @@ public class SsoUserReq extends RequestEntity {
 
     private String token;
 
+    private boolean redisCache;
+
     public String getToken() {
         return token;
     }
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public boolean isRedisCache() {
+        return redisCache;
+    }
+
+    public void setRedisCache(boolean redisCache) {
+        this.redisCache = redisCache;
     }
 }

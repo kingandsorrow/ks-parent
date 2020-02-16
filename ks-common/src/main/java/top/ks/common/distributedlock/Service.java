@@ -1,7 +1,7 @@
 package top.ks.common.distributedlock;
 
-import redis.clients.jedis.JedisPool;
-import redis.clients.jedis.JedisPoolConfig;
+/*import redis.clients.jedis.JedisPool;
+import redis.clients.jedis.JedisPoolConfig;*/
 
 /**
  * <b>类名称:</b>Service$<br/>
@@ -17,7 +17,7 @@ import redis.clients.jedis.JedisPoolConfig;
  */
 public class Service {
 
-    private static JedisPool pool = null;
+    /*private static JedisPool pool = null;
 
     private DistributedLock lock = new DistributedLock(pool);
 
@@ -46,5 +46,5 @@ public class Service {
         System.out.println(Thread.currentThread().getName() + "获得了锁");
         System.out.println(--n);
         lock.releaseLock("resource", identifier);
-    }
+    }*/
 }

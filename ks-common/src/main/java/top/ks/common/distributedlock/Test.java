@@ -14,10 +14,10 @@ package top.ks.common.distributedlock;
  */
 public class Test {
     public static void main(String[] args) {
-        Service service = new Service();
+        /*Service service = new Service();
         for (int i = 0; i < 12; i++) {
             ThreadA threadA = new ThreadA(service);
             threadA.start();
-        }
+        }*/
     }
 }

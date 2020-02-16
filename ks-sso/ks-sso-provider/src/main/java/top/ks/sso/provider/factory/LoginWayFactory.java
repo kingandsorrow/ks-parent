@@ -1,12 +1,20 @@
 package top.ks.sso.provider.factory;
 
+import org.springframework.stereotype.Component;
 import top.ks.common.util.SpringHelper;
 import top.ks.sso.consumer.util.LoginUtil;
 import top.ks.sso.provider.database.service.LoginService;
 
+import javax.annotation.Resource;
+import java.util.Map;
+
+@Component
 public class LoginWayFactory {
 
     public final static String ACCOUNT_LOGIN_SERVICE = "accountLoginServiceImpl";
+    @Resource
+    private Map<String, LoginService> loginServiceMap;
+
 
     /**
      * @param :
@@ -16,12 +24,7 @@ public class LoginWayFactory {
      * @author : birjc
      * @CreateDate : 2019-11-06 20:33
      */
-    public static LoginService getLoginService(int loginWay) {
-        switch (loginWay) {
-            case LoginUtil.LOGIN_WAY_ZERO:
-                return SpringHelper.getBean(ACCOUNT_LOGIN_SERVICE);
-            default:
-                return SpringHelper.getBean(ACCOUNT_LOGIN_SERVICE);
-        }
+    public LoginService getLoginService(int loginWay) {
+        return loginServiceMap.get(ACCOUNT_LOGIN_SERVICE);
     }
 }

@@ -128,4 +128,12 @@
             </if>
         </where>
     </select>
+
+    <!--根据时间查询列表-->
+    <select id="selectOneName" parameterType="String" resultType="String">
+        select
+        name
+        from ks_test
+        where test_id = #{id} limit 1
+    </select>
 </mapper>

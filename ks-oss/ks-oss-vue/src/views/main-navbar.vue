@@ -117,7 +117,7 @@
             method: 'post',
             data: this.$http.adornData()
           }).then(({data}) => {
-            if (data && data.errCode === '0000') {
+            if (data && data.errCode === '0') {
               clearLoginInfo()
               this.$router.push({name: 'login'})
             }

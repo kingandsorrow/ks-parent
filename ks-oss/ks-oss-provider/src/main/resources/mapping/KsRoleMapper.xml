@@ -105,8 +105,8 @@
   </update>
     <!--根据操作员查询角色列表-->
     <select id="selectByOperatorId" parameterType="map" resultMap="BaseResultMap">
-    select a.role_id, a.role_name from ks_role a left join ks_operator_role b on a.role_id = b.role_id
-    where b.operator_id = #{operatorId} and  b.project_id = #{projectId} and a.project_id = #{projectId}
+    select a.role_id, a.role_name from ks_role a left join ks_user_role b on a.role_id = b.role_id
+    where b.user_id = #{operatorId} and  b.project_id = #{projectId} and a.project_id = #{projectId}
   </select>
     <!--分页查询角色列表-->
     <select id="roleList" parameterType="map" resultMap="BaseResultMap">

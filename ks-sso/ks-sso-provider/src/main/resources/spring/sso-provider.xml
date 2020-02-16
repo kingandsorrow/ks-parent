@@ -4,9 +4,13 @@
        xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
-    <dubbo:service interface="top.ks.sso.consumer.LoginServiceI" ref="ossLoginServiceIProxy" group="oss_login"/>
+    <dubbo:service interface="top.ks.sso.consumer.LoginServiceI" ref="ossLoginServiceIProxy" group="oss_login"
+                   timeout="3000" retries="0"/>
 
-    <dubbo:service interface="top.ks.sso.consumer.LoginServiceI" ref="clientLoginServiceIProxy" group="client_login"/>
+    <dubbo:service interface="top.ks.sso.consumer.LoginServiceI" ref="clientLoginServiceIProxy" group="client_login"
+                   timeout="3000" retries="0"/>
 
+    <dubbo:service interface="top.ks.sso.consumer.OssUserServiceI" ref="ossUserServiceIProxy"
+                   timeout="3000" retries="0"/>
 
 </beans>

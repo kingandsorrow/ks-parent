@@ -241,4 +241,21 @@
             </if>
         </where>
     </select>
+    <!--查询list-->
+    <select id="selectList" resultMap="BaseResultMap" parameterType="map">
+        select
+        <include refid="Base_Column_List"/>
+        from ks_oss_user
+        <where>
+            <if test="nickName!=null and nickName!=''">
+                nick_name = #{nickName,jdbcType=VARCHAR}
+            </if>
+            <if test="projectId!=null and projectId!=''">
+                and project_id = #{projectId,jdbcType=VARCHAR}
+            </if>
+            <if test="orgId!=null and orgId!=''">
+                and org_id = #{orgId,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
 </mapper>

@@ -1,9 +1,5 @@
 package top.ks.sso.core.filter;
 
-import com.alibaba.dubbo.config.ApplicationConfig;
-import com.alibaba.dubbo.config.ReferenceConfig;
-import com.alibaba.dubbo.config.RegistryConfig;
-import com.alibaba.dubbo.config.utils.ReferenceConfigCache;
 import com.alibaba.fastjson.JSON;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -13,11 +9,11 @@ import top.ks.common.constant.Const;
 import top.ks.common.enums.ResultStatus;
 import top.ks.common.user.SsoUser;
 import top.ks.common.util.LogFormat;
-import top.ks.common.util.SpringHelper;
 import top.ks.common.util.Strings;
 import top.ks.sso.consumer.LoginServiceI;
 import top.ks.sso.consumer.req.SsoUserReq;
 import top.ks.sso.consumer.resp.SsoUserResp;
+import top.ks.sso.core.help.LoginFactory;
 import top.ks.sso.core.resp.SsoResp;
 import top.ks.sso.core.util.HttpUtil;
 import top.ks.sso.core.util.SsoWebLoginHelper;
@@ -105,7 +101,7 @@ public class SsoWebFilter extends HttpServlet implements Filter {
         ssoUserReq.setToken(cookieToken);
         LoginServiceI loginServiceI = null;
         try {
-            loginServiceI = getLoginServiceI(cookieToken);
+            loginServiceI = LoginFactory.getLoginServiceI(cookieToken);
         } catch (ClassNotFoundException e) {
             log.error(LogFormat.formatMsg("SsoWebFilter.doFilter", "get login ServiceI error..", e));
             resSSOJson(res, LOGINSERVICE_NOT_FOUND);
@@ -139,32 +135,7 @@ public class SsoWebFilter extends HttpServlet implements Filter {
         res.getWriter().println(JSON.toJSON(ssoResp));
     }
 
-    /**
-     * @param :
-     * @return :
-     * @Method :
-     * @Description :获取登录接口（Oss Client）
-     * @author : birjc
-     * @CreateDate : 2019-12-01 21:41
-     */
-    private LoginServiceI getLoginServiceI(String cookieToken) throws ClassNotFoundException {
 
-        ApplicationConfig application = new ApplicationConfig();
-        application.setName("ks-sso-provider");
-
-        RegistryConfig registry = new RegistryConfig();
-        registry.setAddress("127.0.0.1:2181");
-        registry.setProtocol("zookeeper");
-
-        ReferenceConfig<LoginServiceI> referenceConfig = new ReferenceConfig<>();
-        referenceConfig.setApplication(application);
-        referenceConfig.setRegistry(registry);
-        referenceConfig.setGroup("oss_login");
-        referenceConfig.setInterface(LoginServiceI.class);
-        referenceConfig.setVersion("1.0.0");
-        ReferenceConfigCache cache = ReferenceConfigCache.getCache();
-        return cache.get(referenceConfig);
-    }
 
     /**
      * @param :

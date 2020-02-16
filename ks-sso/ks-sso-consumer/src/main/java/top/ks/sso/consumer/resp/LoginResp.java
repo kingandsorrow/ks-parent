@@ -2,6 +2,7 @@ package top.ks.sso.consumer.resp;
 
 
 import top.ks.common.enums.ResultStatus;
+import top.ks.common.user.SsoUser;
 import top.ks.common.util.ResponseEntity;
 import top.ks.sso.consumer.bean.KsOssUserBean;
 
@@ -19,7 +20,7 @@ import top.ks.sso.consumer.bean.KsOssUserBean;
  */
 public class LoginResp extends ResponseEntity {
 
-    private KsOssUserBean ksUserBean;
+    private SsoUser ssoUser;
 
     private String token;
 
@@ -46,11 +47,11 @@ public class LoginResp extends ResponseEntity {
         this.token = token;
     }
 
-    public KsOssUserBean getKsUserBean() {
-        return ksUserBean;
+    public SsoUser getSsoUser() {
+        return ssoUser;
     }
 
-    public void setKsUserBean(KsOssUserBean ksUserBean) {
-        this.ksUserBean = ksUserBean;
+    public void setSsoUser(SsoUser ssoUser) {
+        this.ssoUser = ssoUser;
     }
 }
