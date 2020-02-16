@@ -38,7 +38,7 @@
         <pagehelper.version>1.2.3</pagehelper.version>
         <druid.version>1.0.29</druid.version>
         <!--jdk 1.7 4.3.13.RELEASE-->
-        <spring.version>5.0.2.RELEASE</spring.version>
+        <spring.version>5.2.3.RELEASE</spring.version>
         <jjwt.version>0.10.5</jjwt.version>
         <hutool.version>4.1.14</hutool.version>
         <rocket.version>4.4.0</rocket.version>
