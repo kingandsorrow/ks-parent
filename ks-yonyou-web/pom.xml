@@ -11,7 +11,11 @@
 
     <artifactId>ks-yonyou-web</artifactId>
     <properties>
-        <mw.version>5.1.1-RELEASE</mw.version>
+        <mwclient.version>5.2.1-RELEASE</mwclient.version>
+        <iris-springboot-support.version>5.2.1-RELEASE</iris-springboot-support.version>
+        <diwork-sdk.version>4.0.6-SNAPSHOT</diwork-sdk.version>
+        <uretail.version>1.0.14-u8cdev-SNAPSHOT</uretail.version>
+        <yonyou-mdf-service.version>0.0.14-mdf-SNAPSHOT</yonyou-mdf-service.version>
     </properties>
 
     <dependencies>
@@ -38,18 +42,83 @@
             <scope>test</scope>
         </dependency>
 
-        <!--yonyo dependency start-->
+        <!--yonyou-start RPC -->
+        <dependency>
+            <groupId>com.yonyou.cloud.middleware</groupId>
+            <artifactId>mwclient</artifactId>
+            <version>${mwclient.version}</version>
+            <type>pom</type>
+        </dependency>
+
+
+        <dependency>
+            <groupId>com.yonyou.cloud.middleware</groupId>
+            <artifactId>iris-springboot-support</artifactId>
+            <version>${iris-springboot-support.version}</version>
+        </dependency>
+
         <dependency>
             <groupId>com.yonyou.iuap</groupId>
             <artifactId>iuap-org-api</artifactId>
             <version>2.1.0-SNAPSHOT</version>
         </dependency>
-        <!-- RPC -->
+
+
         <dependency>
-            <groupId>com.yonyou.cloud.middleware</groupId>
-            <artifactId>mwclient</artifactId>
-            <version>${mw.version}</version>
-            <type>pom</type>
+            <groupId>com.yonyou.diwork</groupId>
+            <artifactId>diwork-pub-auth</artifactId>
+            <version>${diwork-sdk.version}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>iuap-bd-translation-sdk</artifactId>
+                    <groupId>com.yonyou.iuap</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>iuap-generic</artifactId>
+                    <groupId>com.yonyou.iuap</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
+        <dependency>
+            <groupId>com.yonyoucloud</groupId>
+            <artifactId>uretail-pubrule</artifactId>
+            <version>${uretail.version}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>spring-rabbit</artifactId>
+                    <groupId>org.springframework.amqp</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>amqp-client</artifactId>
+                    <groupId>com.rabbitmq</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>spring-boot-starter-amqp</artifactId>
+                    <groupId>org.springframework.boot</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>iuap-cache</artifactId>
+                    <groupId>com.yonyou.iuap</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>iuap-bd-translation-sdk</artifactId>
+                    <groupId>com.yonyou.iuap</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>spring-data-redis</artifactId>
+                    <groupId>org.springframework.data</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>spring-boot-starter-data-redis</artifactId>
+                    <groupId>org.springframework.boot</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>mysql-connector-java</artifactId>
+                    <groupId>mysql</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <!--yonyou-end RPC-->
     </dependencies>
 </project>

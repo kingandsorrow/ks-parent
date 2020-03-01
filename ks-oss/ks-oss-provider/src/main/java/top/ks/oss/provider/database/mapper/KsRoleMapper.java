@@ -1,5 +1,6 @@
 package top.ks.oss.provider.database.mapper;
 
+import com.github.pagehelper.Page;
 import org.apache.ibatis.annotations.Param;
 import top.ks.oss.provider.database.model.KsRole;
 
@@ -20,7 +21,6 @@ public interface KsRoleMapper {
 
     List<KsRole> selectByOperatorId(@Param("operatorId") String operatorId, @Param("projectId") String projectId);
 
-    List<KsRole> roleList(@Param("roleName") String roleName, @Param("pageFrom") int pageFrom, @Param("pageSize") int pageSize);
+    Page<KsRole> roleList(@Param("roleName") String roleName, @Param("projectId") String projectId);
 
-    int selectCount(@Param("roleName") String roleName);
 }

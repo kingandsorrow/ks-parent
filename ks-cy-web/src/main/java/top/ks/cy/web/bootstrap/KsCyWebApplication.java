@@ -23,7 +23,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  */
 
 
-@EnableScheduling
 @EnableTransactionManagement
 @MapperScan("top.ks.cy.web.database.mapper")
 @SpringBootApplication(scanBasePackages = "top.ks.cy.web")

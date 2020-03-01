@@ -35,8 +35,8 @@ public class TestController {
 
     @RequestMapping(value = "/downloadFile")
     public String downloads(HttpServletResponse response) throws Exception {
-        String path = "D:\\backup\\";
-        String fileName = "ks-cy-web-1.0.0-SNAPSHOT.jar";
+        String path = "/Users/birongjun/Downloads/";
+        String fileName = "采购委托关系管理列表_CreateSQL_616973480136960_jinyidemotest.sql";
         //1、设置response 响应头
         response.reset();
         response.setCharacterEncoding("UTF-8");

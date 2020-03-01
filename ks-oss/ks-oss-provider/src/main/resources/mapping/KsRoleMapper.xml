@@ -115,19 +115,10 @@
             <if test="roleName!=null and roleName!=''">
                 role_name like CONCAT(CONCAT('%', #{roleName}), '%')
             </if>
-        </where>
-        order by create_time desc
-        <if test="pageSize!=0">
-            limit #{pageFrom},#{pageSize}
-        </if>
-    </select>
-    <!--分页查询角色列表-->
-    <select id="selectCount" parameterType="map" resultType="int">
-        select count(1) from ks_role
-        <where>
-            <if test="roleName!=null and roleName!=''">
-                role_name like CONCAT(CONCAT('%', #{roleName}), '%')
+            <if test="projectId!=null and projectId!=''">
+                and project_id = #{projectId,jdbcType=VARCHAR}
             </if>
         </where>
+        order by create_time desc
     </select>
 </mapper>

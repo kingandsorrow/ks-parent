@@ -22,7 +22,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 
 @EnableScheduling
-@SpringBootApplication(scanBasePackages = {"top.ks.yonyou", "com.yonyou.iuap", "com.yonyou.cloud"})
+@SpringBootApplication(scanBasePackages = {"top.ks.yonyou", "com.yonyou.iuap", "com.yonyou.cloud", "com.yonyou"})
 @SpringBootConfiguration
 public class KsYonyouWebApplication {
 

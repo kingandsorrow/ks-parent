@@ -79,7 +79,8 @@
                 'loginName': this.dataForm.userName,
                 'loginPassWord': this.dataForm.password,
                 'uuid': this.dataForm.uuid,
-                'captcha': this.dataForm.captcha
+                'captcha': this.dataForm.captcha,
+                'projectId':'0'
               })
             }).then(({data}) => {
               if (data && data.errCode === '0') {

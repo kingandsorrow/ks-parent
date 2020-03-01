@@ -30,8 +30,6 @@ public class LoginReq extends RequestEntity {
     private String token;
     //登录来源
     private int loginFrom;
-    //工程id
-    private String projectId;
 
     private String ossAPiKey;
 

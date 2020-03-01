@@ -4,11 +4,9 @@
        xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
-    <dubbo:reference id="operatorServiceI" interface="top.ks.oss.consumer.OperatorServiceI" check="false"
-                     version="1.0.0"/>
+    <dubbo:reference id="roleServiceI" interface="top.ks.oss.consumer.RoleServiceI" check="false"
+                     version="1.0.0" retries="0"/>
 
-    <dubbo:reference id="permissionServiceI" interface="top.ks.oss.consumer.PermissionServiceI" check="false"
-                     version="1.0.0"/>
     <dubbo:reference id="menuServiceI" interface="top.ks.oss.consumer.MenuServiceI" check="false"
                      version="1.0.0"/>
 </beans>
