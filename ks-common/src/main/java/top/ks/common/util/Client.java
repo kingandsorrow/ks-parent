@@ -51,8 +51,9 @@ public class Client {
         CopyOnWriteArrayList<String> copyOnWriteArrayList = new CopyOnWriteArrayList<String>();
         copyOnWriteArrayList.add("a");
 
-
+        String a="cccddd";
     }
+
 
 }
 

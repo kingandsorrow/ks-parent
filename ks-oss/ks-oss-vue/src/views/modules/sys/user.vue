@@ -119,7 +119,6 @@
       AddOrUpdate
     },
     activated() {
-      debugger;
       this.getDataList()
     },
     methods: {

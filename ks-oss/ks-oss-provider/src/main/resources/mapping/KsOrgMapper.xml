@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="top.ks.oss.provider.database.mapper.KsOrgMapper" >
+  <resultMap id="BaseResultMap" type="top.ks.oss.provider.database.model.KsOrg" >
+    <id column="org_id" property="orgId" jdbcType="VARCHAR" />
+    <result column="parent_id" property="parentId" jdbcType="VARCHAR" />
+    <result column="org_code" property="orgCode" jdbcType="VARCHAR" />
+    <result column="org_name" property="orgName" jdbcType="VARCHAR" />
+    <result column="shortname" property="shortname" jdbcType="VARCHAR" />
+    <result column="org_type" property="orgType" jdbcType="INTEGER" />
+    <result column="principal" property="principal" jdbcType="VARCHAR" />
+    <result column="enable" property="enable" jdbcType="INTEGER" />
+    <result column="effectivedate" property="effectivedate" jdbcType="TIMESTAMP" />
+    <result column="expirationdate" property="expirationdate" jdbcType="TIMESTAMP" />
+    <result column="locationid" property="locationid" jdbcType="VARCHAR" />
+    <result column="innercode" property="innercode" jdbcType="VARCHAR" />
+    <result column="language" property="language" jdbcType="VARCHAR" />
+    <result column="contact" property="contact" jdbcType="VARCHAR" />
+    <result column="telephone" property="telephone" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="creator" property="creator" jdbcType="VARCHAR" />
+    <result column="companytype" property="companytype" jdbcType="VARCHAR" />
+    <result column="sourceid" property="sourceid" jdbcType="VARCHAR" />
+    <result column="displayorder" property="displayorder" jdbcType="INTEGER" />
+    <result column="dr" property="dr" jdbcType="INTEGER" />
+    <result column="pubts" property="pubts" jdbcType="TIMESTAMP" />
+    <result column="isEnd" property="isend" jdbcType="INTEGER" />
+    <result column="level" property="level" jdbcType="INTEGER" />
+    <result column="parent_org_id" property="parentOrgId" jdbcType="VARCHAR" />
+    <result column="creator_id" property="creatorId" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="other_info" property="otherInfo" jdbcType="VARCHAR" />
+    <result column="project_id" property="projectId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    org_id, parent_id, org_code, org_name, shortname, org_type, principal, enable, effectivedate, 
+    expirationdate, locationid, innercode, language, contact, telephone, address, description, 
+    creator, companytype, sourceid, displayorder, dr, pubts, isEnd, level, parent_org_id, 
+    creator_id, create_time, update_time, other_info, project_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from ks_org
+    where org_id = #{orgId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from ks_org
+    where org_id = #{orgId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="top.ks.oss.provider.database.model.KsOrg" >
+    insert into ks_org (org_id, parent_id, org_code, 
+      org_name, shortname, org_type, 
+      principal, enable, effectivedate, 
+      expirationdate, locationid, innercode, 
+      language, contact, telephone, 
+      address, description, creator, 
+      companytype, sourceid, displayorder, 
+      dr, pubts, isEnd, 
+      level, parent_org_id, creator_id, 
+      create_time, update_time, other_info, 
+      project_id)
+    values (#{orgId,jdbcType=VARCHAR}, #{parentId,jdbcType=VARCHAR}, #{orgCode,jdbcType=VARCHAR}, 
+      #{orgName,jdbcType=VARCHAR}, #{shortname,jdbcType=VARCHAR}, #{orgType,jdbcType=INTEGER}, 
+      #{principal,jdbcType=VARCHAR}, #{enable,jdbcType=INTEGER}, #{effectivedate,jdbcType=TIMESTAMP}, 
+      #{expirationdate,jdbcType=TIMESTAMP}, #{locationid,jdbcType=VARCHAR}, #{innercode,jdbcType=VARCHAR}, 
+      #{language,jdbcType=VARCHAR}, #{contact,jdbcType=VARCHAR}, #{telephone,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{creator,jdbcType=VARCHAR}, 
+      #{companytype,jdbcType=VARCHAR}, #{sourceid,jdbcType=VARCHAR}, #{displayorder,jdbcType=INTEGER}, 
+      #{dr,jdbcType=INTEGER}, #{pubts,jdbcType=TIMESTAMP}, #{isend,jdbcType=INTEGER}, 
+      #{level,jdbcType=INTEGER}, #{parentOrgId,jdbcType=VARCHAR}, #{creatorId,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{otherInfo,jdbcType=VARCHAR}, 
+      #{projectId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="top.ks.oss.provider.database.model.KsOrg" >
+    insert into ks_org
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orgId != null" >
+        org_id,
+      </if>
+      <if test="parentId != null" >
+        parent_id,
+      </if>
+      <if test="orgCode != null" >
+        org_code,
+      </if>
+      <if test="orgName != null" >
+        org_name,
+      </if>
+      <if test="shortname != null" >
+        shortname,
+      </if>
+      <if test="orgType != null" >
+        org_type,
+      </if>
+      <if test="principal != null" >
+        principal,
+      </if>
+      <if test="enable != null" >
+        enable,
+      </if>
+      <if test="effectivedate != null" >
+        effectivedate,
+      </if>
+      <if test="expirationdate != null" >
+        expirationdate,
+      </if>
+      <if test="locationid != null" >
+        locationid,
+      </if>
+      <if test="innercode != null" >
+        innercode,
+      </if>
+      <if test="language != null" >
+        language,
+      </if>
+      <if test="contact != null" >
+        contact,
+      </if>
+      <if test="telephone != null" >
+        telephone,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="creator != null" >
+        creator,
+      </if>
+      <if test="companytype != null" >
+        companytype,
+      </if>
+      <if test="sourceid != null" >
+        sourceid,
+      </if>
+      <if test="displayorder != null" >
+        displayorder,
+      </if>
+      <if test="dr != null" >
+        dr,
+      </if>
+      <if test="pubts != null" >
+        pubts,
+      </if>
+      <if test="isend != null" >
+        isEnd,
+      </if>
+      <if test="level != null" >
+        level,
+      </if>
+      <if test="parentOrgId != null" >
+        parent_org_id,
+      </if>
+      <if test="creatorId != null" >
+        creator_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="otherInfo != null" >
+        other_info,
+      </if>
+      <if test="projectId != null" >
+        project_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orgId != null" >
+        #{orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="orgCode != null" >
+        #{orgCode,jdbcType=VARCHAR},
+      </if>
+      <if test="orgName != null" >
+        #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="shortname != null" >
+        #{shortname,jdbcType=VARCHAR},
+      </if>
+      <if test="orgType != null" >
+        #{orgType,jdbcType=INTEGER},
+      </if>
+      <if test="principal != null" >
+        #{principal,jdbcType=VARCHAR},
+      </if>
+      <if test="enable != null" >
+        #{enable,jdbcType=INTEGER},
+      </if>
+      <if test="effectivedate != null" >
+        #{effectivedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="expirationdate != null" >
+        #{expirationdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="locationid != null" >
+        #{locationid,jdbcType=VARCHAR},
+      </if>
+      <if test="innercode != null" >
+        #{innercode,jdbcType=VARCHAR},
+      </if>
+      <if test="language != null" >
+        #{language,jdbcType=VARCHAR},
+      </if>
+      <if test="contact != null" >
+        #{contact,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null" >
+        #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null" >
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="companytype != null" >
+        #{companytype,jdbcType=VARCHAR},
+      </if>
+      <if test="sourceid != null" >
+        #{sourceid,jdbcType=VARCHAR},
+      </if>
+      <if test="displayorder != null" >
+        #{displayorder,jdbcType=INTEGER},
+      </if>
+      <if test="dr != null" >
+        #{dr,jdbcType=INTEGER},
+      </if>
+      <if test="pubts != null" >
+        #{pubts,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isend != null" >
+        #{isend,jdbcType=INTEGER},
+      </if>
+      <if test="level != null" >
+        #{level,jdbcType=INTEGER},
+      </if>
+      <if test="parentOrgId != null" >
+        #{parentOrgId,jdbcType=VARCHAR},
+      </if>
+      <if test="creatorId != null" >
+        #{creatorId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="otherInfo != null" >
+        #{otherInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="projectId != null" >
+        #{projectId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="top.ks.oss.provider.database.model.KsOrg" >
+    update ks_org
+    <set >
+      <if test="parentId != null" >
+        parent_id = #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="orgCode != null" >
+        org_code = #{orgCode,jdbcType=VARCHAR},
+      </if>
+      <if test="orgName != null" >
+        org_name = #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="shortname != null" >
+        shortname = #{shortname,jdbcType=VARCHAR},
+      </if>
+      <if test="orgType != null" >
+        org_type = #{orgType,jdbcType=INTEGER},
+      </if>
+      <if test="principal != null" >
+        principal = #{principal,jdbcType=VARCHAR},
+      </if>
+      <if test="enable != null" >
+        enable = #{enable,jdbcType=INTEGER},
+      </if>
+      <if test="effectivedate != null" >
+        effectivedate = #{effectivedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="expirationdate != null" >
+        expirationdate = #{expirationdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="locationid != null" >
+        locationid = #{locationid,jdbcType=VARCHAR},
+      </if>
+      <if test="innercode != null" >
+        innercode = #{innercode,jdbcType=VARCHAR},
+      </if>
+      <if test="language != null" >
+        language = #{language,jdbcType=VARCHAR},
+      </if>
+      <if test="contact != null" >
+        contact = #{contact,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null" >
+        telephone = #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null" >
+        creator = #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="companytype != null" >
+        companytype = #{companytype,jdbcType=VARCHAR},
+      </if>
+      <if test="sourceid != null" >
+        sourceid = #{sourceid,jdbcType=VARCHAR},
+      </if>
+      <if test="displayorder != null" >
+        displayorder = #{displayorder,jdbcType=INTEGER},
+      </if>
+      <if test="dr != null" >
+        dr = #{dr,jdbcType=INTEGER},
+      </if>
+      <if test="pubts != null" >
+        pubts = #{pubts,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isend != null" >
+        isEnd = #{isend,jdbcType=INTEGER},
+      </if>
+      <if test="level != null" >
+        level = #{level,jdbcType=INTEGER},
+      </if>
+      <if test="parentOrgId != null" >
+        parent_org_id = #{parentOrgId,jdbcType=VARCHAR},
+      </if>
+      <if test="creatorId != null" >
+        creator_id = #{creatorId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="otherInfo != null" >
+        other_info = #{otherInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="projectId != null" >
+        project_id = #{projectId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where org_id = #{orgId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="top.ks.oss.provider.database.model.KsOrg" >
+    update ks_org
+    set parent_id = #{parentId,jdbcType=VARCHAR},
+      org_code = #{orgCode,jdbcType=VARCHAR},
+      org_name = #{orgName,jdbcType=VARCHAR},
+      shortname = #{shortname,jdbcType=VARCHAR},
+      org_type = #{orgType,jdbcType=INTEGER},
+      principal = #{principal,jdbcType=VARCHAR},
+      enable = #{enable,jdbcType=INTEGER},
+      effectivedate = #{effectivedate,jdbcType=TIMESTAMP},
+      expirationdate = #{expirationdate,jdbcType=TIMESTAMP},
+      locationid = #{locationid,jdbcType=VARCHAR},
+      innercode = #{innercode,jdbcType=VARCHAR},
+      language = #{language,jdbcType=VARCHAR},
+      contact = #{contact,jdbcType=VARCHAR},
+      telephone = #{telephone,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      creator = #{creator,jdbcType=VARCHAR},
+      companytype = #{companytype,jdbcType=VARCHAR},
+      sourceid = #{sourceid,jdbcType=VARCHAR},
+      displayorder = #{displayorder,jdbcType=INTEGER},
+      dr = #{dr,jdbcType=INTEGER},
+      pubts = #{pubts,jdbcType=TIMESTAMP},
+      isEnd = #{isend,jdbcType=INTEGER},
+      level = #{level,jdbcType=INTEGER},
+      parent_org_id = #{parentOrgId,jdbcType=VARCHAR},
+      creator_id = #{creatorId,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      other_info = #{otherInfo,jdbcType=VARCHAR},
+      project_id = #{projectId,jdbcType=VARCHAR}
+    where org_id = #{orgId,jdbcType=VARCHAR}
+  </update>
+</mapper>

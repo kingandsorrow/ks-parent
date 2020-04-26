@@ -78,8 +78,11 @@
         width="150"
         label="操作">
         <template slot-scope="scope">
-          <el-button v-if="isAuth('menus:update')" type="text" size="small" @click="addOrUpdateHandle(scope.row.menuId)">修改</el-button>
-          <el-button v-if="isAuth('menus:delete')" type="text" size="small" @click="deleteHandle(scope.row.menuId)">删除</el-button>
+          <el-button v-if="isAuth('menus:update')" type="text" size="small"
+                     @click="addOrUpdateHandle(scope.row.menuId)">修改
+          </el-button>
+          <el-button v-if="isAuth('menus:delete')" type="text" size="small" @click="deleteHandle(scope.row.menuId)">删除
+          </el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -91,9 +94,10 @@
 <script>
   import TableTreeColumn from '@/components/table-tree-column'
   import AddOrUpdate from './menu-add-or-update'
-  import { treeDataTranslate } from '@/utils'
+  import {treeDataTranslate} from '@/utils'
+
   export default {
-    data () {
+    data() {
       return {
         dataForm: {},
         dataList: [],
@@ -105,31 +109,37 @@
       TableTreeColumn,
       AddOrUpdate
     },
-    activated () {
+    activated() {
       this.getDataList()
     },
     methods: {
       // 获取数据列表
-      getDataList () {
+      getDataList() {
         this.dataListLoading = true
+        let dataObj = {
+          serviceIName: "menuServiceI",
+          methodName: "menuList",
+          content: JSON.stringify(contentObj)
+        };
         this.$http({
-          url: this.$http.adornUrl('/menuList'),
+          url: this.$http.ossUrl(),
           method: 'get',
-          params: this.$http.adornParams()
+          params: this.$http.adornParams(),
+          data: dataObj
         }).then(({data}) => {
           this.dataList = treeDataTranslate(data.ksFunctionBeans, 'menuId')
           this.dataListLoading = false
         })
       },
       // 新增 / 修改
-      addOrUpdateHandle (id) {
+      addOrUpdateHandle(id) {
         this.addOrUpdateVisible = true
         this.$nextTick(() => {
           this.$refs.addOrUpdate.init(id)
         })
       },
       // 删除
-      deleteHandle (id) {
+      deleteHandle(id) {
         this.$confirm(`确定对[id=${id}]进行[删除]操作?`, '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
@@ -153,7 +163,8 @@
               this.$message.error(data.msg)
             }
           })
-        }).catch(() => {})
+        }).catch(() => {
+        })
       }
     }
   }

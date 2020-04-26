@@ -9,4 +9,7 @@
 
     <dubbo:reference id="menuServiceI" interface="top.ks.oss.consumer.MenuServiceI" check="false"
                      version="1.0.0"/>
+
+    <dubbo:reference id="orgServiceI" interface="top.ks.oss.consumer.OrgServiceI" check="false"
+                     version="1.0.0"/>
 </beans>

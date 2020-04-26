@@ -50,7 +50,6 @@ const mainRoutes = {
     }
   ],
   beforeEnter(to, from, next) {
-    debugger;
     let token = Vue.cookie.get('token')
     if (!token || !/\S/.test(token)) {
       clearLoginInfo()
@@ -98,7 +97,6 @@ router.beforeEach((to, from, next) => {
       params: http.adornParams(),
       data: dataObj
     }).then(({data}) => {
-      debugger;
       if (data && data.errCode === '0') {
         fnAddDynamicMenuRoutes(data.operatorDeatilBean.ksFunctionList)
         router.options.isAddDynamicMenuRoutes = true
@@ -107,6 +105,7 @@ router.beforeEach((to, from, next) => {
         sessionStorage.setItem('permissions', JSON.stringify(data.permissions || '[]'));
         next({...to, replace: true})
       } else if (data && data.errCode === "30012") { // 401, token失效
+        debugger
         clearLoginInfo()
         router.push({name: 'login'})
       } else {

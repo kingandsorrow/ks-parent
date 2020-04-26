@@ -58,4 +58,8 @@ public class ErrorCode {
         this.msg = msg;
     }
 
+    public static void main(String[] args) {
+        String a = "&factoryOrg&";
+        a.contains("baseorg");
+    }
 }

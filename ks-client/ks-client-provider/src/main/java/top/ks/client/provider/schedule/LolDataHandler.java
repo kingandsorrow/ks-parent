@@ -1,6 +1,5 @@
 package top.ks.client.provider.schedule;
 
-import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.fastjson.JSON;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -9,10 +8,6 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-import top.ks.client.api.FileUploadServiceI;
-import top.ks.client.api.req.UploadImgReq;
-import top.ks.client.api.resp.FilepathRes;
-import top.ks.client.provider.FileUploadServiceIProxy;
 import top.ks.client.provider.database.mapper.LolHeroAbilityMapper;
 import top.ks.client.provider.database.mapper.LolHeroMapper;
 import top.ks.client.provider.database.model.LolHero;

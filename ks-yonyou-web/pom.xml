@@ -80,44 +80,11 @@
             </exclusions>
         </dependency>
         <dependency>
-            <groupId>com.yonyoucloud</groupId>
-            <artifactId>uretail-pubrule</artifactId>
-            <version>${uretail.version}</version>
-            <exclusions>
-                <exclusion>
-                    <artifactId>spring-rabbit</artifactId>
-                    <groupId>org.springframework.amqp</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>amqp-client</artifactId>
-                    <groupId>com.rabbitmq</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>spring-boot-starter-amqp</artifactId>
-                    <groupId>org.springframework.boot</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>iuap-cache</artifactId>
-                    <groupId>com.yonyou.iuap</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>iuap-bd-translation-sdk</artifactId>
-                    <groupId>com.yonyou.iuap</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>spring-data-redis</artifactId>
-                    <groupId>org.springframework.data</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>spring-boot-starter-data-redis</artifactId>
-                    <groupId>org.springframework.boot</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>mysql-connector-java</artifactId>
-                    <groupId>mysql</groupId>
-                </exclusion>
-            </exclusions>
+            <groupId>com.yonyou.iuap</groupId>
+            <artifactId>iuap-org-sdk</artifactId>
+            <version>2.0.0-SNAPSHOT</version>
         </dependency>
+
 
         <!--yonyou-end RPC-->
     </dependencies>

@@ -34,9 +34,9 @@ public class TestController {
 
 
     @RequestMapping(value = "/downloadFile")
-    public String downloads(HttpServletResponse response) throws Exception {
+    public String downloads(HttpServletResponse response, String name) throws Exception {
         String path = "/Users/birongjun/Downloads/";
-        String fileName = "采购委托关系管理列表_CreateSQL_616973480136960_jinyidemotest.sql";
+        String fileName = name;
         //1、设置response 响应头
         response.reset();
         response.setCharacterEncoding("UTF-8");

@@ -19,6 +19,7 @@
         <module>ks-rocketmq</module>
         <module>ks-redis</module>
         <module>ks-yonyou-web</module>
+        <module>ks-base</module>
     </modules>
     <properties>
         <!--90repo   releases-->
@@ -126,6 +127,11 @@
                 <groupId>top.ks</groupId>
                 <artifactId>ks-common</artifactId>
                 <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
             </dependency>
             <!--mybatis-->
             <dependency>
@@ -343,6 +349,11 @@
                 <groupId>joda-time</groupId>
                 <artifactId>joda-time</artifactId>
                 <version>${joda-time.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>top.ks</groupId>
+                <artifactId>ks-file-consumer</artifactId>
+                <version>${project.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

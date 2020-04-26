@@ -56,7 +56,7 @@ public class CommonConfig extends WebMvcConfigurerAdapter {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(loginInterceptor).addPathPatterns("/*").excludePathPatterns("/login", "/checkToken", "/loginOut", "/captcha.jpg", "/error", "/listDetail","/listDetail1");
+        registry.addInterceptor(loginInterceptor).addPathPatterns("/*").excludePathPatterns("/login", "/checkToken", "/loginOut", "/captcha.jpg", "/error", "/listDetail", "/listDetail1");
         super.addInterceptors(registry);
     }
 
@@ -82,6 +82,7 @@ public class CommonConfig extends WebMvcConfigurerAdapter {
         //3.返回新的CorsFilter.
         return new CorsFilter(configSource);
     }
+
     @Bean
     public FilterRegistrationBean ssoFilterRegistration() {
         // xxl-sso, redis init

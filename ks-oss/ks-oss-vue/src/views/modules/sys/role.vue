@@ -109,14 +109,21 @@
       // 获取数据列表
       getDataList() {
         this.dataListLoading = true
+        let contentObj = {
+          roleName: this.dataForm.roleName,
+          pageIndex: this.pageIndex,
+          pageSize: this.pageSize
+        }
+        let dataObj = {
+          serviceIName: "roleServiceI",
+          methodName: "roleList",
+          content: JSON.stringify(contentObj)
+        };
         this.$http({
-          url: this.$http.adornUrl('/roleList'),
-          method: 'get',
-          params: this.$http.adornParams({
-            'pageIndex': this.pageIndex,
-            'pageSize': this.pageSize,
-            'roleName': this.dataForm.roleName
-          })
+          url: this.$http.ossUrl(),
+          method: 'post',
+          params: this.$http.adornParams(),
+          data: dataObj
         }).then(({data}) => {
           if (data && data.errCode === '0000') {
             this.dataList = data.roleList
