@@ -2,6 +2,7 @@ package top.ks.oss.provider.database.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 public class KsFunction implements Serializable {
     private String functionId;
@@ -29,6 +30,9 @@ public class KsFunction implements Serializable {
     private Date createTime;
 
     private Date updateTime;
+
+
+    private List<KsFunction> list;
 
     public String getFunctionId() {
         return functionId;
@@ -132,5 +136,13 @@ public class KsFunction implements Serializable {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public List<KsFunction> getList() {
+        return list;
+    }
+
+    public void setList(List<KsFunction> list) {
+        this.list = list;
     }
 }

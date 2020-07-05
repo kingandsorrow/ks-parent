@@ -33,7 +33,7 @@ public class LoginFactory {
         application.setName("ks-sso-provider");
 
         RegistryConfig registry = new RegistryConfig();
-        registry.setAddress("172.20.47.111:2181");
+        registry.setAddress("172.20.56.136:2181");
         registry.setProtocol("zookeeper");
 
         ReferenceConfig<LoginServiceI> referenceConfig = new ReferenceConfig<>();

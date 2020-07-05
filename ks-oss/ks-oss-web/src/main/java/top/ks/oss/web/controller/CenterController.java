@@ -43,7 +43,7 @@ public class CenterController extends BasicController {
      * @Method :
      * @Description :统一调用dubbo入口（需要加密）
      * @author : birjc
-     * @CreateDate : 2019-10-22 19:53
+     * @CreateDate : 2019-10-232 19:5
      */
     @RequestMapping("encrypt/handle")
     public void handle(@RequestBody ReqEntity reqEntity, HttpServletRequest request, HttpServletResponse response) {

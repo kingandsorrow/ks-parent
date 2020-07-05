@@ -26,11 +26,10 @@ public class FileServiceITest {
     @Test
     public void testOrgList() throws Exception {
         FileUploadReq fileUploadReq = new FileUploadReq();
-        fileUploadReq.setFileName("ks");
+        fileUploadReq.setFileName("ks-base");
         fileUploadReq.setFileType(".jar");
         InputStream inputStream = new FileInputStream(new File("/Users/birongjun/Downloads/ks-base-provider-1.0.0-SNAPSHOT.jar"));
         FileUploadRes fileUploadRes = fileUploadServiceI.fileUploadStream(fileUploadReq, inputStream);
         System.out.println(JSON.toJSON(fileUploadRes));
-
     }
 }

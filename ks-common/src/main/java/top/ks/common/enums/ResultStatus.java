@@ -1,5 +1,7 @@
 package top.ks.common.enums;
 
+import java.io.Serializable;
+
 /**
  * <b>类名称:</b>ResultStatus$<br/>
  * <b>类注释:</b><br/>
@@ -12,7 +14,7 @@ package top.ks.common.enums;
  * @version 1.0.0
  * Copyright KS 2019/2/13
  */
-public enum ResultStatus {
+public enum ResultStatus implements Serializable {
     SUCCESS("0", "成功"),
     FAILD("-1", "失败"),
     EXCEPTION("-1", "系统异常"),
@@ -38,7 +40,6 @@ public enum ResultStatus {
     LOGIN_EXPIRE("200008", "登录过期"),
     LOGIN_WAY_ERROR("200009", "登录方式错误"),
     USER_NOT_FOUND("200010", "查询用户失败"),
-
 
 
     /**

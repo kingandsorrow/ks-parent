@@ -14,10 +14,14 @@ public class K {
     }
 
     public static void main(String[] args) {
-        K k = new K();
+        /*K k = new K();
         int count = 0;
         while (k.getKs().size() != 0) {
             count += k.getKs().size();
+        }*/
+        List<String> list = null;
+        for (String s : list) {
+            System.out.println(s);
         }
     }
 }

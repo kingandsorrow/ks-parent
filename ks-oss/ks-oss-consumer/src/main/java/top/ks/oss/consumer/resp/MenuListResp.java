@@ -23,6 +23,7 @@ public class MenuListResp extends ResponseEntity {
 
     private OperatorDeatilBean operatorDeatilBean;
 
+
     public MenuListResp() {
     }
 

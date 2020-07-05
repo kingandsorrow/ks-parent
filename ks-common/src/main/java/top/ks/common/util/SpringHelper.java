@@ -2,8 +2,16 @@ package top.ks.common.util;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.stereotype.Component;
+
+import java.util.Map;
 
 /**
  * @描述:
@@ -13,54 +21,67 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  * @修改人:
  * @修改备注: Copyright brj 2017/4/13
  */
-public class SpringHelper {
-    private static Log logger = LogFactory.getLog(SpringHelper.class);
-    private static ApplicationContext cx = null;
+@Component
+public class SpringHelper implements ApplicationContextAware, InitializingBean {
+    private static final Logger logger = LoggerFactory.getLogger(SpringHelper.class);
 
-    public SpringHelper() {
+    private ApplicationContext applicationContext;
+
+    private static SpringHelper instance;
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        this.init();
     }
 
-    public static <T> T getBean(String beanId) {
-        if (cx == null) {
-            cx = new ClassPathXmlApplicationContext("classpath*:spring/*.xml");
+    private void init() {
+        instance = this;
+    }
+
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        this.applicationContext = applicationContext;
+    }
+
+    public static <T> String[] getBeanNames(Class<T> clazz) {
+        try {
+            return instance.applicationContext.getBeanNamesForType(clazz);
+        } catch (BeansException var2) {
+            logger.warn("Bean is not exist for class:{}", clazz);
+            return null;
         }
-
-        return (T) cx.getBean(beanId);
     }
 
-    public static String[] getBeanDefinitionNames() {
-        return cx == null ? null : cx.getBeanDefinitionNames();
-    }
-
-    public static boolean containsBean(String name) {
-        return cx != null && cx.containsBean(name);
-    }
-
-    public static synchronized void init(ApplicationContext ctx) {
-        if (cx == null) {
-            cx = ctx;
-            logger.info("**********Spring config success!,init from application ctx.**********");
+    public static <T> Map<String, T> getBeansForType(Class<T> clazz) {
+        try {
+            return instance.applicationContext.getBeansOfType(clazz);
+        } catch (BeansException var2) {
+            logger.warn("Bean is not exist for class:{}", clazz);
+            return null;
         }
-
     }
 
-    public static synchronized void init() {
-        if (cx == null) {
-            cx = new ClassPathXmlApplicationContext("classpath:spring/*.xml");
-            logger.info("Spring config success!,ApplicationContext set a object");
+    public static Object getBean(String beanName) {
+        try {
+            return null == instance ? null : instance.applicationContext.getBean(beanName);
+        } catch (BeansException var2) {
+            return null;
         }
-
     }
 
-    public static synchronized void init(String[] paths) {
-        if (cx == null) {
-            cx = new ClassPathXmlApplicationContext(paths);
-            logger.info("Spring config success!,ApplicationContext set a object");
+    public static <T> T getBean(String beanName, Class<T> clazz) {
+        try {
+            return null == instance ? null : instance.applicationContext.getBean(beanName, clazz);
+        } catch (BeansException var3) {
+            return null;
         }
-
     }
 
-    public static synchronized void init(String path) {
-        init(new String[]{path});
+    public static <T> T getBean(Class<T> clazz) {
+        try {
+            return null == instance ? null : instance.applicationContext.getBean(clazz);
+        } catch (BeansException var2) {
+            return null;
+        }
     }
 }

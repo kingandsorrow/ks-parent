@@ -9,13 +9,13 @@
       :data="dataList"
       border
       style="width: 100%;">
-      <el-table-column
+      <!--<el-table-column
         prop="menuId"
         header-align="center"
         align="center"
         width="320"
         label="ID">
-      </el-table-column>
+      </el-table-column>-->
       <table-tree-column
         prop="name"
         header-align="center"
@@ -115,19 +115,22 @@
     methods: {
       // 获取数据列表
       getDataList() {
-        this.dataListLoading = true
+        this.dataListLoading = true;
+        let contentObj = {
+          projectId:"0"
+        };
         let dataObj = {
           serviceIName: "menuServiceI",
-          methodName: "menuList",
+          methodName: "functionList",
           content: JSON.stringify(contentObj)
         };
         this.$http({
           url: this.$http.ossUrl(),
-          method: 'get',
+          method: 'post',
           params: this.$http.adornParams(),
           data: dataObj
         }).then(({data}) => {
-          this.dataList = treeDataTranslate(data.ksFunctionBeans, 'menuId')
+          this.dataList = treeDataTranslate(data.ksFunctionBeanList, 'menuId','parentId');
           this.dataListLoading = false
         })
       },

@@ -1,5 +1,6 @@
 package top.ks.oss.web.bootstrap;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -20,6 +21,7 @@ import org.springframework.context.annotation.ImportResource;
  */
 @SpringBootApplication(scanBasePackages = "top.ks")
 @SpringBootConfiguration
+@MapperScan({"top.ks.oss.provider.database.mapper", "top.ks.sso.provider.database.mapper"})
 @ImportResource("classpath*:spring/*.xml")
 public class KsWebApplication {
 

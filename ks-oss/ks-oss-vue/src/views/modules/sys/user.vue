@@ -124,7 +124,7 @@
     methods: {
       // 获取数据列表
       getDataList() {
-        this.dataListLoading = true
+        this.dataListLoading = true;
         this.$http({
           url: this.$http.adornUrl('/operatorList'),
           method: 'get',
@@ -138,7 +138,7 @@
             this.dataList = data.operatorDeatilBeanList
             this.totalPage = data.count
           } else {
-            this.dataList = []
+            this.dataList = [];
             this.totalPage = 0
           }
           this.dataListLoading = false

@@ -1,5 +1,6 @@
 package top.ks.yonyou.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.yonyou.cloud.mwclient.servmeta.annotation.ApiParam;
 import com.yonyou.diwork.exception.BusinessException;
 import com.yonyou.diwork.service.auth.IServiceIsolateService;
@@ -15,6 +16,7 @@ import com.yonyou.iuap.enumeration.org.OrgFunc;
 import com.yonyou.iuap.international.MultiLangText;
 import com.yonyou.workbench.model.OrgPermVO;
 import com.yonyou.workbench.param.OrgEntryParam;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,6 +26,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+@Slf4j
 @RestController
 public class TestController {
 
@@ -56,12 +59,37 @@ public class TestController {
         return orgPermVO;
     }
 
+    @RequestMapping("testPermisonList")
+    public String testPermisonList() {
+        List<FuncOrg> funcOrgs = null;
+        try {
+            // TAXIT0101  7af397dd-f5a2-4bc8-b80d-3cc9c69ae6b1
+            String token = "bttbGhndk56MFZzcUF1L05vRzRGZEtkZ0RjV0JKajZodWdlMS9ZUG1oL1dmOFNpYVVJSGc0Q0xSalNVYk1ON3dnSVZKSFppV3hodGY5MVBNMHdtb1FqTnpHRnk0a0RyQXp5c2FFN21DcDUwbStIUUJEN1c4OFF6cmlCY1RpYmhpbHpfX3U4Yy1zc28tZGFpbHkueXl1YXAuY29t__3eb171bdbdb0b438fc649fb7bc678334_1588232666683";
+            //mrt16ug3
+            // financeorg
+            // enable =1
+            // [{"conditionList":[],"datatype":"number","extendSql":{},"field":"enable","logic":false,"logicsymbol":"and","operator":"=","value":"1"}]
+            funcOrgs = funcOrgDataQryService.listByConditionWithOrgPermission("7af397dd-f5a2-4bc8-b80d-3cc9c69ae6b1", "TAXIT0101", token, "mrt16ug3", "diwork", OrgFunc.FINANCE_ORG.getCode(), null, null);
+            for (FuncOrg funcOrg : funcOrgs) {
+                AdminOrg adminOrg = (AdminOrg) funcOrg;
+                adminOrg.getLocaleName();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            log.error("system exception:", e);
+            log.error(String.format("birjc TestController.testPermisonList:: %s, %s", "system error::" + e.getMessage(), ""));
+        }
+        return JSON.toJSONString(funcOrgs);
+    }
+
+
     @RequestMapping("testOrgService")
     public FuncOrg testOrgService() {
         FuncOrg funcOrg = null;
         try {
             funcOrg = funcOrgDataQryService.getById("1603357683749120", "orq5s8og", "diwork", OrgFunc.ADMIN_ORG.getCode());
             AdminOrg adminOrg = (AdminOrg) funcOrg;
+
         } catch (Exception e) {
 
             e.printStackTrace();

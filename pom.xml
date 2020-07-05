@@ -15,7 +15,6 @@
         <module>ks-sso</module>
         <module>ks-oss</module>
         <module>ks-order</module>
-        <module>ks-commodity</module>
         <module>ks-rocketmq</module>
         <module>ks-redis</module>
         <module>ks-yonyou-web</module>
@@ -117,6 +116,11 @@
                 <groupId>com.alibaba.boot</groupId>
                 <artifactId>dubbo-spring-boot-actuator</artifactId>
                 <version>${dubbo.spring.boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>top.ks</groupId>
+                <artifactId>ks-oss-provider</artifactId>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>

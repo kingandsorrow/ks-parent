@@ -46,6 +46,8 @@ public class OperatorDeatil implements Serializable {
 
     private List<KsFunction> ksFunctionList;
 
+    private List<String> permissions;
+
     public String getOperatorId() {
         return operatorId;
     }
@@ -164,5 +166,13 @@ public class OperatorDeatil implements Serializable {
 
     public void setKsFunctionList(List<KsFunction> ksFunctionList) {
         this.ksFunctionList = ksFunctionList;
+    }
+
+    public List<String> getPermissions() {
+        return permissions;
+    }
+
+    public void setPermissions(List<String> permissions) {
+        this.permissions = permissions;
     }
 }

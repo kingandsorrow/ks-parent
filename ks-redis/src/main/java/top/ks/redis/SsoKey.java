@@ -21,7 +21,8 @@ public class SsoKey extends BasePrefix {
         super(expireSeconds, prefix);
     }
 
-    public static SsoKey ssoUserToken = new SsoKey(30 * 60, "sut");
+    //6个小时
+    public static SsoKey ssoUserToken = new SsoKey(6 * 60 * 60, "sut");
     public static SsoKey commodityDetail = new SsoKey(60, "cd");
 
     public static SsoKey commodityStock = new SsoKey(0, "cs");

@@ -99,10 +99,10 @@ router.beforeEach((to, from, next) => {
     }).then(({data}) => {
       if (data && data.errCode === '0') {
         fnAddDynamicMenuRoutes(data.operatorDeatilBean.ksFunctionList)
-        router.options.isAddDynamicMenuRoutes = true
+        router.options.isAddDynamicMenuRoutes = true;
         sessionStorage.setItem('operatorDeatilBean', JSON.stringify(data.operatorDeatilBean));
         sessionStorage.setItem('menuList', JSON.stringify(data.operatorDeatilBean.ksFunctionList || '[]'));
-        sessionStorage.setItem('permissions', JSON.stringify(data.permissions || '[]'));
+        sessionStorage.setItem('permissions', JSON.stringify(data.operatorDeatilBean.permissions || '[]'));
         next({...to, replace: true})
       } else if (data && data.errCode === "30012") { // 401, token失效
         debugger
@@ -110,7 +110,7 @@ router.beforeEach((to, from, next) => {
         router.push({name: 'login'})
       } else {
         sessionStorage.setItem('menuList', '[]')
-        sessionStorage.setItem('permissions', '[]')
+        sessionStorage.setItem('permissions', '[]');
         next()
       }
     }).catch((e) => {

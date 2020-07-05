@@ -24,4 +24,6 @@ public interface KsFunctionMapper {
     List<KsFunction> selectAllList(@Param("projectId") String projectId);
 
     List<KsFunction> noButtonMenu(@Param("projectId") String projectId);
+
+    List<KsFunction> selectRootList(@Param("projectId") String projectId);
 }

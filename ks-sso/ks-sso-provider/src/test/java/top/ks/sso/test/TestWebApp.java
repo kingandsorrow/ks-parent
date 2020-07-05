@@ -1,3 +1,4 @@
+/*
 package top.ks.sso.test;
 
 import com.alibaba.fastjson.JSON;
@@ -41,3 +42,4 @@ public class TestWebApp {
         System.out.println(JSON.toJSON(ksOssUsers));
     }
 }
+*/
