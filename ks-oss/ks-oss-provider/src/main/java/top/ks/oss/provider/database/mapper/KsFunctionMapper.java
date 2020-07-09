@@ -23,6 +23,8 @@ public interface KsFunctionMapper {
 
     List<KsFunction> selectAllList(@Param("projectId") String projectId);
 
+    List<KsFunction> selectNoButtonList(@Param("projectId") String projectId, @Param("typeList") List<Integer> typeList);
+
     List<KsFunction> noButtonMenu(@Param("projectId") String projectId);
 
     List<KsFunction> selectRootList(@Param("projectId") String projectId);

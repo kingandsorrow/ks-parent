@@ -98,7 +98,7 @@ router.beforeEach((to, from, next) => {
       data: dataObj
     }).then(({data}) => {
       if (data && data.errCode === '0') {
-        fnAddDynamicMenuRoutes(data.operatorDeatilBean.ksFunctionList)
+        fnAddDynamicMenuRoutes(data.operatorDeatilBean.ksFunctionList);
         router.options.isAddDynamicMenuRoutes = true;
         sessionStorage.setItem('operatorDeatilBean', JSON.stringify(data.operatorDeatilBean));
         sessionStorage.setItem('menuList', JSON.stringify(data.operatorDeatilBean.ksFunctionList || '[]'));
@@ -114,8 +114,7 @@ router.beforeEach((to, from, next) => {
         next()
       }
     }).catch((e) => {
-      debugger
-      console.log(`%c${e} 请求菜单列表和权限失败，跳转至登录页！！`, 'color:blue')
+      console.log(`%c${e} 请求菜单列表和权限失败，跳转至登录页！！`, 'color:blue');
       router.push({name: 'login'})
     })
   }

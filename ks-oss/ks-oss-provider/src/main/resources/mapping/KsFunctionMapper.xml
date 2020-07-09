@@ -217,4 +217,16 @@
         from ks_function
         where project_id = #{projectId,jdbcType=VARCHAR} and parent_id =0 and type =0 order by order_num
     </select>
+    <!--查询没有按钮的列表-->
+    <select id="selectNoButtonList" parameterType="Map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from ks_function
+        where project_id = #{projectId,jdbcType=VARCHAR} and type in
+        <foreach collection="typeList" item="type" index="index"
+                 open="(" close=")" separator=",">
+            #{type}
+        </foreach>
+        order by order_num
+    </select>
 </mapper>

@@ -4,6 +4,7 @@ import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.lang.Func;
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.alibaba.fastjson.JSON;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Component;
@@ -17,9 +18,11 @@ import top.ks.oss.consumer.bean.OperatorDeatilBean;
 import top.ks.oss.consumer.req.AddMenuReq;
 import top.ks.oss.consumer.req.FunctionListReq;
 import top.ks.oss.consumer.req.MenuListReq;
+import top.ks.oss.consumer.req.NoButtonMenuReq;
 import top.ks.oss.consumer.resp.AddMenuResp;
 import top.ks.oss.consumer.resp.FunctionListResp;
 import top.ks.oss.consumer.resp.MenuListResp;
+import top.ks.oss.consumer.resp.NoButtonMenuResp;
 import top.ks.oss.provider.database.mapper.KsFunctionMapper;
 import top.ks.oss.provider.database.model.KsFunction;
 import top.ks.oss.provider.database.model.KsOperator;
@@ -64,11 +67,14 @@ public class MenuServiceIProxy implements MenuServiceI {
         OperatorDeatil operatorDeatil = ksRoleService.selectOperatorDetail(ksOperator);
         OperatorDeatilBean operatorDeatilBean = new OperatorDeatilBean();
         BeanUtil.copyProperties(operatorDeatil, operatorDeatilBean);
-        operatorDeatilBean.setKsFunctionList(initMenuList(operatorDeatil.getKsFunctionList(), new HashMap<String, String>()));
+        Set<String> permissions = new HashSet<>();
+        operatorDeatilBean.setKsFunctionList(initMenuList(operatorDeatil.getKsFunctionList(), new HashMap<String, String>(), permissions));
+        operatorDeatilBean.setPermissions((permissions));
         MenuListResp menuListResp = new MenuListResp(ResultStatus.SUCCESS);
         menuListResp.setOperatorDeatilBean(operatorDeatilBean);
         return menuListResp;
     }
+
 
     @Override
     public FunctionListResp functionList(FunctionListReq functionListReq) throws ClassNotFoundException {
@@ -100,9 +106,38 @@ public class MenuServiceIProxy implements MenuServiceI {
      * @CreateDate : 2020-05-28 21:49
      */
     @Override
-    public AddMenuResp addMenu(AddMenuReq addMenuReq) {
-        
-        return null;
+    public AddMenuResp menuAdd(AddMenuReq addMenuReq) {
+        System.out.println(JSON.toJSON(addMenuReq));
+        return new AddMenuResp(ResultStatus.SUCCESS);
+    }
+
+    /**
+     * @param :
+     * @return :
+     * @Method :
+     * @Description : 没有按钮的菜单
+     * @author : birjc
+     * @CreateDate : 2020-07-05 23:21
+     */
+    @Override
+    public NoButtonMenuResp noButtonMenu(NoButtonMenuReq noButtonMenuReq) {
+        try {
+            // 查询菜单列表
+            List<KsFunction> ksFunctions = ksFunctionMapper.selectNoButtonList(noButtonMenuReq.getProjectId(), new ArrayList<Integer>(Arrays.asList(0, 1)));
+            //List<KsFunction> rootFunction = ksFunctionMapper.selectRootList("0");
+            List<KsFunctionBean> functionBeans = new ArrayList<>();
+            ksFunctions.forEach(s -> {
+                KsFunctionBean ksFunctionBean = FunctionUtil.convertFunctionBean(s);
+                functionBeans.add(ksFunctionBean);
+            });
+            NoButtonMenuResp noButtonMenuResp = new NoButtonMenuResp(ResultStatus.SUCCESS);
+            noButtonMenuResp.setKsFunctionBeanList(functionBeans);
+            return noButtonMenuResp;
+        } catch (Exception e) {
+            log.error("system exception:", e);
+            log.info(LogFormat.formatMsg("MenuServiceIProxy.noButtonMenu", "system error::" + e.getMessage(), ""));
+            return new NoButtonMenuResp(ResultStatus.SYSTEM_ERROR);
+        }
     }
 
     /**
@@ -113,16 +148,21 @@ public class MenuServiceIProxy implements MenuServiceI {
      * @author : brj
      * @CreateDate : 2018/11/5 15:37
      */
-    private List<KsFunctionBean> initMenuList(List<KsFunction> ksFunctionList, Map<String, String> map) {
+    private List<KsFunctionBean> initMenuList(List<KsFunction> ksFunctionList, Map<String, String> map, Set<String> permissions) {
         List<KsFunctionBean> ksFunctionBeans = new ArrayList<KsFunctionBean>();
         if (CollectionUtil.isEmpty(ksFunctionList)) {
             return ksFunctionBeans;
         }
         for (KsFunction ksFunction : ksFunctionList) {
             KsFunctionBean ksFunctionBean = FunctionUtil.convertFunctionBean(ksFunction);
-            ksFunctionBean.setList(FunctionUtil.getChildMap(ksFunction.getFunctionId(), ksFunctionList, map));
-            if (!map.containsKey(ksFunction.getFunctionId())) {
-                ksFunctionBeans.add(ksFunctionBean);
+            if (Strings.isNotEmpty(ksFunction.getAuthorize())) {
+                permissions.add(ksFunction.getAuthorize());
+            }
+            if (ksFunction.getType() == 1 || ksFunction.getType() == 0) {
+                ksFunctionBean.setList(FunctionUtil.getChildMap(ksFunction.getFunctionId(), ksFunctionList, map));
+                if (!map.containsKey(ksFunction.getFunctionId())) {
+                    ksFunctionBeans.add(ksFunctionBean);
+                }
             }
         }
         return ksFunctionBeans;
@@ -154,7 +194,7 @@ public class MenuServiceIProxy implements MenuServiceI {
      * @return :
      * @Method :
      * @Description :获得这个子菜单
-     * @author : brj
+     * @author : birjc
      * @CreateDate : 2018/11/5 21:20
      */
     private List<KsFunctionBean> getThisSubMenu(KsFunction ksFunction, List<KsFunction> ksFunctionList) {

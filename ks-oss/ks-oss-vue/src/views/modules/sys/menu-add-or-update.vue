@@ -3,7 +3,8 @@
     :title="!dataForm.id ? '新增' : '修改'"
     :close-on-click-modal="false"
     :visible.sync="visible">
-    <el-form :model="dataForm" :rules="dataRule" ref="dataForm" @keyup.enter.native="dataFormSubmit()" label-width="80px">
+    <el-form :model="dataForm" :rules="dataRule" ref="dataForm" @keyup.enter.native="dataFormSubmit()"
+             label-width="80px">
       <el-form-item label="类型" prop="type">
         <el-radio-group v-model="dataForm.type">
           <el-radio v-for="(type, index) in dataForm.typeList" :label="index" :key="index">{{ type }}</el-radio>
@@ -28,7 +29,8 @@
             :expand-on-click-node="false">
           </el-tree>
         </el-popover>
-        <el-input v-model="dataForm.parentName" v-popover:menuListPopover :readonly="true" placeholder="点击选择上级菜单" class="menu-list__input"></el-input>
+        <el-input v-model="dataForm.parentName" v-popover:menuListPopover :readonly="true" placeholder="点击选择上级菜单"
+                  class="menu-list__input"></el-input>
       </el-form-item>
       <el-form-item v-if="dataForm.type === 1" label="菜单路由" prop="url">
         <el-input v-model="dataForm.url" placeholder="菜单路由"></el-input>
@@ -57,11 +59,14 @@
                 </el-button>
               </div>
             </el-popover>
-            <el-input v-model="dataForm.icon" v-popover:iconListPopover :readonly="true" placeholder="菜单图标名称" class="icon-list__input"></el-input>
+            <el-input v-model="dataForm.icon" v-popover:iconListPopover :readonly="true" placeholder="菜单图标名称"
+                      class="icon-list__input"></el-input>
           </el-col>
           <el-col :span="2" class="icon-list__tips">
             <el-tooltip placement="top" effect="light">
-              <div slot="content">全站推荐使用SVG Sprite, 详细请参考:<a href="//github.com/daxiongYang/renren-fast-vue/blob/master/src/icons/index.js" target="_blank">icons/index.js</a>描述</div>
+              <div slot="content">全站推荐使用SVG Sprite, 详细请参考:<a
+                href="//github.com/daxiongYang/renren-fast-vue/blob/master/src/icons/index.js" target="_blank">icons/index.js</a>描述
+              </div>
               <i class="el-icon-warning"></i>
             </el-tooltip>
           </el-col>
@@ -76,10 +81,11 @@
 </template>
 
 <script>
-  import { treeDataTranslate } from '@/utils'
+  import {treeDataTranslate} from '@/utils'
   import Icon from '@/icons'
+
   export default {
-    data () {
+    data() {
       var validateUrl = (rule, value, callback) => {
         if (this.dataForm.type === 1 && !/\S/.test(value)) {
           callback(new Error('菜单URL不能为空'))
@@ -104,13 +110,13 @@
         },
         dataRule: {
           name: [
-            { required: true, message: '菜单名称不能为空', trigger: 'blur' }
+            {required: true, message: '菜单名称不能为空', trigger: 'blur'}
           ],
           parentName: [
-            { required: true, message: '上级菜单不能为空', trigger: 'change' }
+            {required: true, message: '上级菜单不能为空', trigger: 'change'}
           ],
           url: [
-            { validator: validateUrl, trigger: 'blur' }
+            {validator: validateUrl, trigger: 'blur'}
           ]
         },
         menuList: [],
@@ -120,20 +126,31 @@
         }
       }
     },
-    created () {
+    created() {
       this.iconList = Icon.getNameList()
     },
     methods: {
-      init (id) {
-        this.dataForm.id = id || 0
+      init(id) {
+        let contentObj = {
+          projectId: "0"
+        };
+        let dataObj = {
+          serviceIName: "menuServiceI",
+          methodName: "noButtonMenu",
+          content: JSON.stringify(contentObj)
+        };
+        this.dataForm.id = id || 0;
         this.$http({
-          url: this.$http.adornUrl('/noButtonMenu'),
-          method: 'get',
-          params: this.$http.adornParams()
+          url: this.$http.ossUrl(),
+          method: 'post',
+          params: this.$http.adornParams(),
+          data: dataObj
         }).then(({data}) => {
-          this.menuList = treeDataTranslate(data.ksFunctionBeans, 'menuId')
+          if (data.ksFunctionBeanList) {
+            this.menuList = treeDataTranslate(data.ksFunctionBeanList, 'menuId', 'parentId');
+          }
         }).then(() => {
-          this.visible = true
+          this.visible = true;
           this.$nextTick(() => {
             this.$refs['dataForm'].resetFields()
           })
@@ -148,50 +165,63 @@
               method: 'get',
               params: this.$http.adornParams()
             }).then(({data}) => {
-              this.dataForm.id = data.menu.menuId
-              this.dataForm.type = data.menu.type
-              this.dataForm.name = data.menu.name
-              this.dataForm.parentId = data.menu.parentId
-              this.dataForm.url = data.menu.url
-              this.dataForm.perms = data.menu.perms
-              this.dataForm.orderNum = data.menu.orderNum
-              this.dataForm.icon = data.menu.icon
+              this.dataForm.id = data.menu.menuId;
+              this.dataForm.type = data.menu.type;
+              this.dataForm.name = data.menu.name;
+              this.dataForm.parentId = data.menu.parentId;
+              this.dataForm.url = data.menu.url;
+              this.dataForm.perms = data.menu.perms;
+              this.dataForm.orderNum = data.menu.orderNum;
+              this.dataForm.icon = data.menu.icon;
               this.menuListTreeSetCurrentNode()
             })
           }
         })
       },
       // 菜单树选中
-      menuListTreeCurrentChangeHandle (data, node) {
-        this.dataForm.parentId = data.menuId
+      menuListTreeCurrentChangeHandle(data, node) {
+        this.dataForm.parentId = data.menuId;
         this.dataForm.parentName = data.name
       },
       // 菜单树设置当前选中节点
-      menuListTreeSetCurrentNode () {
+      menuListTreeSetCurrentNode() {
         this.$refs.menuListTree.setCurrentKey(this.dataForm.parentId)
         this.dataForm.parentName = (this.$refs.menuListTree.getCurrentNode() || {})['name']
       },
       // 图标选中
-      iconActiveHandle (iconName) {
+      iconActiveHandle(iconName) {
         this.dataForm.icon = iconName
       },
       // 表单提交
-      dataFormSubmit () {
+      dataFormSubmit() {
         this.$refs['dataForm'].validate((valid) => {
           if (valid) {
+            let contentObj = {
+              projectId: "0",
+              menuId: this.dataForm.id || undefined,
+              type: this.dataForm.type,
+              name: this.dataForm.name,
+              parentId: this.dataForm.parentId,
+              url: this.dataForm.url,
+              perms: this.dataForm.perms,
+              orderNum: this.dataForm.orderNum,
+              icon: this.dataForm.icon
+            };
+            let dataObjAdd = {
+              serviceIName: "menuServiceI",
+              methodName: "menuAdd",
+              content: JSON.stringify(contentObj)
+            };
+            let dataObjUpdate = {
+              serviceIName: "menuServiceI",
+              methodName: "menuUpdate",
+              content: JSON.stringify(contentObj)
+            };
             this.$http({
-              url: this.$http.adornUrl(`/${!this.dataForm.id ? 'menuAdd' : 'menuUpdate'}`),
+              // url: this.$http.adornUrl(`/${!this.dataForm.id ? 'menuAdd' : 'menuUpdate'}`),
+              url: this.$http.ossUrl(),
               method: 'post',
-              data: this.$http.adornData({
-                'menuId': this.dataForm.id || undefined,
-                'type': this.dataForm.type,
-                'name': this.dataForm.name,
-                'parentId': this.dataForm.parentId,
-                'url': this.dataForm.url,
-                'perms': this.dataForm.perms,
-                'orderNum': this.dataForm.orderNum,
-                'icon': this.dataForm.icon
-              })
+              data: !(this.dataForm.id) ? dataObjAdd : dataObjUpdate
             }).then(({data}) => {
               if (data && data.errCode === '0000') {
                 this.$message({
@@ -199,8 +229,8 @@
                   type: 'success',
                   duration: 1500,
                   onClose: () => {
-                    this.visible = false
-                    this.$emit('refreshDataList')
+                    this.visible = false;
+                    this.$emit('refreshDataList');
                   }
                 })
               } else {
@@ -216,36 +246,46 @@
 
 <style lang="scss">
   .mod-menu {
-    .menu-list__input,
-    .icon-list__input {
-       > .el-input__inner {
-        cursor: pointer;
-      }
-    }
-    &__icon-popover {
-      max-width: 370px;
-    }
-    &__icon-list {
-      max-height: 180px;
-      padding: 0;
-      margin: -8px 0 0 -8px;
-      > .el-button {
-        padding: 8px;
-        margin: 8px 0 0 8px;
-        > span {
-          display: inline-block;
-          vertical-align: middle;
-          width: 18px;
-          height: 18px;
-          font-size: 18px;
-        }
-      }
-    }
-    .icon-list__tips {
-      font-size: 18px;
-      text-align: center;
-      color: #e6a23c;
-      cursor: pointer;
-    }
+
+  .menu-list__input,
+  .icon-list__input {
+
+  > .el-input__inner {
+    cursor: pointer;
+  }
+
+  }
+  &
+  __icon-popover {
+    max-width: 370px;
+  }
+
+  &
+  __icon-list {
+    max-height: 180px;
+    padding: 0;
+    margin: -8px 0 0 -8px;
+
+  > .el-button {
+    padding: 8px;
+    margin: 8px 0 0 8px;
+
+  > span {
+    display: inline-block;
+    vertical-align: middle;
+    width: 18px;
+    height: 18px;
+    font-size: 18px;
+  }
+
+  }
+  }
+  .icon-list__tips {
+    font-size: 18px;
+    text-align: center;
+    color: #e6a23c;
+    cursor: pointer;
+  }
+
   }
 </style>

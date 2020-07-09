@@ -1,5 +1,6 @@
 package top.ks.oss.consumer.resp;
 
+import top.ks.common.enums.ResultStatus;
 import top.ks.common.util.ResponseEntity;
 
 public class AddMenuResp extends ResponseEntity {
@@ -8,19 +9,18 @@ public class AddMenuResp extends ResponseEntity {
 
     private String title;
 
-    public String getFunctionId() {
-        return functionId;
+    public AddMenuResp() {
     }
 
-    public void setFunctionId(String functionId) {
-        this.functionId = functionId;
+    public AddMenuResp(String errCode) {
+        super(errCode);
     }
 
-    public String getTitle() {
-        return title;
+    public AddMenuResp(String errCode, String errMsg) {
+        super(errCode, errMsg);
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public AddMenuResp(ResultStatus resultStatus) {
+        super(resultStatus);
     }
 }

@@ -4,90 +4,28 @@ import top.ks.common.util.RequestEntity;
 
 public class AddMenuReq extends RequestEntity {
 
-    private String functionId;
-
-    private String title;
-
-    private String description;
-
-    private String url;
-
-    private String authorize;
-
-    private String parentId;
-
-    private Byte orderNum;
-
-    private String icon;
+    private String menuId;
 
     private Integer type;
 
-    private String remark;
+    private String name;
 
-    private String projectId;
+    private String parentId;
 
-    public String getFunctionId() {
-        return functionId;
+    private String url;
+
+    private String perms;
+
+    private Integer orderNum;
+
+    private String icon;
+
+    public String getMenuId() {
+        return menuId;
     }
 
-    public void setFunctionId(String functionId) {
-        this.functionId = functionId;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public String getAuthorize() {
-        return authorize;
-    }
-
-    public void setAuthorize(String authorize) {
-        this.authorize = authorize;
-    }
-
-    public String getParentId() {
-        return parentId;
-    }
-
-    public void setParentId(String parentId) {
-        this.parentId = parentId;
-    }
-
-    public Byte getOrderNum() {
-        return orderNum;
-    }
-
-    public void setOrderNum(Byte orderNum) {
-        this.orderNum = orderNum;
-    }
-
-    public String getIcon() {
-        return icon;
-    }
-
-    public void setIcon(String icon) {
-        this.icon = icon;
+    public void setMenuId(String menuId) {
+        this.menuId = menuId;
     }
 
     public Integer getType() {
@@ -98,38 +36,51 @@ public class AddMenuReq extends RequestEntity {
         this.type = type;
     }
 
-    public String getRemark() {
-        return remark;
+    public String getName() {
+        return name;
     }
 
-    public void setRemark(String remark) {
-        this.remark = remark;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    @Override
-    public String getProjectId() {
-        return projectId;
+    public String getParentId() {
+        return parentId;
     }
 
-    @Override
-    public void setProjectId(String projectId) {
-        this.projectId = projectId;
+    public void setParentId(String parentId) {
+        this.parentId = parentId;
     }
 
-    @Override
-    public String toString() {
-        return "AddMenuReq{" +
-                "functionId='" + functionId + '\'' +
-                ", title='" + title + '\'' +
-                ", description='" + description + '\'' +
-                ", url='" + url + '\'' +
-                ", authorize='" + authorize + '\'' +
-                ", parentId='" + parentId + '\'' +
-                ", orderNum=" + orderNum +
-                ", icon='" + icon + '\'' +
-                ", type=" + type +
-                ", remark='" + remark + '\'' +
-                ", projectId='" + projectId + '\'' +
-                '}';
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getPerms() {
+        return perms;
+    }
+
+    public void setPerms(String perms) {
+        this.perms = perms;
+    }
+
+    public Integer getOrderNum() {
+        return orderNum;
+    }
+
+    public void setOrderNum(Integer orderNum) {
+        this.orderNum = orderNum;
+    }
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
     }
 }

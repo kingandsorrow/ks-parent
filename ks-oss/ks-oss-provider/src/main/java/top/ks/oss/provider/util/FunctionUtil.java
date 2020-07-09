@@ -66,7 +66,7 @@ public class FunctionUtil {
     public static List<KsFunctionBean> getChildMap(String functionId, List<KsFunction> ksFunctions, Map<String, String> map) {
         List<KsFunctionBean> ksFunctionBeans = new ArrayList<>();
         ksFunctions.forEach(ksFunction -> {
-            if (functionId.equals(ksFunction.getParentId())) {
+            if ((ksFunction.getType().equals(1) || ksFunction.getType().equals(0)) && functionId.equals(ksFunction.getParentId())) {
                 map.put(ksFunction.getFunctionId(), ksFunction.getParentId());
                 KsFunctionBean ksFunctionBean = convertFunctionBean(ksFunction);
                 ksFunctionBean.setList(getChildMap(ksFunction.getFunctionId(), ksFunctions, map));
