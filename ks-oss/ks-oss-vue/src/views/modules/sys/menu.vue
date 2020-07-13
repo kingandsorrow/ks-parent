@@ -81,7 +81,8 @@
           <el-button v-if="isAuth('menus:update')" type="text" size="small"
                      @click="addOrUpdateHandle(scope.row.menuId)">修改
           </el-button>
-          <el-button v-if="isAuth('menus:delete')" type="text" size="small" @click="deleteHandle(scope.row.menuId)">删除
+          <el-button v-if="isAuth('menus:delete')" type="text" size="small"
+                     @click="deleteHandle(scope.row.menuId,scope.row.name)">删除
           </el-button>
         </template>
       </el-table-column>
@@ -117,7 +118,7 @@
       getDataList() {
         this.dataListLoading = true;
         let contentObj = {
-          projectId:"0"
+          projectId: "0"
         };
         let dataObj = {
           serviceIName: "menuServiceI",
@@ -130,7 +131,7 @@
           params: this.$http.adornParams(),
           data: dataObj
         }).then(({data}) => {
-          this.dataList = treeDataTranslate(data.ksFunctionBeanList, 'menuId','parentId');
+          this.dataList = treeDataTranslate(data.ksFunctionBeanList, 'menuId', 'parentId');
           this.dataListLoading = false
         })
       },
@@ -142,18 +143,27 @@
         })
       },
       // 删除
-      deleteHandle(id) {
-        this.$confirm(`确定对[id=${id}]进行[删除]操作?`, '提示', {
+      deleteHandle(id, name) {
+        let contentObj = {
+          projectId: "0",
+          functionId: id
+        };
+        let dataObj = {
+          serviceIName: "menuServiceI",
+          methodName: "delete",
+          content: JSON.stringify(contentObj)
+        };
+        this.$confirm(`确定对[id=${name}]进行[删除]操作?`, '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
           this.$http({
-            url: this.$http.adornUrl(`/sys/menu/delete/${id}`),
+            url: this.$http.ossUrl(),
             method: 'post',
-            data: this.$http.adornData()
+            data: dataObj
           }).then(({data}) => {
-            if (data && data.errCode === '0000') {
+            if (data && data.errCode === '0') {
               this.$message({
                 message: '操作成功',
                 type: 'success',

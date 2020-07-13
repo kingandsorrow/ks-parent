@@ -25,6 +25,10 @@ public enum ResultStatus implements Serializable {
     SYSTEM_BUSY("10004", "系统繁忙"),
     DATA_NOT_EXSIT("10005", "系统繁忙"),
 
+    /*CRUD模块*/
+    INSERT_FAIL("70001", "新增失败"),
+    DELETE_FAIL("70002", "删除失败"),
+
 
     /**
      * 注册登录

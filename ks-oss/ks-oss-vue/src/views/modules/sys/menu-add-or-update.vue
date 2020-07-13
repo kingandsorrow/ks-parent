@@ -223,6 +223,7 @@
               method: 'post',
               data: !(this.dataForm.id) ? dataObjAdd : dataObjUpdate
             }).then(({data}) => {
+              debugger;
               if (data && data.errCode === '0000') {
                 this.$message({
                   message: '操作成功',

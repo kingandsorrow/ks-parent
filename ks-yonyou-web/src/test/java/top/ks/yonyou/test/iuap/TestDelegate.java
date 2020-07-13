@@ -1,9 +1,14 @@
 package top.ks.yonyou.test.iuap;
 
 import com.alibaba.fastjson.JSON;
+import com.yonyou.iuap.admin.entity.bo.AdminOrg;
 import com.yonyou.iuap.bd.common.exception.BaseDocException;
+import com.yonyou.iuap.data.entity.dto.FuncOrg;
 import com.yonyou.iuap.data.service.itf.BizDelegateApi;
+import com.yonyou.iuap.data.service.itf.OrgDataService;
 import com.yonyou.iuap.data.service.itf.TenantStatusApi;
+import com.yonyou.iuap.international.MultiLangEnum;
+import com.yonyou.iuap.international.MultiLangText;
 import com.yonyou.iuap.org.biz.delegate.bo.BizDelegate;
 import com.yonyou.iuap.org.biz.delegate.bo.PickingDelegate;
 import com.yonyou.iuap.org.biz.delegate.bo.ProductStorageDelegate;
@@ -20,6 +25,7 @@ import top.ks.yonyou.bootstrap.KsYonyouWebApplication;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 @Slf4j
@@ -33,6 +39,38 @@ public class TestDelegate {
 
     @Autowired
     private TenantStatusApi tenantStatusApi;
+    @Autowired
+    private OrgDataService orgDataService;
+
+    @Test
+    public void testSave() throws BaseDocException {
+        try {
+            AdminOrg adminOrg = new AdminOrg();
+            adminOrg.setChildList(new ArrayList<>());
+            adminOrg.setCode("cgs-test");
+            adminOrg.setCompanytype("45ebda24614f424abe5dfb04e00f737c");
+            adminOrg.setDisplayorder(0);
+            adminOrg.setEffectivedate(new Date());
+            adminOrg.setEnable(1);
+            adminOrg.setHassub(false);
+            adminOrg.setInnercode("SHGOXPZY11");
+            adminOrg.setIsdefault(0);
+            MultiLangText multiLangText = new MultiLangText();
+            multiLangText.addText(MultiLangEnum.CN, "陈光升-测试");
+            adminOrg.setName(multiLangText);
+            adminOrg.setNamespace("org");
+            adminOrg.setOrgid("1738968356229376");
+            adminOrg.setOrgtype(1);
+            adminOrg.setStatus(0);
+            adminOrg.setSubEntity(false);
+            adminOrg.setSysid("diwork");
+            adminOrg.setTaxpayertype(1);
+            FuncOrg funcOrg = orgDataService.save("adminorg", adminOrg, "v9wyylox", "diwork");
+            System.out.println(JSON.toJSON(funcOrg));
+        } catch (Exception e) {
+            log.error(String.format("birjc TestDelegate.testSave:: %s, %s", "system error::" + e.getMessage(), e));
+        }
+    }
 
     @Test
     public void testTenantStatus() throws BaseDocException {
