@@ -195,7 +195,7 @@
             #{role.roleId}
         </foreach>
         and a.project_id = #{projectId} and b.project_id = #{projectId}
-        order by order_num
+        order by order_num,type
     </select>
 
     <select id="selectAllList" parameterType="String" resultMap="BaseResultMap">

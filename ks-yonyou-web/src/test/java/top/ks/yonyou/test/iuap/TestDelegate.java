@@ -1,8 +1,10 @@
 package top.ks.yonyou.test.iuap;
 
 import com.alibaba.fastjson.JSON;
+import com.yonyou.diwork.service.IApplicationCacheService;
 import com.yonyou.iuap.admin.entity.bo.AdminOrg;
 import com.yonyou.iuap.bd.common.exception.BaseDocException;
+import com.yonyou.iuap.context.InvocationInfoProxy;
 import com.yonyou.iuap.data.entity.dto.FuncOrg;
 import com.yonyou.iuap.data.service.itf.BizDelegateApi;
 import com.yonyou.iuap.data.service.itf.OrgDataService;
@@ -14,6 +16,11 @@ import com.yonyou.iuap.org.biz.delegate.bo.PickingDelegate;
 import com.yonyou.iuap.org.biz.delegate.bo.ProductStorageDelegate;
 import com.yonyou.iuap.org.dto.BizDelegateQueryParam;
 import com.yonyou.iuap.org.dto.TenantMultiOrgInfo;
+import com.yonyou.iuap.staff.api.StaffBizApi;
+import com.yonyou.iuap.staff.dto.ComparisionTableEnum;
+import com.yonyou.iuap.staff.dto.ComparisionTableResult;
+import com.yonyou.iuap.staff.dto.ComparisonTableParam;
+import com.yonyou.workbench.model.ApplicationVO;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -41,6 +48,47 @@ public class TestDelegate {
     private TenantStatusApi tenantStatusApi;
     @Autowired
     private OrgDataService orgDataService;
+
+    @Autowired
+    private StaffBizApi staffBizApi;
+
+    /*@Autowired
+    private IApplicationCacheService iApplicationCacheService;*/
+
+
+    /*@Test
+    public void test4() {
+        String tenantId = "aa16krcl";
+        List<ApplicationVO> applicationVOS = iApplicationCacheService.findByTenantId(tenantId);
+        System.out.println(JSON.toJSONString(applicationVOS));
+    }*/
+
+    @Test
+    public void test3() {
+        ComparisonTableParam comparisonTableParam = new ComparisonTableParam();
+        List<String> orgPermissionList = new ArrayList<>();
+        orgPermissionList.add("0005780bf9854c3e903fd0ae63084de2");
+        List<ComparisionTableEnum> docCodes = new ArrayList<>();
+        ComparisionTableEnum comparisionTableEnum = ComparisionTableEnum.STAFFTYPE;
+        docCodes.add(comparisionTableEnum);
+        List<Integer> statusCodes = new ArrayList<>();
+        statusCodes.add(1);
+        comparisonTableParam.setDocCodes(docCodes);
+        comparisonTableParam.setOrgPermissionList(orgPermissionList);
+        comparisonTableParam.setStatusList(statusCodes);
+        InvocationInfoProxy.setTenantid("q6ftkh61");
+        InvocationInfoProxy.setLocale(MultiLangEnum.CN.getCode());
+        InvocationInfoProxy.setToken("bttSklYVE9VdlJxbkRSRC9WcTBPVGo1eGVuM1FuTFFhb2w5U280WVhnYmhoQzJKUjRTNXFJclBSaFF5TndER25YZXhCLzRMSTZFNGdFRDlqeHFUOGd1SkRHRnk0a0RyQXp5c2FFN21DcDUwbStIUUJEN1c4OFF6cmlCY1RpYmhpbHpfX3U4Yy1zc28tZGFpbHkueXl1YXAuY29t__20d1834b9b2896f86d0fe047cf7b8c88_1594734707123");
+
+        try {
+            for (int i = 0; i < 4; i++) {
+                System.out.println(staffBizApi.getComparisonTable(comparisonTableParam, "q6ftkh61", "diwork"));
+            }
+            System.out.println("");
+        } catch (Exception e) {
+            log.error(String.format("birjc TestDelegate.test3:: %s, %s", "system error::" + e.getMessage(), e));
+        }
+    }
 
     @Test
     public void testSave() throws BaseDocException {

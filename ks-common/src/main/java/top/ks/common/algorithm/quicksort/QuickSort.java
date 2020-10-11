@@ -27,33 +27,18 @@ public class QuickSort {
       ＊以p[L]为比较对象，比p[L]大或等于的在其左边，否则在其右边
       */
     public static int quickSort(int[] p, int L, int R) {
-        if (L >= R)
-            return -1;
-        int i = L;
-        int j = R;
-        int temp = p[L];
-        while (i < j) {
-            while (i < j && p[j] < temp) j--;
-            if (i < j) {
-                p[i] = p[j];
-                i++;
-            }
-            while (i < j && p[i] > temp) i++;
-            if (i < j) {
-                p[j] = p[i];
-                j--;
-            }
-        }
-        p[i] = temp;
-        //去掉以下两句注释，再将return注释掉，并且将返回值改为void，
-        //就是一个完整的快速排序
-        //quickSort(p ,L,i-1);
-        //quickSort(p ,i+1,R);
-        return i;
+        return 0;
     }
 
-    //快速排序
 
+    /**
+     * @param :
+     * @return :
+     * @Method :
+     * @Description : 快速排序
+     * @author : birjc
+     * @CreateDate : 2020-07-16 00:16
+     */
     public static void quickSortArr(int[] arr, int low, int high) {
         if (low >= high) {
             return;

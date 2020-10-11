@@ -11,8 +11,8 @@
 
     <artifactId>ks-yonyou-web</artifactId>
     <properties>
-        <mwclient.version>5.2.1-RELEASE</mwclient.version>
-        <iris-springboot-support.version>5.2.1-RELEASE</iris-springboot-support.version>
+        <mwclient.version>5.2.5-RELEASE</mwclient.version>
+        <iris-springboot-support.version>5.2.5-RELEASE</iris-springboot-support.version>
         <diwork-sdk.version>4.0.6-SNAPSHOT</diwork-sdk.version>
         <uretail.version>1.0.14-u8cdev-SNAPSHOT</uretail.version>
         <yonyou-mdf-service.version>0.0.14-mdf-SNAPSHOT</yonyou-mdf-service.version>
@@ -72,11 +72,23 @@
         <dependency>
             <groupId>com.yonyou.iuap</groupId>
             <artifactId>iuap-org-api</artifactId>
-            <version>2.1.0-SNAPSHOT</version>
+            <version>4.2.0-SNAPSHOT</version>
             <exclusions>
                 <exclusion>
                     <artifactId>jackson-databind</artifactId>
                     <groupId>com.fasterxml.jackson.core</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>com.yonyou.iuap</groupId>
+            <artifactId>iuap-staff-api</artifactId>
+            <version>4.0.2-SNAPSHOT</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>tomcat-jdbc</artifactId>
+                    <groupId>org.apache.tomcat</groupId>
                 </exclusion>
             </exclusions>
         </dependency>

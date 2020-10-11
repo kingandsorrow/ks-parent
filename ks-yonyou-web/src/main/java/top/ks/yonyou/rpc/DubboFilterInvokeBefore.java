@@ -20,7 +20,7 @@ public class DubboFilterInvokeBefore implements IBeforeInvoke {
         //token online
         InvocationInfoProxy.setLocale("en_US");
 
-        String token = "bttNXRncytGVkVNejZ3QllsY0xiSUdvbTE2YjRQeXk3bjBZMkxvRUN3aGJTUzRFcTZTNUxGMnp6NzRTdE5KWTh1eno1RDkwUFV6NU1CVmxoQ21KbVhQM1RHRnk0a0RyQXp5c2FFN21DcDUwbStIUUJEN1c4OFF6cmlCY1RpYmhpbHpfX3U4Yy1zc28tZGFpbHkueXl1YXAuY29t__00a109501e771da822b115459b808438_1590051008403";
+        String token = InvocationInfoProxy.getToken();
 
         if (null == remoteInvocation.getAttribute("rpcToken") && null != token) {
             remoteInvocation.addAttribute("rpcToken", token);
