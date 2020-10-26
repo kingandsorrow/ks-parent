@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="top.ks.h5.web.mapper.SpidersImageMapper" >
+  <resultMap id="BaseResultMap" type="top.ks.h5.web.model.SpidersImage" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="file_url" property="fileUrl" jdbcType="VARCHAR" />
+    <result column="source_url" property="sourceUrl" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="name1" property="name1" jdbcType="VARCHAR" />
+    <result column="name2" property="name2" jdbcType="VARCHAR" />
+    <result column="name3" property="name3" jdbcType="VARCHAR" />
+    <result column="name4" property="name4" jdbcType="VARCHAR" />
+    <result column="name5" property="name5" jdbcType="VARCHAR" />
+    <result column="name6" property="name6" jdbcType="VARCHAR" />
+    <result column="name7" property="name7" jdbcType="VARCHAR" />
+    <result column="name8" property="name8" jdbcType="VARCHAR" />
+    <result column="name9" property="name9" jdbcType="VARCHAR" />
+    <result column="name10" property="name10" jdbcType="VARCHAR" />
+    <result column="read_count" property="readCount" jdbcType="INTEGER" />
+    <result column="ip_count" property="ipCount" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, file_url, source_url, name, name1, name2, name3, name4, name5, name6, name7, 
+    name8, name9, name10, read_count, ip_count, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from spiders_image
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from spiders_image
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="top.ks.h5.web.model.SpidersImage" >
+    insert into spiders_image (id, file_url, source_url, 
+      name, name1, name2, 
+      name3, name4, name5, 
+      name6, name7, name8, 
+      name9, name10, read_count, 
+      ip_count, create_time, update_time
+      )
+    values (#{id,jdbcType=BIGINT}, #{fileUrl,jdbcType=VARCHAR}, #{sourceUrl,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{name1,jdbcType=VARCHAR}, #{name2,jdbcType=VARCHAR}, 
+      #{name3,jdbcType=VARCHAR}, #{name4,jdbcType=VARCHAR}, #{name5,jdbcType=VARCHAR}, 
+      #{name6,jdbcType=VARCHAR}, #{name7,jdbcType=VARCHAR}, #{name8,jdbcType=VARCHAR}, 
+      #{name9,jdbcType=VARCHAR}, #{name10,jdbcType=VARCHAR}, #{readCount,jdbcType=INTEGER}, 
+      #{ipCount,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="top.ks.h5.web.model.SpidersImage" >
+    insert into spiders_image
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="fileUrl != null" >
+        file_url,
+      </if>
+      <if test="sourceUrl != null" >
+        source_url,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="name1 != null" >
+        name1,
+      </if>
+      <if test="name2 != null" >
+        name2,
+      </if>
+      <if test="name3 != null" >
+        name3,
+      </if>
+      <if test="name4 != null" >
+        name4,
+      </if>
+      <if test="name5 != null" >
+        name5,
+      </if>
+      <if test="name6 != null" >
+        name6,
+      </if>
+      <if test="name7 != null" >
+        name7,
+      </if>
+      <if test="name8 != null" >
+        name8,
+      </if>
+      <if test="name9 != null" >
+        name9,
+      </if>
+      <if test="name10 != null" >
+        name10,
+      </if>
+      <if test="readCount != null" >
+        read_count,
+      </if>
+      <if test="ipCount != null" >
+        ip_count,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="fileUrl != null" >
+        #{fileUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="sourceUrl != null" >
+        #{sourceUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="name1 != null" >
+        #{name1,jdbcType=VARCHAR},
+      </if>
+      <if test="name2 != null" >
+        #{name2,jdbcType=VARCHAR},
+      </if>
+      <if test="name3 != null" >
+        #{name3,jdbcType=VARCHAR},
+      </if>
+      <if test="name4 != null" >
+        #{name4,jdbcType=VARCHAR},
+      </if>
+      <if test="name5 != null" >
+        #{name5,jdbcType=VARCHAR},
+      </if>
+      <if test="name6 != null" >
+        #{name6,jdbcType=VARCHAR},
+      </if>
+      <if test="name7 != null" >
+        #{name7,jdbcType=VARCHAR},
+      </if>
+      <if test="name8 != null" >
+        #{name8,jdbcType=VARCHAR},
+      </if>
+      <if test="name9 != null" >
+        #{name9,jdbcType=VARCHAR},
+      </if>
+      <if test="name10 != null" >
+        #{name10,jdbcType=VARCHAR},
+      </if>
+      <if test="readCount != null" >
+        #{readCount,jdbcType=INTEGER},
+      </if>
+      <if test="ipCount != null" >
+        #{ipCount,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="top.ks.h5.web.model.SpidersImage" >
+    update spiders_image
+    <set >
+      <if test="fileUrl != null" >
+        file_url = #{fileUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="sourceUrl != null" >
+        source_url = #{sourceUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="name1 != null" >
+        name1 = #{name1,jdbcType=VARCHAR},
+      </if>
+      <if test="name2 != null" >
+        name2 = #{name2,jdbcType=VARCHAR},
+      </if>
+      <if test="name3 != null" >
+        name3 = #{name3,jdbcType=VARCHAR},
+      </if>
+      <if test="name4 != null" >
+        name4 = #{name4,jdbcType=VARCHAR},
+      </if>
+      <if test="name5 != null" >
+        name5 = #{name5,jdbcType=VARCHAR},
+      </if>
+      <if test="name6 != null" >
+        name6 = #{name6,jdbcType=VARCHAR},
+      </if>
+      <if test="name7 != null" >
+        name7 = #{name7,jdbcType=VARCHAR},
+      </if>
+      <if test="name8 != null" >
+        name8 = #{name8,jdbcType=VARCHAR},
+      </if>
+      <if test="name9 != null" >
+        name9 = #{name9,jdbcType=VARCHAR},
+      </if>
+      <if test="name10 != null" >
+        name10 = #{name10,jdbcType=VARCHAR},
+      </if>
+      <if test="readCount != null" >
+        read_count = #{readCount,jdbcType=INTEGER},
+      </if>
+      <if test="ipCount != null" >
+        ip_count = #{ipCount,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="top.ks.h5.web.model.SpidersImage" >
+    update spiders_image
+    set file_url = #{fileUrl,jdbcType=VARCHAR},
+      source_url = #{sourceUrl,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      name1 = #{name1,jdbcType=VARCHAR},
+      name2 = #{name2,jdbcType=VARCHAR},
+      name3 = #{name3,jdbcType=VARCHAR},
+      name4 = #{name4,jdbcType=VARCHAR},
+      name5 = #{name5,jdbcType=VARCHAR},
+      name6 = #{name6,jdbcType=VARCHAR},
+      name7 = #{name7,jdbcType=VARCHAR},
+      name8 = #{name8,jdbcType=VARCHAR},
+      name9 = #{name9,jdbcType=VARCHAR},
+      name10 = #{name10,jdbcType=VARCHAR},
+      read_count = #{readCount,jdbcType=INTEGER},
+      ip_count = #{ipCount,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectBySourceUrl" parameterType="String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from spiders_image
+    where source_url = #{sourceUrl,jdbcType=VARCHAR} limit 0,1
+  </select>
+</mapper>

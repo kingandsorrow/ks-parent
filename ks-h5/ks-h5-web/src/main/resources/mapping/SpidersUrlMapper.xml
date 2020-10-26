@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.ks.h5.web.mapper.SpidersUrlMapper">
+    <resultMap id="BaseResultMap" type="top.ks.h5.web.model.SpidersUrl">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="url" jdbcType="VARCHAR" property="url"/>
+        <result column="url_status" jdbcType="TINYINT" property="urlStatus"/>
+        <result column="img_status" jdbcType="TINYINT" property="imgStatus"/>
+        <result column="source_url" jdbcType="VARCHAR" property="sourceUrl"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, url, url_status, img_status, source_url, create_time
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from spiders_url
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete
+        from spiders_url
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="top.ks.h5.web.model.SpidersUrl">
+        insert into spiders_url (id, url, url_status,
+                                 img_status, source_url, create_time)
+        values (#{id,jdbcType=BIGINT}, #{url,jdbcType=VARCHAR}, #{urlStatus,jdbcType=TINYINT},
+                #{imgStatus,jdbcType=TINYINT}, #{sourceUrl,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})
+    </insert>
+    <insert id="insertSelective" parameterType="top.ks.h5.web.model.SpidersUrl">
+        insert into spiders_url
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="url != null">
+                url,
+            </if>
+            <if test="urlStatus != null">
+                url_status,
+            </if>
+            <if test="imgStatus != null">
+                img_status,
+            </if>
+            <if test="sourceUrl != null">
+                source_url,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="url != null">
+                #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="urlStatus != null">
+                #{urlStatus,jdbcType=TINYINT},
+            </if>
+            <if test="imgStatus != null">
+                #{imgStatus,jdbcType=TINYINT},
+            </if>
+            <if test="sourceUrl != null">
+                #{sourceUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="top.ks.h5.web.model.SpidersUrl">
+        update spiders_url
+        <set>
+            <if test="url != null">
+                url = #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="urlStatus != null">
+                url_status = #{urlStatus,jdbcType=TINYINT},
+            </if>
+            <if test="imgStatus != null">
+                img_status = #{imgStatus,jdbcType=TINYINT},
+            </if>
+            <if test="sourceUrl != null">
+                source_url = #{sourceUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="top.ks.h5.web.model.SpidersUrl">
+        update spiders_url
+        set url         = #{url,jdbcType=VARCHAR},
+            url_status  = #{urlStatus,jdbcType=TINYINT},
+            img_status  = #{imgStatus,jdbcType=TINYINT},
+            source_url  = #{sourceUrl,jdbcType=VARCHAR},
+            create_time = #{createTime,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <select id="selectByUrl" parameterType="String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from spiders_url
+        where url = #{url,jdbcType=VARCHAR} limit 0,1
+    </select>
+    <!--根据状态-->
+    <select id="selectByStatus" parameterType="Map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from spiders_url
+        where 1=1
+        <if test="urlStatus!=null">
+            and url_status = #{urlStatus,jdbcType=TINYINT}
+        </if>
+        <if test="imgStatus!=null">
+            and img_status = #{imgStatus,jdbcType=TINYINT}
+        </if>
+        limit 0,1
+    </select>
+</mapper>
