@@ -52,16 +52,16 @@ public class TestDelegate {
     @Autowired
     private StaffBizApi staffBizApi;
 
-    /*@Autowired
-    private IApplicationCacheService iApplicationCacheService;*/
+    @Autowired
+    private IApplicationCacheService iApplicationCacheService;
 
 
-    /*@Test
+    @Test
     public void test4() {
-        String tenantId = "aa16krcl";
+        String tenantId = "qjvl9bqo";
         List<ApplicationVO> applicationVOS = iApplicationCacheService.findByTenantId(tenantId);
         System.out.println(JSON.toJSONString(applicationVOS));
-    }*/
+    }
 
     @Test
     public void test3() {
@@ -132,10 +132,10 @@ public class TestDelegate {
     @Test
     public void testDelegateList() throws BaseDocException {
         try {
-            String tenantId = "ev3qqwud";//友互通租户id
+            String tenantId = "czqne4bp";//友互通租户id
             String sysId = "diwork"; // 默认填diwork
             List<String> orgIds = new ArrayList<>();
-            orgIds.add("1746246833410304");//填组织id
+            orgIds.add("1293284340044032");//填组织id
             BizDelegateQueryParam bizDelegateQueryParam = new BizDelegateQueryParam();
             bizDelegateQueryParam.setIdList(orgIds);
             bizDelegateQueryParam.setDefault(false);// 如果为true则只查默认的一条数据，否则根据组织id查所有

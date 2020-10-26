@@ -5,7 +5,9 @@ import com.yonyou.iuap.bd.common.exception.BaseDocException;
 import com.yonyou.iuap.bd.pub.param.ConditionVO;
 import com.yonyou.iuap.bd.pub.param.Operator;
 import com.yonyou.iuap.data.entity.dto.FuncOrg;
+import com.yonyou.iuap.data.entity.dto.OrgAgg;
 import com.yonyou.iuap.data.service.itf.FuncOrgDataQryService;
+import com.yonyou.iuap.data.service.itf.OrgUnitDataQryService;
 import com.yonyou.iuap.enumeration.org.OrgFunc;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
@@ -28,10 +30,18 @@ public class TestOrgService {
 
     @Autowired
     private FuncOrgDataQryService funcOrgDataQryService;
+    @Autowired
+    private OrgUnitDataQryService orgUnitDataQryService;
 
     @Test
     public void test1() throws BaseDocException {
         FuncOrg funcOrg = funcOrgDataQryService.getById("1900923657998592", "czqne4bp", "diwork", OrgFunc.ADMIN_ORG.getCode(), new String[]{FuncOrgDataQryService.SOURCE_HR_SIGN});
+        System.out.println(JSON.toJSON(funcOrg));
+    }
+
+    @Test
+    public void test3() throws BaseDocException {
+        OrgAgg funcOrg = orgUnitDataQryService.getById("1971037920121344", "tsh7gkxd", "diwork", true);
         System.out.println(JSON.toJSON(funcOrg));
     }
 

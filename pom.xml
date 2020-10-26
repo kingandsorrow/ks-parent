@@ -11,14 +11,12 @@
     <modules>
         <module>ks-cy-web</module>
         <module>ks-common</module>
-        <module>ks-client</module>
         <module>ks-sso</module>
         <module>ks-oss</module>
-        <module>ks-order</module>
-        <module>ks-rocketmq</module>
         <module>ks-redis</module>
         <module>ks-yonyou-web</module>
         <module>ks-base</module>
+        <module>ks-h5</module>
     </modules>
     <properties>
         <!--90repo   releases-->
