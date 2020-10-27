@@ -4,7 +4,6 @@ import com.xxl.job.core.biz.model.ReturnT;
 import com.xxl.job.core.handler.annotation.XxlJob;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
-import top.ks.common.constant.Const;
 import top.ks.h5.web.constanst.H5Const;
 import top.ks.h5.web.mapper.SpidersUrlMapper;
 import top.ks.h5.web.mapper.impl.SpidersUrlMapperImpl;
