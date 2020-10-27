@@ -121,6 +121,7 @@
         <if test="imgStatus!=null">
             and img_status = #{imgStatus,jdbcType=TINYINT}
         </if>
+        order by create_time asc
         limit 0,1
     </select>
 </mapper>

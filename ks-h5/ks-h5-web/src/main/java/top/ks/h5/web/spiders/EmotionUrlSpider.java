@@ -45,6 +45,6 @@ public class EmotionUrlSpider implements PageProcessor {
 
     @Override
     public Site getSite() {
-        return site;
+        return this.site;
     }
 }

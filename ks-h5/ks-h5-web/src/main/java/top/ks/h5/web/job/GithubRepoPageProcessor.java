@@ -36,41 +36,6 @@ public class GithubRepoPageProcessor implements PageProcessor {
         //List<String> urls = page.getHtml().xpath("img[@class='ui image lazy']").$(".image","data-original").all();
         Selectable selectable = page.getHtml().xpath("img[@class='ui image lazy']");
         //1、存储页面找到的url
-        for (Selectable table : selectable.nodes()) {
-            String imgUrl = table.$(".image", "data-original").toString();
-            if (StringUtils.isEmpty(imgUrl)) {
-                continue;
-            }
-            SpidersImage spidersImageDb = spidersImgMapper.selectBySourceUrl(imgUrl);
-            if (spidersImageDb != null) {
-                continue;
-            }
-            String imgtitle = table.$(".image", "title").toString();
-            Map<String, String> map = DownloadUtils.generFilePath("/Users/birongjun/Downloads");
-            long id = new SnowFlakeUtil(0, 1).nextId();
-            String imgCompleteUrl = map.get(DownloadUtils.COMPLETE_PATH);
-            String imgReleateUrl = map.get(DownloadUtils.RELATIVE_PATH);
-            String imgLast = imgUrl.substring(imgUrl.lastIndexOf("."));
-            DownloadUtils.dUrlImg(imgUrl, imgCompleteUrl + id + imgLast);
-            SpidersImage spidersImage = new SpidersImage();
-            spidersImage.setCreateTime(new Date());
-            spidersImage.setFileUrl(imgReleateUrl + id + imgLast);
-            spidersImage.setId(id);
-            spidersImage.setName(imgtitle);
-            spidersImage.setSourceUrl(imgUrl);
-            spidersImage.setReadCount(0);
-            spidersImage.setIpCount(0);
-            spidersImage.setCreateTime(new Date());
-            spidersImage.setUpdateTime(new Date());
-            spidersImgMapper.insertSelective(spidersImage);
-            try {
-                ImgEsService imgEsService = new ImgEsServiceImpl();
-                UpdateResponse updateResponse = imgEsService.upsertData(spidersImage);
-                log.info(String.format("birjc GithubRepoPageProcessor.process:: %s, %s", "updateResponse is.." + JSON.toJSONString(updateResponse), ""));
-            } catch (Exception e) {
-                log.error(String.format("birjc GithubRepoPageProcessor.process:: %s, %s", "system error::" + e.getMessage(), e));
-            }
-        }
     }
 
     @Override
