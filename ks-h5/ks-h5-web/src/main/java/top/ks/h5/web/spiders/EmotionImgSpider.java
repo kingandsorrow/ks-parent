@@ -17,11 +17,21 @@ import us.codecraft.webmagic.selector.Selectable;
 
 import java.util.Date;
 import java.util.Map;
+
 @Slf4j
 public class EmotionImgSpider implements PageProcessor {
 
+    private String preFixImg = null;
+
     private Site site = Site.me().setRetryTimes(3).setSleepTime(1000).setTimeOut(10000);
 
+    public EmotionImgSpider(String preFixImg) {
+        this.preFixImg = preFixImg;
+    }
+
+    public EmotionImgSpider() {
+
+    }
 
     @Override
     public void process(Page page) {
@@ -38,7 +48,8 @@ public class EmotionImgSpider implements PageProcessor {
                 continue;
             }
             String imgtitle = table.$(".image", "title").toString();
-            Map<String, String> map = DownloadUtils.generFilePath("/Users/birongjun/Downloads");
+            // /Users/birongjun/Downloads
+            Map<String, String> map = DownloadUtils.generFilePath(this.preFixImg);
             long id = new SnowFlakeUtil(0, 1).nextId();
             String imgCompleteUrl = map.get(DownloadUtils.COMPLETE_PATH);
             String imgReleateUrl = map.get(DownloadUtils.RELATIVE_PATH);

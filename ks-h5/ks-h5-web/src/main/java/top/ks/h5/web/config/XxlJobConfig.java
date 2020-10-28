@@ -1,6 +1,8 @@
 package top.ks.h5.web.config;
 
 import com.xxl.job.core.executor.impl.XxlJobSpringExecutor;
+import lombok.Getter;
+import lombok.Setter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -12,6 +14,8 @@ import org.springframework.context.annotation.Configuration;
  *
  * @author xuxueli 2017-04-28
  */
+@Getter
+@Setter
 @Configuration
 public class XxlJobConfig {
     private Logger logger = LoggerFactory.getLogger(XxlJobConfig.class);
@@ -39,6 +43,8 @@ public class XxlJobConfig {
 
     @Value("${xxl.job.executor.logretentiondays}")
     private int logRetentionDays;
+    @Value("${pre.fix.img}")
+    private String preFixImg;
 
 
     @Bean

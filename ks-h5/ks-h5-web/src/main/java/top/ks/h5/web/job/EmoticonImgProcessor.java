@@ -3,7 +3,9 @@ package top.ks.h5.web.job;
 import com.xxl.job.core.biz.model.ReturnT;
 import com.xxl.job.core.handler.annotation.XxlJob;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import top.ks.h5.web.config.XxlJobConfig;
 import top.ks.h5.web.constanst.H5Const;
 import top.ks.h5.web.mapper.SpidersImageMapper;
 import top.ks.h5.web.mapper.SpidersUrlMapper;
@@ -16,7 +18,8 @@ import us.codecraft.webmagic.Spider;
 
 @Component
 public class EmoticonImgProcessor {
-
+    @Autowired
+    private XxlJobConfig xxlJobConfig;
 
     @XxlJob("emoticonImgHandler")
     public ReturnT<String> emoticonHandler(String param) throws Exception {
@@ -30,7 +33,7 @@ public class EmoticonImgProcessor {
         spidersUrl.setImgStatus(H5Const.STATUS_ONE);
         int row1 = spidersUrlMapper.updateByPrimaryKeySelective(spidersUrl);
         //3.开始爬虫链接
-        Spider.create(new EmotionImgSpider()).addUrl(spidersUrl.getUrl()).thread(5).run();
+        Spider.create(new EmotionImgSpider(xxlJobConfig.getPreFixImg())).addUrl(spidersUrl.getUrl()).thread(5).run();
         //4.更新为已经处理完成
         spidersUrl.setImgStatus(H5Const.STATUS_TWO);
         int row2 = spidersUrlMapper.updateByPrimaryKeySelective(spidersUrl);
