@@ -58,7 +58,9 @@ public class SpidersUrlMapperImpl implements SpidersUrlMapper {
     public int updateByPrimaryKeySelective(SpidersUrl record) {
         SqlSession session = MyBatisUtil.getSession();
         try {
-            return session.update(namespace + "updateByPrimaryKeySelective", record);
+            int row = session.update(namespace + "updateByPrimaryKeySelective", record);
+            session.commit();
+            return row;
         } catch (Exception e) {
             log.error(String.format("birjc SpidersUrlMapperImpl.updateByPrimaryKeySelective:: %s, %s", "system error::" + e.getMessage(), e));
         } finally {

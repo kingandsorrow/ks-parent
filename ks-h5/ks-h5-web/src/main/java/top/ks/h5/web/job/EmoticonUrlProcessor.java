@@ -34,4 +34,9 @@ public class EmoticonUrlProcessor {
         return ReturnT.SUCCESS;
     }
 
+    public static void main(String[] args) throws Exception {
+        EmoticonUrlProcessor emoticonUrlProcessor = new EmoticonUrlProcessor();
+        emoticonUrlProcessor.emoticonHandler(null);
+    }
+
 }
