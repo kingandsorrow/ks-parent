@@ -53,6 +53,18 @@ public class TestOrgService {
         List<FuncOrg> funcOrgs = funcOrgDataQryService.listByCondition(conditionVOS, null, "en3ova8g", "diwork", OrgFunc.ADMIN_ORG.getCode());
         System.out.println(funcOrgs);
     }
+    @Test
+    public void test4() throws BaseDocException {
+        try{
+            List<String> list = new ArrayList<>(Arrays.asList("1984005349216512","1984005350330624","1985588670189824", "1985612186439936", "1985731718091008", "1986659092517120"));
+            List<Integer> list1 = new ArrayList<>(Arrays.asList(0,1,2));
+            List<OrgAgg> orgAggs = orgUnitDataQryService.listByIds(list, list1, "u1ddi6qy", "diwork",true);
+            System.out.println(orgAggs);
+        }catch(Exception e){
+            log.error(String.format("birjc TestOrgService.test4:: %s, %s", "system error::"+e.getMessage(),e));
+        }
+
+    }
 
     /**
      * @param :
