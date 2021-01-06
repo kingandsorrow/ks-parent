@@ -72,14 +72,6 @@ public class TestOrgService {
         }
     }
 
-*
-     * @param :
-     * @return :
-     * @Method :
-     * @Description : @ApiParam(name = "ids",description = "主键列表") List<String> var1, @ApiParam(name = "statusList",description = "状态列表，0初始化，1启用，2停用；此参数为空，默认查询启用") List<Integer> var2, @ApiParam(name = "tenantId",description = "租户标识") String var3, @ApiParam(name = "sysId",description = "系统标识") String var4, @ApiParam(name = "includeFunOrg",description = "是否包含职能组织") boolean var5
-     * @author : birjc
-     * @CreateDate : 2020-12-31 13:39
-
 
     @Test
     public void test10() throws BaseDocException {
@@ -149,23 +141,6 @@ public class TestOrgService {
     }
 
     @Test
-    public void test9() {
-        //String tenantId, String userId, String isolateType,
-        //        List<String> resourceIds
-String tenantId="ohgfkm6i";
-        String userId ="4c4c966a-b9c1-4fc1-bada-1e2aa7fa98e2";
-        List<String> resources = new ArrayList<>();
-        resources.add("666666");
-        resources.add("1986876394115328");
-        resources.add("1986893249171712");
-        resources.add("1986894553420032");
-        resources.add("child://1985870590431488");
-        OrgDeptVO orgDeptVO = iServiceIsolateExtensionService.calculateOrgDeptByRule(tenantId,userId,"orgdept",resources);
-        System.out.println(orgDeptVO);
-
-    }
-
-    @Test
     public void test7() throws BaseDocException {
         String tenantId = "i2whps0k";
         String sysId = "diwork";
@@ -218,13 +193,6 @@ String tenantId="ohgfkm6i";
         }
     }
 
-*
-     * @param :
-     * @return :
-     * @Method :
-     * @Description : 组织启用条件 0未启用 1启用 2停用 in 条件
-     * @author : birjc
-     * @CreateDate : 2020-05-29 11:08
 
 
     private ConditionVO getCodeConditionVO() {
@@ -241,14 +209,6 @@ String tenantId="ohgfkm6i";
         enableVO.setConditionList(values);
         return enableVO;
     }
-
-*
-     * @param :
-     * @return :
-     * @Method :
-     * @Description : 部门条件
-     * @author : birjc
-     * @CreateDate : 2020-05-29 11:08
 
 
     private ConditionVO getDeptConditionVO() {

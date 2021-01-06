@@ -199,36 +199,7 @@ public class TestController {
     }
 
 
-@RequestMapping("testOrgDubboService")
-    public List testOrgDubboService() {
-        List<Map<String, Object>> list = null;
-        try {
-            list = this.getDefaultExchange();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return list;
-    }
 
 
- private List<Map<String, Object>> getDefaultExchange() {
-        List<Map<String, Object>> list = null;
-        IBillQueryService iBillQueryService = DubboReferenceUtils.getReference("ucfbasedoc", null);
-        if (iBillQueryService == null) {
-            return null;
-        }
-        QueryConditionGroup group = QueryConditionGroup.and(QueryCondition.name("code").eq("01")).and(QueryCondition.name("isDefault").eq("1")).and(QueryCondition.name("dr").in(Arrays.asList(0, 2)));
-        QuerySchema querySchema = QuerySchema.create().addSelect("id,name").addCondition(group);
-        try {
-            list = iBillQueryService.query("bd.exchangeRate.ExchangeRateTypeVO", querySchema.toString());
-            if (com.alibaba.dubbo.common.utils.CollectionUtils.isNotEmpty(list)) {
-                return list;
-            }
-            return null;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
 
 }

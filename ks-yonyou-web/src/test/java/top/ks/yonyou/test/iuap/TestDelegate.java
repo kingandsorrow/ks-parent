@@ -143,7 +143,6 @@ public class TestDelegate {
             //根据工厂组织id查询生产领料委托关系列表
             List<BizDelegate> bizDelegates = bizDelegateApi.listPickDeglistByFacId(bizDelegateQueryParam, tenantId, sysId);
 //*
-/根据库存组织id查询生产领料委托关系列表
             List<BizDelegate> bizDelegates1 = bizDelegateApi.listPickDeglistByInvId(bizDelegateQueryParam, tenantId, sysId);
             // 根据
             List<BizDelegate> bizDelegates2 = bizDelegateApi.listProdStDeglistByFacId(bizDelegateQueryParam, tenantId, sysId);
@@ -181,7 +180,6 @@ for (BizDelegate bizDelegate : bizDelegates2) {
             //根据工厂组织id查询生产领料委托关系列表
             List<BizDelegate> bizDelegates = bizDelegateApi.listPickDeglistByFacId(bizDelegateQueryParam, tenantId, sysId);
 //*
-/根据库存组织id查询生产领料委托关系列表
             List<BizDelegate> bizDelegates1 = bizDelegateApi.listPickDeglistByInvId(bizDelegateQueryParam, tenantId, sysId);
             // 根据
             List<BizDelegate> bizDelegates2 = bizDelegateApi.listProdStDeglistByFacId(bizDelegateQueryParam, tenantId, sysId);

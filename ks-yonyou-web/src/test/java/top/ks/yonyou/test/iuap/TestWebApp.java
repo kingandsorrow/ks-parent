@@ -1,6 +1,5 @@
 package top.ks.yonyou.test.iuap;
 
-import cn.hutool.core.lang.Func;
 import com.alibaba.fastjson.JSON;
 import com.yonyou.diwork.service.auth.IServiceIsolateService;
 import com.yonyou.iuap.admin.entity.bo.AdminOrg;
