@@ -13,7 +13,7 @@
     <properties>
         <mwclient.version>5.2.5-RELEASE</mwclient.version>
         <iris-springboot-support.version>5.2.5-RELEASE</iris-springboot-support.version>
-        <diwork-sdk.version>4.0.6-SNAPSHOT</diwork-sdk.version>
+        <diwork-sdk.version>4.0.8-SNAPSHOT</diwork-sdk.version>
         <uretail.version>1.0.14-u8cdev-SNAPSHOT</uretail.version>
         <yonyou-mdf-service.version>0.0.14-mdf-SNAPSHOT</yonyou-mdf-service.version>
     </properties>
@@ -29,21 +29,15 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        <!-- Spring Boot dependencies -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
+            <artifactId>spring-boot-starter-jdbc</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
-            <exclusions>
-                <exclusion>
-                    <artifactId>jackson-databind</artifactId>
-                    <groupId>com.fasterxml.jackson.core</groupId>
-                </exclusion>
-            </exclusions>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
         </dependency>
+
         <dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
@@ -72,7 +66,7 @@
         <dependency>
             <groupId>com.yonyou.iuap</groupId>
             <artifactId>iuap-org-api</artifactId>
-            <version>4.2.0-SNAPSHOT</version>
+            <version>4.1.4-SNAPSHOT</version>
             <exclusions>
                 <exclusion>
                     <artifactId>jackson-databind</artifactId>
@@ -93,6 +87,12 @@
             </exclusions>
         </dependency>
 
+        <dependency>
+            <groupId>com.yonyou.iuap</groupId>
+            <artifactId>iuap-org-sdk</artifactId>
+            <version>4.2.0-SNAPSHOT</version>
+        </dependency>
+
 
         <dependency>
             <groupId>com.yonyou.diwork</groupId>
@@ -110,6 +110,10 @@
                 <exclusion>
                     <artifactId>jackson-databind</artifactId>
                     <groupId>com.fasterxml.jackson.core</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>spring-jdbc</artifactId>
+                    <groupId>org.springframework</groupId>
                 </exclusion>
             </exclusions>
         </dependency>

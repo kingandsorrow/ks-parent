@@ -199,7 +199,7 @@ public class TestController {
     }
 
 
-    /*@RequestMapping("testOrgDubboService")
+@RequestMapping("testOrgDubboService")
     public List testOrgDubboService() {
         List<Map<String, Object>> list = null;
         try {
@@ -208,9 +208,10 @@ public class TestController {
             e.printStackTrace();
         }
         return list;
-    }*/
+    }
 
-   /* private List<Map<String, Object>> getDefaultExchange() {
+
+ private List<Map<String, Object>> getDefaultExchange() {
         List<Map<String, Object>> list = null;
         IBillQueryService iBillQueryService = DubboReferenceUtils.getReference("ucfbasedoc", null);
         if (iBillQueryService == null) {
@@ -228,5 +229,6 @@ public class TestController {
             e.printStackTrace();
             return null;
         }
-    }*/
+    }
+
 }

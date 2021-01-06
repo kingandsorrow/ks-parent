@@ -17,6 +17,7 @@
         <module>ks-yonyou-web</module>
         <module>ks-base</module>
         <module>ks-h5</module>
+        <module>ks-yonyou-db</module>
     </modules>
     <properties>
         <!--90repo   releases-->
@@ -102,6 +103,11 @@
             </dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-jdbc</artifactId>
+                <version>${spring.boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-tomcat</artifactId>
                 <version>${spring.boot.version}</version>
             </dependency>
@@ -151,6 +157,7 @@
                 <artifactId>mysql-connector-java</artifactId>
                 <version>${mysql.version}</version>
             </dependency>
+
             <!--pagehelper-->
             <dependency>
                 <groupId>com.github.pagehelper</groupId>

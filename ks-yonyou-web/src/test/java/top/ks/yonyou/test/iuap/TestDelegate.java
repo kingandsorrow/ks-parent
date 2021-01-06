@@ -142,11 +142,13 @@ public class TestDelegate {
             bizDelegateQueryParam.setStatusList(new ArrayList<Integer>(Arrays.asList(0, 1, 2)));
             //根据工厂组织id查询生产领料委托关系列表
             List<BizDelegate> bizDelegates = bizDelegateApi.listPickDeglistByFacId(bizDelegateQueryParam, tenantId, sysId);
-            /*//根据库存组织id查询生产领料委托关系列表
+//*
+/根据库存组织id查询生产领料委托关系列表
             List<BizDelegate> bizDelegates1 = bizDelegateApi.listPickDeglistByInvId(bizDelegateQueryParam, tenantId, sysId);
             // 根据
             List<BizDelegate> bizDelegates2 = bizDelegateApi.listProdStDeglistByFacId(bizDelegateQueryParam, tenantId, sysId);
-            List<BizDelegate> bizDelegates3 = bizDelegateApi.listProdStDeglistByInvId(bizDelegateQueryParam, tenantId, sysId);*/
+            List<BizDelegate> bizDelegates3 = bizDelegateApi.listProdStDeglistByInvId(bizDelegateQueryParam, tenantId, sysId);
+
             System.out.println(bizDelegates.size());
             //查询生产领料委托关系实体类
             for (BizDelegate bizDelegate : bizDelegates) {
@@ -154,10 +156,11 @@ public class TestDelegate {
                 System.out.println(JSON.toJSONString(pickingDelegate));
             }
             // 查询生产领料委托关系详情
-            /*for (BizDelegate bizDelegate : bizDelegates2) {
+for (BizDelegate bizDelegate : bizDelegates2) {
                  ProductStorageDelegate productStorageDelegate = (ProductStorageDelegate) bizDelegate;
                 System.out.println(JSON.toJSONString(productStorageDelegate));
-            }*/
+            }
+
         } catch (Exception e) {
             log.error("system exception:", e);
             log.error(String.format("birjc TestDelegate.testDelegateList:: %s, %s", "system error::" + e.getMessage(), ""));
@@ -177,11 +180,13 @@ public class TestDelegate {
             bizDelegateQueryParam.setStatusList(new ArrayList<Integer>(Arrays.asList(0, 1, 2)));
             //根据工厂组织id查询生产领料委托关系列表
             List<BizDelegate> bizDelegates = bizDelegateApi.listPickDeglistByFacId(bizDelegateQueryParam, tenantId, sysId);
-            /*//根据库存组织id查询生产领料委托关系列表
+//*
+/根据库存组织id查询生产领料委托关系列表
             List<BizDelegate> bizDelegates1 = bizDelegateApi.listPickDeglistByInvId(bizDelegateQueryParam, tenantId, sysId);
             // 根据
             List<BizDelegate> bizDelegates2 = bizDelegateApi.listProdStDeglistByFacId(bizDelegateQueryParam, tenantId, sysId);
-            List<BizDelegate> bizDelegates3 = bizDelegateApi.listProdStDeglistByInvId(bizDelegateQueryParam, tenantId, sysId);*/
+            List<BizDelegate> bizDelegates3 = bizDelegateApi.listProdStDeglistByInvId(bizDelegateQueryParam, tenantId, sysId);
+
             System.out.println(bizDelegates.size());
             //查询生产领料委托关系实体类
             for (BizDelegate bizDelegate : bizDelegates) {
@@ -189,10 +194,11 @@ public class TestDelegate {
                 System.out.println(JSON.toJSONString(pickingDelegate));
             }
             // 查询生产领料委托关系详情
-            /*for (BizDelegate bizDelegate : bizDelegates2) {
+for (BizDelegate bizDelegate : bizDelegates2) {
                  ProductStorageDelegate productStorageDelegate = (ProductStorageDelegate) bizDelegate;
                 System.out.println(JSON.toJSONString(productStorageDelegate));
-            }*/
+            }
+
         } catch (Exception e) {
             log.error("system exception:", e);
             log.error(String.format("birjc TestDelegate.testDelegateList:: %s, %s", "system error::" + e.getMessage(), ""));
