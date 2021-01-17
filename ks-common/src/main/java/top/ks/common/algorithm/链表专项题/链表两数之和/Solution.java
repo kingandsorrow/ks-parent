@@ -1,4 +1,4 @@
-package top.ks.common.algorithm.链表两数之和;
+package top.ks.common.algorithm.链表专项题.链表两数之和;
 
 public class Solution {
 

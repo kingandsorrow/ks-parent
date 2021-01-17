@@ -67,9 +67,9 @@ public class TestDb {
     @Test
     public void test2() {
         // 单据billnum
-        String billNum = "salesDelegatelist";
+        String billNum = "org_structure_tree_list";
         // 当前单据的servicecode
-        String parent_id = "HRORG0080";
+        String parent_id = "zzjgt";
         String sub_id = "GZTORG";
         Integer sortNum = 20;
         RowMapper<CommandVo> rowMapper =

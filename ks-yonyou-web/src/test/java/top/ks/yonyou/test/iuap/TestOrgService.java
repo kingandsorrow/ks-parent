@@ -11,10 +11,12 @@ import com.yonyou.iuap.bd.pub.param.Order;
 import com.yonyou.iuap.data.entity.dto.FuncOrg;
 import com.yonyou.iuap.data.entity.dto.OrgAgg;
 import com.yonyou.iuap.data.entity.dto.OrgPermissionDTO;
+import com.yonyou.iuap.data.service.itf.DelegateServiceApi;
 import com.yonyou.iuap.data.service.itf.FuncOrgDataQryService;
 import com.yonyou.iuap.data.service.itf.OrgUnitDataQryService;
 import com.yonyou.iuap.enumeration.org.OrgFunc;
 import com.yonyou.iuap.org.admin.dto.AdminOrg;
+import com.yonyou.iuap.org.biz.delegate.bo.PurchaseDelegate;
 import com.yonyou.iuap.org.entity.bo.Org;
 import com.yonyou.workbench.model.OrgDeptVO;
 import com.yonyou.workbench.model.OrgPermVO;
@@ -45,6 +47,8 @@ public class TestOrgService {
     private OrgUnitDataQryService orgUnitDataQryService;
     @Autowired
     private IServiceIsolateService iServiceIsolateService;
+    @Autowired
+    private DelegateServiceApi delegateServiceApi;
 
     @Test
     public void test1() throws BaseDocException {
@@ -80,6 +84,22 @@ public class TestOrgService {
             List<Integer> status = new ArrayList<>(Arrays.asList(0, 1, 2));
             List<OrgAgg> orgAggs = orgUnitDataQryService.listByIds(ids, status, "rmxzr14e", "diwork", true);
             System.out.println(orgAggs);
+        } catch (Exception e) {
+            log.error(String.format("birjc TestOrgService.test10:: %s, %s", "system error::" + e.getMessage(), e));
+        }
+    }
+
+    @Test
+    public void testdelegate1() throws BaseDocException {
+        try {
+            List<String> purchaseIds = new ArrayList<>();
+            List<String> inventoryIds = new ArrayList<>();
+            List<Integer> statusList = new ArrayList<>();
+            String tenantId = "lcuz0ebc";
+            String sysId = "diwork";
+            // @ApiParam(name = "purchaseIds",description = "采购组织主键") List<String> var1, @ApiParam(name = "inventoryIds",description = "库存组织主键") List<String> var2, @ApiParam(name = "statusList",description = "状态列表") List<Integer> var3, @ApiParam(name = "tenantId",description = "租户标识id") String var4, @ApiParam(name = "sysId",description = "系统标识") String var5
+            List<PurchaseDelegate> purchaseDelegates = delegateServiceApi.listPurDelegateByPursInvs(purchaseIds, inventoryIds, statusList, tenantId, sysId);
+            System.out.println(purchaseDelegates);
         } catch (Exception e) {
             log.error(String.format("birjc TestOrgService.test10:: %s, %s", "system error::" + e.getMessage(), e));
         }
@@ -192,7 +212,6 @@ public class TestOrgService {
             log.error(String.format("birjc TestOrgService.test4:: %s, %s", "system error::" + e.getMessage(), e));
         }
     }
-
 
 
     private ConditionVO getCodeConditionVO() {

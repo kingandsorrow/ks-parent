@@ -1,4 +1,4 @@
-package top.ks.common.algorithm.回文链表;
+package top.ks.common.algorithm.链表专项题.回文链表;
 
 /**
  * <b>类名称:</b>Solution<br/>

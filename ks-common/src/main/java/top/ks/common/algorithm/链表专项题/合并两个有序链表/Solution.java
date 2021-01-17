@@ -1,4 +1,4 @@
-package top.ks.common.algorithm.合并两个有序链表;
+package top.ks.common.algorithm.链表专项题.合并两个有序链表;
 
 public class Solution {
     static class ListNode {

@@ -1,4 +1,4 @@
-package top.ks.common.algorithm.链表倒数第k个节点;
+package top.ks.common.algorithm.链表专项题.链表倒数第k个节点;
 
 /**
  * <b>类名称:</b>Solution<br/>

@@ -1,4 +1,4 @@
-package top.ks.common.algorithm.扁平化多级双向链表;
+package top.ks.common.algorithm.链表专项题.扁平化多级双向链表;
 
 import java.util.LinkedList;
 
