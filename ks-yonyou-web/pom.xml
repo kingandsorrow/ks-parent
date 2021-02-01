@@ -53,7 +53,7 @@
         <dependency>
             <groupId>com.yonyou.iuap</groupId>
             <artifactId>iuap-org-api</artifactId>
-            <version>4.1.4-SNAPSHOT</version>
+            <version>4.1.4-RELEASE</version>
             <exclusions>
                 <exclusion>
                     <artifactId>jackson-databind</artifactId>
@@ -65,7 +65,7 @@
         <dependency>
             <groupId>com.yonyou.iuap</groupId>
             <artifactId>iuap-staff-api</artifactId>
-            <version>4.0.2-SNAPSHOT</version>
+            <version>4.1.4-RELEASE</version>
             <exclusions>
                 <exclusion>
                     <artifactId>tomcat-jdbc</artifactId>
@@ -78,6 +78,12 @@
             <groupId>com.yonyou.iuap</groupId>
             <artifactId>iuap-org-sdk</artifactId>
             <version>4.2.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.yonyou.ucf</groupId>
+            <artifactId>ucf-org-ref-api</artifactId>
+            <version>4.1.4-SNAPSHOT</version>
         </dependency>
 
 

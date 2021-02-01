@@ -36,7 +36,9 @@
           </div>
         </div>
         <div class="pop-item pop-last">
-          查看更多
+          <div class="last-main">
+              查看更多
+          </div>
         </div>
       </div>
     </div>
@@ -63,17 +65,19 @@
         display: flex;
         white-space: nowrap;
         margin-left: 1px;
-
         .pop-last {
-          padding-top: 15px;
           text-align: center;
-          background-color: #9ca1a8;
-          width: 58px;
-          margin: 0 auto;
-          font-size: 16px;
-          line-height: 20px;
-          white-space: normal !important;
-          margin-left: 3px !important;
+          background-color: #f5f5f5;
+          border: 0.05333rem solid #f5f5f5;
+          height: 2.74667rem;
+          .last-main {
+            width: 26.5px;
+            line-height: 21.5px;
+            font-size: 16px;
+            white-space: normal !important;
+            margin-top: 9.3px;
+
+          }
         }
 
         .pop-item {

@@ -5,9 +5,11 @@ import com.yonyou.diwork.exception.BusinessException;
 import com.yonyou.diwork.service.auth.IServiceIsolateExtensionService;
 import com.yonyou.diwork.service.auth.IServiceIsolateService;
 import com.yonyou.iuap.bd.common.exception.BaseDocException;
+import com.yonyou.iuap.bd.pub.page.PaginationDTO;
 import com.yonyou.iuap.bd.pub.param.ConditionVO;
 import com.yonyou.iuap.bd.pub.param.Operator;
 import com.yonyou.iuap.bd.pub.param.Order;
+import com.yonyou.iuap.context.InvocationInfoProxy;
 import com.yonyou.iuap.data.entity.dto.FuncOrg;
 import com.yonyou.iuap.data.entity.dto.OrgAgg;
 import com.yonyou.iuap.data.entity.dto.OrgPermissionDTO;
@@ -18,6 +20,7 @@ import com.yonyou.iuap.enumeration.org.OrgFunc;
 import com.yonyou.iuap.org.admin.dto.AdminOrg;
 import com.yonyou.iuap.org.biz.delegate.bo.PurchaseDelegate;
 import com.yonyou.iuap.org.entity.bo.Org;
+import com.yonyou.ucf.org.common.api.OrgComApi;
 import com.yonyou.workbench.model.OrgDeptVO;
 import com.yonyou.workbench.model.OrgPermVO;
 import com.yonyou.workbench.param.OrgEntryParam;
@@ -49,11 +52,37 @@ public class TestOrgService {
     private IServiceIsolateService iServiceIsolateService;
     @Autowired
     private DelegateServiceApi delegateServiceApi;
+    @Autowired
+    private OrgComApi orgComApi;
 
     @Test
     public void test1() throws BaseDocException {
         FuncOrg funcOrg = funcOrgDataQryService.getById("1900923657998592", "czqne4bp", "diwork", OrgFunc.ADMIN_ORG.getCode());
         System.out.println(JSON.toJSON(funcOrg));
+    }
+
+    @Test
+    public void test18() throws BaseDocException {
+        try {
+            List<Integer> statusList = new ArrayList<Integer>(Arrays.asList(0, 1, 2));
+            // @ApiParam(name = "id",description = "主键") String var1, @ApiParam(name = "statusList",description = "状态列表，0初始化，1启用，2停用；此参数为空，默认查询启用") List<Integer> var2, @ApiParam(name = "tenantId",description = "租户标识") String var3, @ApiParam(name = "sysId",description = "系统标识") String var4, @ApiParam(name = "includeCurrentNode",description = "是否包含当前节点") boolean var5, @ApiParam(name = "funcType",description = "职能类型编码") String var6) throws BaseDocException;
+            List<FuncOrg> funcOrgList = funcOrgDataQryService.listAllParentOrgById("1909113759388160", statusList, "td4z5vmi", "diwork", true, OrgFunc.ADMIN_ORG.getCode());
+            System.out.println(JSON.toJSON(funcOrgList));
+        } catch (Exception e) {
+            log.error(String.format("birjc TestOrgService.test18:: %s, %s", "system error::" + e.getMessage(), e));
+        }
+    }
+
+    @Test
+    public void test20() {
+        try {
+            List<ConditionVO> conditionVOS = new ArrayList<>();
+            List<Order> orders = new ArrayList<>();
+            PaginationDTO<FuncOrg> paginationDTO = funcOrgDataQryService.pagination(1, 50, conditionVOS, orders, "x30fk78m", "diwork", OrgFunc.ADMIN_ORG.getCode());
+            System.out.println(JSON.toJSONString(paginationDTO));
+        } catch (Exception e) {
+            log.error(String.format("birjc TestOrgService.test20:: %s, %s", "system error::" + e.getMessage(), e));
+        }
     }
 
     @Test
@@ -80,10 +109,24 @@ public class TestOrgService {
     @Test
     public void test10() throws BaseDocException {
         try {
+            InvocationInfoProxy.setToken("bttQnZaYTlyYTBXQ051MnVJSXN0clVSQVc3aGVHNTdWaERXbHZjdUoyaDVuYVMySW9UOEgzMEl5TWtIWitRcGRVQjJ1RDhlcHpHdWhVYTF5cjJBQzB3WmJlK3orYlIrbVd1YVNNMnVrejdWUU09X19ldWMueW9ueW91Y2xvdWQuY29t__5f5865dd74135b4f289c7b8f5ee2744b_1610638343980");
+
             List<String> ids = new ArrayList<>(Arrays.asList("303332"));
             List<Integer> status = new ArrayList<>(Arrays.asList(0, 1, 2));
             List<OrgAgg> orgAggs = orgUnitDataQryService.listByIds(ids, status, "rmxzr14e", "diwork", true);
             System.out.println(orgAggs);
+        } catch (Exception e) {
+            log.error(String.format("birjc TestOrgService.test10:: %s, %s", "system error::" + e.getMessage(), e));
+        }
+    }
+
+    @Test
+    public void test11() throws BaseDocException {
+        try {
+            InvocationInfoProxy.setToken("locale=zh_CN; Hm_lvt_6495ea4f6fbb47d0b926af4228140e91=1611644896; ARK_ID=JS2e3074045c7eabaf36c118d21110d7782e30; eudiqz=lzsrm3iy98b0ac72-9c3e-47ef-a584-d004ec8b01df+78594787; YKJ_IS_DIWORK=1; YKJ_DIWORK_DATA=%7B%22data%22%3A%7B%22is_diwork%22%3A1%2C%22cur_qzid%22%3A%2224161%22%7D%2C%22key%22%3A%227fe3c56e225e8ad74e1ecf1d3c52c276%22%7D; PHPSESSID=abd8fo8c7ijcplg79vh9icl49h; ck_safe_chaoke_csrf_token=68dfe32aab917f481b71eb4694eb2234; ARK_STARTUP=eyJTVEFSVFVQIjp0cnVlLCJTVEFSVFVQVElNRSI6IjIwMjEtMDEtMjYgMTU6MjI6MTIuMTA2In0%3D; orgstatus=true; businessDate=2021-01-26; Hm_lpvt_6495ea4f6fbb47d0b926af4228140e91=1611645929; at=2d5de952-ba89-4643-af96-a2f98cb041e8; yonyou_uid=e84d2e55-48a3-4349-8d5e-c50e1587b793; yonyou_uname=13811085326; JSESSIONID=node0v3fjezfxaz473ev1gapg64p44401.node0; yht_username_diwork=ST-19184-wYpD1Hjy7vnp4Y0Y12B5-u8c-user-daily.yyuap.com__e84d2e55-48a3-4349-8d5e-c50e1587b793; yht_usertoken_diwork=uNoB7DkJbwXx80bULE5XXh%2B3GVUkMWDfD9v47y4DOFY5QNw3wZTzfEddSHBHq5ijkrapn%2BmiYjxVrCWsa%2FhQcQ%3D%3D; wb_at=LMjnvnuqjvRo6nAixtumoqRmRno4rjtubjtrdqjcZhkxkxxtZokbnl; locale=zh_CN; yht_access_token=bttS2c4T0RBeHJOZ3BTUVBUZDhkTXR2bCtnelN4N203OW56WFMwcFR6QXFMTURZZGc1bHhPUGhGUytaMUo4R0QxSDFoTnNNNVdzcytTZVArUVZMd3duMHpHRnk0a0RyQXp5c2FFN21DcDUwbStIUUJEN1c4OFF6cmlCY1RpYmhpbHpfX3U4Yy1zc28tZGFpbHkueXl1YXAuY29t__736cf8857d13149cc14fde766127d1ee_1611646074386; tenantid=aodu0hnj; isdiwork=false; acw_tc=2760827416116467082524753e58d072b0ae9481e20d3554da82586a36e052; FZ_STROAGE.yyuap.com=eyJBUktTVVBFUiI6eyJ0ZW5hbnRfaWQiOiJhb2R1MGhuaiIsImNvbXBhbnkiOiIxMDE15pel5bi45LiT5Lia5aSaIiwidXNlcl9pZCI6ImU4NGQyZTU1LTQ4YTMtNDM0OS04ZDVlLWM1MGUxNTg3Yjc5MyIsInVzZXJfbmFtZSI6IjEzODExMDg1MzI2IiwicHJvZHVjdF9pZCI6InU4YzMuMCIsInByb2R1Y3RfbmFtZSI6IllvblN1aXRlIn0sIlNFRVNJT05JRCI6ImE0NjIxMjZkMzFlMjBkZGIiLCJTRUVTSU9OREFURSI6MTYxMTY0ODA0NTk2MCwiQU5TQVBQSUQiOiJhZDliOTEwZjA3MTA5NTJmIiwiQU5TJERFQlVHIjoyLCJBTlNVUExPQURVUkwiOiJodHRwczovL2FydC5kaXdvcmsuY29tLyIsIkZSSVNUREFZIjoiMjAyMTAxMjYiLCJGUklTVElNRSI6ZmFsc2UsIkFSS19MT0dJTklEIjoiZTg0ZDJlNTUtNDhhMy00MzQ5LThkNWUtYzUwZTE1ODdiNzkzIiwiQVJLX0lEIjoiSlMyZTMwNzQwNDVjN2VhYmFmMzZjMTE4ZDIxMTEwZDc3ODJlMzAiLCJBUktGUklTVFBST0ZJTEUiOiIyMDIxLTAxLTI2IDE1OjA4OjIwLjA3NSIsIkFOU1NFUlZFUlRJTUUiOi00NTB9");
+            InvocationInfoProxy.setTenantid("aodu0hnj");
+            List<String> strings = orgComApi.funcOrgCodes();
+            System.out.println(strings);
         } catch (Exception e) {
             log.error(String.format("birjc TestOrgService.test10:: %s, %s", "system error::" + e.getMessage(), e));
         }

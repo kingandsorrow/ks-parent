@@ -10,6 +10,12 @@ public class ToolbarItem implements Serializable {
 
     private String text_resid;
 
+    private String name;
+
+    private String billnumber;
+
+    private String authid;
+
     public String getCommand() {
         return command;
     }
@@ -32,5 +38,29 @@ public class ToolbarItem implements Serializable {
 
     public void setText_resid(String text_resid) {
         this.text_resid = text_resid;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getBillnumber() {
+        return billnumber;
+    }
+
+    public void setBillnumber(String billnumber) {
+        this.billnumber = billnumber;
+    }
+
+    public String getAuthid() {
+        return authid;
+    }
+
+    public void setAuthid(String authid) {
+        this.authid = authid;
     }
 }

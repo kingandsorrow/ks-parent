@@ -10,6 +10,8 @@ public class CommandVo implements Serializable {
 
     private String billnumber;
 
+    private String authid;
+
 
     public String getName() {
         return name;
@@ -33,5 +35,13 @@ public class CommandVo implements Serializable {
 
     public void setBillnumber(String billnumber) {
         this.billnumber = billnumber;
+    }
+
+    public String getAuthid() {
+        return authid;
+    }
+
+    public void setAuthid(String authid) {
+        this.authid = authid;
     }
 }
