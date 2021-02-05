@@ -18,6 +18,7 @@
         <module>ks-base</module>
         <module>ks-h5</module>
         <module>ks-yonyou-db</module>
+        <module>ks-learn</module>
     </modules>
     <properties>
         <!--90repo   releases-->

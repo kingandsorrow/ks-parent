@@ -213,7 +213,7 @@ public class TestDb {
     @Test
     public void test3() {
         // 单据billnum
-        String billNum = "bd_admindepttree";
+        String billNum = "org_func_sharing_setting_list";
         RowMapper<CommandVo> rowMapper =
                 new BeanPropertyRowMapper<CommandVo>(CommandVo.class);
         RowMapper<ToolbarItem> rowMapper1 =

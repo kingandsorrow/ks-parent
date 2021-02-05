@@ -5,7 +5,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.ThreadFactory;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
+
 @RestController
 public class ThreadController {
     @RequestMapping("/swapThread")
@@ -17,6 +22,12 @@ public class ThreadController {
         return "ok";
     }
 
+    @RequestMapping("/testThread")
+    public void testThread() {
+
+
+
+    }
 
 }
 

@@ -54,6 +54,14 @@ public class TestOrgService {
     private DelegateServiceApi delegateServiceApi;
     @Autowired
     private OrgComApi orgComApi;
+    @Autowired
+    private IServiceIsolateExtensionService iServiceIsolateExtensionService;
+
+    private void test16(){
+        List<String> list = new ArrayList<>();
+
+        iServiceIsolateExtensionService.calculateOrgDeptByRule("al5whxtd","db78dcad-ffa2-41ea-b6d8-e7ea507eb442","orgdept",list);
+    }
 
     @Test
     public void test1() throws BaseDocException {

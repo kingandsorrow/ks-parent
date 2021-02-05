@@ -99,7 +99,7 @@ public class AccountLoginServiceImpl implements LoginService {
      */
     private String createJWT(String ossAPiKey, String id, String issuer, String subject, long ttlMillis) {
 
-//The JWT signature algorithm we will be using to sign the token
+//The JWT signature 算法 we will be using to sign the token
         SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
 
         long nowMillis = System.currentTimeMillis();
