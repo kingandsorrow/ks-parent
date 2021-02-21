@@ -1,4 +1,4 @@
-package top.ks.learn.多线程.threadlocal学习;
+package top.ks.learn.多线程.c_ThreadLocal学习;
 
 import java.text.SimpleDateFormat;
 import java.util.Random;

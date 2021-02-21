@@ -11,5 +11,11 @@
 
     <artifactId>ks-learn</artifactId>
 
-
+    <developers>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.38</version>
+        </dependency>
+    </developers>
 </project>
