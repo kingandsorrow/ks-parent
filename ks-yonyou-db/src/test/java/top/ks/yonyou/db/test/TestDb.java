@@ -175,12 +175,96 @@ public class TestDb {
         return;
     }
 
+    /**
+     * @param :
+     * @return :
+     * @Method :
+     * @Description :
+     * @author : birjc
+     * @CreateDate : 2021-02-24 11:00
+     */
+    @Test
+    public void test12() {
+        // 单据billnum
+        String billNum = "org_center_card";
+        String pbillNum = "org_unit_tree_list";
+        // 当前单据的servicecode
+        String parent_id = "GZTORG001";
+        String sub_id = "GZTORG";
+        Integer sortNum = 20;
+        RowMapper<CommandVo> rowMapper =
+                new BeanPropertyRowMapper<CommandVo>(CommandVo.class);
+        RowMapper<ToolbarItem> rowMapper1 =
+                new BeanPropertyRowMapper<ToolbarItem>(ToolbarItem.class);
+        List<CommandVo> cs = this.jdbcTemplateOne.query("select name,action,billnumber,authid from bill_command where tenant_id='0' and  billnumber ='" + billNum + "'", rowMapper);
+        List<CommandVo> parentcs = this.jdbcTemplateOne.query("select name,action,billnumber,authid from bill_command where tenant_id='0' and  billnumber ='" + pbillNum + "'", rowMapper);
+        List<ToolbarItem> items = this.jdbcTemplateOne.query("select name,billnumber,command,text,text_resid,authid from bill_toolbaritem where tenant_id='0' and  billnumber ='" + billNum + "'", rowMapper1);
+        List<ToolbarItem> pitems = this.jdbcTemplateOne.query("select name,billnumber,command,text,text_resid,authid from bill_toolbaritem where tenant_id='0' and  billnumber ='" + pbillNum + "'", rowMapper1);
+        StringBuilder csSql = new StringBuilder();
+        StringBuilder itemsql = new StringBuilder();
+        // 处理commandVo
+        handleCardCommandVo(cs, parentcs, csSql);
+        handleCardItemVo(items, pitems, itemsql);
+        FileWriter fileWriter = new FileWriter("/Users/birongjun/Downloads/202101121454_birjc_" + billNum + "command.sql");
+        fileWriter.write(csSql.toString());
+        FileWriter fileWriter1 = new FileWriter("/Users/birongjun/Downloads/202101121455_birjc_" + billNum + "auth.sql");
+        fileWriter1.write(itemsql.toString());
+    }
+
+    /**
+     * @param :
+     * @return :
+     * @Method :
+     * @Description : 处理toolbaritem
+     * @author : birjc
+     * @CreateDate : 2021-02-24 11:30
+     */
+    private void handleCardItemVo(List<ToolbarItem> items, List<ToolbarItem> pitems, StringBuilder itemsql) {
+        for (ToolbarItem toolbarItem : items) {
+            for (ToolbarItem pitem : pitems) {
+                if (toolbarItem.getCommand().equals(pitem.getCommand())) {
+                    String sqlU = " update bill_toolbaritem set authid ='" + pitem.getAuthid() + "' where name='" + toolbarItem.getName() + "' and billnumber='" + toolbarItem.getBillnumber() + "';\n";
+                    itemsql.append(sqlU);
+                }
+            }
+        }
+    }
+
+    /**
+     * @param :
+     * @param csSql
+     * @return :
+     * @Method :
+     * @Description :
+     * @author : birjc
+     * @CreateDate : 2021-02-24 11:20
+     */
+    private void handleCardCommandVo(List<CommandVo> cs, List<CommandVo> parentcs, StringBuilder csSql) {
+
+        for (CommandVo commandVo : cs) {
+            for (CommandVo pcommandVo : parentcs) {
+                if (commandVo.getName().equals(pcommandVo.getName())) {
+                    String sqlU = " update bill_command set authid ='" + pcommandVo.getAuthid() + "' where name='" + commandVo.getName() + "' and action='" + commandVo.getAction() + "' and billnumber='" + commandVo.getBillnumber() + "';\n";
+                    csSql.append(sqlU);
+                }
+            }
+        }
+    }
+
+    /**
+     * @param :
+     * @return :
+     * @Method :
+     * @Description : 列表界面按钮权限
+     * @author : birjc
+     * @CreateDate : 2021-02-24 10:59
+     */
     @Test
     public void test2() {
         // 单据billnum
-        String billNum = "org_registergrouplist";
+        String billNum = "org_center_card";
         // 当前单据的servicecode
-        String parent_id = "znzc";
+        String parent_id = "GZTORG001";
         String sub_id = "GZTORG";
         Integer sortNum = 20;
         RowMapper<CommandVo> rowMapper =

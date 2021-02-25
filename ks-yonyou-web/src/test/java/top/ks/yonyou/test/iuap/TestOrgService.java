@@ -68,6 +68,14 @@ public class TestOrgService {
         FuncOrg funcOrg = funcOrgDataQryService.getById("1900923657998592", "czqne4bp", "diwork", OrgFunc.ADMIN_ORG.getCode());
         System.out.println(JSON.toJSON(funcOrg));
     }
+    @Test
+    public void test29() throws BaseDocException {
+        OrgFunc.INVENTORY_ORG.getCode();
+        List<String> ids = new ArrayList<>(Arrays.asList("303332")); //组织id
+        List<Integer> status = new ArrayList<>(Arrays.asList(0, 1, 2));// 状态 0未启用 1启用 2 停用
+        List<FuncOrg> funcOrg = funcOrgDataQryService.listByIds(ids,status, "czqne4bp", "diwork", OrgFunc.FINANCE_ORG.getCode());
+        System.out.println(JSON.toJSON(funcOrg));
+    }
 
     @Test
     public void test18() throws BaseDocException {
@@ -117,7 +125,6 @@ public class TestOrgService {
     @Test
     public void test10() throws BaseDocException {
         try {
-            InvocationInfoProxy.setToken("bttQnZaYTlyYTBXQ051MnVJSXN0clVSQVc3aGVHNTdWaERXbHZjdUoyaDVuYVMySW9UOEgzMEl5TWtIWitRcGRVQjJ1RDhlcHpHdWhVYTF5cjJBQzB3WmJlK3orYlIrbVd1YVNNMnVrejdWUU09X19ldWMueW9ueW91Y2xvdWQuY29t__5f5865dd74135b4f289c7b8f5ee2744b_1610638343980");
 
             List<String> ids = new ArrayList<>(Arrays.asList("303332"));
             List<Integer> status = new ArrayList<>(Arrays.asList(0, 1, 2));

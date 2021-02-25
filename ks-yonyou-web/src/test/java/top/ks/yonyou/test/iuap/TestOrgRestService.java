@@ -21,6 +21,118 @@ import java.util.*;
 
 @Slf4j
 public class TestOrgRestService {
+
+    @Test
+    public void orgFireEventTest1() throws BaseDocRestException {
+        String orgId = "2117313172508928";
+//        String url = "http://localhost:8083/org-u8c/rest/v1/org/fire/event";
+        String url = "https://bd.diwork.com/org/rest/v1/org/fire/event";
+//        String url = "https://u8cbd-daily.yyuap.com/org-u8c/rest/v1/org/fire/event";
+
+        Map<String, String> header = new HashMap<>();
+        header.put("userId", "yql_admin");
+        Map<String, String> map = new HashMap<>();
+        map.put("sysId", "diwork");
+        map.put("tenantId", "qyic8c7o"); // qyic8c7o hc6h4yne bqmmtzvy
+        map.put("type", "update");// add update disable
+//        map.put("enable", "2");
+        map.put("id", orgId);
+//        map.put("businessid", "3");
+//        map.put("orgType", "1");
+
+        String string = AuthHttpClientUtils.execGet(url, map, header);
+        System.out.println("调用结束：" + string);
+    }
+
+    @Test
+    public void deptFireEventTest1() throws BaseDocRestException {
+        String orgId = "1708469720944901";
+//        String url = "http://localhost:8083/org-u8c/rest/v1/org/fire/event";
+        String url = "https://bd.diwork.com/org/rest/v1/org/fire/event";
+//        String url = "https://u8cbd-daily.yyuap.com/org-u8c/rest/v1/org/fire/event";
+
+        Map<String, String> header = new HashMap<>();
+        header.put("userId", "yql_admin");
+        Map<String, String> map = new HashMap<>();
+        map.put("sysId", "diwork");
+        map.put("tenantId", "sncud5w2"); // qyic8c7o hc6h4yne bqmmtzvy
+        map.put("type", "update");// add update disable
+//        map.put("enable", "2");
+        map.put("id", orgId);
+//        map.put("businessid", "3");
+//        map.put("orgType", "1");
+
+        String string = AuthHttpClientUtils.execGet(url, map, header);
+        System.out.println("调用结束：" + string);
+    }
+
+    /**
+     * 组织部门事件发送（查询org_orgs表数据）
+     */
+    @Test
+    public void yqlOrgFireEventTest() throws BaseDocRestException {
+        String yqlOrgId = "e7181a5302374c9a917192e375a8e266";
+        String url = "http://localhost:8083/org-u8c/rest/v1/yqlorg/fire/event";
+
+        Map<String, String> header = new HashMap<>();
+        header.put("userId", "yql_admin");
+        Map<String, String> map = new HashMap<>();
+        map.put("sysId", "diwork");
+        map.put("tenantId", "k1ijybtt"); // qyic8c7o hc6h4yne bqmmtzvy
+        map.put("type", "update");// add update disable
+        map.put("id", yqlOrgId);
+//        map.put("enable", "1");
+//        map.put("businessid", "2");
+//        map.put("orgType", "1");
+
+        String string = AuthHttpClientUtils.execGet(url, map, header);
+        System.out.println("调用结束：" + string);
+    }
+
+    /**
+     * 组织部门事件发送（查询org_admin表数据）
+     */
+    @Test
+    public void orgFireEventTest() throws BaseDocRestException {
+        String orgId = "1865492281807104";
+        //String url = "http://localhost:8083/org-u8c/rest/v1/org/fire/event";
+//        String url = "https://bd.diwork.com/org/rest/v1/org/fire/event";
+        String url = "http://orgcenter-u8c.daily.app.yyuap.com/org-u8c/rest/v1/org/fire/event";
+
+        Map<String, String> header = new HashMap<>();
+        header.put("userId", "yql_admin");
+        Map<String, String> map = new HashMap<>();
+        map.put("sysId", "diwork");
+        map.put("tenantId", "lc2h5i1r"); // qyic8c7o hc6h4yne bqmmtzvy
+        map.put("type", "update");// add update disable
+        map.put("id", orgId);
+//        map.put("enable", "1");
+//        map.put("businessid", "1");
+//        map.put("orgType", "1");
+
+        String string = AuthHttpClientUtils.execGet(url, map, header);
+        System.out.println("调用结束：" + string);
+    }
+
+    /**
+     * 重新计算组织部门内部码
+     */
+    @Test
+    public void orgDataUpdateTest() throws BaseDocRestException {
+//        String url = "http://localhost:8083/org-u8c/rest/v1/ys/data";
+        String url = "https://bd.diwork.com/org/rest/v1/ys/data";
+//        String url = "https://bd.diwork.com/org-integrate/rest/v1/ys/data";
+
+        Map<String, String> header = new HashMap<>();
+        header.put("userId", "yql_admin");
+        Map<String, String> map = new HashMap<>();
+        map.put("sysId", "diwork");
+        map.put("tenantId", "f3otleip");// qyic8c7o bqmmtzvy sda6vebc
+
+        String string = AuthHttpClientUtils.execGet(url, map, header);
+        System.out.println("调用结束：" + string);
+    }
+
     @Test
     public void testOrgOne() {
         try {
@@ -96,7 +208,7 @@ public class TestOrgRestService {
 
     @Test
     public void testOrgRest4() throws BaseDocRestException {
-        AdminOrgService adminOrgService = OrgRestSingleton.getInst("b5c093ds", "diwork",
+        AdminOrgService adminOrgService = OrgRestSingleton.getInst("xha14j2x", "ssc_baozhang",
                 "f3ce959a-8e44-4b86-abbc-b06b23bb65c6", OrgRestParam.SOURCE_HR_SIGN).getBdRestService().getAdminOrgService();
         /*Condition condition = new Condition();
         ConditionVO enableCond = new ConditionVO("parentid", "2009621358760192", DataType.STRING, Operator.EQUAL);
@@ -106,6 +218,18 @@ public class TestOrgRestService {
 
         List<AdminOrg> adminOrgs = adminOrgService.listByIdList(new ArrayList<>(Arrays.asList("2047527984091392", "2013585813967104", "2013588403507456", "2039027296112896", "2009621358760192")), new ArrayList<>(Arrays.asList(1)));
         System.out.println(JSON.toJSONString(adminOrgs));
+    }
+
+    @Test
+    public void testOrgRestOne1() throws BaseDocRestException {
+        try {
+            AdminOrgService adminOrgService = OrgRestSingleton.getInst("xha14j2x", "ssc_baozhang",
+                    "f3ce959a-8e44-4b86-abbc-b06b23bb65c6", OrgRestParam.SOURCE_HR_SIGN).getBdRestService().getAdminOrgService();
+            AdminOrg adminOrgs = adminOrgService.getById("f5668553ae0343b081ee8521db5a2d46");
+            System.out.println(JSON.toJSONString(adminOrgs));
+        } catch (Exception e) {
+            log.error(String.format("birjc TestOrgRestService.testOrgRestOne1:: %s, %s", "system error::" + e.getMessage(), e));
+        }
     }
 
     @Test
