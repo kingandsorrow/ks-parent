@@ -1,4 +1,0 @@
-dubboContextFilter=com.yonyoucloud.uretail.dubbo.DubboContextFilter
-consumerContextFilter=com.yonyoucloud.uretail.dubbo.ConsumerContextFilter
-MDCLogDubboConsumerFilter=com.yonyou.iuap.ucf.log.filter.MDCLogDubboConsumerFilter
-MDCLogDubboProviderFilter=com.yonyou.iuap.ucf.log.filter.MDCLogDubboProviderFilter
