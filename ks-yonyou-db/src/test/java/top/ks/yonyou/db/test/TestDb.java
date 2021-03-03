@@ -144,7 +144,7 @@ public class TestDb {
         try {
             String dbTable = "bd_grade";
             String uniqueKey = "code";
-            String tenantId = " where tenantid='ru0dsil8'";
+            String tenantId = " where tenantid='nlqsl42m'";
             RowMapper<CommonVO> rowMapper =
                     new BeanPropertyRowMapper<CommonVO>(CommonVO.class);
             List<String> ids = this.jdbcTemplateOne.queryForList("select min(id) from " + dbTable + tenantId + "  group by " + uniqueKey + ",tenantid having count(id)>1", String.class);

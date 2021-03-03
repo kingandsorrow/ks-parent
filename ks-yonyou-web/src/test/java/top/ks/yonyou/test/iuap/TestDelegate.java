@@ -64,6 +64,14 @@ public class TestDelegate {
     }
 
     @Test
+    public void test41() throws BaseDocException {
+        String tenantId = "x400kv54";
+        List<String> str = new ArrayList<String>(Arrays.asList("2084326420960000"));
+        List<String> applicationVOS = bizDelegateApi.listAccountingDelegateFinanceOrgIdsByOrgUnitIdList(str, tenantId, "diwork");
+        System.out.println(JSON.toJSONString(applicationVOS));
+    }
+
+    @Test
     public void test3() {
         ComparisonTableParam comparisonTableParam = new ComparisonTableParam();
         List<String> orgPermissionList = new ArrayList<>();
@@ -84,7 +92,7 @@ public class TestDelegate {
             for (int i = 0; i < 4; i++) {
                 System.out.println(staffBizApi.getComparisonTable(comparisonTableParam, "q6ftkh61", "diwork"));
             }
-            System.out.println("");
+            System.out.println();
         } catch (Exception e) {
             log.error(String.format("birjc TestDelegate.test3:: %s, %s", "system error::" + e.getMessage(), e));
         }
@@ -155,8 +163,8 @@ public class TestDelegate {
                 System.out.println(JSON.toJSONString(pickingDelegate));
             }
             // 查询生产领料委托关系详情
-for (BizDelegate bizDelegate : bizDelegates2) {
-                 ProductStorageDelegate productStorageDelegate = (ProductStorageDelegate) bizDelegate;
+            for (BizDelegate bizDelegate : bizDelegates2) {
+                ProductStorageDelegate productStorageDelegate = (ProductStorageDelegate) bizDelegate;
                 System.out.println(JSON.toJSONString(productStorageDelegate));
             }
 
@@ -192,8 +200,8 @@ for (BizDelegate bizDelegate : bizDelegates2) {
                 System.out.println(JSON.toJSONString(pickingDelegate));
             }
             // 查询生产领料委托关系详情
-for (BizDelegate bizDelegate : bizDelegates2) {
-                 ProductStorageDelegate productStorageDelegate = (ProductStorageDelegate) bizDelegate;
+            for (BizDelegate bizDelegate : bizDelegates2) {
+                ProductStorageDelegate productStorageDelegate = (ProductStorageDelegate) bizDelegate;
                 System.out.println(JSON.toJSONString(productStorageDelegate));
             }
 

@@ -54,13 +54,9 @@ public class TestOrgService {
     private DelegateServiceApi delegateServiceApi;
     @Autowired
     private OrgComApi orgComApi;
-    @Autowired
-    private IServiceIsolateExtensionService iServiceIsolateExtensionService;
 
     private void test16(){
         List<String> list = new ArrayList<>();
-
-        iServiceIsolateExtensionService.calculateOrgDeptByRule("al5whxtd","db78dcad-ffa2-41ea-b6d8-e7ea507eb442","orgdept",list);
     }
 
     @Test
@@ -94,7 +90,7 @@ public class TestOrgService {
         try {
             List<ConditionVO> conditionVOS = new ArrayList<>();
             List<Order> orders = new ArrayList<>();
-            PaginationDTO<FuncOrg> paginationDTO = funcOrgDataQryService.pagination(1, 50, conditionVOS, orders, "x30fk78m", "diwork", OrgFunc.ADMIN_ORG.getCode());
+            PaginationDTO<FuncOrg> paginationDTO = funcOrgDataQryService.pagination(1, 50, conditionVOS, orders, "rjpdd6qn", "diwork", OrgFunc.ADMIN_ORG.getCode());
             System.out.println(JSON.toJSONString(paginationDTO));
         } catch (Exception e) {
             log.error(String.format("birjc TestOrgService.test20:: %s, %s", "system error::" + e.getMessage(), e));

@@ -1,10 +1,10 @@
-package top.ks.learn.算法.数组;
+package top.ks.learn.算法.数组.b快速排序;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
 
-public class b快速排序 {
+public class Solution {
 
     public static void main(String[] args) {
         Integer[] arrs = {6, 1, 2, 7, 9, 3, 4, 5, 10, 8};
