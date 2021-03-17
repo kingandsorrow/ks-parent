@@ -4,6 +4,7 @@ public class MyThread extends Thread {
 
     @Override
     public void run() {
+        int i = 10 / 0;
         System.out.println("start new thread!");
     }
 }

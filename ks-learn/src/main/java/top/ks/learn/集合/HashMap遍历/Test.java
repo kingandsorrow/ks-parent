@@ -39,6 +39,14 @@ public class Test {
         }
     }
 
+    /**
+     * @param :
+     * @return :
+     * @Method :
+     * @Description : 第二种模式
+     * @author : birjc
+     * @CreateDate : 2021-03-08 23:11
+     */
     public static void lambda(Map map) {
         map.keySet().removeIf(key -> "c".equals(key));
         map.forEach((key, val) -> {

@@ -7,10 +7,10 @@ import java.util.Stack;
 public class Solution {
 
     public static void main(String[] args) {
-        Integer[] arrs = {6, 1, 2, 7, 9, 3, 4, 5, 10, 8};
+        Integer[] arrs = {5, 2, 3, 1};
         //bubbleSort1(arrs);
         //quickSort1(arrs, 0, arrs.length - 1);
-        quickSort2(arrs, 0, arrs.length - 1);
+        quickSort1(arrs, 0, arrs.length - 1);
         System.out.println(arrs);
     }
 

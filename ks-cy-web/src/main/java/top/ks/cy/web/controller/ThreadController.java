@@ -28,7 +28,13 @@ public class ThreadController {
         ThreadLocal<Byte[]> localVariable = new ThreadLocal<Byte[]>();
         localVariable.set(new Byte[4096 * 1024]);// 为线程添加变量
         return "ok";
+    }
 
+    @RequestMapping("/testdeathThread")
+    public void testdeathThread() {
+        System.out.println("开启一个线程");
+        new Thread(new RunThread()).start();
+        System.out.println("结束一个线程");
 
     }
 

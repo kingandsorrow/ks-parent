@@ -105,4 +105,8 @@ public class Solution {
         return b;
     }
 
+    public static void main(String[] args) {
+        int[] a = {3, 2, 1, 2, 1, 7};
+        System.out.println(minIncrementForUnique(a));
+    }
 }

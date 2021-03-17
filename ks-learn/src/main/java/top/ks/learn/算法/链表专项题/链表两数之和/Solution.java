@@ -14,6 +14,7 @@ public class Solution {
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
         int temp = 0;
         ListNode l3 = new ListNode(0);
+        // 没想出的点 构造结果，用一个指针指着。
         ListNode p = l3;
         while (l1 != null || l2 != null || temp != 0) {
             int l1Val = l1 != null ? l1.val : 0;
@@ -28,4 +29,7 @@ public class Solution {
         return l3.next;
     }
 
+    public static void main(String[] args) {
+        System.out.println(1/2);
+    }
 }

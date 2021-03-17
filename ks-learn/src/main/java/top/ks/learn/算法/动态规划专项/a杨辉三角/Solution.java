@@ -1,4 +1,4 @@
-package top.ks.learn.算法.动态规划.a杨辉三角;
+package top.ks.learn.算法.动态规划专项.a杨辉三角;
 
 import java.util.ArrayList;
 import java.util.Arrays;

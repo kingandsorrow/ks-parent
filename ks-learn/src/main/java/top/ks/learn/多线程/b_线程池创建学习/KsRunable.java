@@ -12,9 +12,12 @@ public class KsRunable implements Runnable {
 
     @Override
     public void run() {
-        System.out.println(Thread.currentThread().getName() + " Start. Time = " + new Date());
+        System.out.println(Thread.currentThread().getName() + " Start. Time = " + new Date() + " result:" + command);
         processCommand();
-        System.out.println(Thread.currentThread().getName() + " End. Time = " + new Date());
+        if ("3".equals(command)) {
+            int i = 10 / 0;
+        }
+        System.out.println(Thread.currentThread().getName() + " End. Time = " + new Date() + " result:" + command);
     }
 
     private void processCommand() {

@@ -13,16 +13,15 @@ public class Solution {
      * @CreateDate : 2021-01-17 23:36
      */
     public static ListNode reverseListDD(ListNode head) {
-        ListNode pre = null;
-        ListNode cur = head;
-        ListNode next = null;
-        while (cur != null) {
-            next = cur.next;
-            cur.next = pre;
-            pre = cur;
-            cur = next;
+        ListNode pre = head;
+        ListNode cur = null;
+        while (pre != null) {
+            ListNode temp = pre.next;
+            pre.next = cur;
+            cur = pre;
+            pre = temp;
         }
-        return pre;
+        return cur;
     }
 
     /**
@@ -57,7 +56,9 @@ public class Solution {
         ListNode node3 = new ListNode(3, node4);
         ListNode node2 = new ListNode(2, node3);
         ListNode node1 = new ListNode(1, node2);
-        ListNode result = reverseListDG(null, node1);
+        ListNode result = reverseListDD(node1);
+        ListNode result1 = reverseListDG(null, node1);
         System.out.println(result);
+        System.out.println(result1);
     }
 }

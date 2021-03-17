@@ -53,13 +53,116 @@ public class KLinkedList<E> {
      * @param :
      * @return :
      * @Method :
-     * @Description : 增加一个元素
+     * @Description : 增--增一个元素
      * @author : birjc
      * @CreateDate : 2021-03-03 00:12
      */
     public boolean add(E e) {
         linkLast(e);
         return true;
+    }
+
+    /**
+     * @param :
+     * @return :
+     * @Method :
+     * @Description :增--在指定位置增加element
+     * @author : birjc
+     * @CreateDate : 2021-03-03 00:18
+     */
+    public void add(int index, E element) {
+        if (index >= 0 && index <= size) {
+            throw new IndexOutOfBoundsException("index is error");
+        }
+
+        if (index == size) {
+            linkLast(element);
+        } else {
+            linkBefore(element, node(index));
+        }
+    }
+
+    /**
+     * @param :
+     * @return :
+     * @Method :
+     * @Description : 删--移除某个元数据
+     * @author : birjc
+     * @CreateDate : 2021-03-03 00:33
+     */
+    public boolean remove(Object o) {
+        if (o == null) {
+            for (Node<E> x = first; x != null; x = x.next) {
+                if (x.element == null) {
+                    unlink(x);
+                    return true;
+                }
+            }
+        } else {
+            for (Node<E> x = first; x != null; x = x.next) {
+                if (o.equals(x.element)) {
+                    unlink(x);
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
+     * @param :
+     * @return :
+     * @Method :
+     * @Description : 删--完全清除
+     * @author : birjc
+     * @CreateDate : 2021-03-03 23:12
+     */
+    public void clear() {
+        Node var2;
+        for (Node var1 = this.first; var1 != null; var1 = var2) {
+            var2 = var1.next;
+            var1.element = null;
+            var1.next = null;
+            var1.prev = null;
+        }
+
+        this.first = this.last = null;
+        this.size = 0;
+        ++this.modCount;
+    }
+
+    /**
+     * @param :
+     * @return :
+     * @Method :
+     * @Description :改--改变指定位置
+     * @author : birjc
+     * @CreateDate : 2021-03-03 23:14
+     */
+    public E set(int index, E e) {
+        if (index >= 0 && index <= size) {
+            throw new IndexOutOfBoundsException("index is error");
+        }
+        Node<E> oldNode = this.node(index);
+        E oldElement = oldNode.element;
+        oldNode.element = e;
+        return oldElement;
+    }
+
+    /**
+     * @param :
+     * @return :
+     * @Method :
+     * @Description :查-- 查某个位置的元素
+     * @author : birjc
+     * @CreateDate : 2021-03-03 23:23
+     */
+    public E get(int index) {
+        if (index >= 0 && index <= size) {
+            throw new IndexOutOfBoundsException("index is error");
+        }
+        Node<E> node = this.node(index);
+        return node.element;
     }
 
     private void linkLast(E e) {
@@ -75,25 +178,6 @@ public class KLinkedList<E> {
         modCount++;
     }
 
-    /**
-     * @param :
-     * @return :
-     * @Method :
-     * @Description :在指定位置增加element
-     * @author : birjc
-     * @CreateDate : 2021-03-03 00:18
-     */
-    public void add(int index, E element) {
-        if (index >= 0 && index <= size) {
-            throw new IndexOutOfBoundsException("index is error");
-        }
-
-        if (index == size) {
-            linkLast(element);
-        } else {
-            linkBefore(element, node(index));
-        }
-    }
 
     /**
      * @param :
@@ -127,8 +211,9 @@ public class KLinkedList<E> {
     Node<E> node(int index) {
         if (index < (size >> 1)) {
             Node<E> x = first;
-            for (int i = 0; i < index; i++)
+            for (int i = 0; i < index; i++) {
                 x = x.next;
+            }
             return x;
         } else {
             Node<E> x = last;
@@ -138,32 +223,6 @@ public class KLinkedList<E> {
         }
     }
 
-    /**
-     * @param :
-     * @return :
-     * @Method :
-     * @Description : 删 移除某个元数据
-     * @author : birjc
-     * @CreateDate : 2021-03-03 00:33
-     */
-    public boolean remove(Object o) {
-        if (o == null) {
-            for (Node<E> x = first; x != null; x = x.next) {
-                if (x.element == null) {
-                    unlink(x);
-                    return true;
-                }
-            }
-        } else {
-            for (Node<E> x = first; x != null; x = x.next) {
-                if (o.equals(x.element)) {
-                    unlink(x);
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
 
     /**
      * @param :
