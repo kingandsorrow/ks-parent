@@ -16,11 +16,13 @@ import java.util.List;
  * <b>修改时间:</b>2018/10/4<br/>
  * <b>修改备注:</b><br/>
  *
- * @version 1.0.0<br               />
+ * @version 1.0.0<br />
  * Copyright KS 2018/10/4
  */
 public interface KsRoleService {
     OperatorDeatil selectOperatorDetail(KsOperator ksOperator);
 
     int roleAdd(KsRole ksRole, List<KsRoleFunction> ksRoleFunctions);
+
+    int updateRole(KsRole ksRole, List<KsRoleFunction> ksRoleFunctions, List<KsRoleFunction> roleFunctions);
 }

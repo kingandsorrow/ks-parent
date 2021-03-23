@@ -4,6 +4,7 @@ import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.collection.CollectionUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 import top.ks.oss.provider.database.mapper.KsFunctionMapper;
 import top.ks.oss.provider.database.mapper.KsRoleFunctionMapper;
 import top.ks.oss.provider.database.mapper.KsRoleMapper;
@@ -11,7 +12,6 @@ import top.ks.oss.provider.database.model.*;
 import top.ks.oss.provider.database.service.KsRoleService;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -60,6 +60,21 @@ public class KsRoleServiceImpl implements KsRoleService {
         int row1 = ksRoleMapper.insertSelective(ksRole);
         int row2 = ksRoleFunctionMapper.insertksRoleFunctions(ksRoleFunctions);
         return row2;
+    }
+
+    @Transactional
+    @Override
+    public int updateRole(KsRole ksRole, List<KsRoleFunction> ksRoleFunctions, List<KsRoleFunction> roleFunctions) {
+        int row1 = ksRoleMapper.updateByPrimaryKeySelective(ksRole);
+        if (!CollectionUtils.isEmpty(ksRoleFunctions)) {
+            for (KsRoleFunction ksRoleFunction : ksRoleFunctions) {
+                int row2 = ksRoleFunctionMapper.updateByPrimaryKeySelective(ksRoleFunction);
+            }
+        }
+        if (CollectionUtil.isNotEmpty(roleFunctions)) {
+            int row3 = ksRoleFunctionMapper.insertksRoleFunctions(roleFunctions);
+        }
+        return row1;
     }
 
 

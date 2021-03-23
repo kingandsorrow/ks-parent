@@ -50,14 +50,14 @@
       // 切换处理
       toggleHandle (index, row) {
         if (this.hasChild(row)) {
-          var data = this.$parent.store.states.data.slice(0)
-          data[index]._expanded = !data[index]._expanded
+          var data = this.$parent.store.states.data.slice(0);
+          data[index]._expanded = !data[index]._expanded;
           if (data[index]._expanded) {
             data = data.splice(0, index + 1).concat(row[this.childKey]).concat(data)
           } else {
             data = this.removeChildNode(data, row[this.treeKey])
           }
-          this.$parent.store.commit('setData', data)
+          this.$parent.store.commit('setData', data);
           this.$nextTick(() => {
             this.$parent.doLayout()
           })
@@ -65,14 +65,14 @@
       },
       // 移除子节点
       removeChildNode (data, parentId) {
-        var parentIds = isArray(parentId) ? parentId : [parentId]
+        var parentIds = isArray(parentId) ? parentId : [parentId];
         if (parentId.length <= 0) {
           return data
         }
-        var ids = []
+        var ids = [];
         for (var i = 0; i < data.length; i++) {
           if (parentIds.indexOf(data[i][this.parentKey]) !== -1 && parentIds.indexOf(data[i][this.treeKey]) === -1) {
-            ids.push(data.splice(i, 1)[0][this.treeKey])
+            ids.push(data.splice(i, 1)[0][this.treeKey]);
             i--
           }
         }

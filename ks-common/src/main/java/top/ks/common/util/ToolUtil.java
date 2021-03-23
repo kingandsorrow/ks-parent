@@ -1,5 +1,6 @@
 package top.ks.common.util;
 
+import cn.hutool.core.util.IdUtil;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -44,6 +45,10 @@ public class ToolUtil {
 
     private static List<Class> baseClassList = new ArrayList<>(Arrays.asList(Integer.class, int.class, String.class, Byte.class, byte.class, Short.class, short.class, float.class, Float.class, double.class, Double.class, char.class, Character.class, boolean.class, Boolean.class, String.class));
 
+    public static String generateId() {
+        return IdUtil.createSnowflake(1, 1).nextId() + "";
+    }
+
     // 转换为酒吧时间，头一天12点到今天12点
     public static Date convertBarDay(Date date) {
 
@@ -72,7 +77,7 @@ public class ToolUtil {
         Random random = new Random();
         StringBuffer sbf = new StringBuffer();
         for (int i = 0; i < 6; i++) {
-            String rand = String.valueOf(String.valueOf((random.nextInt(10))));
+            String rand = String.valueOf((random.nextInt(10)));
             sbf.append(rand);
         }
 
@@ -88,12 +93,8 @@ public class ToolUtil {
 
         double d = doubleVal(location);
 
-        if (d > 0) {
+        return !(d > 0);
 
-            return false;
-        }
-
-        return true;
     }
 
     /**
@@ -336,7 +337,7 @@ public class ToolUtil {
             if (num == null) {
                 return 0;
             }
-            int value = Integer.parseInt(num.toString());
+            int value = Integer.parseInt(num);
             return value;
         } catch (Exception e) {
             return 0;
@@ -350,7 +351,7 @@ public class ToolUtil {
             if (num == null) {
                 return 0;
             }
-            long value = Long.parseLong(num.toString());
+            long value = Long.parseLong(num);
             return value;
         } catch (Exception e) {
             return 0;
@@ -548,9 +549,9 @@ public class ToolUtil {
      * @return
      */
     public static String getDay(String day) {
-        return new StringBuffer().append(day.substring(0, 4)).append("-")
-                .append(day.substring(4, 6)).append("-")
-                .append(day.substring(6, 8)).toString();
+        return new StringBuffer().append(day, 0, 4).append("-")
+                .append(day, 4, 6).append("-")
+                .append(day, 6, 8).toString();
     }
 
     public static final boolean isDateEqual(Date d1, Date d2) {
@@ -680,9 +681,7 @@ public class ToolUtil {
     private static boolean outOfChina(double lat, double lon) {
         if (lon < 72.004 || lon > 137.8347)
             return true;
-        if (lat < 0.8293 || lat > 55.8271)
-            return true;
-        return false;
+        return lat < 0.8293 || lat > 55.8271;
     }
 
     private static double transformLat(double x, double y) {
@@ -861,7 +860,7 @@ public class ToolUtil {
         }
 
         return phone.substring(0, 3)
-                + phone.substring(phone.length() - 4, phone.length());
+                + phone.substring(phone.length() - 4);
     }
 
     public static String appendPhone(String phone) {
@@ -887,7 +886,7 @@ public class ToolUtil {
         }
 
         return phone.substring(0, 3) + "***"
-                + phone.substring(phone.length() - 3, phone.length());
+                + phone.substring(phone.length() - 3);
     }
 
     public static String getDayStart(Date date) {

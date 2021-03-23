@@ -81,12 +81,12 @@ public class TreeUtil {
             return null;
         }
         KsFunctionBean ksFunctionBean = new KsFunctionBean();
-        ksFunctionBean.setMenuId(Long.parseLong(ksFunction.getFunctionId()));
+        ksFunctionBean.setMenuId(ksFunction.getFunctionId());
         ksFunctionBean.setIcon(ksFunction.getIcon());
         ksFunctionBean.setName(ksFunction.getTitle());
         ksFunctionBean.setUrl(ksFunction.getUrl());
         if (ksFunction.getParentId() != null) {
-            ksFunctionBean.setParentId(Long.parseLong(ksFunction.getParentId()));
+            ksFunctionBean.setParentId(ksFunction.getParentId());
         }
         ksFunctionBean.setType(ksFunction.getType());
         ksFunctionBean.setOrderNum(Integer.parseInt(ksFunction.getOrderNum() + ""));

@@ -56,31 +56,39 @@
     },
     methods: {
       init(id) {
-        this.dataForm.id = id || 0
+        this.dataForm.id = id || 0;
+        let contentObj = {
+          projectId: "0"
+        };
+        let dataObj = {
+          serviceIName: "menuServiceI",
+          methodName: "functionList",
+          content: JSON.stringify(contentObj)
+        };
         this.$http({
-          url: this.$http.adornUrl('/menuList'),
-          method: 'get',
-          params: this.$http.adornParams()
+          url: this.$http.ossUrl(),
+          method: 'post',
+          params: this.$http.adornParams(),
+          data: dataObj
         }).then(({data}) => {
-          debugger;
-          this.menuList = treeDataTranslate(data.ksFunctionBeans, 'menuId')
+          this.menuList = treeDataTranslate(data.ksFunctionBeanList, 'menuId', 'parentId');
         }).then(() => {
-          this.visible = true
+          this.visible = true;
           this.$nextTick(() => {
-            this.$refs['dataForm'].resetFields()
-            this.$refs.menuListTree.setCheckedKeys([])
+            this.$refs['dataForm'].resetFields();
+            this.$refs.menuListTree.setCheckedKeys([]);
           })
         }).then(() => {
           if (this.dataForm.id) {
             this.$http({
-              url: this.$http.adornUrl(`/sys/role/info/${this.dataForm.id}`),
-              method: 'get',
+              url: this.$http.ossUrl(),
+              method: 'post',
               params: this.$http.adornParams()
             }).then(({data}) => {
               if (data && data.errCode === '0000') {
-                this.dataForm.roleName = data.role.roleName
-                this.dataForm.description = data.role.remark
-                var idx = data.role.menuIdList.indexOf(this.tempKey)
+                this.dataForm.roleName = data.role.roleName;
+                this.dataForm.description = data.role.remark;
+                var idx = data.role.menuIdList.indexOf(this.tempKey);
                 if (idx !== -1) {
                   data.role.menuIdList.splice(idx, data.role.menuIdList.length - idx)
                 }
@@ -94,15 +102,29 @@
       dataFormSubmit() {
         this.$refs['dataForm'].validate((valid) => {
           if (valid) {
+            let contentObj = {
+              projectId: "0",
+              'roleId': this.dataForm.id || undefined,
+              'roleName': this.dataForm.roleName,
+              'description': this.dataForm.remark,
+              'menuIdList': [].concat(this.$refs.menuListTree.getCheckedKeys(), [this.tempKey], this.$refs.menuListTree.getHalfCheckedKeys())
+            };
+            let addObj = {
+              serviceIName: "roleServiceI",
+              methodName: "addRole",
+              content: JSON.stringify(contentObj)
+            };
+            let updateObj = {
+              serviceIName: "roleServiceI",
+              methodName: "updateRole",
+              content: JSON.stringify(contentObj)
+            };
+            let dataObj = this.dataForm.id ? updateObj : addObj;
             this.$http({
-              url: this.$http.adornUrl(`/${!this.dataForm.id ? 'roleAdd' : 'update'}`),
+              url: this.$http.ossUrl(),
               method: 'post',
-              data: this.$http.adornData({
-                'roleId': this.dataForm.id || undefined,
-                'roleName': this.dataForm.roleName,
-                'description': this.dataForm.remark,
-                'menuIdList': [].concat(this.$refs.menuListTree.getCheckedKeys(), [this.tempKey], this.$refs.menuListTree.getHalfCheckedKeys())
-              })
+              params: this.$http.adornParams(),
+              data: dataObj
             }).then(({data}) => {
               if (data && data.errCode === '0000') {
                 this.$message({
@@ -110,7 +132,7 @@
                   type: 'success',
                   duration: 1500,
                   onClose: () => {
-                    this.visible = false
+                    this.visible = false;
                     this.$emit('refreshDataList')
                   }
                 })

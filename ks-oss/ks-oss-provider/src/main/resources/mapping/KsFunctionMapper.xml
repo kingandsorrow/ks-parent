@@ -28,7 +28,7 @@
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from ks_function
-    where function_id = #{functionId,jdbcType=VARCHAR}
+    where function_id = #{functionId,jdbcType=VARCHAR} and project_id=#{projectId,jdbcType=VARCHAR}
   </delete>
     <insert id="insert" parameterType="top.ks.oss.provider.database.model.KsFunction">
     insert into ks_function (function_id, title, description, 

@@ -7,7 +7,7 @@ import top.ks.oss.provider.database.model.KsRole;
 import java.util.List;
 
 public interface KsFunctionMapper {
-    int deleteByPrimaryKey(String functionId);
+    int deleteByPrimaryKey(@Param("functionId") String functionId, @Param("projectId") String projectId);
 
     int insert(KsFunction record);
 

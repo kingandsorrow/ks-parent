@@ -108,12 +108,12 @@
     methods: {
       // 获取数据列表
       getDataList() {
-        this.dataListLoading = true
+        this.dataListLoading = true;
         let contentObj = {
           roleName: this.dataForm.roleName,
           pageIndex: this.pageIndex,
           pageSize: this.pageSize
-        }
+        };
         let dataObj = {
           serviceIName: "roleServiceI",
           methodName: "roleList",
@@ -126,10 +126,10 @@
           data: dataObj
         }).then(({data}) => {
           if (data && data.errCode === '0000') {
-            this.dataList = data.roleList
-            this.totalPage = data.totalCount
+            this.dataList = data.roleList;
+            this.totalPage = data.totalCount;
           } else {
-            this.dataList = []
+            this.dataList = [];
             this.totalPage = 0
           }
           this.dataListLoading = false
@@ -137,13 +137,13 @@
       },
       // 每页数
       sizeChangeHandle(val) {
-        this.pageSize = val
-        this.pageIndex = 1
+        this.pageSize = val;
+        this.pageIndex = 1;
         this.getDataList()
       },
       // 当前页
       currentChangeHandle(val) {
-        this.pageIndex = val
+        this.pageIndex = val;
         this.getDataList()
       },
       // 多选
@@ -152,7 +152,7 @@
       },
       // 新增 / 修改
       addOrUpdateHandle(id) {
-        this.addOrUpdateVisible = true
+        this.addOrUpdateVisible = true;
         this.$nextTick(() => {
           this.$refs.addOrUpdate.init(id)
         })
@@ -161,7 +161,7 @@
       deleteHandle(id) {
         var ids = id ? [id] : this.dataListSelections.map(item => {
           return item.roleId
-        })
+        });
         this.$confirm(`确定对[id=${ids.join(',')}]进行[${id ? '删除' : '批量删除'}]操作?`, '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',

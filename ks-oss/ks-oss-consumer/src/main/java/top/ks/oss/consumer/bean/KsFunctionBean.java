@@ -12,12 +12,12 @@ public class KsFunctionBean extends BaseEntity {
     /**
      * 菜单ID
      */
-    private Long menuId;
+    private String menuId;
 
     /**
      * 父菜单ID，一级菜单为0
      */
-    private Long parentId;
+    private String parentId;
 
     /**
      * 父菜单名称

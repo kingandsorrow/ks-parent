@@ -27,7 +27,7 @@ import java.io.IOException;
  * <b>修改时间:</b><br/>
  * <b>修改备注:</b><br/>
  *
- * @version 1.0.0<br />
+ * @version 1.0.0<br/>
  * <p>
  * Copyright KS 2019-09-08
  */
@@ -72,15 +72,5 @@ public class CenterController extends BasicController {
     public void checkToken(String serviceIName, String methodName, HttpServletRequest request, HttpServletResponse response) {
         ResponseEntity responseEntity = new ResponseEntity(ResultStatus.SUCCESS);
         resultString(responseEntity.toJsonStr(), response, true);
-    }
-
-
-    public static void main(String[] args) {
-        MenuListReq menuListReq = new MenuListReq();
-        menuListReq.setToken("aaaa");
-        System.out.println(JSON.toJSONString(menuListReq));
-        String param = "{\"token\":\"aaaa\"}";
-        MenuListReq req = JSON.parseObject(param, MenuListReq.class);
-        System.out.println(req.toJsonStr());
     }
 }

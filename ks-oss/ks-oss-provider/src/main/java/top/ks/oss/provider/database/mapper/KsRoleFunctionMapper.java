@@ -19,4 +19,6 @@ public interface KsRoleFunctionMapper {
     int updateByPrimaryKey(KsRoleFunction record);
 
     int insertksRoleFunctions(@Param("list") List<KsRoleFunction> ksRoleFunctions);
+
+    List<KsRoleFunction> selectByRoleId(@Param("roleId") String roleId, @Param("projectId") String projectId);
 }

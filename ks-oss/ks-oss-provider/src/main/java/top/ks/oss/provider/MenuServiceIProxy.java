@@ -120,11 +120,11 @@ public class MenuServiceIProxy implements MenuServiceI {
     @Override
     public DeleteMenuResp delete(DeleteMenuReq deleteMenuReq) {
         try {
-            int row = ksFunctionMapper.deleteByPrimaryKey(deleteMenuReq.getFunctionId());
+            int row = ksFunctionMapper.deleteByPrimaryKey(deleteMenuReq.getFunctionId(), deleteMenuReq.getProjectId());
             if (row > 0) {
                 return new DeleteMenuResp(ResultStatus.SUCCESS);
             } else {
-                return new DeleteMenuResp(ResultStatus.INSERT_FAIL);
+                return new DeleteMenuResp(ResultStatus.DELETE_FAIL);
             }
         } catch (Exception e) {
             log.error(String.format("birjc MenuServiceIProxy.delete:: %s, %s", "system error::" + e.getMessage(), e));
@@ -223,7 +223,7 @@ public class MenuServiceIProxy implements MenuServiceI {
      */
     private KsFunctionBean getKsFunctionBean(KsFunction ksFunction) {
         KsFunctionBean ksFunctionBean = new KsFunctionBean();
-        ksFunctionBean.setMenuId(Long.parseLong(ksFunction.getFunctionId()));
+        ksFunctionBean.setMenuId(ksFunction.getFunctionId());
         ksFunctionBean.setName(ksFunction.getTitle());
         ksFunctionBean.setUrl(ksFunction.getUrl());
         ksFunctionBean.setPerms(ksFunction.getAuthorize());
@@ -247,7 +247,7 @@ public class MenuServiceIProxy implements MenuServiceI {
         for (KsFunction ks : ksFunctionList) {
             if (Strings.isNotEmpty(ksFunction.getFunctionId()) && ksFunction.getFunctionId().equals(ks.getParentId())) {
                 KsFunctionBean ksFunctionBean = getKsFunctionBean(ks);
-                ksFunctionBean.setParentId(Long.parseLong(ksFunction.getFunctionId()));
+                ksFunctionBean.setParentId(ksFunction.getFunctionId());
                 ksFunctionBean.setParentName(ksFunction.getTitle());
                 ksFunctionBeans.add(ksFunctionBean);
             }

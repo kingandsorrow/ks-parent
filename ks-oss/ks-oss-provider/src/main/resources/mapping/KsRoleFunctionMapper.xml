@@ -8,8 +8,8 @@
         <result column="project_id" property="projectId" jdbcType="VARCHAR"/>
     </resultMap>
     <sql id="Base_Column_List">
-    role_function_id, role_id, function_id, project_id
-  </sql>
+        role_function_id, role_id, function_id, project_id
+    </sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
         select
         <include refid="Base_Column_List"/>
@@ -17,15 +17,16 @@
         where role_function_id = #{roleFunctionId,jdbcType=VARCHAR}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from ks_role_function
-    where role_function_id = #{roleFunctionId,jdbcType=VARCHAR}
-  </delete>
+        delete
+        from ks_role_function
+        where role_function_id = #{roleFunctionId,jdbcType=VARCHAR}
+    </delete>
     <insert id="insert" parameterType="top.ks.oss.provider.database.model.KsRoleFunction">
-    insert into ks_role_function (role_function_id, role_id, function_id, 
-      project_id)
-    values (#{roleFunctionId,jdbcType=VARCHAR}, #{roleId,jdbcType=VARCHAR}, #{functionId,jdbcType=VARCHAR}, 
-      #{projectId,jdbcType=VARCHAR})
-  </insert>
+        insert into ks_role_function (role_function_id, role_id, function_id,
+                                      project_id)
+        values (#{roleFunctionId,jdbcType=VARCHAR}, #{roleId,jdbcType=VARCHAR}, #{functionId,jdbcType=VARCHAR},
+                #{projectId,jdbcType=VARCHAR})
+    </insert>
     <insert id="insertSelective" parameterType="top.ks.oss.provider.database.model.KsRoleFunction">
         insert into ks_role_function
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -73,12 +74,12 @@
         where role_function_id = #{roleFunctionId,jdbcType=VARCHAR}
     </update>
     <update id="updateByPrimaryKey" parameterType="top.ks.oss.provider.database.model.KsRoleFunction">
-    update ks_role_function
-    set role_id = #{roleId,jdbcType=VARCHAR},
-      function_id = #{functionId,jdbcType=VARCHAR},
-      project_id = #{projectId,jdbcType=VARCHAR}
-    where role_function_id = #{roleFunctionId,jdbcType=VARCHAR}
-  </update>
+        update ks_role_function
+        set role_id     = #{roleId,jdbcType=VARCHAR},
+            function_id = #{functionId,jdbcType=VARCHAR},
+            project_id  = #{projectId,jdbcType=VARCHAR}
+        where role_function_id = #{roleFunctionId,jdbcType=VARCHAR}
+    </update>
     <!--批量增加-->
     <insert id="insertksRoleFunctions" parameterType="List">
         insert into ks_role_function (role_function_id, role_id, function_id, project_id) values
@@ -86,4 +87,10 @@
             (#{item.roleFunctionId}, #{item.roleId}, #{item.functionId},#{item.projectId})
         </foreach>
     </insert>
+    <select id="selectByRoleId" parameterType="Map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from ks_role_function
+        where role_id = #{roleId,jdbcType=VARCHAR} and project_id=#{projectId,jdbcType=VARCHAR}
+    </select>
 </mapper>

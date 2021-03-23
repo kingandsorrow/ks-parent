@@ -12,7 +12,7 @@ public interface MenuServiceI {
      * @author : birjc
      * @CreateDate : 2020-04-29 10:32
      */
-    public MenuListResp menuList(MenuListReq menuListReq) throws ClassNotFoundException;
+    MenuListResp menuList(MenuListReq menuListReq) throws ClassNotFoundException;
 
     /**
      * @param :
@@ -22,7 +22,7 @@ public interface MenuServiceI {
      * @author : birjc
      * @CreateDate : 2020-05-01 22:43
      */
-    public FunctionListResp functionList(FunctionListReq functionListReq) throws ClassNotFoundException;
+    FunctionListResp functionList(FunctionListReq functionListReq) throws ClassNotFoundException;
 
     /**
      * @param :
@@ -32,17 +32,17 @@ public interface MenuServiceI {
      * @author : birjc
      * @CreateDate : 2020-05-28 21:48
      */
-    public AddMenuResp menuAdd(AddMenuReq addMenuReq);
+    AddMenuResp menuAdd(AddMenuReq addMenuReq);
 
     /**
      * @param :
      * @return :
      * @Method :
-     * @Description :新增菜单
+     * @Description :删除菜单
      * @author : birjc
      * @CreateDate : 2020-05-28 21:48
      */
-    public DeleteMenuResp delete(DeleteMenuReq deleteMenuReq);
+    DeleteMenuResp delete(DeleteMenuReq deleteMenuReq);
 
-    public NoButtonMenuResp noButtonMenu(NoButtonMenuReq noButtonMenuReq);
+    NoButtonMenuResp noButtonMenu(NoButtonMenuReq noButtonMenuReq);
 }
