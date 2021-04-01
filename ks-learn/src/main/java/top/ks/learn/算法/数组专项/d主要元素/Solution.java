@@ -1,4 +1,4 @@
-package top.ks.learn.算法.数组.d主要元素;
+package top.ks.learn.算法.数组专项.d主要元素;
 
 /**
  * <b>类名称:</b>Solution<br/>

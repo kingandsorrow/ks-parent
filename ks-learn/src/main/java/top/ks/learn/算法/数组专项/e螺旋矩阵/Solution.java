@@ -1,4 +1,4 @@
-package top.ks.learn.算法.数组.e螺旋矩阵;
+package top.ks.learn.算法.数组专项.e螺旋矩阵;
 
 import java.util.LinkedList;
 import java.util.List;

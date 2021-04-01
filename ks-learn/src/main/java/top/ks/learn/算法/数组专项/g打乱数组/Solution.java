@@ -1,4 +1,4 @@
-package top.ks.learn.算法.数组.g打乱数组;
+package top.ks.learn.算法.数组专项.g打乱数组;
 
 import com.alibaba.fastjson.JSON;
 

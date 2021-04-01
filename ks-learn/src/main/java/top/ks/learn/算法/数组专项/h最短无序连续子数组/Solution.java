@@ -1,4 +1,4 @@
-package top.ks.learn.算法.数组.h最短无序连续子数组;
+package top.ks.learn.算法.数组专项.h最短无序连续子数组;
 
 /**
  * <b>类名称:</b>Solution<br/>

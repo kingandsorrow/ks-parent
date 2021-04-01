@@ -1,4 +1,4 @@
-package top.ks.learn.算法.数组.j两个正序数组的中位数_4;
+package top.ks.learn.算法.数组专项.j两个正序数组的中位数_4;
 
 /**
  * <b>类名称:</b>Solution<br/>

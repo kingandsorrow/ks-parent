@@ -1,4 +1,4 @@
-package top.ks.learn.算法.数组.b快速排序;
+package top.ks.learn.算法.数组专项.b快速排序;
 
 import com.alibaba.fastjson.JSON;
 

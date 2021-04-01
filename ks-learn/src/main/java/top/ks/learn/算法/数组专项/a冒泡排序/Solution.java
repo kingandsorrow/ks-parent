@@ -1,4 +1,4 @@
-package top.ks.learn.算法.数组.a冒泡排序;
+package top.ks.learn.算法.数组专项.a冒泡排序;
 
 public class Solution {
     //6 1 2 7 9 3 4 5 10 8

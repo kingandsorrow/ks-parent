@@ -1,4 +1,4 @@
-package top.ks.learn.算法.数组.c转置矩阵;
+package top.ks.learn.算法.数组专项.c转置矩阵;
 
 public class Solution {
 

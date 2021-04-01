@@ -1,4 +1,4 @@
-package top.ks.learn.算法.数组.f矩阵置0;
+package top.ks.learn.算法.数组专项.f矩阵置0;
 
 import com.alibaba.fastjson.JSON;
 
