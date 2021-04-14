@@ -6,6 +6,10 @@ public class AdminVO {
 
     private String parentid;
 
+    private String code;
+
+    private String name;
+
     private String parentorgid;
 
     private Integer is_biz_unit;
@@ -60,5 +64,21 @@ public class AdminVO {
 
     public void setInnercode(String innercode) {
         this.innercode = innercode;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
